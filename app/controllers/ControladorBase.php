@@ -8,8 +8,4 @@ class ControladorBase {
     public static function loadMain() {
         require_once "./app/view/Components/head.php";
     }
-
-    public static function nose() {
-        
-    }
 }
