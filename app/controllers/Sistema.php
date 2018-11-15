@@ -2,7 +2,7 @@
 
 class Sistema extends ControladorBase {
 
-    // Vistas
+    // Vistas y otras mierdas
 
     public static function loginView() {
         self::loadHeadOnly();
@@ -22,9 +22,6 @@ class Sistema extends ControladorBase {
     // Métodos 
 
     public static function login() {
-        /* $nomUsuario = $_REQUEST["user"];
-        $pass = $_REQUEST["pass"]; */
-
         $datos = $_REQUEST["datos"];
 
         $datos = json_decode($datos);
