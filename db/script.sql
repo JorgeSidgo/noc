@@ -49,3 +49,4 @@ insert into authUsuario values (null, 'Autorizado');
 # Usuario
 
 insert into usuario values (null, 'Karla Guadalupe', 'Arevalo Vega', 'kgarevalo', 'kgarevalo@deloitte.com', 'Deloite123!', 2, 1);
+insert into usuario values (null, 'Karla Guadalupe', 'Arevalo Vega', 'asaber', 'kgarevalo@deloitte.com', '123', 2, 1);

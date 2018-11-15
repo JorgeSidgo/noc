@@ -5,24 +5,35 @@ class Sistema extends ControladorBase {
     // Vistas
 
     public static function loginView() {
-        self::loadMain();
+        self::loadHeadOnly();
         require_once './app/view/Sistema/login.php';
     }
 
     public static function registroForm() {
-        self::loadMain();
+        self::loadHeadOnly();
         require_once './app/view/Sistema/registro.php';
+    }
+    
+    public static function dashboard() {
+        self::loadMain();
+        require_once './app/view/Sistema/dashboard.php';
     }
 
     // Métodos 
 
     public static function login() {
-        $nomUsuario = $_REQUEST["user"];
-        $pass = $_REQUEST["pass"];
+        /* $nomUsuario = $_REQUEST["user"];
+        $pass = $_REQUEST["pass"]; */
+
+        $datos = $_REQUEST["datos"];
+
+        $datos = json_decode($datos);
+
 
         $dao = new DaoUsuario();
-        $dao->objeto->setNomUsuario($nomUsuario);
-
+        $dao->objeto->setNomUsuario($datos->user);
+        $dao->objeto->setPass($datos->pass);
+        
         $dao->login();
     }
 

@@ -14,7 +14,7 @@
                 <div class="cuadro-ins">
                     <img src="./res/img/deloitteNigga.svg" alt="" id="logo-login">
                 </div>
-                <form action="" method="POST" class="ui form">
+                <form id="frmLogin" action="" method="POST" class="ui form">
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
@@ -35,7 +35,7 @@
                             Datos Incorrectos
                         </p>
                     </div>
-                    <button style="margin-top: 15px;" :class="loading" @click="login" id="btnLogin" type="button"
+                    <button style="margin-top: 15px;" :class="loading" name="btnLogin" value="noloc" @click="login" id="btnLogin" type="button"
                         @submit.prevent="" >Ingresar</button>
                     
                 </form>
@@ -65,13 +65,26 @@
                     this.isError = false;
                 },
                 login() {
-                    this.loading.push('loading');
-                    var user = document.getElementById("user").value.trim();
-                    var pass = document.getElementById("pass").value.trim();
 
-                    /* $('#btnLogin').addClass("loading"); */
+                    var gatos = {}; 
+                    // $('#frmLogin').addClass('loading');
 
-                    fetch("../controladorUsuario?op=login&nom="+ user + "&pass=" + pass)
+                    $('#frmLogin').find(":input").each(function () {
+                        gatos[this.name] = $(this).val();
+                    });
+
+                    gatos = JSON.stringify(gatos);
+
+                    console.log(gatos);
+                    var param = {
+                        method: 'POST',
+                        headers: {
+                            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+                        },
+                        body: "datos=" + gatos,
+                    };
+
+                    fetch("?1=Sistema&2=login", param)
                         .then(response => {
                             if (response.ok) {
                                 return response.json();
@@ -84,15 +97,15 @@
                         .then(val => {
 
                             if (val == 1) {
-                                location.href = 'dashboard.jsp';
-                                
+                                // location.href = 'dashboard.jsp';
+                                alert('simonalamona');
                             } else {
                                 this.loading.pop();
                                 this.isError = true;
                             }
                             
                         }).catch(res => {
-                            this.loading.pop();
+                            //this.loading.pop();
                             this.isError = true;
                             console.log(res);
                         
