@@ -2,7 +2,7 @@
 
 class Sistema extends ControladorBase {
 
-    // Vistas y otras mierdas
+    // Vistas y otras cosas perronas
 
     public static function loginView() {
         self::loadHeadOnly();
