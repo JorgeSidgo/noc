@@ -31,7 +31,7 @@ class Exec {
      */ 
     public function setController()
     {
-        $this->controller = !empty($_GET["1"]) ? $_GET["1"] : 'Sistema';
+        $this->controller = !empty($_GET["1"]) ? $_GET["1"] : 'UsuarioController';
 
         return $this;
     }

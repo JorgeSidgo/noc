@@ -11,9 +11,7 @@
 
     <div style="margin-right:10px;" id="notif" class="ui floated right dropdown tug floating item">
         <i class="bell icon"></i>
-        <!-- <div style="background: #fff; color: #222;" class="ui bottom white circular label">
-            1
-        </div> -->                       
+
         <div class="menu">
             <div class="header">
                 Notificaciones
@@ -34,12 +32,12 @@
     </div>
     
 
-    <div style="margin-right:10px;" id="usuario-header" class="ui dropdown tug floating item">
-        <img class="ui avatar image" src="./res/img/userDef.png"> &nbsp;&nbsp; kgarevalo
+    <div style="margin-right:20px;" id="usuario-header" class="ui dropdown tug floating item">
+        <img class="ui avatar image" src="./res/img/userDef.png"> &nbsp;&nbsp; <?php echo $_SESSION["nomUsuario"] ?>
         <i class="dropdown icon"></i>
         <div class="menu">
             <div class="header">
-                Administrador
+                <?php echo $_SESSION["descRol"] ?>
             </div>
             <div class="divider"></div>
             <a href="../vista/configuracionCuenta.jsp">
@@ -48,7 +46,7 @@
                     Cuenta
                 </div>
             </a>
-            <a href="../controladorUsuario?op=logout">
+            <a href="?1=UsuarioController&2=logout">
                 <div style="color:#c0392b;" class="item">
                     <i class="power icon"></i>
                     Cerrar Sesi&oacute;n

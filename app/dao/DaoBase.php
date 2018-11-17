@@ -6,7 +6,8 @@ class DaoBase {
     public $objeto;
 
     public function __construct() {
-        $this->con = new Conexion();
+        $obj = new Conexion();
+        $this->con = $obj->conectar();
     }
 
 }

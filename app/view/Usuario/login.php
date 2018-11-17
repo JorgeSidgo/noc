@@ -40,7 +40,7 @@
                     
                 </form>
                 <div style="text-align:center; margin-top:15px;" class="field">
-                        <a href="?1=Sistema&2=registroForm" class="ui bottom attached label">¿Aún no tiene cuenta? Regístrese</a>
+                        <a href="?1=UsuarioController&2=registroForm" class="ui bottom attached label">¿Aún no tiene cuenta? Regístrese</a>
                     </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
                 login() {
 
                     var gatos = {}; 
-                    // $('#frmLogin').addClass('loading');
+                    $('#frmLogin').addClass('loading');
 
                     $('#frmLogin').find(":input").each(function () {
                         gatos[this.name] = $(this).val();
@@ -84,7 +84,7 @@
                         body: "datos=" + gatos,
                     };
 
-                    fetch("?1=Sistema&2=login", param)
+                    fetch("?1=UsuarioController&2=login", param)
                         .then(response => {
                             if (response.ok) {
                                 return response.json();
@@ -97,15 +97,15 @@
                         .then(val => {
 
                             if (val == 1) {
-                                // location.href = 'dashboard.jsp';
-                                alert('simonalamona');
+                                $('#frmLogin').removeClass('loading');
+                                location.href = '?1=UsuarioController&2=dashboard';
                             } else {
-                                this.loading.pop();
+                                $('#frmLogin').removeClass('loading');
                                 this.isError = true;
                             }
                             
                         }).catch(res => {
-                            //this.loading.pop();
+                            $('#frmLogin').removeClass('loading');
                             this.isError = true;
                             console.log(res);
                         

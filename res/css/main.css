@@ -52,10 +52,10 @@ body {
     box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
 }
 
-.ui.menu {
+/* .ui.menu {
     background: #333;
     border: 0 !important;
-}
+} */
 
 .menu-it {
     font-size: 14px;
@@ -236,12 +236,12 @@ body {
     width: 200px;
 }
 
-/* .body-login {
-    background: url(../img/bg.jpg) !important;
+.body-login {
+    /* background: url(../img/bg.jpg) !important; */
     background-size: cover !important;
     transition: background .3s ease;
 }
- */
+
 .cuadro {
     background: #fff;
     margin: auto;

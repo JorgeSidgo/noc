@@ -52,6 +52,3 @@
             .dropdown();
     });
 </script>
-
-<div class="pusher">
-    <div class="contenedor">
