@@ -27,6 +27,13 @@ create table authUsuario(
     descAuth varchar(25)
 );
 
+create table clientes(
+	codigoCliente int primary key unique auto_increment,
+    nombreCliente varchar(50),
+    direccion varchar(100),
+    telefono varchar(20)
+);
+
 -- ===========================================================================
 -- RELACIONES
 -- ===========================================================================
@@ -52,6 +59,11 @@ insert into authUsuario values (null, 'Esperando Autorizacion');
 insert into usuario values (null, 'Karla Guadalupe', 'Arevalo Vega', 'kgarevalo', 'kgarevalo@deloitte.com', 'Deloitte123!', 1, 1);
 insert into usuario values (null, 'Jorge Luis', 'Sidgo Pimentel', 'jlsidgo', 'jlsidgo@deloitte.com', 'Deloitte123!', 1, 1);
 insert into usuario values (null, 'John', 'Doe', 'johndoe', 'johndoe@deloitte.com', 'Deloite123!', 2, 2);
+
+#Cliente
+insert into clientes values(null,'Telefonica','San Salvador','2314-1231');
+insert into clientes values(null,'YKK','Santa Ana','2451-2312');
+insert into clientes values(null,'Don Pollo','Santa Tecla','2451-6969');
 
 delimiter $$
 create procedure registrarUsuario(
@@ -104,6 +116,41 @@ begin
 	from usuario u
 	inner join rol r on r.codigoRol = u.codigoRol
 	inner join authUsuario a on a.codigoAuth = u.codigoAuth;
+end
+$$
+
+
+#Procedimientos de Clientes
+
+delimiter $$
+create procedure mostrarClientes()
+begin
+	select * from clientes;
+end
+$$
+
+delimiter $$
+create procedure registrarCliente(
+	in nom varchar(50),
+    in direc varchar(50),
+    in tel varchar(50)
+)
+begin
+	insert into clientes values (null, nom, direc, tel);
+end
+$$
+
+delimiter $$
+create procedure editarCliente(
+	in nom varchar(50),
+    in direc varchar(50),
+    in tel varchar(50),
+    in idCliente int
+)
+begin
+	update clientes
+    set nombreCliente = nom, direccion = direc, telefono = tel
+    where codigoCliente = idCliente;
 end
 $$
 
