@@ -34,7 +34,7 @@
                 Cancelar
             </button>
             <button id="btnAutorizar" class="ui right yellow button">
-                Autorizar
+                Cambiar Estado
             </button>
         </div>
     </div>
