@@ -20,36 +20,45 @@
                     <div class="two fields">
                         <div class="field">
                             <label for="">Nombre:</label>
-                                <input @keyup.enter="login" @keyup="setTrue" type="text" class="reqLogin" name="user" id="user">
+                                <input type="text" class="reqLogin" name="user" id="user">
                         </div>
                         <div class="field">
                             <label for="">Apellido:</label>
-                                <input type="text" class="reqLogin" name="pass" id="pass" 
-                                    @keyup.enter="login" @keyup="setTrue">
+                                <input type="text" class="reqLogin" name="pass" id="pass">
 
                         </div>
                     </div>
                     <div class="field">
                             <label for="">Nombre de Usuario:</label>
-                                <input @keyup.enter="login" @keyup="setTrue" type="text" class="reqLogin" name="user" id="user">
+                                <input   type="text" class="reqLogin" name="user" id="user">
                         </div>
                     <div class="field">
                             <label for="">E-mail:</label>
                                 <input type="text" class="reqLogin" name="pass" id="pass"
-                                    @keyup.enter="login" @keyup="setTrue">
+                                     >
+
+                        </div>
+                    <div class="field">
+                            <label for="">Área:</label>
+                                <select name="area" id="area" class="ui dropdown">
+                                    <option value="1">Abas</option>
+                                    <option value="2">Tax y Legal</option>
+                                    <option value="3">RRHH</option>
+                                    <option value="4">Finanzas</option>
+                                </select>
 
                         </div>
                     <div class="two fields">
                         <div class="field">
                             <label for="">Contraseña:</label>
                                 <input type="password" class="reqLogin" name="pass" id="pass"
-                                    @keyup.enter="login" @keyup="setTrue">
+                                     >
 
                         </div>
                         <div class="field">
                             <label for="">Confirmar Contraseña:</label>
                                 <input type="password" class="reqLogin" name="pass" id="pass"
-                                    @keyup.enter="login" @keyup="setTrue">
+                                     >
 
                         </div>
                     </div>

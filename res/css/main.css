@@ -89,7 +89,7 @@ body {
 #titulo-menu {
     text-align: center;
     padding: 18px;
-    background: #8B1013;
+    background: #85BC22;
     color: #fff;
 }
 
@@ -99,6 +99,12 @@ body {
 
 #titulo-menu>b {
     font-size: 18px;
+}
+
+#dashboard-card {
+    width: 100%;
+    padding: 20px;
+    background: #fff;
 }
 
 .tug {

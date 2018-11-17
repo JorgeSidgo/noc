@@ -14,6 +14,7 @@ class ControladorBase {
     public static function loadMain() {
         session_start();
         require_once "./app/view/Components/head.php";
+        require_once "./app/view/Components/menu.php";
         require_once "./app/view/Components/headerBar.php";
     }
 }
