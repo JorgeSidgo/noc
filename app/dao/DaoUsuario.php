@@ -63,8 +63,8 @@ class DaoUsuario extends DaoBase {
         }
     }
 
-    public function autorizar() {
-        $_query = "update usuario set codigoAuth = 1 where codigoUsuario = ".$this->objeto->getCodigoUsuario();
+    public function autorizar($estado) {
+        $_query = "update usuario set codigoAuth = {$estado} where codigoUsuario = ".$this->objeto->getCodigoUsuario();
         $resultado = $this->con->query($_query);
 
         if($resultado) {

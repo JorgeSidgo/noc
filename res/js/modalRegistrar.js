@@ -38,10 +38,10 @@ Vue.component('modal-registrar', {
     mounted() {
         $('.ui.checkbox').checkbox();
         $('.ui.radio.checkbox').checkbox();
-        $('input.timepicker').timepicker({
+        /* $('input.timepicker').timepicker({
             dropdown: true,
             scrollbar:true
-        });
+        }); */
     },
     updated() {
         for (let index = 0; index < this.campos.length; index++) {

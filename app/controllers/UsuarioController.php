@@ -19,6 +19,11 @@ class UsuarioController extends ControladorBase {
         require_once './app/view/Usuario/dashboard.php';
     }
 
+    public static function gestion() {
+        self::loadMain();
+        require_once './app/view/Usuario/gestion.php';
+    }
+
     // Métodos 
 
     public static function login() {
@@ -77,12 +82,13 @@ class UsuarioController extends ControladorBase {
 
     public function autorizar() {
         $id = $_REQUEST["id"];
+        $estado = $_REQUEST["estado"];
 
         $dao = new DaoUsuario();
 
         $dao->objeto->setCodigoUsuario($id);
 
-        echo $dao->autorizar();
+        echo $dao->autorizar($estado);
     }
 
     public function cargarDatosUsuario() {

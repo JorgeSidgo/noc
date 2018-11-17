@@ -14,9 +14,19 @@
         <div class="header">
             Autorizar Usuario
         </div>
-        <div class="content">
-            <h4>¿Desea autorizar este usuario para ingresar al sistema?</h4>        
-            <input type="hidden" id="idAutorizar" name="idAutorizar">
+        <div class="content">      
+            <form action="" class="ui equal width form" id="frmAutorizar">
+                <div class="fields">
+                    <div  class="field">
+                        <label for="">Estado:</label>
+                        <select class="ui dropdown" name="idEstado" id="idEstado">
+                            <option value="1">Autorizado</option>
+                            <option value="2">Esperando Autorización</option>
+                        </select>
+                    </div>
+                    <input type="hidden" id="idAutorizar" name="idAutorizar">
+                </div>
+            </form> 
         </div>
 
         <div class="actions">
@@ -216,7 +226,7 @@ var app = new Vue({
         });
 
         $(document).on("click", ".btnAutorizar", function () {
-            $('#modalAutorizar').modal('setting', 'closable', false).modal('show');
+            $('#modalAutorizar').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
             $('#idAutorizar').val($(this).attr("id"));
         });
 </script>
@@ -227,12 +237,14 @@ var app = new Vue({
         $('#btnAutorizar').click(function() {
 
             var idUsuario = $('#idAutorizar').val();
+            var idEstado = $('#idEstado').val();
 
            $.ajax({
                type: 'POST',
                url: '?1=UsuarioController&2=autorizar',
                data: {
-                   id: idUsuario
+                   id: idUsuario, 
+                   estado: idEstado
                },
                success: function(r) {
                    if(r == 1) {
