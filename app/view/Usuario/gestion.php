@@ -111,6 +111,7 @@ var app = new Vue({
                 {
                     label: 'Correo Electrónico:',
                     name: 'correo',
+                    mask: 'correoElectronico',
                     type: 'text'
                 },
                 {
@@ -153,6 +154,7 @@ var app = new Vue({
                 {
                     label: 'Correo Electrónico:',
                     name: 'correo',
+                    mask: 'correoElectronico',
                     type: 'text'
                 },
                 {

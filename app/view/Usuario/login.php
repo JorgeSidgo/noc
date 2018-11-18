@@ -5,7 +5,7 @@
 </style>
 
 <body class="body-login">
-<div id="fondo-dot"></div>
+    <div id="fondo-dot"></div>
     <div id="app">
         <div class="contenedor" style="margin-top:0; height: 100vh; background: none !important; display: flex;
         align-items: center;
@@ -18,7 +18,8 @@
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
-                            <input @keyup.enter="login" @keyup="setTrue" type="text" class="reqLogin" name="user" id="user" placeholder="Usuario">
+                            <input @keyup.enter="login" @keyup="setTrue" type="text" class="reqLogin" name="user" id="user"
+                                placeholder="Usuario">
                         </div>
                     </div>
                     <div style="text-align: right;" class="field">
@@ -29,19 +30,17 @@
                         </div>
                         <a href=""><small>Olvidé mi contraseña</small></a>
                     </div>
-                    
-                    <div class="ui negative message" v-if="isError">
-                        <p>
-                            Datos Incorrectos
-                        </p>
-                    </div>
-                    <button style="margin-top: 15px;" :class="loading" name="btnLogin" value="noloc" @click="login" id="btnLogin" type="button"
-                        @submit.prevent="" >Ingresar</button>
-                    
+                    <a id="label-error" style="margin: 0;" class="ui red fluid large label" v-if="isError">Datos
+                        Incorrectos</a>
+                    <button style="margin-top: 15px;" :class="loading" name="btnLogin" value="noloc" @click="login" id="btnLogin"
+                        type="button" @submit.prevent="">Ingresar</button>
+
                 </form>
                 <div style="text-align:center; margin-top:15px;" class="field">
-                        <a href="?1=UsuarioController&2=registroForm" class="ui bottom attached label">¿Aún no tiene cuenta? Regístrese</a>
-                    </div>
+                    <a href="?1=UsuarioController&2=registroForm" class="ui bottom attached label">¿Aún no tiene
+                        cuenta? Regístrese</a>
+                </div>
+
             </div>
         </div>
     </div>
@@ -51,14 +50,14 @@
             $('#user').focus();
         });
     </script>
-    
+
 
     <script>
         var app = new Vue({
             el: "#app",
             data: {
                 isError: false,
-                loading:['ui','fluid','green-deloitte','button']
+                loading: ['ui', 'fluid', 'green-deloitte', 'button']
             },
             methods: {
                 setTrue() {
@@ -66,7 +65,7 @@
                 },
                 login() {
 
-                    var gatos = {}; 
+                    var gatos = {};
                     $('#frmLogin').addClass('loading');
 
                     $('#frmLogin').find(":input").each(function () {
@@ -75,7 +74,6 @@
 
                     gatos = JSON.stringify(gatos);
 
-                    console.log(gatos);
                     var param = {
                         method: 'POST',
                         headers: {
@@ -91,24 +89,28 @@
                             } else {
                                 throw "Error al recibir datos";
                                 this.isError = true;
-                                
+
                             }
                         })
                         .then(val => {
 
+                            $('#frmLogin').removeClass('loading');
+
                             if (val == 1) {
-                                $('#frmLogin').removeClass('loading');
                                 location.href = '?1=UsuarioController&2=dashboard';
+                            } else if (val == 2) {
+                                $('#label-error').html('No tiene autorización para ingresar');
+                                this.isError = true;
                             } else {
-                                $('#frmLogin').removeClass('loading');
+                                $('#label-error').html('Datos Incorrectos');
                                 this.isError = true;
                             }
-                            
+
                         }).catch(res => {
                             $('#frmLogin').removeClass('loading');
                             this.isError = true;
                             console.log(res);
-                        
+
                         });
                 }
             }

@@ -26,10 +26,14 @@
     <link rel="stylesheet" href="./res/plugins/ripple/ripple.css">
     <link rel="stylesheet" href="./res/plugins/Material-Icons/material-icons.css">
 
+    <!-- JQueryMask -->
+    <script src="./res/plugins/JQueryMask/jquery.mask.js"></script>
+
     <!-- JS -->
     <script src="./res/js/efectinis.js"></script>    
     <script src="./res/js/validar.js"></script>    
     <script src="./res/js/fondo-dot.js"></script>    
+    <script src="./res/js/mask-inputs.js"></script>    
     <script src="./res/js/menu.js"></script>
     <script src="./res/plugins/ripple/ripple.js"></script>
     <script src="./res/plugins/ripple/ripple.init.js"></script>
@@ -52,6 +56,3 @@
             .dropdown();
     });
 </script>
-
-<div class="pusher">
-    <div class="contenedor">

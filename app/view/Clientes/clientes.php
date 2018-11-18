@@ -76,6 +76,7 @@ var app = new Vue({
                 {
                     label: 'Teléfono',
                     name: 'telefono',
+                    mask: 'telefono',
                     type: 'text'
                 }
             ],
@@ -93,7 +94,12 @@ var app = new Vue({
                 {
                     label: 'Teléfono',
                     name: 'telefono',
+                    mask: 'telefono',
                     type: 'text'
+                },
+                {
+                    name: 'idDetalle',
+                    type: 'hidden'
                 }
             ],
             campos_eliminar: [{

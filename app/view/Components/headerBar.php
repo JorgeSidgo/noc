@@ -28,7 +28,7 @@
                 </a>
             </div>
         </div>
-         <a href="?1=Sistema&2=registroForm" class="ui bottom right attached label">1</a>
+         <a href="?1=Sistema&2=registroForm" class="ui bottom right attached olive label">1</a>
     </div>
     
 

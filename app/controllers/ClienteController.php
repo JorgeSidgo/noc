@@ -37,8 +37,9 @@ class ClienteController extends ControladorBase {
         $dao = new DaoCliente();
 
         $dao->objeto->setNombreCliente($datos->nombreCliente);
-        $dao->objeto->setDirección($datos->direccion);
+        $dao->objeto->setDireccion($datos->direccion);
         $dao->objeto->setTelefono($datos->telefono);
+        $dao->objeto->setCodigoCliente($datos->idDetalle);
 
         echo $dao->editar();
      

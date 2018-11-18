@@ -58,7 +58,7 @@ insert into authUsuario values (null, 'Esperando Autorizacion');
 
 insert into usuario values (null, 'Karla Guadalupe', 'Arevalo Vega', 'kgarevalo', 'kgarevalo@deloitte.com', 'Deloitte123!', 1, 1);
 insert into usuario values (null, 'Jorge Luis', 'Sidgo Pimentel', 'jlsidgo', 'jlsidgo@deloitte.com', 'Deloitte123!', 1, 1);
-insert into usuario values (null, 'John', 'Doe', 'johndoe', 'johndoe@deloitte.com', 'Deloite123!', 2, 2);
+insert into usuario values (null, 'John', 'Doe', 'johndoe', 'johndoe@deloitte.com', '123', 2, 2);
 
 #Cliente
 insert into clientes values(null,'Telefonica','San Salvador','2314-1231');
@@ -154,5 +154,6 @@ begin
 end
 $$
 
+select * from usuario;
 
-call mostrarUsuarios()
+-- call mostrarUsuarios()

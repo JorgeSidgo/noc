@@ -134,7 +134,7 @@ Vue.component('modal-editar', {
 
                             <input v-else-if="campo.type == 'hidden'" :type="campo.type" :id="campo.name" :name="campo.name">
 
-                            <input v-else class="reqRegistrar" :type="campo.type" :name="campo.name">
+                            <input v-else class="requerido" :type="campo.type" :mask="campo.mask" :name="campo.name">
                             
                             <div class="ui red pointing label" style="display: none;">
                             </div>

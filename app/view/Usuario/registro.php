@@ -5,7 +5,7 @@
 </style>
 
 <body class="body-login">
-<div id="fondo-dot"></div>
+    <div id="fondo-dot"></div>
     <div id="app">
         <div class="contenedor" style="margin-top:0; height: 100vh; background: none !important; display: flex;
         align-items: center;
@@ -14,67 +14,59 @@
                 <div class="cuadro-ins" style="margin-top: -12%;">
                     <img src="./res/img/deloitteNigga.svg" alt="" id="logo-login">
                 </div>
-                <form action="" method="POST" class="ui form">
+                <form id="frmLogin" method="POST" class="ui form">
 
-                    
+
                     <div class="two fields">
                         <div class="field">
                             <label for="">Nombre:</label>
-                                <input type="text" class="reqLogin" name="user" id="user">
+                            <input type="text" class="requerido" name="nombre" id="nombre">
                         </div>
                         <div class="field">
                             <label for="">Apellido:</label>
-                                <input type="text" class="reqLogin" name="pass" id="pass">
+                            <input type="text" class="requerido" name="apellido" id="apellido">
 
                         </div>
                     </div>
                     <div class="field">
-                            <label for="">Nombre de Usuario:</label>
-                                <input   type="text" class="reqLogin" name="user" id="user">
-                        </div>
+                        <label for="">Nombre de Usuario:</label>
+                        <input type="text" class="requerido" name="user" id="user">
+                    </div>
                     <div class="field">
-                            <label for="">E-mail:</label>
-                                <input type="text" class="reqLogin" name="pass" id="pass"
-                                     >
+                        <label for="">E-mail:</label>
+                        <input type="text" class="requerido" name="email" id="email">
 
-                        </div>
+                    </div>
                     <div class="field">
-                            <label for="">Área:</label>
-                                <select name="area" id="area" class="ui dropdown">
-                                    <option value="1">Abas</option>
-                                    <option value="2">Tax y Legal</option>
-                                    <option value="3">RRHH</option>
-                                    <option value="4">Finanzas</option>
-                                </select>
+                        <label for="">Área:</label>
+                        <select name="area" id="area" class="ui dropdown">
+                            <option value="1">Abas</option>
+                            <option value="2">Tax y Legal</option>
+                            <option value="3">RRHH</option>
+                            <option value="4">Finanzas</option>
+                        </select>
 
-                        </div>
+                    </div>
                     <div class="two fields">
                         <div class="field">
                             <label for="">Contraseña:</label>
-                                <input type="password" class="reqLogin" name="pass" id="pass"
-                                     >
+                            <input type="password" class="requerido" name="pass" id="pass">
 
                         </div>
                         <div class="field">
                             <label for="">Confirmar Contraseña:</label>
-                                <input type="password" class="reqLogin" name="pass" id="pass"
-                                     >
+                            <input type="password" class="requerido" name="confPass" id="confPass">
 
                         </div>
                     </div>
-                    
-                    <div class="ui negative message" v-if="isError">
-                        <p>
-                            Datos Incorrectos
-                        </p>
-                    </div>
-                    <button style="margin-top: 15px;" :class="loading" @click="login" id="btnLogin" type="button"
-                        @submit.prevent="" >Registrarse</button>
-                    
+
+                    <button style="margin-top: 15px;" class="ui green-deloitte fluid button" id="btnLogin" type="button"
+                        @submit.prevent="">Registrarse</button>
+
                 </form>
                 <div style="text-align:center; margin-top:15px;" class="field">
-                <a href="?" class="ui bottom attached label">¿Ya posee una cuenta? Inicie Sesión</a>
-                    </div>
+                    <a href="?" class="ui bottom attached label">¿Ya posee una cuenta? Inicie Sesión</a>
+                </div>
             </div>
         </div>
     </div>
@@ -84,54 +76,27 @@
             $('#user').focus();
         });
     </script>
-    
 
     <script>
-        var app = new Vue({
-            el: "#app",
-            data: {
-                isError: false,
-                loading:['ui','fluid','green-deloitte','button']
-            },
-            methods: {
-                setTrue() {
-                    this.isError = false;
-                },
-                login() {
-                    this.loading.push('loading');
-                    var user = document.getElementById("user").value.trim();
-                    var pass = document.getElementById("pass").value.trim();
+        $(function() {
+            $('#btnLogin').click(function() {
 
-                    /* $('#btnLogin').addClass("loading"); */
+                if(validarVacios('frmLogin', '#btnLogin') == 0)
+                {
+                    var gatos = {};
+                    $('#frmLogin').addClass('loading');
 
-                    fetch("../controladorUsuario?op=login&nom="+ user + "&pass=" + pass)
-                        .then(response => {
-                            if (response.ok) {
-                                return response.json();
-                            } else {
-                                throw "Error al recibir datos";
-                                this.isError = true;
-                                
-                            }
-                        })
-                        .then(val => {
+                    $('#frmLogin').find(":input").each(function () {
+                        gatos[this.name] = $(this).val();
+                    });
 
-                            if (val == 1) {
-                                location.href = 'dashboard.jsp';
-                                
-                            } else {
-                                this.loading.pop();
-                                this.isError = true;
-                            }
-                            
-                        }).catch(res => {
-                            this.loading.pop();
-                            this.isError = true;
-                            console.log(res);
-                        
-                        });
+                    gatos = JSON.stringify(gatos);
+
+                    console.log(gatos);
                 }
-            }
+                
+            });
         });
     </script>
+
 </body>

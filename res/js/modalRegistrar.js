@@ -134,7 +134,8 @@ Vue.component('modal-registrar', {
 
                             <input v-else-if="campo.type == 'number'" class="requerido" :type="campo.type" :name="campo.name" :min="campo.min" :max="campo.max" :id="campo.name" :step='campo.step' :disabled='campo.disabled'>
 
-                            <input v-else class="requerido" :type="campo.type" :name="campo.name" :id="campo.name" :disabled='campo.disabled'>
+                            <input v-else class="requerido" :type="campo.type" :mask="campo.mask" :name="campo.name">
+
                             <div class="ui red pointing label" style="display: none;">
                             </div>
                         </div>
