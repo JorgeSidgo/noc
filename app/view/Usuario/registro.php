@@ -92,34 +92,47 @@ $(function() {
 
                 if(validarVacios('frmLogin', '#btnLogin') == 0)
                 {
-                    var gatos = {};
-                    $('#frmLogin').addClass('loading');
+                    alert($('#pass').val() +' ' + $('#confPass').val())
 
-                    $('#frmLogin').find(":input").each(function () {
-                        gatos[this.name] = $(this).val();
-                    });
+                    if($('#pass').val() != $('#confPass').val()) {
 
-                    gatos = JSON.stringify(gatos);
+                        $('#label-error').html('Las contraseñas no concuerdan');
+                        $('#label-error').css('display', 'inline-block');
 
-                    $.ajax({
-                        type: 'POST',
-                        url: '?1=UsuarioController&2=registrar',
-                        data: {datos: gatos},
-                        success: function(r) {
-                            $('#frmLogin').removeClass('loading');
-                            if(r == 1) {
-                                swal({
-                                    title: 'Registrado',
-                                    text: 'Se le notificará por correo cuando su cuenta sea autorizada',
-                                    type: 'success'
-                                }).then((result) => {
-                                    if (result.value) {
-                                        location.href = '?';
-                                    }
-                                });     
+                    } else {
+
+                        $('#label-error').css('display', 'none');
+                        $('#label-error').html('');
+                        var gatos = {};
+                        $('#frmLogin').addClass('loading');
+
+                        $('#frmLogin').find(":input").each(function () {
+                            gatos[this.name] = $(this).val();
+                        });
+
+                        gatos = JSON.stringify(gatos);
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '?1=UsuarioController&2=registrar',
+                            data: {datos: gatos},
+                            success: function(r) {
+                                $('#frmLogin').removeClass('loading');
+                                if(r == 1) {
+                                    swal({
+                                        title: 'Registrado',
+                                        text: 'Se le notificará por correo cuando su cuenta sea autorizada',
+                                        type: 'success'
+                                    }).then((result) => {
+                                        if (result.value) {
+                                            location.href = '?';
+                                        }
+                                    });     
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+
                 } else {
                     $('#label-error').html('Complete todos los campos');
                     $('#label-error').css('display', 'inline-block');

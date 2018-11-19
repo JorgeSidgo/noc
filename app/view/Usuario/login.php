@@ -33,10 +33,11 @@ if(isset($_REQUEST["user"])) {
                         </div>
                     </div>
                     <div style="text-align: right;" class="field">
-                        <div class="ui left icon input">
+                        <div class="ui right labeled left icon input">
                             <i class="lock icon"></i>
                             <input type="password" class="reqLogin" name="pass" id="pass" placeholder="Contraseña"
                                 @keyup.enter="login" @keyup="setTrue">
+                                <div id="show-contra" class="ui basic label"><i style="margin: 0;" id="icon-contra" class="eye icon"></i></div>
                         </div>
                         <a href=""><small>Olvidé mi contraseña</small></a>
                     </div>
@@ -61,6 +62,22 @@ if(isset($_REQUEST["user"])) {
         });
     </script>
 
+
+    <script>
+        $(function() {
+            $('#show-contra').mousedown(function() {
+                $('#icon-contra').attr('class', 'eye slash icon');
+                $('#pass').attr('type', 'text');
+            });
+
+
+            $('#show-contra').mouseup(function() {
+                $('#icon-contra').attr('class', 'eye icon');
+                $('#pass').attr('type', 'password');
+            });
+
+        });
+    </script>
 
     <script>
         var app = new Vue({
