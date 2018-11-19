@@ -17,7 +17,7 @@ class Mail {
 
     public function composeAuthMail($datosUsuario, $estadoCuenta) {
 
-        $emailFrom = 'jorge.sidgo@gmail.com';
+        $emailFrom = 'deloitte.prueba.no.reply@gmail.com';
         $emailFromName = 'Deloitte';
 
         $emailTo = $datosUsuario->email;
@@ -33,8 +33,8 @@ class Mail {
         $mail->isHTML(true);
         $mail->Charset = 'UTF-8';
 
-        $mail->Username = 'jorge.sidgo@gmail.com';
-        $mail->Password = 'sferrari21';
+        $mail->Username = 'deloitte.prueba.no.reply@gmail.com';
+        $mail->Password = 'Deloitte123!';
         $mail->setFrom($emailFrom, $emailFromName);
 
         $mail->addAddress($emailTo, $emailToName);
