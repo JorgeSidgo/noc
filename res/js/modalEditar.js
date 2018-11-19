@@ -42,14 +42,7 @@ Vue.component('modal-editar', {
         $('.ui.checkbox').checkbox();
         $('.ui.radio.checkbox').checkbox();
     },
-    updated() {
-        for (let index = 0; index < this.campos.length; index++) {
-            if (this.campos[index].selected == undefined) {} else {
-
-            }
-        }
-    },
-
+    
     data: function () {
         return {
             contador: 0
@@ -114,7 +107,7 @@ Vue.component('modal-editar', {
                         <div v-for="campo in campos" class="field">
                             <label>{{campo.label}} </label>
                             <select class="ui dropdown" v-if="campo.type == 'select'" :name="campo.name">
-                                <option v-for="(op,i) in campo.options" :value="op.val" :key='i' :id="op.val+'_'+i">
+                                <option v-for="(op,i) in campo.options" :value="op.val" :key='i'>
                                     {{op.text}}
                                 </option>  
                             </select>

@@ -21,7 +21,7 @@
                         <label for="">Estado:</label>
                         <select class="ui dropdown" name="idEstado" id="idEstado">
                             <option value="1">Autorizado</option>
-                            <option value="2">Esperando Autorización</option>
+                            <option value="3">Restringido</option>
                         </select>
                     </div>
                     <input type="hidden" id="idAutorizar" name="idAutorizar">
@@ -71,8 +71,9 @@
                             <th>Apellido</th>
                             <th>Usuario</th>
                             <th>Email</th>
-                            <th>Autorización</th>
+                            <th>Área</th>
                             <th>Rol</th>
+                            <th>Autorización</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -120,6 +121,29 @@ var app = new Vue({
                     type: 'password'
                 },
                 {
+                    label: 'Área:',
+                    name: 'area',
+                    type: 'select',
+                    options: [
+                        {
+                            val: 2,
+                            text: 'Abas'
+                        },
+                        {
+                            val: 3,
+                            text: 'Tax y Legal'
+                        },
+                        {
+                            val: 4,
+                            text: 'RRHH'
+                        },
+                        {
+                            val: 5,
+                            text: 'Finanzas'
+                        }
+                    ]
+                },
+                {
                     label: 'Rol:',
                     name: 'rol',
                     type: 'select',
@@ -156,6 +180,29 @@ var app = new Vue({
                     name: 'correo',
                     mask: 'correoElectronico',
                     type: 'text'
+                },
+                {
+                    label: 'Área:',
+                    name: 'area',
+                    type: 'select',
+                    options: [
+                        {
+                            val: 2,
+                            text: 'Abas'
+                        },
+                        {
+                            val: 3,
+                            text: 'Tax y Legal'
+                        },
+                        {
+                            val: 4,
+                            text: 'RRHH'
+                        },
+                        {
+                            val: 5,
+                            text: 'Finanzas'
+                        }
+                    ]
                 },
                 {
                     label: 'Rol:',
@@ -238,6 +285,8 @@ var app = new Vue({
     $(function() {
         $('#btnAutorizar').click(function() {
 
+            $('#frmAutorizar').addClass('loading');
+
             var idUsuario = $('#idAutorizar').val();
             var idEstado = $('#idEstado').val();
 
@@ -249,6 +298,7 @@ var app = new Vue({
                    estado: idEstado
                },
                success: function(r) {
+                $('#frmAutorizar').removeClass('loading');
                    if(r == 1) {
                     swal({
                             title: 'Autorizado',

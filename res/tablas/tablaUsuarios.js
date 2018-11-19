@@ -23,10 +23,13 @@ $(function() {
                     "data": "email"             
                 },
                 {
-                    "data": "descAuth"             
+                    "data": "descArea"             
                 },
                 {
                     "data": "descRol"             
+                },
+                {
+                    "data": "descAuth"             
                 },
                 {
                     "data": "Acciones"             

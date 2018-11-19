@@ -25,7 +25,7 @@ class DaoUsuario extends DaoBase {
                 $_SESSION["email"] = $fila["email"];
                 $_SESSION["nomUsuario"] = $fila["nomUsuario"];
                 $_SESSION["descRol"] = $fila["descRol"];
-                $_SESSION["nomUsuario"] = $fila["nomUsuario"];
+                $_SESSION["descArea"] = $fila["descArea"];
                 
                 return 1;
             } 
@@ -42,6 +42,7 @@ class DaoUsuario extends DaoBase {
         from usuario u
         inner join rol r on r.codigoRol = u.codigoRol
         inner join authUsuario a on a.codigoAuth = u.codigoAuth
+        inner join area ar on ar.codigoArea = u.codigoArea
         where u.codigoUsuario = ".$this->objeto->getCodigoUsuario();
 
         $resultado = $this->con->query($_query);
@@ -52,7 +53,7 @@ class DaoUsuario extends DaoBase {
     }
 
     public function registrar() {
-        $_query = "call registrarUsuario('".$this->objeto->getNombre()."', '".$this->objeto->getApellido()."','".$this->objeto->getNomUsuario()."', '".$this->objeto->getEmail()."', '".$this->objeto->getPass()."', ".$this->objeto->getCodigoRol().")";
+        $_query = "call registrarUsuario('".$this->objeto->getNombre()."', '".$this->objeto->getApellido()."','".$this->objeto->getNomUsuario()."', '".$this->objeto->getEmail()."', '".$this->objeto->getPass()."', ".$this->objeto->getCodigoArea().", ".$this->objeto->getCodigoRol().")";
 
         $resultado = $this->con->query($_query);
 

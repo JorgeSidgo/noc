@@ -4,6 +4,12 @@
     }
 </style>
 
+<script>
+$(function() {
+    overflowRestore();
+});
+</script>
+
 <body class="body-login">
     <div id="fondo-dot"></div>
     <div id="app">
@@ -21,6 +27,7 @@
                         <div class="field">
                             <label for="">Nombre:</label>
                             <input type="text" class="requerido" name="nombre" id="nombre">
+                            
                         </div>
                         <div class="field">
                             <label for="">Apellido:</label>
@@ -29,12 +36,12 @@
                         </div>
                     </div>
                     <div class="field">
-                        <label for="">Nombre de Usuario:</label>
+                        <label for="">Nombre de Usuario Deloitte:</label>
                         <input type="text" class="requerido" name="user" id="user">
                     </div>
                     <div class="field">
                         <label for="">E-mail:</label>
-                        <input type="text" class="requerido" name="email" id="email">
+                        <input type="text" class="requerido" name="correo" id="correo">
 
                     </div>
                     <div class="field">
@@ -59,8 +66,10 @@
 
                         </div>
                     </div>
-
-                    <button style="margin-top: 15px;" class="ui green-deloitte fluid button" id="btnLogin" type="button"
+                    <a id="label-error" style="margin: 0; display:none; text-align:center;" class="ui red fluid large label">
+                        
+                    </a>
+                    <button style="margin-top: 15px;" class="ui green-deloitte fluid button" name="btnLogin" value="login" id="btnLogin" type="button"
                         @submit.prevent="">Registrarse</button>
 
                 </form>
@@ -73,7 +82,7 @@
 
     <script>
         $(function () {
-            $('#user').focus();
+            $('#nombre').focus();
         });
     </script>
 
@@ -92,7 +101,28 @@
 
                     gatos = JSON.stringify(gatos);
 
-                    console.log(gatos);
+                    $.ajax({
+                        type: 'POST',
+                        url: '?1=UsuarioController&2=registrar',
+                        data: {datos: gatos},
+                        success: function(r) {
+                            $('#frmLogin').removeClass('loading');
+                            if(r == 1) {
+                                swal({
+                                    title: 'Registrado',
+                                    text: 'Se le notificará por correo cuando su cuenta sea autorizada',
+                                    type: 'success'
+                                }).then((result) => {
+                                    if (result.value) {
+                                        location.href = '?';
+                                    }
+                                });     
+                            }
+                        }
+                    });
+                } else {
+                    $('#label-error').html('Complete todos los campos');
+                    $('#label-error').css('display', 'inline-block');
                 }
                 
             });

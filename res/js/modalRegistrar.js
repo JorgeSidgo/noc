@@ -43,13 +43,6 @@ Vue.component('modal-registrar', {
             scrollbar:true
         }); */
     },
-    updated() {
-        for (let index = 0; index < this.campos.length; index++) {
-            if (this.campos[index].selected == undefined) {} else {
-
-            }
-        }
-    },
 
     methods: {
         registrar() {
@@ -116,7 +109,7 @@ Vue.component('modal-registrar', {
                         <div v-for="campo in campos" class="field">
                             <label>{{campo.label}} </label>
                             <select class="ui dropdown" v-if="campo.type == 'select'" :name="campo.name" :id="campo.name">
-                                <option v-for="(op,i) in campo.options" :value="op.val" :key='i' :id="op.val+'_'+i">
+                                <option v-for="(op,i) in campo.options" :value="op.val" :key='i'>
                                     {{op.text}}
                                 </option>  
                             </select>

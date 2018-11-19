@@ -23,12 +23,18 @@
                 <a href="">
                     <div class="item">
                         <i class="certificate icon"></i>
-                        Simon
+                        Notificación 1
+                    </div>
+                </a>
+                <a href="">
+                    <div class="item">
+                        <i class="certificate icon"></i>
+                        Notificación 2
                     </div>
                 </a>
             </div>
         </div>
-         <a href="?1=Sistema&2=registroForm" class="ui bottom right attached olive label">1</a>
+         <a class="ui bottom right attached olive label">1</a>
     </div>
     
 
@@ -40,7 +46,7 @@
                 <?php echo $_SESSION["descRol"] ?>
             </div>
             <div class="divider"></div>
-            <a href="../vista/configuracionCuenta.jsp">
+            <a href="">
                 <div class="item" id="#btnConf">
                     <i class="cog icon"></i>
                     Cuenta

@@ -51,6 +51,12 @@ class UsuarioController extends ControladorBase {
 
         $datos = json_decode($datos);
 
+        if(empty($datos->rol)) {
+            $rol = 2;
+        } else {
+            $rol = $datos->rol;
+        }
+
         $dao = new DaoUsuario();
 
         $dao->objeto->setNombre($datos->nombre);
@@ -58,10 +64,15 @@ class UsuarioController extends ControladorBase {
         $dao->objeto->setNomUsuario($datos->user);
         $dao->objeto->setEmail($datos->correo);
         $dao->objeto->setPass($datos->pass);
-        $dao->objeto->setCodigoRol($datos->rol);
+        $dao->objeto->setCodigoRol($rol);
+        $dao->objeto->setCodigoArea($datos->area);
 
         echo $dao->registrar();
      
+    }
+
+    public function registrarExterno() {
+
     }
 
     public function editar() {
@@ -70,7 +81,7 @@ class UsuarioController extends ControladorBase {
         $datos = json_decode($datos);
 
         $dao = new DaoUsuario();
-
+        
         $dao->objeto->setNombre($datos->nombre);
         $dao->objeto->setApellido($datos->apellido);
         $dao->objeto->setNomUsuario($datos->user);
@@ -83,12 +94,24 @@ class UsuarioController extends ControladorBase {
     }
 
     public function autorizar() {
+        
+        $dao = new DaoUsuario();
+
+        require './app/mail/Mail.php';
+        $mail = new Mail();
+
         $id = $_REQUEST["id"];
         $estado = $_REQUEST["estado"];
 
-        $dao = new DaoUsuario();
-
+        $estadoCuenta = $estado == 1 ? 'Autorizada' : 'Restringida';
+        
         $dao->objeto->setCodigoUsuario($id);
+        
+        $datosUsuario = json_decode($dao->cargarDatosUsuario());
+        
+        if(!$mail->composeAuthMail($datosUsuario, $estadoCuenta)) {
+            echo "El correo no fue enviado Correctamente";
+        }
 
         echo $dao->autorizar($estado);
     }

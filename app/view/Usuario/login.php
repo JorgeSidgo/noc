@@ -1,8 +1,18 @@
+<?php
+if(isset($_REQUEST["user"])) {
+    $nomUser = $_REQUEST["user"];
+} else {
+    $nomUser = '';
+}
+
+?>
+
 <style>
     body {
         overflow: hidden;
     }
 </style>
+
 
 <body class="body-login">
     <div id="fondo-dot"></div>
@@ -18,7 +28,7 @@
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
-                            <input @keyup.enter="login" @keyup="setTrue" type="text" class="reqLogin" name="user" id="user"
+                            <input @keyup.enter="login" value="<?php echo $nomUser?>" @keyup="setTrue" type="text" class="reqLogin" name="user" id="user"
                                 placeholder="Usuario">
                         </div>
                     </div>
@@ -30,7 +40,7 @@
                         </div>
                         <a href=""><small>Olvidé mi contraseña</small></a>
                     </div>
-                    <a id="label-error" style="margin: 0;" class="ui red fluid large label" v-if="isError">Datos
+                    <a id="label-error" style="margin: 0; text-align:center;" class="ui red fluid large label" v-if="isError">Datos
                         Incorrectos</a>
                     <button style="margin-top: 15px;" :class="loading" name="btnLogin" value="noloc" @click="login" id="btnLogin"
                         type="button" @submit.prevent="">Ingresar</button>

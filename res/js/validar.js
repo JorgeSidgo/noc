@@ -114,3 +114,10 @@ function validarVacios(parametro, btn) {
     } */
     return num;
 }
+
+
+function overflowRestore() {
+    setTimeout(function() {
+        $('body').css('overflow-y', 'visible');
+    }, 1000);
+}

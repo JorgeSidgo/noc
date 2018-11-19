@@ -8,6 +8,7 @@ class Usuario extends ModeloBase{
     private $email;
     private $pass;
     private $codigoRol;
+    private $codigoArea;
 
     public function __construct() {
 
@@ -149,6 +150,26 @@ class Usuario extends ModeloBase{
     public function setEmail($email)
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of codigoArea
+     */ 
+    public function getCodigoArea()
+    {
+        return $this->codigoArea;
+    }
+
+    /**
+     * Set the value of codigoArea
+     *
+     * @return  self
+     */ 
+    public function setCodigoArea($codigoArea)
+    {
+        $this->codigoArea = $codigoArea;
 
         return $this;
     }
