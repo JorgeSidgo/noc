@@ -37,6 +37,7 @@ class DaoUsuario extends DaoBase {
         }
     }
 
+
     public function cargarDatosUsuario() {
         $_query = "select u.*, r.descRol, a.descAuth
         from usuario u
@@ -66,6 +67,18 @@ class DaoUsuario extends DaoBase {
 
     public function autorizar($estado) {
         $_query = "update usuario set codigoAuth = {$estado} where codigoUsuario = ".$this->objeto->getCodigoUsuario();
+        $resultado = $this->con->query($_query);
+
+        if($resultado) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+    //Actualizar con el generador de codigo
+    public function reestablecer($psswd)
+    {
+        $_query = "update usuario set pass = {$psswd} where nomUsuario = ".$this->objeto->getNomUsuario()."' and email ='".$this->objeto->getEmail();
         $resultado = $this->con->query($_query);
 
         if($resultado) {

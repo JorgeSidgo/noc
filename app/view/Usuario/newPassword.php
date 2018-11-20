@@ -1,12 +1,3 @@
-<?php
-if(isset($_REQUEST["user"])) {
-    $nomUser = $_REQUEST["user"];
-} else {
-    $nomUser = '';
-}
-
-?>
-
 <style>
     body {
         overflow: hidden;
@@ -24,61 +15,42 @@ if(isset($_REQUEST["user"])) {
                 <div class="cuadro-ins">
                     <img src="./res/img/deloitteNigga.svg" alt="" id="logo-login">
                 </div>
-                <form id="frmLogin" action="" method="POST" class="ui form">
+                <form id="frmNewPass" action="" method="POST" class="ui form">
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
-                            <input @keyup.enter="login" value="<?php echo $nomUser?>" @keyup="setTrue" type="text" class="reqLogin" name="user" id="user"
-                                placeholder="Usuario">
+                            <input @keyup.enter="login" value="" @keyup="setTrue" type="text" class="reqLogin" name="user" id="user"
+                                placeholder="Usuario Deloitte">
                         </div>
                     </div>
                     <div style="text-align: right;" class="field">
                         <div class="ui right labeled left icon input">
-                            <i class="lock icon"></i>
-                            <input type="password" class="reqLogin" name="pass" id="pass" placeholder="Contraseña"
+                            <i class="envelope icon"></i>
+                            <input type="text" class="reqLogin" name="correo" id="correo" placeholder="Correo Electrónico"
                                 @keyup.enter="login" @keyup="setTrue">
-                                <div id="show-contra" class="ui basic label"><i style="margin: 0;" id="icon-contra" class="eye icon"></i></div>
+                                
                         </div>
-                        <a href="?1=NewPassController&2=reestablecer"><small>Olvidé mi contraseña</small></a>
+                        
                     </div>
                     <a id="label-error" style="margin: 0; text-align:center;" class="ui red fluid large label" v-if="isError">Datos
                         Incorrectos</a>
-                    <button style="margin-top: 15px;" :class="loading" name="btnLogin" value="noloc" @click="login" id="btnLogin"
-                        type="button" @submit.prevent="">Ingresar</button>
+                    <button style="margin-top: 15px;" :class="loading" name="btnEnviar" value="noloc" @click="login" id="btnEnviar"
+                        type="button" @submit.prevent="">Enviar datos</button>
+                        <?php
 
                 </form>
                 <div style="text-align:center; margin-top:15px;" class="field">
-                    <a href="?1=UsuarioController&2=registroForm" class="ui bottom attached label">¿Aún no tiene
-                        cuenta? Regístrese</a>
+                    <a href="?1=UsuarioController&2=loginview" class="ui bottom attached label">Volver a inicio</a>
                 </div>
 
             </div>
         </div>
     </div>
-
     <script>
         $(function () {
             $('#user').focus();
         });
     </script>
-
-
-    <script>
-        $(function() {
-            $('#show-contra').mousedown(function() {
-                $('#icon-contra').attr('class', 'eye slash icon');
-                $('#pass').attr('type', 'text');
-            });
-
-
-            $('#show-contra').mouseup(function() {
-                $('#icon-contra').attr('class', 'eye icon');
-                $('#pass').attr('type', 'password');
-            });
-
-        });
-    </script>
-
     <script>
         var app = new Vue({
             el: "#app",
@@ -93,9 +65,9 @@ if(isset($_REQUEST["user"])) {
                 login() {
 
                     var gatos = {};
-                    $('#frmLogin').addClass('loading');
+                    $('#frmNewPass').addClass('loading');
 
-                    $('#frmLogin').find(":input").each(function () {
+                    $('#frmNewPass').find(":input").each(function () {
                         gatos[this.name] = $(this).val();
                     });
 
@@ -109,7 +81,7 @@ if(isset($_REQUEST["user"])) {
                         body: "datos=" + gatos,
                     };
 
-                    fetch("?1=UsuarioController&2=login", param)
+                    fetch("?1=NewPassController&2=enviarDatos", param)
                         .then(response => {
                             if (response.ok) {
                                 return response.json();
@@ -120,21 +92,18 @@ if(isset($_REQUEST["user"])) {
                             }
                         })
                         .then(val => {
-
-                            $('#frmLogin').removeClass('loading');
+                            //prueba de datos correctos pero aun no funciona XD falta el metodo en el controlador
+                            $('#frmNewPass').removeClass('loading');
 
                             if (val == 1) {
-                                location.href = '?1=UsuarioController&2=dashboard';
-                            } else if (val == 2) {
-                                $('#label-error').html('No tiene autorización para ingresar');
-                                this.isError = true;
+                                location.href = '??1=UsuarioController&2=dashboard';
                             } else {
                                 $('#label-error').html('Datos Incorrectos');
                                 this.isError = true;
                             }
 
                         }).catch(res => {
-                            $('#frmLogin').removeClass('loading');
+                            $('#frmNewPass').removeClass('loading');
                             this.isError = true;
                             console.log(res);
 
@@ -143,4 +112,5 @@ if(isset($_REQUEST["user"])) {
             }
         });
     </script>
+    
 </body>
