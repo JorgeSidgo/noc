@@ -92,7 +92,7 @@
                             }
                         })
                         .then(val => {
-                            //prueba de datos correctos pero aun no funciona XD falta el metodo en el controlador
+                            //prueba de datos correctos pero aun no funciona XD falta el metodo en el controlador 
                             $('#frmNewPass').removeClass('loading');
 
                             if (val == 1) {
