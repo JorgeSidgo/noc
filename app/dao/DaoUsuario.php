@@ -53,6 +53,7 @@ class DaoUsuario extends DaoBase {
         return $json;
     }
 
+
     public function registrar() {
         $_query = "call registrarUsuario('".$this->objeto->getNombre()."', '".$this->objeto->getApellido()."','".$this->objeto->getNomUsuario()."', '".$this->objeto->getEmail()."', '".$this->objeto->getPass()."', ".$this->objeto->getCodigoArea().", ".$this->objeto->getCodigoRol().")";
 
@@ -75,6 +76,13 @@ class DaoUsuario extends DaoBase {
             return 0;
         }
     }
+    //verificar si el usuario y el correo existen por seguridad
+    public function enviarDatos()
+    {
+
+
+    }
+
     //Actualizar con el generador de codigo
     public function reestablecer($psswd)
     {
