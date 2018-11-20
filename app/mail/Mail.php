@@ -31,6 +31,7 @@ class Mail {
         $mail->SMTPSecure = 'tls';
         $mail->SMTPAuth = true;
         $mail->isHTML(true);
+        // $mail->SMTPDebug = 2;
         $mail->Charset = 'UTF-8';
 
         $mail->Username = 'deloitte.prueba.no.reply@gmail.com';
@@ -50,6 +51,8 @@ class Mail {
         if($mail->Send())
         {
             return true;
+        } else {
+            return false;
         }
     }
 

@@ -15,7 +15,8 @@ create table usuario (
     pass varchar(75),
     codigoAuth int,
     codigoRol int,
-    codigoArea int
+    codigoArea int,
+
 );
 
 create table rol (

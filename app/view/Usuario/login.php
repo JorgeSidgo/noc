@@ -28,22 +28,22 @@ if(isset($_REQUEST["user"])) {
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
-                            <input @keyup.enter="login" value="<?php echo $nomUser?>" @keyup="setTrue" type="text" class="reqLogin" name="user" id="user"
+                            <input @keyup.enter="login" value="<?php echo $nomUser?>" @keyup="setTrue" type="text" class="requerido" name="user" id="user"
                                 placeholder="Usuario">
                         </div>
                     </div>
                     <div style="text-align: right;" class="field">
                         <div class="ui right labeled left icon input">
                             <i class="lock icon"></i>
-                            <input type="password" class="reqLogin" name="pass" id="pass" placeholder="Contraseña"
+                            <input type="password" class="requerido" name="pass" id="pass" placeholder="Contraseña"
                                 @keyup.enter="login" @keyup="setTrue">
-                                <div id="show-contra" class="ui basic label"><i style="margin: 0;" id="icon-contra" class="eye icon"></i></div>
+                                <div id="show-contra" class="ui basic label"><i style="margin: 0;" id="icon-contra" class="eye slash icon"></i></div>
                         </div>
-                        <a href="?1=NewPassController&2=reestablecer"><small>Olvidé mi contraseña</small></a>
+                        <a href="?1=UsuarioController&2=reestablecer"><small>Olvidé mi contraseña</small></a>
                     </div>
-                    <a id="label-error" style="margin: 0; text-align:center;" class="ui red fluid large label" v-if="isError">Datos
+                    <a id="label-error" style="display: none; margin: 0; text-align:center;" class="ui red fluid large label">Datos
                         Incorrectos</a>
-                    <button style="margin-top: 15px;" :class="loading" name="btnLogin" value="noloc" @click="login" id="btnLogin"
+                    <button style="margin-top: 15px;" class="ui green-deloitte fluid button" name="btnLogin" id="btnLogin" value="noloc" @click="login" id="btnLogin"
                         type="button" @submit.prevent="">Ingresar</button>
 
                 </form>
@@ -54,7 +54,7 @@ if(isset($_REQUEST["user"])) {
 
             </div>
         </div>
-    </div>
+</div>
 
     <script>
         $(function () {
@@ -62,85 +62,75 @@ if(isset($_REQUEST["user"])) {
         });
     </script>
 
+    <script>
+        $(function() {
+            $('#frmLogin :input').keyup(function() {
+                $('#label-error').css('display', 'none');
+            });
+        });
+    </script>
 
     <script>
         $(function() {
             $('#show-contra').mousedown(function() {
-                $('#icon-contra').attr('class', 'eye slash icon');
+                $('#icon-contra').attr('class', 'eye icon');
                 $('#pass').attr('type', 'text');
             });
 
 
             $('#show-contra').mouseup(function() {
-                $('#icon-contra').attr('class', 'eye icon');
+                $('#icon-contra').attr('class', 'eye slash icon');
                 $('#pass').attr('type', 'password');
             });
 
         });
     </script>
 
+    
     <script>
-        var app = new Vue({
-            el: "#app",
-            data: {
-                isError: false,
-                loading: ['ui', 'fluid', 'green-deloitte', 'button']
-            },
-            methods: {
-                setTrue() {
-                    this.isError = false;
-                },
-                login() {
+        $(function() {
+            $('#btnLogin').click(function() {
 
-                    var gatos = {};
-                    $('#frmLogin').addClass('loading');
+                if(validarVacios('frmLogin', '#btnLogin') == 0)
+                {
 
-                    $('#frmLogin').find(":input").each(function () {
-                        gatos[this.name] = $(this).val();
-                    });
+                        $('#label-error').css('display', 'none');
+                        $('#label-error').html('');
 
-                    gatos = JSON.stringify(gatos);
+                        var gatos = {};
+                        $('#frmLogin').addClass('loading');
 
-                    var param = {
-                        method: 'POST',
-                        headers: {
-                            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
-                        },
-                        body: "datos=" + gatos,
-                    };
-
-                    fetch("?1=UsuarioController&2=login", param)
-                        .then(response => {
-                            if (response.ok) {
-                                return response.json();
-                            } else {
-                                throw "Error al recibir datos";
-                                this.isError = true;
-
-                            }
-                        })
-                        .then(val => {
-
-                            $('#frmLogin').removeClass('loading');
-
-                            if (val == 1) {
-                                location.href = '?1=UsuarioController&2=dashboard';
-                            } else if (val == 2) {
-                                $('#label-error').html('No tiene autorización para ingresar');
-                                this.isError = true;
-                            } else {
-                                $('#label-error').html('Datos Incorrectos');
-                                this.isError = true;
-                            }
-
-                        }).catch(res => {
-                            $('#frmLogin').removeClass('loading');
-                            this.isError = true;
-                            console.log(res);
-
+                        $('#frmLogin').find(":input").each(function () {
+                            gatos[this.name] = $(this).val();
                         });
+
+                        gatos = JSON.stringify(gatos);
+
+                        $.ajax({
+                            type: 'POST',
+                            url: '?1=UsuarioController&2=login',
+                            data: {datos: gatos},
+                            success: function(r) {
+                                $('#frmLogin').removeClass('loading');
+                                if(r == 1) {
+                                    location.href = '?1=UsuarioController&2=dashboard';
+                                } else if((r == 2) || (r == 3)){
+                                    $('#label-error').html('Su cuenta aún no ha sido autorizada');
+                                    $('#label-error').css('display', 'inline-block');
+                                } else {
+                                    $('#label-error').html('Datos Incorrectos');
+                                    $('#label-error').css('display', 'inline-block');
+                                }
+                            }
+                        });
+
+                } else {
+                    $('#label-error').html('Complete todos los campos');
+                    $('#label-error').css('display', 'inline-block');
                 }
-            }
+                
+            });
         });
     </script>
+
 </body>

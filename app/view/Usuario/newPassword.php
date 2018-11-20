@@ -32,11 +32,11 @@
                         </div>
                         
                     </div>
-                    <a id="label-error" style="margin: 0; text-align:center;" class="ui red fluid large label" v-if="isError">Datos
+                    <a id="label-error" style="display: none; margin: 0; text-align:center;" class="ui red fluid large label" v-if="isError">Datos
                         Incorrectos</a>
-                    <button style="margin-top: 15px;" :class="loading" name="btnEnviar" value="noloc" @click="login" id="btnEnviar"
+                    <button style="margin-top: 15px;" class="ui green-deloitte fluid button" name="btnEnviar" value="noloc" @click="login" id="btnEnviar"
                         type="button" @submit.prevent="">Enviar datos</button>
-                        <?php
+                        
 
                 </form>
                 <div style="text-align:center; margin-top:15px;" class="field">
@@ -51,21 +51,16 @@
             $('#user').focus();
         });
     </script>
-    <script>
-        var app = new Vue({
-            el: "#app",
-            data: {
-                isError: false,
-                loading: ['ui', 'fluid', 'green-deloitte', 'button']
-            },
-            methods: {
-                setTrue() {
-                    this.isError = false;
-                },
-                login() {
 
-                    var gatos = {};
+    <script>
+        $(function() {
+            $('#btnEnviar').click(function() {
+
+                if(validarVacios('frmNewPass', '#btnEnviar') == 0) {
+
                     $('#frmNewPass').addClass('loading');
+
+                    var datos = {};
 
                     $('#frmNewPass').find(":input").each(function () {
                         gatos[this.name] = $(this).val();
@@ -73,44 +68,15 @@
 
                     gatos = JSON.stringify(gatos);
 
-                    var param = {
-                        method: 'POST',
-                        headers: {
-                            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
-                        },
-                        body: "datos=" + gatos,
-                    };
+                    console.log(gatos);
 
-                    fetch("?1=NewPassController&2=enviarDatos", param)
-                        .then(response => {
-                            if (response.ok) {
-                                return response.json();
-                            } else {
-                                throw "Error al recibir datos";
-                                this.isError = true;
-
-                            }
-                        })
-                        .then(val => {
-                            //prueba de datos correctos pero aun no funciona XD falta el metodo en el controlador 
-                            $('#frmNewPass').removeClass('loading');
-
-                            if (val == 1) {
-                                location.href = '??1=UsuarioController&2=dashboard';
-                            } else {
-                                $('#label-error').html('Datos Incorrectos');
-                                this.isError = true;
-                            }
-
-                        }).catch(res => {
-                            $('#frmNewPass').removeClass('loading');
-                            this.isError = true;
-                            console.log(res);
-
-                        });
+                } else {
+                    $('#label-error').html('Complete todos los campos');
+                    $('#label-error').css('display', 'inline-block');
                 }
-            }
+
+            });
         });
     </script>
-    
+
 </body>

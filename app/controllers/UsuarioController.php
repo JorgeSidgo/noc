@@ -24,6 +24,12 @@ class UsuarioController extends ControladorBase {
         require_once './app/view/Usuario/gestion.php';
     }
 
+    public static function contraseñaOlvidada() {
+        self::loadHeadOnly();
+        require_once './app/view/Usuario/newPassword.php';
+    }
+
+
     // Métodos 
 
     public static function login() {
@@ -69,6 +75,32 @@ class UsuarioController extends ControladorBase {
 
         echo $dao->registrar();
      
+    }
+
+    public function newPass() {
+        //Generador de contraseñas aleatorias
+        $psswd = substr( md5(microtime()), 1, 8);
+
+        $dao = new DaoUsuario();
+
+        require './app/mail/MailPassword.php';
+        $mail = new Mail();
+
+        $id = $_REQUEST["user"];
+        $email = $_REQUEST["email"];
+
+        
+        
+        $dao->objeto->setNomUser($id);
+        $dao->objeto->setEmail($email);
+
+        $datosUsuario = json_decode($dao->cargarDatosUsuario());
+        
+        if(!$mail->composeAuthMail($datosUsuario, $psswd)) {
+            echo "El correo no fue enviado Correctamente";
+        }
+
+        echo $dao->reestablecer($psswd);
     }
 
     public function registrarExterno() {

@@ -88,6 +88,14 @@ $(function() {
 
     <script>
         $(function() {
+            $('#frmLogin :input').keyup(function() {
+                $('#label-error').css('display', 'none');
+            });
+        });
+    </script>
+
+    <script>
+        $(function() {
             $('#btnLogin').click(function() {
 
                 if(validarVacios('frmLogin', '#btnLogin') == 0)
@@ -128,7 +136,7 @@ $(function() {
                                             location.href = '?';
                                         }
                                     });     
-                                }
+                                } 
                             }
                         });
                     }
