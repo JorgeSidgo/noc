@@ -42,9 +42,11 @@ class Mail {
         $mail->Subject = 'Control de Cuenta Deloitte';
 
         //$mail->Body = '<img src="cid:logo"><br/><a style="padding:15px; color: #fff; text-decoration: none; background:#85BC22; border-radius: 5px !important;" href="localhost/deloitte-mensajeria/?">Iniciar Sesión</a>';
-        $mail->Body = '<img src="cid:logo"> <a style="padding:15px; color: #fff; text-decoration: none; background:#85BC22; border-radius: 5px !important;" href="localhost/deloitte-mensajeria/?1=UsuarioController&2=loginView&user='.$datosUsuario->nomUsuario.'">Iniciar Sesión</a> <br><br> Su cuenta ha sido '.$estadoCuenta;
-        $mail->AddEmbeddedImage('../../res/img/deloiteNegro.png', 'logo');
-        
+        //$mail->Body = '<img src="cid:logo"> <a style="padding:15px; color: #fff; text-decoration: none; background:#85BC22; border-radius: 5px !important;" href="localhost/deloitte-mensajeria/?1=UsuarioController&2=loginView&user='.$datosUsuario->nomUsuario.'">Iniciar Sesión</a> <br><br> Su cuenta ha sido '.$estadoCuenta;
+        $mail->msgHTML(file_get_contents('./app/mail/correoAuth.html'));
+        $mail->AddEmbeddedImage('./app/mail/deloitteNegro.png', 'logo');
+
+
         if($mail->Send())
         {
             return true;
