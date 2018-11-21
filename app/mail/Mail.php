@@ -26,6 +26,10 @@ class Mail {
         $mail = new PHPMailer();
         $mail->isSMTP();
 
+        require_once './app/encode/Encode.php';
+
+        $encode = new Encode();
+
         $mail->Host = "smtp.gmail.com";
         $mail->Port = 587;
         $mail->SMTPSecure = 'tls';
@@ -42,9 +46,22 @@ class Mail {
 
         $mail->Subject = 'Control de Cuenta Deloitte';
 
-        //$mail->Body = '<img src="cid:logo"><br/><a style="padding:15px; color: #fff; text-decoration: none; background:#85BC22; border-radius: 5px !important;" href="localhost/deloitte-mensajeria/?">Iniciar Sesión</a>';
-        //$mail->Body = '<img src="cid:logo"> <a style="padding:15px; color: #fff; text-decoration: none; background:#85BC22; border-radius: 5px !important;" href="localhost/deloitte-mensajeria/?1=UsuarioController&2=loginView&user='.$datosUsuario->nomUsuario.'">Iniciar Sesión</a> <br><br> Su cuenta ha sido '.$estadoCuenta;
-        $mail->msgHTML(file_get_contents('./app/mail/correoAuth.html'));
+        $plantilla = file_get_contents('./app/mail/correoAuth.html');
+
+        if($estadoCuenta == 'Autorizada') {
+            $celda = '<td style="padding: 20px 0px;"><a href="localhost/deloitte-mensajeria/?1=UsuarioController&2=loginView&3='.$encode->encode('e', $datosUsuario->nomUsuario).'" style="padding: 10px; border-radius: 3px; background: #85BC22; text-decoration: none; color: #fff;">Iniciar Sesión</a></td>';
+        } else {
+            $celda = '<td></td>';
+        }
+
+        
+        
+        $plantilla = str_replace('%estadoCuenta%', $estadoCuenta, $plantilla);
+        $plantilla = str_replace('%celda%', $celda, $plantilla);
+        
+        $mail->Body = $plantilla;
+        $mail->AltBody = strip_tags($plantilla);
+        // $mail->AltBody(strip_tags($plantilla));
         $mail->AddEmbeddedImage('./app/mail/deloitteNegro.png', 'logo');
 
 
@@ -53,6 +70,46 @@ class Mail {
             return true;
         } else {
             return false;
+        }
+    }
+
+    public function composeRestorePassMail($emailUsuario, $nomUsuario, $pass) {
+
+        $emailFrom = 'deloitte.prueba.no.reply@gmail.com';
+        $emailFromName = 'Deloitte';
+
+        $emailTo = $emailUsuario;
+        // $emailToName = $datosUsuario->nombre.' '. $datosUsuario->apellido;
+        $emailToName = $nomUsuario;
+
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+
+        $mail->Host = "smtp.gmail.com";
+        $mail->Port = 587;
+        $mail->SMTPSecure = 'tls';
+        $mail->SMTPAuth = true;
+        $mail->isHTML(true);
+        $mail->Charset = 'UTF-8';
+
+        $mail->Username = 'deloitte.prueba.no.reply@gmail.com';
+        $mail->Password = 'Deloitte123!';
+        $mail->setFrom($emailFrom, $emailFromName);
+
+        $mail->addAddress($emailTo, $emailToName);
+
+        $mail->Subject = 'Control de Cuenta Deloitte';
+
+        $plantilla = file_get_contents('./app/mail/correoRestorePass.html');
+
+        $plantilla = str_replace('%codigoPass%', $pass, $plantilla);
+
+        $mail->msgHTML($plantilla);
+        $mail->AddEmbeddedImage('./app/mail/deloitteNegro.png', 'logo');
+        
+        if($mail->Send())
+        {
+            return true;
         }
     }
 

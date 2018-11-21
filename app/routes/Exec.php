@@ -12,7 +12,7 @@ class Exec {
     public function __construct() {
         $this->setController();
         $this->setMethod();
-        $this->setParameter();
+        //$this->setParameter();
     }
 
     # Getters y Setters

@@ -1,3 +1,16 @@
+<?php
+if(isset($_REQUEST["3"])) {
+
+    $enc = new Encode();
+
+    $nomUser = $_REQUEST["3"];
+
+} else {
+    $nomUser = '';
+}
+
+?>
+
 <style>
     body {
         overflow: hidden;
@@ -17,18 +30,18 @@
                 </div>
                 <form id="frmNewPass" action="" method="POST" class="ui form">
                     <div class="field">
-                        <div class="ui left icon input">
-                            <i class="user icon"></i>
-                            <input @keyup.enter="login" value="" @keyup="setTrue" type="text" class="requerido" name="user"
-                                id="user" placeholder="Usuario Deloitte">
+                        <label for="">Ingrese el código:</label>
+                        <div class="ui input">
+
+                            <input @keyup.enter="login" value="" @keyup="setTrue" type="text" class="requerido" name="code"
+                                id="code">
                         </div>
                     </div>
-                    <div style="text-align: right;" class="field">
-                        <div class="ui right labeled left icon input">
-                            <i class="envelope icon"></i>
-                            <input type="text" class="requerido" name="correo" id="correo" placeholder="Correo Electrónico"
-                                @keyup.enter="login" @keyup="setTrue">
-
+                    <div class="field">
+                        <label for="">Nueva contraseña:</label>
+                        <div class="ui right labeled input">
+                            <input type="password" class="requerido" name="pass" id="pass" @keyup.enter="login" @keyup="setTrue">
+                            <div id="show-contra" class="ui basic label"><i style="margin: 0;" id="icon-contra" class="eye slash icon"></i></div>
                         </div>
 
                     </div>
@@ -53,6 +66,22 @@
         });
     </script>
 
+            <script>
+        $(function () {
+            $('#show-contra').mousedown(function () {
+                $('#icon-contra').attr('class', 'eye icon');
+                $('#pass').attr('type', 'text');
+            });
+
+
+            $('#show-contra').mouseup(function () {
+                $('#icon-contra').attr('class', 'eye slash icon');
+                $('#pass').attr('type', 'password');
+            });
+
+        });
+    </script>
+
     <script>
         $(function () {
             $('#btnEnviar').click(function () {
@@ -69,30 +98,24 @@
 
                     gatos = JSON.stringify(gatos);
 
+                    console.log(gatos);
 
                     $.ajax({
                         type: 'POST',
-                        url: '?1=UsuarioController&2=newPass',
+                        url: '?1=UsuarioController&2=resetPassword',
                         data: {
-                            datos: gatos
+                            datos: gatos,
+                            user: '<?php echo $nomUser?>'
                         },
                         success: function (r) {
                             if (r == 1) {
                                 swal({
-                                    title: 'Datos enviados',
-                                    text: 'Se ha enviado un código de recuperación a su correo',
+                                    title: 'Éxito',
+                                    text: 'Su contraseña ha sido reestablecida',
                                     type: 'success'
                                 }).then((result) => {
                                     if (result.value) {
-
-                                        $.ajax({
-                                            type: 'POST',
-                                            url: '?1=UsuarioController&2=encodeString',
-                                            data: {string: JSON.parse(gatos).user},
-                                            success: function(r) {
-                                                location.href = '?1=UsuarioController&2=resetPasswordView&3='+ r;
-                                            }
-                                        });
+                                        location.href = '?1=UsuarioController&2=loginView&3='+ '<?php echo $nomUser ?>';
                                     }
                                 });
                             }

@@ -24,9 +24,14 @@ class UsuarioController extends ControladorBase {
         require_once './app/view/Usuario/gestion.php';
     }
 
-    public static function contraseñaOlvidada() {
+    public static function contraOlvidada() {
         self::loadHeadOnly();
         require_once './app/view/Usuario/newPassword.php';
+    }
+    
+    public static function resetPasswordView() {
+        self::loadHeadOnly();
+        require_once './app/view/Usuario/resetPassword.php';
     }
 
 
@@ -50,6 +55,29 @@ class UsuarioController extends ControladorBase {
         session_unset();
         session_destroy();
         header("location: ?");
+    }
+
+    public function encodeString() { 
+        $enc = new Encode();
+
+        $encoded = $enc->encode('e', $_REQUEST["string"]);
+
+        echo $encoded;
+    }
+
+    public function resetPassword() {
+
+        $enc = new Encode();
+
+        $datos = json_decode($_REQUEST["datos"]);
+        $nomUser = $enc->encode('d', $_REQUEST["user"]);
+
+        $dao = new DaoUsuario();
+
+        $dao->objeto->setPass($datos->pass);
+        $dao->objeto->setNomUsuario($nomUser);
+        
+        echo $dao->resetPassword($datos->code);
     }
 
     public function registrar() {
@@ -83,20 +111,22 @@ class UsuarioController extends ControladorBase {
 
         $dao = new DaoUsuario();
 
-        require './app/mail/MailPassword.php';
+        require './app/mail/Mail.php';
         $mail = new Mail();
 
-        $id = $_REQUEST["user"];
-        $email = $_REQUEST["email"];
+        $datos = json_decode($_REQUEST["datos"]);
+
+        $id = $datos->user;
+        $email = $datos->correo;
 
         
         
-        $dao->objeto->setNomUser($id);
+        $dao->objeto->setNomUsuario($id);
         $dao->objeto->setEmail($email);
 
-        $datosUsuario = json_decode($dao->cargarDatosUsuario());
+        //$datosUsuario = json_decode($dao->cargarDatosUsuario());
         
-        if(!$mail->composeAuthMail($datosUsuario, $psswd)) {
+        if(!$mail->composeRestorePassMail($email, $id, $psswd)) {
             echo "El correo no fue enviado Correctamente";
         }
 
@@ -119,6 +149,7 @@ class UsuarioController extends ControladorBase {
         $dao->objeto->setNomUsuario($datos->user);
         $dao->objeto->setEmail($datos->correo);
         $dao->objeto->setCodigoRol($datos->rol);
+        $dao->objeto->setCodigoArea($datos->area);
         $dao->objeto->setCodigoUsuario($datos->idDetalle);
 
         echo $dao->editar();

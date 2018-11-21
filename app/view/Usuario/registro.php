@@ -57,12 +57,18 @@ $(function() {
                     <div class="two fields">
                         <div class="field">
                             <label for="">Contraseña:</label>
-                            <input type="password" class="requerido" name="pass" id="pass">
+                            <div class="ui right labeled input">
+                                <input type="password" class="requerido" name="pass" id="pass">
+                                <div id="show-contra" class="ui basic label show-contra"><i style="margin: 0;" id="icon-contra" class="eye slash icon"></i></div>
+                            </div>
 
                         </div>
                         <div class="field">
                             <label for="">Confirmar Contraseña:</label>
-                            <input type="password" class="requerido" name="confPass" id="confPass">
+                            <div class="ui right labeled input">
+                                <input type="password" class="requerido" name="confPass" id="confPass">
+                                <div id="show-contra" class="ui basic label show-contra"><i style="margin: 0;" id="icon-contra" class="eye slash icon"></i></div>
+                            </div>
 
                         </div>
                     </div>
@@ -83,6 +89,22 @@ $(function() {
     <script>
         $(function () {
             $('#nombre').focus();
+        });
+    </script>
+
+        <script>
+        $(function () {
+            $('.show-contra').mousedown(function () {
+                $(this).children().attr('class', 'eye icon');
+                $(this).siblings('input.requerido').attr('type', 'text');
+            });
+
+
+            $('.show-contra').mouseup(function () {
+                $(this).children().attr('class', 'eye slash icon');
+                $(this).siblings('input.requerido').attr('type', 'password');
+            });
+
         });
     </script>
 

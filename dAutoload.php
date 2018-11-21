@@ -18,4 +18,8 @@ function __autoload($clase) {
         require_once('./app/routes/'.$clase.'.php');
     }
     
+    else if(file_exists('./app/encode/'.$clase.'.php')) {
+        require_once('./app/encode/'.$clase.'.php');
+    }
+    
 }

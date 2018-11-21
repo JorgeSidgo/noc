@@ -3,15 +3,15 @@
         <b>Men&uacute;</b>
     </a>
 
-    <a href="?1=UsuarioController&2=gestion" class="item menu-it">
-        <i class="users icon"></i>
-        Gestión de Usuarios
-    </a>
+    <?php
 
-    <a href="?1=ClienteController&2=clientes" class="item menu-it">
-        <i class="building icon"></i>
-        Gestión de Clientes
-    </a>
+        if($_SESSION["descRol"] == 'Administrador') {
+            require_once 'menuAdmin.php';
+        } else {
+            require_once 'menuSolicitante.php';
+        }
+
+    ?>
 
 </div>
 

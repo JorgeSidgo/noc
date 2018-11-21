@@ -15,8 +15,7 @@ create table usuario (
     pass varchar(75),
     codigoAuth int,
     codigoRol int,
-    codigoArea int,
-
+    codigoArea int
 );
 
 create table rol (
@@ -29,16 +28,50 @@ create table area (
     descArea varchar(25)
 );
 
-create table authUsuario(
+create table authUsuario (
 	codigoAuth int primary key unique auto_increment,
     descAuth varchar(25)
 );
 
-create table clientes(
+create table envio (
+	codigoEnvio int primary key unique auto_increment,
+    codigoUsuario int
+);
+
+create table detalleEnvio (
+	codigoDetalleEnvio int primary key unique auto_increment,
+    codigoCliente int,
+    codigoEnvio int,
+    codigoTipoDocumento int,
+    codigoArea int,
+    codigoTramite int,
+    codigoObservaciones int,
+    codigoStatus int
+);
+
+create table clientes (
 	codigoCliente int primary key unique auto_increment,
     nombreCliente varchar(50),
     direccion varchar(100),
     telefono varchar(20)
+);
+
+create table tipoDocumento (
+    codigoTipoDocumento int primary key unique auto_increment
+);
+
+create table tramite (
+    codigoTramite int primary key unique auto_increment
+);
+
+create table observaciones (
+    codigoObservaciones int primary key unique auto_increment,
+    observacion text
+);
+
+create table status (
+    codigoStatus int primary key unique auto_increment,
+    descStatus varchar(25)
 );
 
 -- ===========================================================================
@@ -48,6 +81,14 @@ create table clientes(
 alter table usuario add constraint fk_usuario_rol foreign key (codigoRol) references rol(codigoRol);
 alter table usuario add constraint fk_usuario_auth foreign key (codigoAuth) references authUsuario(codigoAuth);
 alter table usuario add constraint fk_usuario_area foreign key (codigoArea) references area(codigoArea);
+alter table envio add constraint fk_envio_usuario foreign key (codigoUsuario) references usuario(codigoUsuario);
+alter table detalleEnvio add constraint fk_detalleEnvio_envio foreign key (codigoEnvio) references envio(codigoEnvio);
+alter table detalleEnvio add constraint fk_detalleEnvio_tipoDocumento foreign key (codigoTipoDocumento) references tipoDocumento(codigoTipoDocumento);
+alter table detalleEnvio add constraint fk_detalleEnvio_area foreign key (codigoArea) references area(codigoArea);
+alter table detalleEnvio add constraint fk_detalleEnvio_tramite foreign key (codigoTramite) references tramite(codigoTramite);
+alter table detalleEnvio add constraint fk_detalleEnvio_clientes foreign key (codigoCliente) references clientes(codigoCliente);
+alter table detalleEnvio add constraint fk_detalleEnvio_observaciones foreign key (codigoObservaciones) references observaciones(codigoObservaciones);
+alter table detalleEnvio add constraint fk_detalleEnvio_status foreign key (codigoStatus) references status(codigoStatus);
 
 -- ===========================================================================
 -- DATOS
@@ -71,9 +112,9 @@ insert into area values (null, 'RRHH');
 insert into area values (null, 'Finanzas');
 
 # Usuario
-insert into usuario values (null, 'Karla Guadalupe', 'Arevalo Vega', 'kgarevalo', 'kgarevalo@deloitte.com', 'Deloitte123!', 1, 1, 1);
-insert into usuario values (null, 'Jorge Luis', 'Sidgo Pimentel', 'jlsidgo', 'jlsidgo@deloitte.com', 'Deloitte123!', 1, 1, 1);
-insert into usuario values (null, 'John', 'Doe', 'johndoe', 'johndoe@deloitte.com', '123', 2, 2, 4);
+insert into usuario values (null, 'Karla Guadalupe', 'Arevalo Vega', 'kgarevalo', 'kgarevalo@deloitte.com', sha1('Deloitte123!'), 1, 1, 1);
+insert into usuario values (null, 'Jorge Luis', 'Sidgo Pimentel', 'jlsidgo', 'jorge.sidgo@gmail.com', sha1('Deloitte123!'), 1, 1, 1);
+insert into usuario values (null, 'John', 'Doe', 'johndoe', 'johndoe@deloitte.com', sha1('123'), 2, 2, 4);
 
 #Cliente
 insert into clientes values(null,'Telefonica','San Salvador','2314-1231');
@@ -86,7 +127,7 @@ create procedure registrarUsuario(
     in ape varchar(50),
     in us varchar(50),
     in correo varchar(75),
-    in contra varchar(50),
+    in contra varchar(75),
     in idArea int,
     in rol int
 )
@@ -172,5 +213,7 @@ begin
     where codigoCliente = idCliente;
 end
 $$
+
+update usuario set pass = 'f9a662ff' where nomUsuario = 'jlsidgo' and pass ='123'
 
 -- call mostrarUsuarios()

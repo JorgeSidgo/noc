@@ -9,7 +9,7 @@ class DaoUsuario extends DaoBase {
 
 
     public function login() {
-        $_query = "call login('".$this->objeto->getNomUsuario()."', '".$this->objeto->getPass()."')";
+        $_query = "call login('".$this->objeto->getNomUsuario()."', '".sha1($this->objeto->getPass())."')";
 
         $resultado = $this->con->query($_query);
 
@@ -37,6 +37,14 @@ class DaoUsuario extends DaoBase {
         }
     }
 
+    public function getCodigoUsuarioByPass($code) {
+        $_query = "select codigoUsuario from usuario where pass = '".$code."' and nomUsuario = '".$this->objeto->getNomUsuario()."'";
+        $resultado = $this->con->query($_query);
+
+        $datos = $resultado->fetch_assoc();
+
+        return $datos["codigoUsuario"];
+    }
 
     public function cargarDatosUsuario() {
         $_query = "select u.*, r.descRol, a.descAuth
@@ -55,7 +63,7 @@ class DaoUsuario extends DaoBase {
 
 
     public function registrar() {
-        $_query = "call registrarUsuario('".$this->objeto->getNombre()."', '".$this->objeto->getApellido()."','".$this->objeto->getNomUsuario()."', '".$this->objeto->getEmail()."', '".$this->objeto->getPass()."', ".$this->objeto->getCodigoArea().", ".$this->objeto->getCodigoRol().")";
+        $_query = "call registrarUsuario('".$this->objeto->getNombre()."', '".$this->objeto->getApellido()."','".$this->objeto->getNomUsuario()."', '".$this->objeto->getEmail()."', '".sha1($this->objeto->getPass())."', ".$this->objeto->getCodigoArea().", ".$this->objeto->getCodigoRol().")";
 
         $resultado = $this->con->query($_query);
 
@@ -83,10 +91,25 @@ class DaoUsuario extends DaoBase {
 
     }
 
+    public function resetPassword($code) {
+
+        $codigoUsuario = $this->getCodigoUsuarioByPass($code);
+
+        $_query = "update usuario set pass = '".sha1($this->objeto->getPass())."' where codigoUsuario = ".$codigoUsuario;
+        $resultado = $this->con->query($_query);
+
+        if($resultado) {
+            return 1;
+        } else {
+            return 0;
+        }
+
+    }
+
     //Actualizar con el generador de codigo
     public function reestablecer($psswd)
     {
-        $_query = "update usuario set pass = {$psswd} where nomUsuario = ".$this->objeto->getNomUsuario()."' and email ='".$this->objeto->getEmail();
+        $_query = "update usuario set pass = '{$psswd}' where nomUsuario = '".$this->objeto->getNomUsuario()."' and email ='".$this->objeto->getEmail()."'";
         $resultado = $this->con->query($_query);
 
         if($resultado) {
@@ -97,7 +120,7 @@ class DaoUsuario extends DaoBase {
     }
 
     public function editar() {
-        $_query = "call editarUsuario('".$this->objeto->getNombre()."', '".$this->objeto->getApellido()."','".$this->objeto->getNomUsuario()."', '".$this->objeto->getEmail()."', ".$this->objeto->getCodigoRol().", ".$this->objeto->getCodigoUsuario().")";
+        $_query = "call editarUsuario('".$this->objeto->getNombre()."', '".$this->objeto->getApellido()."','".$this->objeto->getNomUsuario()."', '".$this->objeto->getEmail()."', ".$this->objeto->getCodigoRol().", ".$this->objeto->getCodigoArea().", ".$this->objeto->getCodigoUsuario().")";
 
         $resultado = $this->con->query($_query);
 
