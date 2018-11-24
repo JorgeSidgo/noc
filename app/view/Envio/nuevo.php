@@ -1,3 +1,9 @@
+<style>
+    .contenedor {
+        width: 92vw;
+    }
+</style>
+
 <script>
     var fecha;
     $(function() {
@@ -27,7 +33,7 @@
         <div class="row">
             <div class="sixteen wide column">
                 <form action="" class="ui form" id="frmEnvios">
-                    <table class="ui green fixed celled very compact table">
+                    <table class="ui green fixed very compact table">
                         <thead class="super-compact">
                             <tr>
                                 <th class="two wide">Trámite</th>
@@ -44,7 +50,7 @@
                             <tr v-for="(envio, index) in envios">
                                 <td>
                                     <div class="ui mini input">
-                                    <select class="" v-model="envio.tramite">
+                                    <select class="ui selection dropdown" v-model="envio.tramite">
                                         <option value="1">Entrega</option>
                                         <option value="2">Remesa</option>
                                         <option value="3">Pago</option>
