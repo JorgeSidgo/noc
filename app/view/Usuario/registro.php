@@ -10,6 +10,12 @@ $(function() {
 });
 </script>
 
+<script>
+$(function() {
+    console.log(<?php echo $areas?>);
+});
+</script>
+
 <body class="body-login">
     <div id="fondo-dot"></div>
     <div id="app">
@@ -47,10 +53,7 @@ $(function() {
                     <div class="field">
                         <label for="">Área:</label>
                         <select name="area" id="area" class="ui dropdown">
-                            <option value="1">Abas</option>
-                            <option value="2">Tax y Legal</option>
-                            <option value="3">RRHH</option>
-                            <option value="4">Finanzas</option>
+
                         </select>
 
                     </div>
@@ -122,8 +125,6 @@ $(function() {
 
                 if(validarVacios('frmLogin', '#btnLogin') == 0)
                 {
-                    alert($('#pass').val() +' ' + $('#confPass').val())
-
                     if($('#pass').val() != $('#confPass').val()) {
 
                         $('#label-error').html('Las contraseñas no concuerdan');
@@ -168,6 +169,19 @@ $(function() {
                     $('#label-error').css('display', 'inline-block');
                 }
                 
+            });
+        });
+    </script>
+
+    <script>
+        $(function() {
+            var option = '';
+            var areas = '<?php echo $areas?>';
+
+            $.each(JSON.parse(areas), function() {
+                option = `<option value="${this.codigoArea}">${this.descArea}</option>`;
+
+                $('#area').append(option);
             });
         });
     </script>

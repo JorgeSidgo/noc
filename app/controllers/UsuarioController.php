@@ -11,6 +11,8 @@ class UsuarioController extends ControladorBase {
 
     public static function registroForm() {
         self::loadHeadOnly();
+        $dao = new DaoArea();
+        $areas = $dao->mostrarAreas();
         require_once './app/view/Usuario/registro.php';
     }
     
@@ -153,7 +155,6 @@ class UsuarioController extends ControladorBase {
         $dao->objeto->setCodigoUsuario($datos->idDetalle);
 
         echo $dao->editar();
-     
     }
 
     public function autorizar() {

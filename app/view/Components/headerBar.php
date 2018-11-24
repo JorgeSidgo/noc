@@ -2,10 +2,10 @@
     <a class="item" id="btn-menu">
         <i class="material-icons">menu</i>
     </a>
-    <!-- <a class="item" style="color:#fff;" href="dashboard.jsp">
+    <a class="item" href="?1=UsuarioController&2=dashboard">
         <i class="material-icons">home</i>
-    </a> -->
-    <a class="item" id="logo-header" style="color:#fff;">
+    </a>
+    <a class="item" id="logo-header">
         <img src="./res/img/deloitteNigga.svg" alt="" width="" class="logo" id="">
     </a>
 

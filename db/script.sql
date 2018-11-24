@@ -57,7 +57,8 @@ create table clientes (
 );
 
 create table tipoDocumento (
-    codigoTipoDocumento int primary key unique auto_increment
+    codigoTipoDocumento int primary key unique auto_increment,
+    descTipoDocumento varchar(25)
 );
 
 create table tramite (
@@ -105,8 +106,8 @@ insert into authUsuario values (null, 'Restringido');
 
 
 #Area
-insert into area values (null, 'Administraci&oacute;n');
-insert into area values (null, 'Abas');
+-- insert into area values (null, 'Administraci&oacute;n');
+insert into area values (null, 'ABAS');
 insert into area values (null, 'Tax y Legal');
 insert into area values (null, 'RRHH');
 insert into area values (null, 'Finanzas');
@@ -120,6 +121,10 @@ insert into usuario values (null, 'John', 'Doe', 'johndoe', 'johndoe@deloitte.co
 insert into clientes values(null,'Telefonica','San Salvador','2314-1231');
 insert into clientes values(null,'YKK','Santa Ana','2451-2312');
 insert into clientes values(null,'Don Pollo','Santa Tecla','2451-6969');
+
+#Tipo de Documento
+insert into tipoDocumento values(null, '');
+
 
 delimiter $$
 create procedure registrarUsuario(
@@ -214,6 +219,5 @@ begin
 end
 $$
 
-update usuario set pass = 'f9a662ff' where nomUsuario = 'jlsidgo' and pass ='123'
 
 -- call mostrarUsuarios()

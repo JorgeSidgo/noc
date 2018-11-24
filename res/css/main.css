@@ -27,7 +27,7 @@ body {
 }
 
 #logo-header {
-    padding: 0px 20px !important;
+    padding: 0px 7px !important;
 }
 
 #logo-header:hover {
@@ -65,8 +65,9 @@ body {
     color: #fff;
 }
 
+
 .contenedor {
-    width: 85vw;
+    width: 92vw;
     margin: auto;
     margin-top: 60px;
     padding: 30px 0px;
@@ -252,6 +253,14 @@ body {
     /* background: url(../img/bg.jpg) !important; */
     background-size: cover !important;
     transition: background .3s ease;
+}
+
+div.ui.mini.input{
+    width: 100% !important;
+}
+
+.super-compact > tr > th {
+    padding: 9px !important;
 }
 
 .cuadro {
