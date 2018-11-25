@@ -57,16 +57,21 @@ var app = new Vue({
         data: {
             campos_registro: [{
                     label: 'Tipo de Documento:',
-                    name: 'nombre',
+                    name: 'descTipoDocumento',
                     type: 'text'
                 }
             ],
             campos_editar: [
                 {
                     label: 'Tipo de Documento:',
-                    name: 'nombre',
+                    name: 'descTipoDocumento',
                     type: 'text'
-                }],
+                },
+                {
+                    name: 'idDetalle',
+                    type: 'hidden'
+                }
+            ],
             campos_eliminar: [{
                 name: 'idEliminar',
                 type: 'hidden'
@@ -89,11 +94,7 @@ var app = new Vue({
                     })
                     .then(dat => {
 
-                        $('#frmEditar input[name="nombre"]').val(dat.nombre);
-                        $('#frmEditar input[name="apellido"]').val(dat.apellido);
-                        $('#frmEditar input[name="user"]').val(dat.nomDocumento);
-                        $('#frmEditar input[name="correo"]').val(dat.email);
-                        $('#frmEditar select[name="rol"]').dropdown('set selected', dat.codigoRol);
+                        $('#frmEditar input[name="descTipoDocumento"]').val(dat.descTipoDocumento);
                     })
                     .catch(err => {
                         console.log(err);
@@ -114,10 +115,6 @@ var app = new Vue({
             app.cargarDatos();
         });
 
-        $(document).on("click", ".btnAutorizar", function () {
-            $('#modalAutorizar').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
-            $('#idAutorizar').val($(this).attr("id"));
-        });
 </script>
 
      

@@ -23,6 +23,8 @@ class UsuarioController extends ControladorBase {
 
     public static function gestion() {
         self::loadMain();
+        $dao = new DaoArea();
+        $areas = $dao->mostrarAreas();
         require_once './app/view/Usuario/gestion.php';
     }
 
