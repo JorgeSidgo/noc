@@ -123,7 +123,7 @@ insert into clientes values(null,'YKK','Santa Ana','2451-2312');
 insert into clientes values(null,'Don Pollo','Santa Tecla','2451-6969');
 
 #Tipo de Documento
-insert into tipoDocumento values(null, '');
+insert into tipoDocumento values(null, 'Legal');
 
 
 delimiter $$
@@ -218,6 +218,61 @@ begin
     where codigoCliente = idCliente;
 end
 $$
+-- PROCEDIMIENTOS DOCUMENTO--
+delimiter $$
+create procedure mostrarDocumentos()
+begin
+	select * from tipoDocumento;
+end
+$$
+
+delimiter $$
+create procedure registrarDocumentos(
+	in nom varchar(50)
+)
+begin
+	insert into tipoDocumento values (null, nom);
+end
+$$
+
+delimiter $$
+create procedure editarDocumento(
+	in nom varchar(50),
+    in idDocumento int
+)
+begin
+	update tipoDocumento
+    set descTipoDocumento = nom
+    where codigoTipoDocumento = idDocumento;
+end
+$$
+
+-- PROCEDIMIENTOS AREAS--
+delimiter $$
+create procedure mostrarArea()
+begin
+	select * from area;
+end
+$$
 
 
--- call mostrarUsuarios()
+delimiter $$
+create procedure registrarArea(
+	in descArea varchar(50)
+)
+begin
+	insert into area values (null,descArea);
+end
+$$
+
+delimiter $$
+create procedure editarArea(
+	in nom varchar(50),
+    in idArea int
+)
+begin
+	update area
+    set descArea = nom
+    where codigoArea = idArea;
+end
+$$
