@@ -12,7 +12,8 @@
     <div class="ui grid">
         <div class="row">
             <div class="titulo">
-                Documentos
+            <i class="copy icon"></i>
+                Documentos Deloitte.
             </div>
         </div>
         <div class="row title-bar">

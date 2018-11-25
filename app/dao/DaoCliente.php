@@ -8,6 +8,23 @@ class DaoCliente extends DaoBase
         $this->objeto = new Clientes();
     }
 
+
+    public function mostrarClientesCmb() {
+        $_query = "select * from clientes";
+
+        $resultado = $this->con->query($_query);
+
+        $json = '';
+
+        while($fila = $resultado->fetch_assoc()) {
+            $json .= json_encode($fila).',';
+        }
+
+        $json = substr($json,0, strlen($json) - 1);
+
+        return '['.$json.']';
+    }
+
     public function mostrarClientes() {
         $_query = "call mostrarClientes()";
 

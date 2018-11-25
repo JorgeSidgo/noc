@@ -18,7 +18,8 @@
     <div class="ui grid">
         <div class="row">
             <div class="titulo">
-                Clientes
+            <i class="building icon"></i>
+                Clientes Deloitte.
             </div>
         </div>
         <div class="row title-bar">

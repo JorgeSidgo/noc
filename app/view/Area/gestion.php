@@ -12,7 +12,8 @@
     <div class="ui grid">
         <div class="row">
             <div class="titulo">
-                Areas
+            <i class="industry icon"></i>
+                Áreas Deloitte.
             </div>
         </div>
         <div class="row title-bar">

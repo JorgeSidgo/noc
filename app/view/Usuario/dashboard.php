@@ -10,8 +10,8 @@
 
     <div class="row" id="dashboard-card">
         <h3 class="ui header">
-        <?php echo $_SESSION["nombre"].' '.$_SESSION["apellido"]?>
-            <div class="sub header"><?php echo $_SESSION["email"]?></div>
+        <b><?php echo $_SESSION["nombre"].' '.$_SESSION["apellido"]?>
+            <div class="sub header"><?php echo $_SESSION["email"]?></b></div>
         </h3>
     </div>
     <div class="row">

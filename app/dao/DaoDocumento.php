@@ -7,6 +7,22 @@ class DaoDocumento extends DaoBase {
         $this->objeto = new Documento();
     }
 
+    public function mostrarDocumentosCmb() {
+        $_query = "select * from tipoDocumento";
+
+        $resultado = $this->con->query($_query);
+
+        $json = '';
+
+        while($fila = $resultado->fetch_assoc()) {
+            $json .= json_encode($fila).',';
+        }
+
+        $json = substr($json,0, strlen($json) - 1);
+
+        return '['.$json.']';
+    }
+
     public function mostrarDocumentos() {
         $_query = "call mostrarDocumentos()";
 
