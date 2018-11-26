@@ -10,12 +10,13 @@ $(function() {
         
     }, 50);
 
+
     setTimeout(function() {
-        $("#dashboard-card").css('transform', 'translateY(0)');
+        $("#dashboard-grid").find('.row').css('transform', 'translateY(0)');
     }, 50);
 
     setTimeout(function() {
-        $("#dashboard-card").css('filter', 'opacity(100%)');
+        $("#dashboard-grid").find('.row').css('filter', 'opacity(100%)');
         $("body").css('overflow', 'show');
         
     }, 50);
