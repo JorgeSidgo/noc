@@ -5,6 +5,20 @@
 </style>
 
 <script>
+$(function() {
+    overflowRestore();
+});
+</script>
+
+<script>
+$(function() {
+    console.log(<?php echo $areas?>);
+    console.log(<?php echo $clientes?>);
+    console.log(<?php echo $documentos?>);
+});
+</script>
+
+<script>
     var fecha;
     $(function() {
         fecha = new Date();
@@ -18,7 +32,8 @@
     <div class="ui grid">
         <div class="row">
             <div class="titulo">
-                Envío
+            <i class="paper plane icon"></i>
+                Envíos Deloitte.
                 <span style="float:right;">
                     <small>
                         <small id="fecha-header">Fecha</small>
@@ -60,17 +75,17 @@
                                 </td>
                                 <td>
                                     <div class="ui mini input">
-                                    <select class="ui dropdown" v-model="envio.cliente"></select>
+                                    <select v-model="envio.cliente" id="clientes" name="clientes"></select>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="ui mini input">
-                                    <select class="ui dropdown" v-model="envio.area"></select>
+                                    <select  v-model="envio.area" id="area" name="area"></select>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="ui mini input">
-                                    <select class="ui dropdown" v-model="envio.tipoDocumento"></select>
+                                    <select v-model="envio.tipoDocumento" id="documentos" name="documentos"></select>
                                     </div>
                                 </td>
                                 <td>
@@ -150,3 +165,38 @@
         }
     });
 </script>
+
+<script>
+        $(function() {
+            var option = '';
+            var areas = '<?php echo $areas?>';
+
+            $.each(JSON.parse(areas), function() {
+                option = `<option value="${this.codigoArea}">${this.descArea}</option>`;
+
+                $('#area').append(option);
+            });
+        });
+
+        $(function() {
+            var option = '';
+            var clientes = '<?php echo $clientes?>';
+
+            $.each(JSON.parse(clientes), function() {
+                option = `<option value="${this.codigoCliente}">${this.nombreCliente}</option>`;
+
+                $('#clientes').append(option);
+            });
+        });
+
+        $(function() {
+            var option = '';
+            var documentos = '<?php echo $documentos?>';
+
+            $.each(JSON.parse(documentos), function() {
+                option = `<option value="${this.codigoTipoDocumento}">${this.descTipoDocumento}</option>`;
+
+                $('#documentos').append(option);
+            });
+        });
+    </script>

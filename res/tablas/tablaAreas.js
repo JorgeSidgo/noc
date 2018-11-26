@@ -4,7 +4,7 @@ $(function() {
     if($('#dtAreas').length) {
         tablaAreas = $('#dtAreas').DataTable({
             "ajax": {
-                "url": "?1=AreaController&2=mostrarAreasDT",
+                "url": "?1=AreaController&2=mostrarArea",
                 "type": "POST"
             },
             "columns": [

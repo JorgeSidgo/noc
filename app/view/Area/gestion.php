@@ -12,7 +12,8 @@
     <div class="ui grid">
         <div class="row">
             <div class="titulo">
-                Areas
+            <i class="industry icon"></i>
+                Áreas Deloitte.
             </div>
         </div>
         <div class="row title-bar">
@@ -57,16 +58,21 @@ var app = new Vue({
         data: {
             campos_registro: [{
                     label: 'Nombre:',
-                    name: 'nombre',
+                    name: 'descArea',
                     type: 'text'
                 }
             ],
             campos_editar: [
                 {
                     label: 'Nombre:',
-                    name: 'nombre',
+                    name: 'descArea',
                     type: 'text'
-                }],
+                },
+                {
+                    name: 'idDetalle',
+                    type: 'hidden'
+                }
+            ],
             campos_eliminar: [{
                 name: 'idEliminar',
                 type: 'hidden'
@@ -90,11 +96,7 @@ var app = new Vue({
                     .then(dat => {
 
                         // $('#frmEditar input[name="idDetalle"]').val(dat.codigoUsuari);
-                        $('#frmEditar input[name="nombre"]').val(dat.nombre);
-                        $('#frmEditar input[name="apellido"]').val(dat.apellido);
-                        $('#frmEditar input[name="user"]').val(dat.nomArea);
-                        $('#frmEditar input[name="correo"]').val(dat.email);
-                        $('#frmEditar select[name="rol"]').dropdown('set selected', dat.codigoRol);
+                        $('#frmEditar input[name="descArea"]').val(dat.descArea);
                     })
                     .catch(err => {
                         console.log(err);
@@ -115,8 +117,5 @@ var app = new Vue({
             app.cargarDatos();
         });
 
-        $(document).on("click", ".btnAutorizar", function () {
-            $('#modalAutorizar').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
-            $('#idAutorizar').val($(this).attr("id"));
-        });
+       
 </script>
