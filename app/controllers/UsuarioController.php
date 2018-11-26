@@ -2,7 +2,7 @@
 
 class UsuarioController extends ControladorBase {
 
-    // Vistas y otras mierdas
+    // Vistas
 
     public static function loginView() {
         self::loadHeadOnly();
