@@ -21,19 +21,19 @@
     </div>
 
     <div class="row">
-        <a href="?1=EnvioController&2=nuevoEnvio" style="width: 22%;" class="ui labeled icon green huge button">
+        <a href="?1=EnvioController&2=nuevoEnvio" style="width: 24%;" class="ui labeled icon green huge button">
             <i class="paper plane icon"></i>
             Nuevo Envio
         </a>
-        <a href="?1=EnvioController&2=nuevoEnvio" style="width: 22%;" class="ui labeled icon green huge button">
+        <a href="?1=EnvioController&2=nuevoEnvio" style="width: 24%;" class="ui labeled icon green huge button">
             <i class="paper plane icon"></i>
             Nuevo Envio
         </a>
-        <a href="?1=EnvioController&2=nuevoEnvio" style="width: 22%;" class="ui labeled icon green huge button">
+        <a href="?1=EnvioController&2=nuevoEnvio" style="width: 24%;" class="ui labeled icon green huge button">
             <i class="paper plane icon"></i>
             Nuevo Envio
         </a>
-        <a href="?1=EnvioController&2=nuevoEnvio" style="width: 22%;" class="ui labeled icon green huge button">
+        <a href="?1=EnvioController&2=nuevoEnvio" style="width: 24%;" class="ui labeled icon green huge button">
             <i class="paper plane icon"></i>
             Nuevo Envio
         </a>

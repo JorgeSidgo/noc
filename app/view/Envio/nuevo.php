@@ -11,14 +11,6 @@ $(function() {
 </script>
 
 <script>
-$(function() {
-    console.log(<?php echo $areas?>);
-    console.log(<?php echo $clientes?>);
-    console.log(<?php echo $documentos?>);
-});
-</script>
-
-<script>
     var fecha;
     $(function() {
         fecha = new Date();
@@ -65,27 +57,33 @@ $(function() {
                             <tr v-for="(envio, index) in envios">
                                 <td>
                                     <div class="ui mini input">
-                                    <select class="ui selection dropdown" v-model="envio.tramite">
+                                    <select class="" v-model="envio.tramite">
                                         <option value="1">Entrega</option>
                                         <option value="2">Remesa</option>
                                         <option value="3">Pago</option>
                                         <option value="4">Depósito</option>
                                     </select>
                                     </div>
-                                </td>
+                                </td>  
                                 <td>
                                     <div class="ui mini input">
-                                    <select v-model="envio.cliente" id="clientes" name="clientes"></select>
+                                    <select v-model="envio.cliente" id="clientes" name="clientes">
+                                        <option v-for="option in clientesOps" :value="option.codigoCliente">{{option.nombreCliente}}</option>
+                                    </select>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="ui mini input">
-                                    <select  v-model="envio.area" id="area" name="area"></select>
+                                    <select  v-model="envio.area" id="area" name="area">
+                                        <option v-for="option in areaOps" :value="option.codigoArea">{{option.descArea}}</option>
+                                    </select>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="ui mini input">
-                                    <select v-model="envio.tipoDocumento" id="documentos" name="documentos"></select>
+                                    <select v-model="envio.tipoDocumento" id="documentos" name="documentos">
+                                        <option v-for="option in tipoDocumentoOps" :value="option.codigoTipoDocumento" >{{option.descTipoDocumento}}</option>
+                                    </select>
                                     </div>
                                 </td>
                                 <td>
@@ -106,7 +104,6 @@ $(function() {
                                 <td>
                                     <button type="button" @click="eliminarDetalle(index)" class="ui google plus mini circular icon button"><i
                                             class="times icon"></i></button>
-                                    <!-- <button type="button" @click="eliminarDetalle(index)" class="ui green mini circular icon button"><i class="plus icon"></i></button> -->
                                 </td>
                             </tr>
                         </tbody>
@@ -129,7 +126,13 @@ $(function() {
                 numDocumento: '',
                 monto: '$ ',
                 observaciones: ''
-            }]
+            }],
+            clientesOps: <?php echo $clientes?>,
+            
+            areaOps: <?php echo $areas?>,
+
+            tipoDocumentoOps: <?php echo $documentos?>
+
         },
         methods: {
             guardarEnvio() {
@@ -165,41 +168,3 @@ $(function() {
         }
     });
 </script>
-
-<script>
-$('.money').mask("$ #,##0.00", {reverse: true});
-</script>
-<script>
-        $(function() {
-            var option = '';
-            var areas = '<?php echo $areas?>';
-
-            $.each(JSON.parse(areas), function() {
-                option = `<option value="${this.codigoArea}">${this.descArea}</option>`;
-
-                $('#area').append(option);
-            });
-        });
-
-        $(function() {
-            var option = '';
-            var clientes = '<?php echo $clientes?>';
-
-            $.each(JSON.parse(clientes), function() {
-                option = `<option value="${this.codigoCliente}">${this.nombreCliente}</option>`;
-
-                $('#clientes').append(option);
-            });
-        });
-
-        $(function() {
-            var option = '';
-            var documentos = '<?php echo $documentos?>';
-
-            $.each(JSON.parse(documentos), function() {
-                option = `<option value="${this.codigoTipoDocumento}">${this.descTipoDocumento}</option>`;
-
-                $('#documentos').append(option);
-            });
-        });
-    </script>
