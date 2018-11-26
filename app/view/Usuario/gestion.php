@@ -46,7 +46,7 @@
         <div class="row">
             <div class="titulo">
             <i class="users icon"></i>
-                Usuarios Deloitte
+                Usuarios Deloitte<font color="#85BC22" size="20px">.</font>
             </div>
         </div>
         <div class="row title-bar">

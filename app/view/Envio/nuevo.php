@@ -33,7 +33,7 @@ $(function() {
         <div class="row">
             <div class="titulo">
             <i class="paper plane icon"></i>
-                Envíos Deloitte.
+                Envíos Deloitte<font color="#85BC22" size="20px">.</font>
                 <span style="float:right;">
                     <small>
                         <small id="fecha-header">Fecha</small>
@@ -95,7 +95,7 @@ $(function() {
                                 </td>
                                 <td>
                                     <div class="ui mini input">
-                                    <input class="requerido" v-model="envio.monto" type="text">
+                                    <input class="requerido money" v-model="envio.monto" type="text">
                                     </div>
                                 </td>
                                 <td>
@@ -166,6 +166,9 @@ $(function() {
     });
 </script>
 
+<script>
+$('.money').mask("$ #,##0.00", {reverse: true});
+</script>
 <script>
         $(function() {
             var option = '';

@@ -13,7 +13,7 @@
         <div class="row">
             <div class="titulo">
             <i class="industry icon"></i>
-                Áreas Deloitte.
+                Áreas Deloitte<font color="#85BC22" size="20px">.</font>
             </div>
         </div>
         <div class="row title-bar">
