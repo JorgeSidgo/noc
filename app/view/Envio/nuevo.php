@@ -57,7 +57,7 @@ $(function() {
                             <tr v-for="(envio, index) in envios">
                                 <td>
                                     <div class="ui mini input">
-                                    <select class="" v-model="envio.tramite">
+                                    <select class="requerido" v-model="envio.tramite">
                                         <option value="1">Entrega</option>
                                         <option value="2">Remesa</option>
                                         <option value="3">Pago</option>
@@ -119,10 +119,10 @@ $(function() {
         el: '#app',
         data: {
             envios: [{
-                tramite: '',
-                cliente: '',
-                area: '',
-                tipoDocumento: '',
+                tramite: '1',
+                cliente: '1',
+                area: '1',
+                tipoDocumento: '1',
                 numDocumento: '',
                 monto: '$ ',
                 observaciones: ''
@@ -136,8 +136,10 @@ $(function() {
         },
         methods: {
             guardarEnvio() {
-                console.log(fecha);
-                console.log(JSON.stringify(this.envios));
+                
+                if(validarVaciosEnvios('frmEnvios') == 0) {
+                    console.log(JSON.stringify(this.envios));
+                }
             },
             agregarDetalle() {
                 this.envios.push({

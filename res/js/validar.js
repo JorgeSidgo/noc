@@ -115,6 +115,20 @@ function validarVacios(parametro, btn) {
     return num;
 }
 
+function validarVaciosEnvios(parametro) {
+    var num = 0;
+    $('#' + parametro + ' .requerido').each(function() {
+        var valor = $(this).val();
+        if ((valor == "") || (valor == "-")) {
+            num++;
+            $(this).parent().addClass("field error");
+        } else {
+            $(this).parent().removeClass("field error");
+        }
+
+    });
+    return num;
+}
 
 function overflowRestore() {
     setTimeout(function() {
