@@ -34,7 +34,7 @@
                 </a>
             </div>
         </div>
-         <a class="ui bottom right attached olive label">1</a>
+         <a class="ui bottom right attached green-deloitte label">1</a>
     </div>
     
 

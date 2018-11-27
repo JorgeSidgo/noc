@@ -1,3 +1,5 @@
+<script src="./res/plugins/v-money.js"></script>
+
 <style>
     .contenedor {
         width: 92vw;
@@ -5,7 +7,7 @@
 </style>
 
 <script>
-$(function() {
+    $(function() {
     overflowRestore();
 });
 </script>
@@ -24,7 +26,7 @@ $(function() {
     <div class="ui grid">
         <div class="row">
             <div class="titulo">
-            <i class="paper plane icon"></i>
+                <i class="paper plane icon"></i>
                 Envíos Deloitte<font color="#85BC22" size="20px">.</font>
                 <span style="float:right;">
                     <small>
@@ -57,48 +59,49 @@ $(function() {
                             <tr v-for="(envio, index) in envios">
                                 <td>
                                     <div class="ui mini input">
-                                    <select class="requerido" v-model="envio.tramite">
-                                        <option value="1">Entrega</option>
-                                        <option value="2">Remesa</option>
-                                        <option value="3">Pago</option>
-                                        <option value="4">Depósito</option>
-                                    </select>
-                                    </div>
-                                </td>  
-                                <td>
-                                    <div class="ui mini input">
-                                    <select v-model="envio.cliente" id="clientes" name="clientes">
-                                        <option v-for="option in clientesOps" :value="option.codigoCliente">{{option.nombreCliente}}</option>
-                                    </select>
+                                        <select class="requerido" v-model="envio.tramite">
+                                            <option value="1">Entrega</option>
+                                            <option value="2">Remesa</option>
+                                            <option value="3">Pago</option>
+                                            <option value="4">Depósito</option>
+                                        </select>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="ui mini input">
-                                    <select  v-model="envio.area" id="area" name="area">
-                                        <option v-for="option in areaOps" :value="option.codigoArea">{{option.descArea}}</option>
-                                    </select>
+                                        <select v-model="envio.cliente" id="clientes" name="clientes">
+                                            <option v-for="option in clientesOps" :value="option.codigoCliente">{{option.nombreCliente}}</option>
+                                        </select>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="ui mini input">
-                                    <select v-model="envio.tipoDocumento" id="documentos" name="documentos">
-                                        <option v-for="option in tipoDocumentoOps" :value="option.codigoTipoDocumento" >{{option.descTipoDocumento}}</option>
-                                    </select>
+                                        <select v-model="envio.area" id="area" name="area">
+                                            <option v-for="option in areaOps" :value="option.codigoArea">{{option.descArea}}</option>
+                                        </select>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="ui mini input">
-                                    <input class="requerido" v-model="envio.numDocumento" type="text">
+                                        <select v-model="envio.tipoDocumento" id="documentos" name="documentos">
+                                            <option v-for="option in tipoDocumentoOps" :value="option.codigoTipoDocumento">{{option.descTipoDocumento}}</option>
+                                        </select>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="ui mini input">
-                                    <input class="requerido money" v-model="envio.monto" type="text">
+                                        <input class="requerido" v-model="envio.numDocumento" type="text">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="ui mini input">
-                                    <input class="requerido" v-model="envio.observaciones" type="text">
+                                        <!-- <input class="requerido" mask="dinero" v-model="envio.monto" type="text"> -->
+                                        <money v-model="envio.monto" v-bind="money" class="requerido"></money>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="ui mini input">
+                                        <input class="requerido" v-model="envio.observaciones" type="text">
                                     </div>
                                 </td>
                                 <td>
@@ -124,31 +127,49 @@ $(function() {
                 area: '1',
                 tipoDocumento: '1',
                 numDocumento: '',
-                monto: '$ ',
+                monto: '',
                 observaciones: ''
             }],
             clientesOps: <?php echo $clientes?>,
-            
+
             areaOps: <?php echo $areas?>,
 
-            tipoDocumentoOps: <?php echo $documentos?>
+            tipoDocumentoOps: <?php echo $documentos?>,
+
+            money: {
+                decimal: '.',
+                thousands: ',',
+                prefix: '$ ',
+                suffix: '',
+                precision: 2,
+                masked: true
+            }
 
         },
         methods: {
             guardarEnvio() {
-                
-                if(validarVaciosEnvios('frmEnvios') == 0) {
+
+                /* if (validarVaciosEnvios('frmEnvios') == 0) {
                     console.log(JSON.stringify(this.envios));
-                }
+                } */
+
+                $.ajax({
+                    type: 'POST',
+                    data: {detalles: JSON.stringify(this.envios)},
+                    url: '?1=EnvioController&2=registrarEnvio',
+                    success: function(r) {
+                        console.log(r);
+                    }
+                });
             },
             agregarDetalle() {
                 this.envios.push({
-                    tramite: '',
-                    cliente: '',
-                    area: '',
-                    tipoDocumento: '',
+                    tramite: '1',
+                    cliente: '1',
+                    area: '1',
+                    tipoDocumento: '1',
                     numDocumento: '',
-                    monto: '$ ',
+                    monto: '',
                     observaciones: ''
                 });
             },
@@ -161,12 +182,14 @@ $(function() {
             $('.ui.dropdown.selection').css('max-width', '100%');
             $('.ui.dropdown.selection').css('min-width', '100%');
             $('.ui.dropdown.selection').css('width', '100%');
+            $('input[mask="dinero"]').mask('$0');
         },
         updated() {
             $('.ui.dropdown').dropdown();
             $('.ui.dropdown.selection').css('max-width', '100%');
             $('.ui.dropdown.selection').css('min-width', '100%');
             $('.ui.dropdown.selection').css('width', '100%');
+            $('input[mask="dinero"]').mask('$0');
         }
     });
 </script>

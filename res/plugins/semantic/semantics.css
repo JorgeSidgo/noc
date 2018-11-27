@@ -15288,6 +15288,15 @@ a.ui.basic.olive.label:hover {
   color: #FFFFFF !important;
 }
 
+/*--- Green Deloitte ---*/
+
+.ui.green-deloitte.labels .label,
+.ui.green-deloitte.label {
+  background-color: #85BC22 !important;
+  border-color: #85BC22 !important;
+  color: #FFFFFF !important;
+}
+
 /* Link */
 
 .ui.green.labels .label:hover,

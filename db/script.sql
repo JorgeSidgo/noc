@@ -41,14 +41,14 @@ create table envio (
 
 create table detalleEnvio (
 	codigoDetalleEnvio int primary key unique auto_increment,
+    codigoEnvio int,
     codigoTipoTramite int,
     codigoCliente int,
-    codigoEnvio int,
     codigoTipoDocumento int,
     codigoArea int,
-    codigoTramite int,
-    observacion text,
-    codigoStatus int
+    codigoStatus int,
+    monto varchar(25),
+    observacion text
 );
 
 create table tipoTramite(
@@ -66,10 +66,6 @@ create table clientes (
 create table tipoDocumento (
     codigoTipoDocumento int primary key unique auto_increment,
     descTipoDocumento varchar(25)
-);
-
-create table tramite (
-    codigoTramite int primary key unique auto_increment
 );
 
 create table observaciones (
@@ -94,7 +90,6 @@ alter table detalleEnvio add constraint fk_detalleEnvio_envio foreign key (codig
 alter table detalleEnvio add constraint fk_detalleEnvio_tipoTramite foreign key (codigoTipoTramite) references tipoTramite(codigoTipoTramite);
 alter table detalleEnvio add constraint fk_detalleEnvio_tipoDocumento foreign key (codigoTipoDocumento) references tipoDocumento(codigoTipoDocumento);
 alter table detalleEnvio add constraint fk_detalleEnvio_area foreign key (codigoArea) references area(codigoArea);
-alter table detalleEnvio add constraint fk_detalleEnvio_tramite foreign key (codigoTramite) references tramite(codigoTramite);
 alter table detalleEnvio add constraint fk_detalleEnvio_clientes foreign key (codigoCliente) references clientes(codigoCliente);
 -- alter table detalleEnvio add constraint fk_detalleEnvio_observaciones foreign key (codigoObservaciones) references observaciones(codigoObservaciones);
 alter table detalleEnvio add constraint fk_detalleEnvio_status foreign key (codigoStatus) references status(codigoStatus);
@@ -145,7 +140,6 @@ insert into tipoDocumento values(null, 'Q');
 insert into tipoDocumento values(null, 'Propuestas');
 insert into tipoDocumento values(null, 'Informes');
 insert into tipoDocumento values(null, 'Otro');
-
 
 #Status 
 insert into status values (null, 'Pendiente');
@@ -303,3 +297,33 @@ begin
     where codigoArea = idArea;
 end
 $$
+
+
+-- PROCEDIMIENTOS ENVIOS--	
+delimiter $$
+create procedure encabezadoEnvio(
+	in usuario int
+)
+begin
+	insert into envio values(null, usuario, curdate());
+    
+    select max(codigoEnvio) as codigoEnvio from envio;
+end
+$$
+
+delimiter $$
+create procedure registrarDetalleEnvio(
+	in envio int,
+    in tramite int,
+    in cliente int,
+    in documento int,
+    in area int,
+    in mon varchar(25),
+    in obs text
+)
+begin
+	insert into detalleEnvio values (null, envio, tramite, cliente, documento, area, 1, mon, obs);
+end
+$$
+
+select * from envio;
