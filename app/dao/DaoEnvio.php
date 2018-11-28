@@ -11,7 +11,7 @@ class DaoEnvio extends DaoBase {
         $_query = "call encabezadoEnvio
         ({$this->objeto->getCodigoUsuario()})";
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         $resultado = $resultado->fetch_assoc();
 
@@ -23,23 +23,26 @@ class DaoEnvio extends DaoBase {
 
     public function registrarDetalleEnvio() {
 
-        try {
-            
-            $_query = "call registrarDetalleEnvio(".$this->objeto->getCodigoEnvio().", ".$this->objeto->getCodigoTipoTramite().", ".$this->objeto->getCodigoCliente().", ".$this->objeto->getCodigoTipoDocumento().", ".$this->objeto->getCodigoArea().", '".$this->objeto->getMonto()."', '".$this->objeto->getObservacion()."');";
+        $query = "call registrarDetalleEnvio(".$this->objeto->getCodigoEnvio().", ".$this->objeto->getCodigoTipoTramite().", ".$this->objeto->getCodigoCliente().", ".$this->objeto->getCodigoTipoDocumento().", ".$this->objeto->getCodigoArea().", '".$this->objeto->getMonto()."', '".$this->objeto->getObservacion()."');";
 
-            $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($query);
 
-            return $_query;
-        } catch (mysqli_sql_exception $e) {
-            return $e;
-        }
-
-
-        /* if($resultado) {
-            return 1;
-        } else {
-            return 0;
-        } */
+        return $resultado; 
     }
 
+    public function getEncabezadoEnvio() {
+        $_query = "call getEncabezadoEnvio({$this->objeto->getCodigoEnvio()})";
+
+        $resultado = $this->con->ejecutar($_query);
+
+        return $resultado;
+    }
+
+    public function detallesEnvio() {
+        $_query = "call detallesEnvio({$this->objeto->getCodigoEnvio()})";
+
+        $resultado = $this->con->ejecutar($_query);
+
+        return $resultado;
+    }
 }

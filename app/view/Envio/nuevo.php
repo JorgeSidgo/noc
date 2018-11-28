@@ -33,24 +33,24 @@
                         <small id="fecha-header">Fecha</small>
                     </small>
 
-                    <button @click="guardarEnvio" class="ui green mini icon button"><i class="check icon"></i></button>
-                    <button @click="agregarDetalle" class="ui green mini icon button"><i class="plus icon"></i></button>
+                    <button @click="guardarEnvio" class="ui green-deloitte mini circular icon button"><i class="check icon"></i></button>
+                    <button @click="agregarDetalle" class="ui primary mini circular icon button"><i class="plus icon"></i></button>
                 </span>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row ">
             <div class="sixteen wide column">
                 <form action="" class="ui form" id="frmEnvios">
                     <table class="ui green fixed very compact table">
                         <thead class="super-compact">
                             <tr>
                                 <th class="two wide">Trámite</th>
-                                <th class="four wide">Cliente</th>
+                                <th class="three wide">Cliente</th>
                                 <th class="two wide">Área</th>
                                 <th class="two wide">Tipo Doc</th>
                                 <th class="one wide">N° Doc</th>
-                                <th class="one wide">Monto</th>
+                                <th class="two wide">Monto</th>
                                 <th class="three wide">Observaciones</th>
                                 <th class="one wide"></th>
                             </tr>
@@ -105,7 +105,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <button type="button" @click="eliminarDetalle(index)" class="ui google plus mini circular icon button"><i
+                                    <button type="button" @click="eliminarDetalle(index)" class="ui negative mini circular icon button"><i
                                             class="times icon"></i></button>
                                 </td>
                             </tr>
@@ -149,16 +149,30 @@
         methods: {
             guardarEnvio() {
 
+                $('#frmEnvios').addClass('loading');
+
                 /* if (validarVaciosEnvios('frmEnvios') == 0) {
                     console.log(JSON.stringify(this.envios));
                 } */
 
                 $.ajax({
                     type: 'POST',
-                    data: {detalles: JSON.stringify(this.envios)},
+                    data: {
+                        detalles: JSON.stringify(this.envios)
+                    },
                     url: '?1=EnvioController&2=registrarEnvio',
-                    success: function(r) {
-                        console.log(r);
+                    success: function (r) {
+                        $('#frmEnvios').removeClass('loading');
+                        if (r == 1) {
+                            swal({
+                                title: 'Completado',
+                                type: 'success'
+                            }).then((result) => {
+                                if (result.value) {
+                                    location.reload();
+                                }
+                            });
+                        }
                     }
                 });
             },

@@ -12,7 +12,7 @@ class DaoCliente extends DaoBase
     public function mostrarClientesCmb() {
         $_query = "select * from clientes";
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         $json = '';
 
@@ -28,7 +28,7 @@ class DaoCliente extends DaoBase
     public function mostrarClientes() {
         $_query = "call mostrarClientes()";
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         $_json = '';
 
@@ -53,7 +53,7 @@ class DaoCliente extends DaoBase
     public function registrar() {
         $_query = "call registrarCliente('".$this->objeto->getNombreCliente()."', '".$this->objeto->getDireccion()."','".$this->objeto->getTelefono()."')";
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         if($resultado) {
             return 1;
@@ -66,7 +66,7 @@ class DaoCliente extends DaoBase
     public function editar() {
         $_query = "call editarCliente('".$this->objeto->getNombreCliente()."', '".$this->objeto->getDireccion()."','".$this->objeto->getTelefono()."', ".$this->objeto->getCodigoCliente().")";
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         if($resultado) {
             return 1;
@@ -79,7 +79,7 @@ class DaoCliente extends DaoBase
     public function cargarDatosCliente() {
         $_query = "select * from clientes where codigoCliente = ".$this->objeto->getCodigoCliente();
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         $json = json_encode($resultado->fetch_assoc());
 
@@ -89,7 +89,7 @@ class DaoCliente extends DaoBase
     public function eliminar() {
         $_query = "delete from clientes where codigoCliente = ".$this->objeto->getCodigoCliente();
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         if($resultado) {
             return 1;

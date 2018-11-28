@@ -10,12 +10,6 @@ $(function() {
 });
 </script>
 
-<script>
-$(function() {
-    console.log(<?php echo $areas?>);
-});
-</script>
-
 <body class="body-login">
     <div id="fondo-dot"></div>
     <div id="app">
@@ -43,11 +37,11 @@ $(function() {
                     </div>
                     <div class="field">
                         <label for="">Nombre de Usuario Deloitte:</label>
-                        <input type="text" class="requerido" name="user" id="user">
+                        <input type="text" class="requerido" v-model="nomUsuario" name="user" id="user">
                     </div>
                     <div class="field">
                         <label for="">E-mail:</label>
-                        <input type="text" class="requerido" name="correo" id="correo">
+                        <input type="text" class="requerido" :value="correoUsuario" name="correo" id="correo" readonly>
 
                     </div>
                     <div class="field">
@@ -184,6 +178,24 @@ $(function() {
                 $('#area').append(option);
             });
         });
+    </script>
+
+    <script>
+    let app = new Vue({
+        el: '#app',
+
+        data: {
+            nomUsuario: '',
+            sufix: '@deloitte.com',
+            correo: ''
+        },
+        computed: {
+            correoUsuario: function() {
+                return this.nomUsuario + this.sufix;
+            }
+        }
+    });
+    
     </script>
 
 </body>

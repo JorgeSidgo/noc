@@ -113,4 +113,81 @@ class Mail {
         }
     }
 
+    public function detalleEnvio($codigoEnvio) {
+        $emailFrom = 'deloitte.prueba.no.reply@gmail.com';
+        $emailFromName = 'Deloitte';
+
+        $emailTo = 'jorge.sidgo@gmail.com';
+        $emailToName = 'Ing. Jorge Sidgo-Pimentel';
+
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+
+        require_once './app/encode/Encode.php';
+
+        $encode = new Encode();
+
+        $mail->Host = "smtp.gmail.com";
+        $mail->Port = 587;
+        $mail->SMTPSecure = 'tls';
+        $mail->SMTPAuth = true;
+        $mail->isHTML(true);
+        // $mail->SMTPDebug = 2;
+        $mail->Charset = 'UTF-8';
+
+        $mail->Username = 'deloitte.prueba.no.reply@gmail.com';
+        $mail->Password = 'Deloitte123!';
+        $mail->setFrom($emailFrom, $emailFromName);
+
+        $mail->addAddress($emailTo, $emailToName);
+
+        $mail->Subject = 'Control de Envios';
+
+
+        $dao = new DaoEnvio();
+
+        $dao->objeto->setCodigoEnvio($codigoEnvio);
+
+        $datosEncabezado = $dao->getEncabezadoEnvio()->fetch_assoc();
+
+        $detallesEnvio = $dao->detallesEnvio();
+
+        $celda = '';
+        
+        while($fila = $detallesEnvio->fetch_assoc()){
+
+            $celda .= '<tr>
+                        <td>'.$fila["descTipoTramite"].'</td>
+                        <td>'.$fila["nombreCliente"].'</td>
+                        <td>'.$fila["descTipoDocumento"].'</td>
+                        <td>'.$fila["descArea"].'</td>
+                        <td>'.$fila["descStatus"].'</td>
+                        <td>'.$fila["monto"].'</td>
+                        <td>'.$fila["observacion"].'</td>
+                    </tr>'; 
+        }
+
+        $plantilla = file_get_contents('./app/mail/correoEnvios.html');
+        
+        $plantilla = str_replace('%nomUsuario%', $datosEncabezado["nomUsuario"], $plantilla);
+        $plantilla = str_replace('%fecha%', $datosEncabezado["fecha"], $plantilla);
+        $plantilla = str_replace('%hora%', $datosEncabezado["hora"], $plantilla);
+        $plantilla = str_replace('%nombre%', $datosEncabezado["nombre"], $plantilla);
+        $plantilla = str_replace('%apellido%', $datosEncabezado["apellido"], $plantilla);
+        $plantilla = str_replace('%lista%', $celda, $plantilla);
+        
+        $mail->Body = $plantilla;
+        $mail->AltBody = strip_tags($plantilla);
+        // $mail->AltBody(strip_tags($plantilla));
+        $mail->AddEmbeddedImage('./app/mail/deloitteNegro.png', 'logo');
+
+
+        if($mail->Send())
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

@@ -37,19 +37,10 @@ class EnvioController extends ControladorBase {
         $codigoEnvio = $dao->encabezadoEnvio();
 
         $dao->objeto->setCodigoEnvio($codigoEnvio);
-        
-        $dao->objeto->setCodigoTipoTramite($detalles[0]->tramite);
-        $dao->objeto->setCodigoCliente($detalles[0]->cliente);
-        $dao->objeto->setCodigoTipoDocumento($detalles[0]->tipoDocumento);
-        $dao->objeto->setCodigoArea($detalles[0]->area);
-        $dao->objeto->setMonto($detalles[0]->monto);
-        $dao->objeto->setObservacion($detalles[0]->observaciones);
 
-        $resultado = $dao->registrarDetalleEnvio();
+        $contador = 0;
 
-        var_dump($resultado);
-
-        /* foreach($detalles as $detalle) {
+        foreach($detalles as $detalle) {
             $dao->objeto->setCodigoTipoTramite($detalle->tramite);
             $dao->objeto->setCodigoCliente($detalle->cliente);
             $dao->objeto->setCodigoTipoDocumento($detalle->tipoDocumento);
@@ -59,19 +50,21 @@ class EnvioController extends ControladorBase {
 
             if($dao->registrarDetalleEnvio()) {
                 $contador++;
-            } else 
-            {
-                echo "nell";
-                die();
             }
         }
 
+        require './app/mail/Mail.php';
+        $mail = new Mail();
+
+        if(!$mail->detalleEnvio($codigoEnvio)) {
+            echo "El correo no fue enviado Correctamente";
+        }
 
         if($contador == count($detalles)) {
             echo 1;
         } else {
             echo 2;
-        } */
+        }
 
     }
 }

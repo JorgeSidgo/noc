@@ -10,7 +10,7 @@ class DaoArea extends DaoBase {
     public function mostrarAreas() {
         $_query = "select * from area";
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         $json = '';
 
@@ -26,7 +26,7 @@ class DaoArea extends DaoBase {
     public function mostrarAreasDT() {
         $_query = "call mostrarArea()";
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         $_json = '';
 
@@ -52,7 +52,7 @@ class DaoArea extends DaoBase {
     public function registrar() {
         $_query = "call registrarArea('".$this->objeto->getDescArea()."')";
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         if($resultado) {
             return 1;
@@ -64,7 +64,7 @@ class DaoArea extends DaoBase {
     public function editar() {
         $_query = "call editarArea('".$this->objeto->getDescArea()."',".$this->objeto->getCodigoArea().")";
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         if($resultado) {
             return 1;
@@ -76,7 +76,7 @@ class DaoArea extends DaoBase {
     public function cargarDatosArea() {
         $_query = "select * from area where codigoArea = ".$this->objeto->getCodigoArea();
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         $json = json_encode($resultado->fetch_assoc());
 
@@ -86,7 +86,7 @@ class DaoArea extends DaoBase {
     public function eliminar() {
         $_query = "delete from area where codigoArea = ".$this->objeto->getCodigoArea();
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         if($resultado) {
             return 1;

@@ -36,7 +36,8 @@ create table authUsuario (
 create table envio (
 	codigoEnvio int primary key unique auto_increment,
     codigoUsuario int,
-    fecha date
+    fecha date,
+    hora time 
 );
 
 create table detalleEnvio (
@@ -125,7 +126,7 @@ insert into area values (null, 'Finanzas');
 # Usuario
 insert into usuario values (null, 'Karla Guadalupe', 'Arevalo Vega', 'kgarevalo', 'kgarevalo@deloitte.com', sha1('Deloitte123!'), 1, 1, 1);
 insert into usuario values (null, 'Jorge Luis', 'Sidgo Pimentel', 'jlsidgo', 'jorge.sidgo@gmail.com', sha1('Deloitte123!'), 1, 1, 1);
-insert into usuario values (null, 'John', 'Doe', 'johndoe', 'johndoe@deloitte.com', sha1('123'), 2, 2, 4);
+insert into usuario values (null, 'John', 'Doe', 'johndoe', 'johndoe@deloitte.com', sha1('123'), 1, 2, 4);
 
 #Cliente
 insert into clientes values(null,'Telefonica','San Salvador','2314-1231');
@@ -305,12 +306,11 @@ create procedure encabezadoEnvio(
 	in usuario int
 )
 begin
-	insert into envio values(null, usuario, curdate());
+	insert into envio values(null, usuario, curdate(), DATE_FORMAT(NOW( ), "%H:%i:%s" ));
     
     select max(codigoEnvio) as codigoEnvio from envio;
 end
 $$
-
 delimiter $$
 create procedure registrarDetalleEnvio(
 	in envio int,
@@ -326,4 +326,61 @@ begin
 end
 $$
 
+delimiter $$
+create procedure enviosPendientes()
+begin
+	select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, e.fecha, e.hora, tt.descTipoTramite, c.nombreCliente, tc.descTipoDocumento, a.descArea, s.descStatus, d.monto, d.observacion
+	from detalleEnvio d
+	inner join envio e on e.codigoEnvio = d.codigoEnvio
+    inner join usuario u on u.codigoUsuario = e.codigoUsuario
+	inner join tipoTramite tt on tt.codigoTipoTramite = d.codigoTipoTramite
+	inner join clientes c on c.codigoCliente = d.codigoCliente
+    inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
+    inner join area a on a.codigoArea = d.codigoArea 
+    inner join status s on s.codigoStatus = d.codigoStatus
+    
+    where s.codigoStatus = 1;
+    
+end
+$$
+
+delimiter $$
+create procedure detallesEnvio(
+	in idEnvio int
+)
+begin
+	select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, e.fecha, e.hora, tt.descTipoTramite, c.nombreCliente, tc.descTipoDocumento, a.descArea, s.descStatus, d.monto, d.observacion
+	from detalleEnvio d
+	inner join envio e on e.codigoEnvio = d.codigoEnvio
+    inner join usuario u on u.codigoUsuario = e.codigoUsuario
+	inner join tipoTramite tt on tt.codigoTipoTramite = d.codigoTipoTramite
+	inner join clientes c on c.codigoCliente = d.codigoCliente
+    inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
+    inner join area a on a.codigoArea = d.codigoArea 
+    inner join status s on s.codigoStatus = d.codigoStatus
+    
+    where s.codigoStatus = 1 and e.codigoEnvio = idEnvio;
+end
+$$
+
+delimiter $$
+create procedure getEncabezadoEnvio(
+	in idEnvio int
+)
+begin
+	select e.codigoEnvio, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.nombre, u.apellido
+    from envio e
+    inner join usuario u on u.codigoUsuario = e.codigoUsuario
+    where e.codigoEnvio = idEnvio;
+end
+$$
+
+
+/*call enviosPendientes();
+
+call getEncabezadoEnvio(1);
+
+call detallesEnvio(3);
+
 select * from envio;
+select * from detalleEnvio;*/

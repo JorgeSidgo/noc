@@ -11,7 +11,7 @@ class DaoUsuario extends DaoBase {
     public function login() {
         $_query = "call login('".$this->objeto->getNomUsuario()."', '".sha1($this->objeto->getPass())."')";
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         if($resultado->num_rows == 1) {
 
@@ -39,7 +39,7 @@ class DaoUsuario extends DaoBase {
 
     public function getCodigoUsuarioByPass($code) {
         $_query = "select codigoUsuario from usuario where pass = '".$code."' and nomUsuario = '".$this->objeto->getNomUsuario()."'";
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         $datos = $resultado->fetch_assoc();
 
@@ -54,7 +54,7 @@ class DaoUsuario extends DaoBase {
         inner join area ar on ar.codigoArea = u.codigoArea
         where u.codigoUsuario = ".$this->objeto->getCodigoUsuario();
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         $json = json_encode($resultado->fetch_assoc());
 
@@ -65,7 +65,7 @@ class DaoUsuario extends DaoBase {
     public function registrar() {
         $_query = "call registrarUsuario('".$this->objeto->getNombre()."', '".$this->objeto->getApellido()."','".$this->objeto->getNomUsuario()."', '".$this->objeto->getEmail()."', '".sha1($this->objeto->getPass())."', ".$this->objeto->getCodigoArea().", ".$this->objeto->getCodigoRol().")";
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         if($resultado) {
             return 1;
@@ -76,7 +76,7 @@ class DaoUsuario extends DaoBase {
 
     public function autorizar($estado) {
         $_query = "update usuario set codigoAuth = {$estado} where codigoUsuario = ".$this->objeto->getCodigoUsuario();
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         if($resultado) {
             return 1;
@@ -96,7 +96,7 @@ class DaoUsuario extends DaoBase {
         $codigoUsuario = $this->getCodigoUsuarioByPass($code);
 
         $_query = "update usuario set pass = '".sha1($this->objeto->getPass())."' where codigoUsuario = ".$codigoUsuario;
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         if($resultado) {
             return 1;
@@ -110,7 +110,7 @@ class DaoUsuario extends DaoBase {
     public function reestablecer($psswd)
     {
         $_query = "update usuario set pass = '{$psswd}' where nomUsuario = '".$this->objeto->getNomUsuario()."' and email ='".$this->objeto->getEmail()."'";
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         if($resultado) {
             return 1;
@@ -122,7 +122,7 @@ class DaoUsuario extends DaoBase {
     public function editar() {
         $_query = "call editarUsuario('".$this->objeto->getNombre()."', '".$this->objeto->getApellido()."','".$this->objeto->getNomUsuario()."', '".$this->objeto->getEmail()."', ".$this->objeto->getCodigoRol().", ".$this->objeto->getCodigoArea().", ".$this->objeto->getCodigoUsuario().")";
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         if($resultado) {
             return 1;
@@ -134,7 +134,7 @@ class DaoUsuario extends DaoBase {
     public function eliminar() {
         $_query = "delete from usuario where codigoUsuario = ".$this->objeto->getCodigoUsuario();
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         if($resultado) {
             return 1;
@@ -146,7 +146,7 @@ class DaoUsuario extends DaoBase {
     public function mostrarUsuarios() {
         $_query = "call mostrarUsuarios()";
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         $_json = '';
 

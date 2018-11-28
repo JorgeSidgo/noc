@@ -10,33 +10,29 @@
 
     <div class="row" id="dashboard-card">
         <h3 class="ui header">
-        <b><?php echo $_SESSION["nombre"].' '.$_SESSION["apellido"]?>
-            <div class="sub header"><?php echo $_SESSION["email"]?></b></div>
-        </h3>
+            <b>
+                <?php echo $_SESSION["nombre"].' '.$_SESSION["apellido"]?>
+                <div class="sub header">
+                    <?php echo $_SESSION["email"]?>
+            </b>
     </div>
-    <div class="row">
+    </h3>
+</div>
+<!--     <div class="row">
     <h1>
     <i class="envelope icon"></i> Mensajería
     </h1>
     </div>
+ -->
 
-    <div class="row">
-        <a href="?1=EnvioController&2=nuevoEnvio" style="width: 24%;" class="ui labeled icon green huge button">
-            <i class="paper plane icon"></i>
-            Nuevo Envio
-        </a>
-        <a href="?1=EnvioController&2=nuevoEnvio" style="width: 24%;" class="ui labeled icon green huge button">
-            <i class="paper plane icon"></i>
-            Nuevo Envio
-        </a>
-        <a href="?1=EnvioController&2=nuevoEnvio" style="width: 24%;" class="ui labeled icon green huge button">
-            <i class="paper plane icon"></i>
-            Nuevo Envio
-        </a>
-        <a href="?1=EnvioController&2=nuevoEnvio" style="width: 24%;" class="ui labeled icon green huge button">
-            <i class="paper plane icon"></i>
-            Nuevo Envio
-        </a>
-    </div>
+ <?php
+
+ if($_SESSION["descRol"] == 'Administrador') {
+     require_once 'dashboardAdmin.php';
+ } else {
+     require_once 'dashboardSoli.php';
+ }
+
+?>
 
 </div>

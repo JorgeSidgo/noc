@@ -14,4 +14,16 @@ class Conexion {
             return $con;
     }
 
+    public function ejecutar($query) {
+        
+        try {
+            $resultado = self::conectar()->query($query);
+        } catch (mysqli_sql_exception $e) {
+            throw $e;
+            die();
+        }
+
+        return $resultado;
+    }
+
 }

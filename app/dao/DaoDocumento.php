@@ -10,7 +10,7 @@ class DaoDocumento extends DaoBase {
     public function mostrarDocumentosCmb() {
         $_query = "select * from tipoDocumento";
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         $json = '';
 
@@ -26,7 +26,7 @@ class DaoDocumento extends DaoBase {
     public function mostrarDocumentos() {
         $_query = "call mostrarDocumentos()";
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         $_json = '';
 
@@ -52,7 +52,7 @@ class DaoDocumento extends DaoBase {
     public function registrar() {
         $_query = "call registrarDocumentos('".$this->objeto->getDescTipoDocumento()."')";
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         if($resultado) {
             return 1;
@@ -65,7 +65,7 @@ class DaoDocumento extends DaoBase {
     public function editar() {
         $_query = "call editarDocumento('".$this->objeto->getDescTipoDocumento()."',".$this->objeto->getCodigoTipoDocumento().")";
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         if($resultado) {
             return 1;
@@ -77,7 +77,7 @@ class DaoDocumento extends DaoBase {
     public function cargarDatosDocumento() {
         $_query = "select * from tipoDocumento where codigoTipoDocumento = ".$this->objeto->getCodigoTipoDocumento();
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         $json = json_encode($resultado->fetch_assoc());
 
@@ -87,7 +87,7 @@ class DaoDocumento extends DaoBase {
     public function eliminar() {
         $_query = "delete  from tipoDocumento where codigoTipoDocumento= ".$this->objeto->getCodigoTipoDocumento();
 
-        $resultado = $this->con->query($_query);
+        $resultado = $this->con->ejecutar($_query);
 
         if($resultado) {
             return 1;
