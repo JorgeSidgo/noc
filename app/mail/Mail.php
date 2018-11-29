@@ -117,7 +117,7 @@ class Mail {
         $emailFrom = 'deloitte.prueba.no.reply@gmail.com';
         $emailFromName = 'Deloitte';
 
-        $emailTo = 'jorge.sidgo@gmail.com';
+        $emailTo = 'fabiomejiash@gmail.com';
         $emailToName = 'Ing. Jorge Sidgo-Pimentel';
 
         $mail = new PHPMailer();

@@ -45,4 +45,29 @@ class DaoEnvio extends DaoBase {
 
         return $resultado;
     }
+
+    public function mostrarPaquetes()
+    {
+        $_query = "call mostrarPaquetes()";
+
+        $resultado = $this->con->ejecutar($_query);
+
+        $_json = '';
+
+        while($fila = $resultado->fetch_assoc()) {
+
+            $object = json_encode($fila);
+            $btnVer = '<button id=\"'.$fila["codigoEnvio"].'\" class=\"ui btnVer icon blue small button\"><i class=\"eye icon\"></i></button>';
+
+            $acciones = ', "Acciones": "'.$btnVer.'"';
+
+            $object = substr_replace($object, $acciones, strlen($object) -1, 0);
+
+            $_json .= $object.',';
+        }
+
+        $_json = substr($_json,0, strlen($_json) - 1);
+
+        echo '{"data": ['.$_json .']}';
+    }
 }

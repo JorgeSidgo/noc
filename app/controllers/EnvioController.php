@@ -21,8 +21,27 @@ class EnvioController extends ControladorBase {
         require_once './app/view/Envio/misEnvios.php';
     }
 
+    public function controlEnvios()
+    {
+        self::loadMain();
+        require_once './app/view/Envio/controlEnvios.php';
+    }
+
+    public function detallesEnvio()
+    {
+        self::loadMain();
+        require_once './app/view/Envio/detallesEnvio.php';
+    }
 
     // Métodos 
+    public function mostrarPaquetes()
+    {
+        $dao = new DaoEnvio();
+
+        echo $dao->mostrarPaquetes();
+    }
+
+    
 
     public function registrarEnvio() {
 
