@@ -6,7 +6,7 @@
         <i class="paper plane icon"></i>
     </a>
 
-    <a href="?1=EnvioController&2=nuevoEnvio" style="width: 24%;"  class="ui blue inverted segment">
+    <a href="?1=EnvioController&2=controlEnvios" style="width: 24%;"  class="ui blue inverted segment">
         <h3>Control de Envíos</h3>
         <div class="ui divider"></div>
         <i class="box icon"></i>
