@@ -46,7 +46,8 @@
     <!-- SweerAlert -->
     <script src="./res/plugins/sweetalert2.js"></script>
 
-    
+    <!-- Socket.io -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
     
 </head>
 <body>

@@ -53,12 +53,18 @@ class EnvioController extends ControladorBase {
             }
         }
 
+
         require './app/mail/Mail.php';
         $mail = new Mail();
 
         if(!$mail->detalleEnvio($codigoEnvio)) {
             echo "El correo no fue enviado Correctamente";
         }
+
+        require './app/notif/Notif.php';
+        $notif = new Notif();
+
+        $notif->envioRealizado();
 
         if($contador == count($detalles)) {
             echo 1;

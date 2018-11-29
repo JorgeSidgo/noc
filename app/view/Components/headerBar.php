@@ -68,3 +68,11 @@
             .dropdown();
     });
 </script>
+
+<script>
+    var socket = io.connect("http://localhost:3008");
+
+    socket.on("new_order", function(data) {
+        console.log(data);
+    });
+</script>
