@@ -4,7 +4,7 @@
 </a>
 
 <a href="?1=EnvioController&2=controlEnvios" class="item menu-it">
-    <i class="tasks open icon"></i>
+    <i class="box icon"></i>
     Control de Envíos
 </a>
 
