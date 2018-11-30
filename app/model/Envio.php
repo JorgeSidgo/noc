@@ -11,6 +11,7 @@ class Envio extends ModeloBase {
     private $codigoArea;
     private $monto;
     private $observacion;
+    private $numDoc;
     private $codigoStatus;
 
     public function __construct() {
@@ -233,6 +234,26 @@ class Envio extends ModeloBase {
     public function setMonto($monto)
     {
         $this->monto = $monto;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of numDoc
+     */ 
+    public function getNumDoc()
+    {
+        return $this->numDoc;
+    }
+
+    /**
+     * Set the value of numDoc
+     *
+     * @return  self
+     */ 
+    public function setNumDoc($numDoc)
+    {
+        $this->numDoc = $numDoc;
 
         return $this;
     }

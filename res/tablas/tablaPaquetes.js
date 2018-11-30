@@ -26,7 +26,7 @@ $(function() {
                     "data": "nombre"             
                 },
                 {
-                    "data": "apellido"             
+                    "data": "documentos"
                 },
                 {
                     "data": "Acciones"             

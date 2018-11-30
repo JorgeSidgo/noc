@@ -41,7 +41,27 @@ class EnvioController extends ControladorBase {
         echo $dao->mostrarPaquetes();
     }
 
-    
+    public function getDetallesEnvio() {
+        $dao = new DaoEnvio();
+
+        $id = $_REQUEST["id"];
+        
+        $dao->objeto->setCodigoEnvio($id);
+
+        $resultado = $dao->detallesEnvio();
+
+        $json = '';
+
+        while($fila = $resultado->fetch_assoc()) {
+
+            $json .= json_encode($fila).',';
+
+        }
+
+        $json = substr($json, 0, strlen($json) - 1);
+
+        echo'['.$json.']';
+    }
 
     public function registrarEnvio() {
 
@@ -54,7 +74,7 @@ class EnvioController extends ControladorBase {
         $dao->objeto->setCodigoUsuario($_SESSION["codigoUsuario"]);
 
         $codigoEnvio = $dao->encabezadoEnvio();
-
+        
         $dao->objeto->setCodigoEnvio($codigoEnvio);
 
         $contador = 0;
@@ -66,9 +86,12 @@ class EnvioController extends ControladorBase {
             $dao->objeto->setCodigoArea($detalle->area);
             $dao->objeto->setMonto($detalle->monto);
             $dao->objeto->setObservacion($detalle->observaciones);
+            $dao->objeto->setNumDoc($detalle->numDocumento);
 
             if($dao->registrarDetalleEnvio()) {
                 $contador++;
+            } else {
+                echo 'nell';
             }
         }
 
@@ -79,11 +102,6 @@ class EnvioController extends ControladorBase {
         if(!$mail->detalleEnvio($codigoEnvio)) {
             echo "El correo no fue enviado Correctamente";
         }
-
-        require './app/notif/Notif.php';
-        $notif = new Notif();
-
-        $notif->envioRealizado();
 
         if($contador == count($detalles)) {
             echo 1;

@@ -48,6 +48,7 @@ create table detalleEnvio (
     codigoTipoDocumento int,
     codigoArea int,
     codigoStatus int,
+    numDoc varchar(25),
     monto varchar(25),
     observacion text
 );
@@ -107,12 +108,12 @@ insert into rol values (null, 'Solicitante');
 insert into authUsuario values (null, 'Autorizado');
 insert into authUsuario values (null, 'Esperando Autorizacion');
 insert into authUsuario values (null, 'Restringido');
-
+	
 # Tipo de Tramite
 insert into tipoTramite values(null, 'Entrega');
 insert into tipoTramite values(null, 'Cobro');
 insert into tipoTramite values(null, 'Transferencia');
-insert into tipoTramite values(null, 'Dep&oacute;sito');
+insert into tipoTramite values(null, 'DepÃ³sito');
 insert into tipoTramite values(null, 'Retiro de Cheques');
 insert into tipoTramite values(null, 'Retiro de Documentos');
 
@@ -145,7 +146,7 @@ insert into tipoDocumento values(null, 'Otro');
 #Status 
 insert into status values (null, 'Pendiente');
 insert into status values (null, 'Revisado');
-insert into status values (null, 'Enviado');
+insert into status values (null, 'Completo');
 insert into status values (null, 'Regresado a Finanzas');
 
 delimiter $$
@@ -319,10 +320,11 @@ create procedure registrarDetalleEnvio(
     in documento int,
     in area int,
     in mon varchar(25),
-    in obs text
+    in obs text,
+    in num varchar(25)
 )
 begin
-	insert into detalleEnvio values (null, envio, tramite, cliente, documento, area, 1, mon, obs);
+	insert into detalleEnvio values (null, envio, tramite, cliente, documento, area, 1, num, mon, obs);
 end
 $$
 
@@ -349,7 +351,7 @@ create procedure detallesEnvio(
 	in idEnvio int
 )
 begin
-	select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, e.fecha, e.hora, tt.descTipoTramite, c.nombreCliente, tc.descTipoDocumento, a.descArea, s.descStatus, d.monto, d.observacion
+	select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, e.fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
 	from detalleEnvio d
 	inner join envio e on e.codigoEnvio = d.codigoEnvio
     inner join usuario u on u.codigoUsuario = e.codigoUsuario
@@ -364,6 +366,22 @@ end
 $$
 
 delimiter $$
+create procedure detallesEnvioLabel
+(
+	in idEnvio int
+)
+begin
+	select e.codigoEnvio, d.codigoDetalleEnvio,s.descStatus
+	from detalleEnvio d
+	inner join envio e on e.codigoEnvio = d.codigoEnvio
+    inner join status s on s.codigoStatus = d.codigoStatus
+    
+    where e.codigoEnvio = idEnvio;
+end
+$$
+
+
+delimiter $$
 create procedure getEncabezadoEnvio(
 	in idEnvio int
 )
@@ -374,13 +392,25 @@ begin
     where e.codigoEnvio = idEnvio;
 end
 $$
+delimiter $$
+create procedure mostrarPaquetes()
+begin
+select Distinct(e.codigoEnvio), DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.nombre, u.apellido from envio e
+inner join usuario u on u.codigoUsuario = e.codigoUsuario
+inner join detalleEnvio d on e.codigoEnvio = d.codigoEnvio
+where d.codigoStatus=1;
+end
+$$
 
+call encabezadoEnvio(1);
 
-/*call enviosPendientes();
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 2, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 3, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');
 
-call getEncabezadoEnvio(1);
+select * from detalleEnvio;
 
-call detallesEnvio(3);
+-- call detallesEnvio(1);
 
-select * from envio;
-select * from detalleEnvio;*/
+-- call mostrarPaquetes();
+-- call getEncabezadoEnvio(1);

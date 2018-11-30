@@ -38,7 +38,7 @@
                 </span>
             </div>
         </div>
-
+        
         <div class="row ">
             <div class="sixteen wide column">
                 <form action="" class="ui form" id="frmEnvios">
@@ -149,13 +149,10 @@
         methods: {
             guardarEnvio() {
 
-                $('#frmEnvios').addClass('loading');
+                if(this.envios.length) {
 
-                /* if (validarVaciosEnvios('frmEnvios') == 0) {
-                    console.log(JSON.stringify(this.envios));
-                } */
-
-                $.ajax({
+                    $('#frmEnvios').addClass('loading');
+                    $.ajax({
                     type: 'POST',
                     data: {
                         detalles: JSON.stringify(this.envios)
@@ -175,6 +172,8 @@
                         }
                     }
                 });
+                }
+
             },
             agregarDetalle() {
                 this.envios.push({

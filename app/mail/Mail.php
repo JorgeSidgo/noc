@@ -117,7 +117,7 @@ class Mail {
         $emailFrom = 'deloitte.prueba.no.reply@gmail.com';
         $emailFromName = 'Deloitte';
 
-        $emailTo = 'fabiomejiash@gmail.com';
+        $emailTo = 'jorge.sidgo@gmail.com';
         $emailToName = 'Ing. Jorge Sidgo-Pimentel';
 
         $mail = new PHPMailer();
@@ -159,8 +159,9 @@ class Mail {
             $celda .= '<tr>
                         <td>'.$fila["descTipoTramite"].'</td>
                         <td>'.$fila["nombreCliente"].'</td>
-                        <td>'.$fila["descTipoDocumento"].'</td>
                         <td>'.$fila["descArea"].'</td>
+                        <td>'.$fila["descTipoDocumento"].'</td>
+                        <td>'.$fila["numDoc"].'</td>
                         <td>'.$fila["descStatus"].'</td>
                         <td>'.$fila["monto"].'</td>
                         <td>'.$fila["observacion"].'</td>

@@ -23,7 +23,7 @@ class DaoEnvio extends DaoBase {
 
     public function registrarDetalleEnvio() {
 
-        $query = "call registrarDetalleEnvio(".$this->objeto->getCodigoEnvio().", ".$this->objeto->getCodigoTipoTramite().", ".$this->objeto->getCodigoCliente().", ".$this->objeto->getCodigoTipoDocumento().", ".$this->objeto->getCodigoArea().", '".$this->objeto->getMonto()."', '".$this->objeto->getObservacion()."');";
+        $query = "call registrarDetalleEnvio(".$this->objeto->getCodigoEnvio().", ".$this->objeto->getCodigoTipoTramite().", ".$this->objeto->getCodigoCliente().", ".$this->objeto->getCodigoTipoDocumento().", ".$this->objeto->getCodigoArea().", '".$this->objeto->getMonto()."', '".$this->objeto->getObservacion()."', '".$this->objeto->getNumDoc()."');";
 
         $resultado = $this->con->ejecutar($query);
 
@@ -54,16 +54,59 @@ class DaoEnvio extends DaoBase {
 
         $_json = '';
 
+        $contador_pendientes = 0;
+        $contador_completo = 0;
+        $contador_revisado = 0;
+
+
         while($fila = $resultado->fetch_assoc()) {
 
-            $object = json_encode($fila);
-            $btnVer = '<button id=\"'.$fila["codigoEnvio"].'\" class=\"ui btnVer icon blue small button\"><i class=\"eye icon\"></i></button>';
+            $btnVer = '<button id=\"'.$fila["codigoEnvio"].'\" class=\"ui btnVer icon secondary small button\"><i class=\"list ul icon\"></i></button>';
 
-            $acciones = ', "Acciones": "'.$btnVer.'"';
+            $sub_query = "call detallesEnvioLabel({$fila["codigoEnvio"]})";
 
-            $object = substr_replace($object, $acciones, strlen($object) -1, 0);
+            $sub_resultado = $this->con->ejecutar($sub_query);
+
+
+            while($sub_fila = $sub_resultado->fetch_assoc()) {
+
+                switch($sub_fila["descStatus"]) {
+                    case 'Pendiente':
+                        $contador_pendientes++;
+                        break;
+
+                    case 'Revisado': 
+                        $contador_revisado++;
+                        break;
+                        
+                    case 'Completo':
+                        $contador_completo++;
+                        break;
+                }
+            }
+
+            $label_pendientes= '<a class=\"ui yellow label\">'.$contador_pendientes.'</a>';
+            $label_completo= '<a class=\"ui green label\">'.$contador_completo.'</a>';
+            $label_revisado= '<a class=\"ui orange label\">'.$contador_revisado.'</a>';
+
+            $labels = '<div class=\"ui small labels\">'.$label_pendientes.$label_completo.$label_revisado.'</div>';
+
+            $object = '{
+                            "codigoEnvio": "'.$fila["codigoEnvio"].'",
+                            "fecha": "'.$fila["fecha"].'",
+                            "hora": "'.$fila["hora"].'",
+                            "nomUsuario": "'.$fila["nomUsuario"].'",
+                            "nombre": "'.$fila["nombre"].' '.$fila["apellido"].'",
+                            "documentos": "'.$labels.'",
+                            "Acciones": "'.$btnVer.'"
+                        }';
 
             $_json .= $object.',';
+
+
+            $contador_pendientes = 0;
+            $contador_completo = 0;
+            $contador_revisado = 0;
         }
 
         $_json = substr($_json,0, strlen($_json) - 1);
