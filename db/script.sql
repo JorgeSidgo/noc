@@ -407,10 +407,11 @@ call encabezadoEnvio(1);
 insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 2, '123', '$1', 'nada');
 insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 3, '123', '$1', 'nada');
 insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');
 
-select * from detalleEnvio;
+-- select * from detalleEnvio;
 
--- call detallesEnvio(1);
+-- call detallesEnvioLabel(1);
 
 -- call mostrarPaquetes();
 -- call getEncabezadoEnvio(1);

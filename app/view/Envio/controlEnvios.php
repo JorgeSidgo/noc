@@ -26,7 +26,7 @@
         </div>
 
         <div class="actions">
-            <button class="ui black button">
+            <button @click="cerrarCambios" class="ui black button">
                 Cancelar
             </button>
             <button @click="cambiarEstado" id="btnCambiar" class="ui right primary button">
@@ -102,10 +102,14 @@
                 $('#modalDetalles').modal('hide');
             },
 
-            cambiarEstado() {
+            cerrarCambios() {
                 $('#modalDetalles').modal('setting', 'autofocus', false).modal('setting', 'closable', false)
                 .modal('show');
                 $('#modalCambios').modal('hide');
+            },
+
+            cambiarEstado() {
+                this.cerrarCambios();
             }
         }
     });
