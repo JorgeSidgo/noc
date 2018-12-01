@@ -402,6 +402,16 @@ where d.codigoStatus=1;
 end
 $$
 
+call encabezadoEnvio(1);
+
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 2, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 3, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');
+
+-- select * from detalleEnvio;
+
+-- call detallesEnvioLabel(1);
 delimiter $$ 
 create procedure historialEnvios()
 begin
