@@ -20,7 +20,7 @@ where e.fecha=(select Max(fecha) from envio) order by e.hora DESC;";
 
 $res = $con ->query($sql);
 $tabla="";
-$tabla.= "<table>
+$tabla.= "<table border='1px'>
             <tr>
                 <th>Usuario</th>
                 <th>Hora</th>
