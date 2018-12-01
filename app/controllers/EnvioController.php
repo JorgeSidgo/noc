@@ -33,6 +33,8 @@ class EnvioController extends ControladorBase {
         require_once './app/view/Envio/detallesEnvio.php';
     }
 
+    
+
     public function historialEnvios()
     {
         self::loadMain();
