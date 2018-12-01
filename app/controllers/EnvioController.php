@@ -33,12 +33,24 @@ class EnvioController extends ControladorBase {
         require_once './app/view/Envio/detallesEnvio.php';
     }
 
+    public function historialEnvios()
+    {
+        self::loadMain();
+        require_once './app/view/Envio/historialEnvios.php';
+    }
     // Métodos 
     public function mostrarPaquetes()
     {
         $dao = new DaoEnvio();
 
         echo $dao->mostrarPaquetes();
+    }
+
+    public function historialEnviosP()
+    {
+        $dao = new DaoEnvio();
+
+        echo $dao->historialEnvios();
     }
 
     public function getDetallesEnvio() {
@@ -49,6 +61,28 @@ class EnvioController extends ControladorBase {
         $dao->objeto->setCodigoEnvio($id);
 
         $resultado = $dao->detallesEnvio();
+
+        $json = '';
+
+        while($fila = $resultado->fetch_assoc()) {
+
+            $json .= json_encode($fila).',';
+
+        }
+
+        $json = substr($json, 0, strlen($json) - 1);
+
+        echo'['.$json.']';
+    }
+
+    public function getDetallesEnvioH() {
+        $dao = new DaoEnvio();
+
+        $id = $_REQUEST["id"];
+        
+        $dao->objeto->setCodigoEnvio($id);
+
+        $resultado = $dao->detallesEnvioH();
 
         $json = '';
 

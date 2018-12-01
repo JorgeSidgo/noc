@@ -412,6 +412,31 @@ insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');
 -- select * from detalleEnvio;
 
 -- call detallesEnvioLabel(1);
+delimiter $$ 
+create procedure historialEnvios()
+begin
+select Distinct(e.codigoEnvio), DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.nombre, u.apellido from envio e
+inner join usuario u on u.codigoUsuario = e.codigoUsuario
+inner join detalleEnvio d on e.codigoEnvio = d.codigoEnvio;
+end
+$$
 
--- call mostrarPaquetes();
--- call getEncabezadoEnvio(1);
+
+delimiter $$
+create procedure detallesEnvioH(
+	in idEnvio int
+)
+begin
+	select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, e.fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+	from detalleEnvio d
+	inner join envio e on e.codigoEnvio = d.codigoEnvio
+    inner join usuario u on u.codigoUsuario = e.codigoUsuario
+	inner join tipoTramite tt on tt.codigoTipoTramite = d.codigoTipoTramite
+	inner join clientes c on c.codigoCliente = d.codigoCliente
+    inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
+    inner join area a on a.codigoArea = d.codigoArea 
+    inner join status s on s.codigoStatus = d.codigoStatus
+    
+    where e.codigoEnvio = idEnvio;
+end
+$$
