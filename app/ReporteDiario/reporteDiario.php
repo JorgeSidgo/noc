@@ -1,6 +1,6 @@
 <?php
 
- include 'mpdf/mpdf.php';
+ require_once './vendor/autoload.php';
 
  function datos()
  {
@@ -46,7 +46,7 @@ return $tabla;
 $html = datos();
 
 
-$pdf = new mPDF('c');
+$pdf = new \Mpdf\Mpdf();
 $pdf->WriteHTML($html);
 $pdf->Output();
 

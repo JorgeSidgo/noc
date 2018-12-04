@@ -35,7 +35,7 @@ class EnvioController extends ControladorBase {
 
     public function llamaReporte()
     {
-        require_once './app/mpdf/reporteDiario.php';
+        require_once './app/ReporteDiario/reporteDiario.php';
     }
     
 
