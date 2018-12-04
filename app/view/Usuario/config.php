@@ -167,13 +167,13 @@
                 <center><h3><i class="cogs icon"></i> Opciones de configuración.</h3></center>
                     <div class="ui list">
                         <div class="item">
-                            <button class="ui right floated fluid grey  button" id="btnCambiarNomUser" type="button"><i class="user icon"></i>Mi usuario Deloitte</button>
+                            <button class="ui right floated fluid green-deloitte  button" id="btnCambiarNomUser" type="button"><i class="user icon"></i>Mi usuario Deloitte</button>
                         </div>
                         <div class="item">
-                            <button class="ui right floated fluid grey  button" id="btnCambiarNom" type="button"><i class="street view icon"></i>Datos Personales</button>
+                            <button class="ui right floated fluid green-deloitte  button" id="btnCambiarNom" type="button"><i class="street view icon"></i>Datos Personales</button>
                         </div>
                         <div class="item">
-                            <button class="ui right floated fluid grey button" id="btnCambiarContra" type="button"><i class="lock icon"></i>Modificar contraseña</button>
+                            <button class="ui right floated fluid green-deloitte button" id="btnCambiarContra" type="button"><i class="lock icon"></i>Modificar contraseña</button>
                         </div>
                         <div class="item">
                             <button class="ui right floated fluid red button" id="btnEliminarCuenta" type="button"><i class="trash icon"></i>Eliminar mi cuenta</button>

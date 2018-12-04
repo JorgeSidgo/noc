@@ -21,6 +21,7 @@ $tabla.= "<table border='1px'>
                 <th>Tipo de documento</th>
                 <th>N° Documento</th>
                 <th>Monto</th>
+                <th>Observación</th>
             </tr>
 
             ";
@@ -34,7 +35,7 @@ $tabla.="<tr>
                 <td>".$fila['descTipoDocumento']."</td>
                 <td>".$fila['numDoc']."</td>
                 <td>".$fila['monto']."</td>
-
+                <td>".$fila['observacion']."</td>
         </tr>";
 }
 $tabla .= "</table>";
