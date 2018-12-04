@@ -121,6 +121,15 @@ class EnvioController extends ControladorBase {
         echo $dao->misEnvios();
     }
 
+    public function misDetallesPendientes() {
+        session_start();
+        $dao = new DaoEnvio();
+
+        $dao->objeto->setCodigoUsuario($_SESSION["codigoUsuario"]);
+
+        echo $dao->misDetallesPendientes();
+    }
+
     public function registrarEnvio() {
 
         session_start();

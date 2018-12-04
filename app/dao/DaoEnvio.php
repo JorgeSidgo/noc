@@ -137,6 +137,23 @@ class DaoEnvio extends DaoBase {
         echo '{"data": ['.$_json .']}';
     }
 
+    public function misDetallesPendientes() {
+        $_query = "call misDocumentosPendientes({$this->objeto->getCodigoUsuario()})";
+
+        $resultado = $this->con->ejecutar($_query);
+
+        $_json = '';
+
+        while($fila = $resultado->fetch_assoc()) {
+            $_json .=  json_encode($fila).',';
+        }
+
+        $_json = substr($_json,0, strlen($_json) - 1);
+
+
+        return '['.$_json.']';
+    }
+
     public function mostrarPaquetes()
     {
         $_query = "call mostrarPaquetes()";
