@@ -84,6 +84,30 @@ class DaoUsuario extends DaoBase {
             return 0;
         }
     }
+
+
+    public function cambiarUsuario($estado) {
+        $_query = "update usuario set nomUsuario = '".$this->objeto->getNomUsuario()."' where codigoUsuario = ".$this->objeto->getCodigoUsuario();
+        $resultado = $this->con->ejecutar($_query);
+
+        if($resultado) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public function cambiarDatos($estado) {
+        $_query = "update usuario set nombre = '".$this->objeto->getNombre()."', apellido='".$this->objeto->getApellido()."' where codigoUsuario = ".$this->objeto->getCodigoUsuario();
+        $resultado = $this->con->ejecutar($_query);
+
+        if($resultado) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
     //verificar si el usuario y el correo existen por seguridad
     public function enviarDatos()
     {
