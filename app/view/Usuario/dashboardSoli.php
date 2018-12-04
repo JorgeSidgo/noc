@@ -1,3 +1,4 @@
+
 <div class="row tiles" style="display: flex !important; align-items: baseline; justify-content: space-between">
 
     <a href="?1=EnvioController&2=nuevoEnvio"  style="width: 49%;" class="ui green inverted segment">
@@ -14,3 +15,109 @@
 
 
 </div>
+
+<?php
+ require_once './vendor/autoload.php';
+ $id=$_SESSION['codigoUsuario'];
+ $con = new mysqli("localhost","root","","deloitte_mensajeria");
+$sql="call clientes_Usuario(".$id.")";
+$res=$con->query($sql);
+
+$Cantidad=mysqli_num_rows($res);
+
+$clientes=null;
+$i=1;
+
+if ($Cantidad==1) {
+  while ($fila=$res->fetch_assoc()) {
+   $clientes[$i]=$fila['Cliente'];
+   $i++;
+  }
+}
+
+
+?>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Cliente', 'Cantidad'],
+           <?php
+          while ($fila=$res->fetch_assoc()) {
+          echo "['".$fila["nombreCliente"]."',".$fila["Cliente"]."],";
+         // ['Work',     11],
+          
+          }
+          ?>
+        ]);
+
+        var options = {
+          title: 'Mis clientes que reciben mayor cantidad de envíos'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+      
+    </script>
+
+    <?php
+ require_once './vendor/autoload.php';
+ $con = new mysqli("localhost","root","","deloitte_mensajeria");
+$sql="call tiposTramiteUsuario(".$id.")";
+$res=$con->query($sql);
+
+$Cantidad=mysqli_num_rows($res);
+
+$tramite=null;
+$i=1;
+
+if ($Cantidad==1) {
+  while ($fila=$res->fetch_assoc()) {
+   $tramite[$i]=$fila['Tramite'];
+   $i++;
+  }
+}
+
+
+?>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Usuario', 'Cantidad'],
+           <?php
+          while ($fila=$res->fetch_assoc()) {
+          echo "['".$fila["descTipoTramite"]."',".$fila["Tramite"]."],";          
+          }
+          ?>
+        ]);
+
+        var options = {
+          title: 'Tipos de trámite que he realizado con mayor frecuencia',
+          pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+    <body>
+    <table>
+    <td>
+    <div id="piechart" style="width: 700px; height: 500px;"></div>
+    </td>
+    <td>
+    <div id="donutchart" style="width: 700px; height: 500px;"></div>
+    </td>
+    <table>
+    
+    </body>

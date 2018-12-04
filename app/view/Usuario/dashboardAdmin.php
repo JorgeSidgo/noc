@@ -25,3 +25,111 @@
     </a>
 
 </div>
+
+
+<?php
+ require_once './vendor/autoload.php';
+ $con = new mysqli("localhost","root","","deloitte_mensajeria");
+$sql="call clientesConMasEnvios()";
+$res=$con->query($sql);
+
+$Cantidad=mysqli_num_rows($res);
+
+$clientes=null;
+$i=1;
+
+if ($Cantidad==1) {
+  while ($fila=$res->fetch_assoc()) {
+   $clientes[$i]=$fila['Cliente'];
+   $i++;
+  }
+}
+
+
+?>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Cliente', 'Cantidad'],
+           <?php
+          while ($fila=$res->fetch_assoc()) {
+          echo "['".$fila["nombreCliente"]."',".$fila["Cliente"]."],";
+         // ['Work',     11],
+          
+          }
+          ?>
+        ]);
+
+        var options = {
+          title: 'Clientes que reciben mayor cantidad de  envíos'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+      
+    </script>
+
+
+<?php
+ require_once './vendor/autoload.php';
+ $con = new mysqli("localhost","root","","deloitte_mensajeria");
+$sql="call usuariosEnvios()";
+$res=$con->query($sql);
+
+$Cantidad=mysqli_num_rows($res);
+
+$usuarios=null;
+$i=1;
+
+if ($Cantidad==1) {
+  while ($fila=$res->fetch_assoc()) {
+   $usuarios[$i]=$fila['Usuario'];
+   $i++;
+  }
+}
+
+
+?>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Usuario', 'Cantidad'],
+           <?php
+          while ($fila=$res->fetch_assoc()) {
+          echo "['".$fila["nomUsuario"]."',".$fila["Usuario"]."],";          
+          }
+          ?>
+        ]);
+
+        var options = {
+          title: 'Usuarios que han enviado mas paquetes',
+          pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <table>
+    <td>
+    <div id="piechart" style="width: 700px; height: 500px;"></div>
+    </td>
+    <td>
+    <div id="donutchart" style="width: 700px; height: 500px;"></div>
+    </td>
+    <table>
+    </body>
+</div>

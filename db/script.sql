@@ -10,7 +10,7 @@ create table usuario (
     codigoUsuario int primary key unique auto_increment,
     nombre varchar(50),
     apellido varchar(50),
-    nomUsuario varchar(75), 
+    nomUsuario varchar(75),
     email varchar(100),
     pass varchar(75),
     codigoAuth int,
@@ -360,7 +360,7 @@ begin
     inner join area a on a.codigoArea = d.codigoArea 
     inner join status s on s.codigoStatus = d.codigoStatus
     
-    where s.codigoStatus = 1 and e.codigoEnvio = idEnvio
+    where s.codigoStatus = 1 or s.codigoStatus = 2 and e.codigoEnvio = idEnvio
     
     order by d.codigoDetalleEnvio desc;
 end
@@ -403,7 +403,7 @@ begin
 	select Distinct(e.codigoEnvio), DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.nombre, u.apellido from envio e
 	inner join usuario u on u.codigoUsuario = e.codigoUsuario
 	inner join detalleEnvio d on e.codigoEnvio = d.codigoEnvio
-	where d.codigoStatus=1
+	where d.codigoStatus=1 or d.codigoStatus = 2
     order by e.codigoEnvio desc;
 end
 $$
@@ -473,7 +473,13 @@ create procedure misDocumentosPendientes(
 	in idUsuario int 
 )
 begin
-	select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, e.fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+end
+$$
+
+delimiter $$
+create procedure reporteDiario()
+begin
+select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
 	from detalleEnvio d
 	inner join envio e on e.codigoEnvio = d.codigoEnvio
     inner join usuario u on u.codigoUsuario = e.codigoUsuario
@@ -482,34 +488,53 @@ begin
     inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
     inner join area a on a.codigoArea = d.codigoArea 
     inner join status s on s.codigoStatus = d.codigoStatus
-    
-    where s.codigoStatus = 4 or s.codigoStatus = 2 and e.codigoUsuario = idUsuario
-    
-    order by d.codigoDetalleEnvio desc;
+where e.fecha=(select curdate()) order by e.hora DESC;
+end
+$$
+
+delimiter $$
+create procedure tiposTramiteUsuario(
+in idUsuario int
+)
+begin
+select count(tt.codigoTipoTramite) as Tramite, tt.descTipoTramite  from detalleEnvio d
+inner join tipoTramite tt on tt.codigoTipoTramite = d.codigoTipoTramite
+inner join envio e on e.codigoEnvio = d.codigoEnvio
+where e.codigoUsuario=idUsuario
+group by tt.descTipoTramite;
+end
+$$
+
+delimiter $$
+create procedure clientes_Usuario(
+in idUsuario int
+)
+begin
+select count(c.codigoCliente) as Cliente, c.nombreCliente  from detalleEnvio d
+inner join clientes c on c.codigoCliente = d.codigoCliente
+inner join envio e on e.codigoEnvio = d.codigoEnvio
+where e.codigoUsuario=idUsuario
+group by c.nombreCliente;
+end
+$$
+
+
+
+delimiter $$
+create procedure clientesConMasEnvios()
+begin
+select count(c.codigoCliente) as Cliente, c.nombreCliente  from detalleEnvio d
+inner join clientes c on c.codigoCliente = d.codigoCliente
+group by c.nombreCliente;
 end
 $$
 
 
 delimiter $$
-create procedure reporteDiario()
+create procedure usuariosEnvios()
 begin
-select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, e.fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
-	from detalleEnvio d
-	inner join envio e on e.codigoEnvio = d.codigoEnvio
-    inner join usuario u on u.codigoUsuario = e.codigoUsuario
-	inner join tipoTramite tt on tt.codigoTipoTramite = d.codigoTipoTramite
-	inner join clientes c on c.codigoCliente = d.codigoCliente
-    inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
-    inner join area a on a.codigoArea = d.codigoArea 
-    inner join status s on s.codigoStatus = d.codigoStatus
-where e.fecha=(select Max(fecha) from envio) order by e.hora DESC;
+select count(c.codigoUsuario) as Usuario, c.nomUsuario  from envio e
+inner join usuario c on c.codigoUsuario = e.codigoUsuario
+ group by c.nomUsuario;
 end
 $$
-
-
-call encabezadoEnvio(1);
-
-insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 2, '123', '$1', 'nada');
-insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 3, '123', '$1', 'nada');
-insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 4, '123', '$1', 'falta cheque');
-insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');
