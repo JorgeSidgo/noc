@@ -11,6 +11,14 @@
 
 $res = $con ->query($sql);
 $tabla="";
+
+$tabla .= '<style>
+                td { 
+                    text-align: center;
+                }
+
+            </style>';
+
 $tabla.= "<table border='1px'>
             <tr>
                 <th>Usuario</th>
