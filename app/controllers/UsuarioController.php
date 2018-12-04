@@ -39,7 +39,7 @@ class UsuarioController extends ControladorBase {
     }
 
     public static function config() {
-        self::loadHeadOnly();
+        self::loadMain();
         require_once './app/view/Usuario/config.php';
     }
 
