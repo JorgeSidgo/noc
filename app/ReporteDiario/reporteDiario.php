@@ -11,8 +11,8 @@
 
 $res = $con ->query($sql);
 $tabla="";
-$tabla.= "<table border='1px'>
-            <tr>
+$tabla.= "<table>
+            <tr style='background-color: #85BC22;'>
                 <th>Usuario</th>
                 <th>Hora</th>
                 <th>Trámite</th>
@@ -46,7 +46,7 @@ return $tabla;
 $html = datos();
 
 
-$pdf = new \Mpdf\Mpdf();
+$pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
 $pdf->WriteHTML($html);
 $pdf->Output();
 
