@@ -33,6 +33,10 @@ class EnvioController extends ControladorBase {
         require_once './app/view/Envio/detallesEnvio.php';
     }
 
+    public function llamaReporte()
+    {
+        require_once './app/mpdf/reporteDiario.php';
+    }
     
 
     public function historialEnvios()

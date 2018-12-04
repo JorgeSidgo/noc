@@ -18,7 +18,7 @@
         <i class="envelope icon"></i>
     </a>
 
-    <a href="./app/mpdf/reporteDiario.php" style="width: 24%;"  class="ui teal inverted segment" target="_blank">
+    <a href="?1=EnvioController&2=llamaReporte" style="width: 24%;"  class="ui teal inverted segment" target="_blank">
         <h3>Reporte Diario</h3>
         <div class="ui divider"></div>
         <i class="save icon"></i>
