@@ -96,58 +96,6 @@ alter table detalleEnvio add constraint fk_detalleEnvio_clientes foreign key (co
 -- alter table detalleEnvio add constraint fk_detalleEnvio_observaciones foreign key (codigoObservaciones) references observaciones(codigoObservaciones);
 alter table detalleEnvio add constraint fk_detalleEnvio_status foreign key (codigoStatus) references status(codigoStatus);
 
--- ===========================================================================
--- DATOS
--- ===========================================================================
-
-# Rol
-insert into rol values (null, 'Administrador');
-insert into rol values (null, 'Solicitante');
-
-# Auth (Autorización del Usuario)
-insert into authUsuario values (null, 'Autorizado');
-insert into authUsuario values (null, 'Esperando Autorizacion');
-insert into authUsuario values (null, 'Restringido');
-	
-# Tipo de Tramite
-insert into tipoTramite values(null, 'Entrega');
-insert into tipoTramite values(null, 'Cobro');
-insert into tipoTramite values(null, 'Transferencia');
-insert into tipoTramite values(null, 'DepÃ³sito');
-insert into tipoTramite values(null, 'Retiro de Cheques');
-insert into tipoTramite values(null, 'Retiro de Documentos');
-
-#Area
--- insert into area values (null, 'Administraci&oacute;n');
-insert into area values (null, 'ABAS');
-insert into area values (null, 'Tax y Legal');
-insert into area values (null, 'RRHH');
-insert into area values (null, 'Finanzas');
-
-# Usuario
-insert into usuario values (null, 'Karla Guadalupe', 'Arevalo Vega', 'kgarevalo', 'kgarevalo@deloitte.com', sha1('Deloitte123!'), 1, 1, 1);
-insert into usuario values (null, 'Jorge Luis', 'Sidgo Pimentel', 'jlsidgo', 'jorge.sidgo@gmail.com', sha1('Deloitte123!'), 1, 1, 1);
-insert into usuario values (null, 'John', 'Doe', 'johndoe', 'johndoe@deloitte.com', sha1('123'), 1, 2, 4);
-
-#Cliente
-insert into clientes values(null,'Telefonica','San Salvador','2314-1231');
-insert into clientes values(null,'YKK','Santa Ana','2451-2312');
-insert into clientes values(null,'Don Pollo','Santa Tecla','2451-6969');
-
-#Tipo de Documento
-insert into tipoDocumento values(null, 'FE');
-insert into tipoDocumento values(null, 'F');
-insert into tipoDocumento values(null, 'CCF');
-insert into tipoDocumento values(null, 'Q');
-insert into tipoDocumento values(null, 'Propuestas');
-insert into tipoDocumento values(null, 'Informes');
-insert into tipoDocumento values(null, 'Otro');
-
-#Status 
-insert into status values (null, 'Pendiente');
-insert into status values (null, 'Revisado');
-insert into status values (null, 'Completo');
-insert into status values (null, 'Regresado a Finanzas');
 
 delimiter $$
 create procedure registrarUsuario(
@@ -360,7 +308,7 @@ begin
     inner join area a on a.codigoArea = d.codigoArea 
     inner join status s on s.codigoStatus = d.codigoStatus
     
-    where s.codigoStatus = 1 or s.codigoStatus = 2 and e.codigoEnvio = idEnvio
+    where s.codigoStatus = 1 and e.codigoEnvio = idEnvio
     
     order by d.codigoDetalleEnvio desc;
 end
@@ -473,6 +421,19 @@ create procedure misDocumentosPendientes(
 	in idUsuario int 
 )
 begin
+		select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, e.fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+	from detalleEnvio d
+	inner join envio e on e.codigoEnvio = d.codigoEnvio
+    inner join usuario u on u.codigoUsuario = e.codigoUsuario
+	inner join tipoTramite tt on tt.codigoTipoTramite = d.codigoTipoTramite
+	inner join clientes c on c.codigoCliente = d.codigoCliente
+    inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
+    inner join area a on a.codigoArea = d.codigoArea 
+    inner join status s on s.codigoStatus = d.codigoStatus
+    
+    where s.codigoStatus = 4 or s.codigoStatus = 2 and e.codigoUsuario = idUsuario
+    
+    order by d.codigoDetalleEnvio desc;
 end
 $$
 
@@ -538,3 +499,57 @@ inner join usuario c on c.codigoUsuario = e.codigoUsuario
  group by c.nomUsuario;
 end
 $$
+
+
+-- ===========================================================================
+-- DATOS
+-- ===========================================================================
+
+# Rol
+insert into rol values (null, 'Administrador');
+insert into rol values (null, 'Solicitante');
+
+# Auth (Autorización del Usuario)
+insert into authUsuario values (null, 'Autorizado');
+insert into authUsuario values (null, 'Esperando Autorizacion');
+insert into authUsuario values (null, 'Restringido');
+	
+# Tipo de Tramite
+insert into tipoTramite values(null, 'Entrega');
+insert into tipoTramite values(null, 'Cobro');
+insert into tipoTramite values(null, 'Transferencia');
+insert into tipoTramite values(null, 'DepÃ³sito');
+insert into tipoTramite values(null, 'Retiro de Cheques');
+insert into tipoTramite values(null, 'Retiro de Documentos');
+
+#Area
+-- insert into area values (null, 'Administraci&oacute;n');
+insert into area values (null, 'ABAS');
+insert into area values (null, 'Tax y Legal');
+insert into area values (null, 'RRHH');
+insert into area values (null, 'Finanzas');
+
+# Usuario
+insert into usuario values (null, 'Karla Guadalupe', 'Arevalo Vega', 'kgarevalo', 'kgarevalo@deloitte.com', sha1('Deloitte123!'), 1, 1, 1);
+insert into usuario values (null, 'Jorge Luis', 'Sidgo Pimentel', 'jlsidgo', 'jorge.sidgo@gmail.com', sha1('Deloitte123!'), 1, 1, 1);
+insert into usuario values (null, 'John', 'Doe', 'johndoe', 'johndoe@deloitte.com', sha1('123'), 1, 2, 4);
+
+#Cliente
+insert into clientes values(null,'Telefonica','San Salvador','2314-1231');
+insert into clientes values(null,'YKK','Santa Ana','2451-2312');
+insert into clientes values(null,'Don Pollo','Santa Tecla','2451-6969');
+
+#Tipo de Documento
+insert into tipoDocumento values(null, 'FE');
+insert into tipoDocumento values(null, 'F');
+insert into tipoDocumento values(null, 'CCF');
+insert into tipoDocumento values(null, 'Q');
+insert into tipoDocumento values(null, 'Propuestas');
+insert into tipoDocumento values(null, 'Informes');
+insert into tipoDocumento values(null, 'Otro');
+
+#Status 
+insert into status values (null, 'Pendiente');
+insert into status values (null, 'Revisado');
+insert into status values (null, 'Completo');
+insert into status values (null, 'Regresado a Finanzas');
