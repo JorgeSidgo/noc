@@ -135,9 +135,6 @@
     </div>
 </div>
 
-
-<div class="pusher">
-    <div class="contenedor">
         <div class="ui grid">
             <div class="row">
                 <div class="sixteen wide column">
@@ -201,8 +198,6 @@
                 </div>
             </div> -->
         </div>
-    </div>
-</div>
 <script>
  $(document).on("click", "#btnCambiarNom", function () {
             $('#modalCambiarNom').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');

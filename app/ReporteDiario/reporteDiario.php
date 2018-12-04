@@ -16,6 +16,15 @@ $tabla .= '<style>
                 td { 
                     text-align: center;
                 }
+                table {
+                    width: 100%;
+                }
+                .header {
+                    font-family: sans-serif;
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-end;
+                }
                 .tabla, th, td{
                     border: 1px solid black;
                     border-collapse: collapse;
@@ -23,8 +32,12 @@ $tabla .= '<style>
                 }
             </style>';
                 $fecha=$res->fetch_assoc();
-$tabla.= "<h1>Envíos Deloitte<font color='#85BC22' size='100px'>.</font></h1>
-            <p align='right'>Fecha: <b>".$fecha['fecha']."</b></p>
+
+$tabla.= "
+            <div class='header'>
+                <h1>Envíos Deloitte<font color='#85BC22' size='100px'>.</font></h1>
+                <p>Fecha: <b>".$fecha['fecha']."</b></p>
+            </div>    
 
             <table class='tabla'>
             <tr>
