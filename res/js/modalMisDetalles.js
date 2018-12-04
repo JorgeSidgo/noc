@@ -51,9 +51,6 @@ Vue.component('modal-detalles', {
                                 <td>
                                     {{detalle.observacion}}
                                 </td>
-                                <!-- <button @click="$parent.modalCambiar(detalle.codigoDetalleEnvio, detalle.descTipoTramite, detalle.nombreCliente, detalle.descArea, detalle.descTipoDocumento, detalle.descStatus, detalle.observacion)" type="button" class="ui mini circular green icon button btnCambios">
-                                    <i class="sync icon"></i>
-                                </button> -->
                         </tr>
                     </tbody>
                 </table>
