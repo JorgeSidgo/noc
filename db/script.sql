@@ -360,7 +360,7 @@ begin
     inner join area a on a.codigoArea = d.codigoArea 
     inner join status s on s.codigoStatus = d.codigoStatus
     
-    where s.codigoStatus = 1 or s.codigoStatus = 2 and e.codigoEnvio = idEnvio
+    where s.codigoStatus = 1 and e.codigoEnvio = idEnvio
     
     order by d.codigoDetalleEnvio desc;
 end
@@ -403,7 +403,7 @@ begin
 	select Distinct(e.codigoEnvio), DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.nombre, u.apellido from envio e
 	inner join usuario u on u.codigoUsuario = e.codigoUsuario
 	inner join detalleEnvio d on e.codigoEnvio = d.codigoEnvio
-	where d.codigoStatus=1 or d.codigoStatus = 2
+	where d.codigoStatus=1
     order by e.codigoEnvio desc;
 end
 $$
@@ -490,17 +490,6 @@ end
 $$
 
 
-
-call encabezadoEnvio(1);
-
-insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 2, '123', '$1', 'nada');
-insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 3, '123', '$1', 'nada');
-insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');
-insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');
-
-
-call misDocumentosPendientes(1);
-
 delimiter $$
 create procedure reporteDiario()
 begin
@@ -516,3 +505,11 @@ select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, e.fecha, e.hora, tt.de
 where e.fecha=(select Max(fecha) from envio) order by e.hora DESC;
 end
 $$
+
+
+call encabezadoEnvio(1);
+
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 2, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 3, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 4, '123', '$1', 'falta cheque');
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');

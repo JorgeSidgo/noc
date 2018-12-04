@@ -5,32 +5,24 @@
     <div class="ui tiny second coupled modal" id="modalCambios">
 
         <div class="header">
-            Mis Envíos
+            Actualizar Documento
         </div>
         <div class="content">
-            <form action="" class="ui equal width form" id="frmAutorizar">
-                <div class="field">
-                    <label for="">Estado:</label>
-                    <select class="ui dropdown" name="idEstado" id="idEstado">
-                        <option value="2">Revisado</option>
-                        <option value="3">Completo</option>
-                        <option value="4">En finanzas</option>
-                    </select>
-                </div>
+            <form v-on:submit.prevent action="" class="ui equal width form" id="frmAutorizar">
                 <div class="field">
                     <label for="">Observación:</label>
-                    <input type="text" id="obs" name="obs">
+                    <input v-model="cambiarDetalle.observacion" type="text" id="obs" name="obs">
                 </div>
                 <input type="hidden" id="idAutorizar" name="idAutorizar">
             </form>
         </div>
 
         <div class="actions">
-            <button @click="cerrarCambios" class="ui black button">
+            <button type="button" @click="cerrarCambios" class="ui black button">
                 Cancelar
             </button>
-            <button @click="cambiarEstado" id="btnCambiar" class="ui right primary button">
-                Cambiar Estado
+            <button type="button" @click="cambiarEstado" id="btnCambiar" class="ui right green button">
+                Actualizar
             </button>
         </div>
     </div>
@@ -89,7 +81,7 @@
 
                             <td>{{pendiente.observacion}}</td>
                             <td>
-                                <button @click="" type="button" class="ui mini circular green icon button btnCambios">
+                                <button @click="modalCambiar(pendiente.codigoDetalleEnvio)" type="button" class="ui mini circular green icon button btnCambios">
                                     <i class="sync icon"></i>
                                 </button>
                             </td>
@@ -152,7 +144,7 @@
 
             cambiarDetalle: {
                 idDetalle: 0,
-                idStatus: 2,
+                idStatus: 1,
                 observacion: ''
             },
 
@@ -182,7 +174,6 @@
                     type: 'POST',
                     url: '?1=EnvioController&2=misDetallesPendientes',
                     success: function (data) {
-                        console.log(data);
                         app.pendientes = JSON.parse(data);
                     }
                 });
@@ -196,18 +187,9 @@
                 this.detalles = [];
             },
 
-            modalCambiar(idDetalle, tramite, cliente, area, tipoDoc, estado, obs) {
-
-                this.datosDetalle.tramite = tramite;
-                this.datosDetalle.cliente = cliente;
-                this.datosDetalle.area = area;
-                this.datosDetalle.tipoDoc = tipoDoc;
-                this.cambiarDetalle.observacion = obs;
+            modalCambiar(idDetalle) {
 
                 this.cambiarDetalle.idDetalle = parseInt(idDetalle);
-
-                $("#idEstado option:contains(" + estado + ")").attr('selected', 'selected');
-
 
                 $('#modalCambios').modal('setting', 'autofocus', false).modal('setting', 'closable', false)
                     .modal('show');
@@ -215,8 +197,6 @@
             },
 
             cerrarCambios() {
-                $('#modalDetalles').modal('setting', 'autofocus', false).modal('setting', 'closable', false)
-                    .modal('show');
                 $('#modalCambios').modal('hide');
             },
 
@@ -241,9 +221,10 @@
                                 showConfirmButton: false,
                                 timer: 1000
                             });
-
+                            app.cambiarDetalle.observacion = '';    
                             app.cargarDetalles(app.idEnvio);
                             app.cerrarCambios();
+                            app.cargarPendientes();    
                             app.reloadTabla();
                         }
 
