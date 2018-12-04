@@ -12,7 +12,7 @@
         <i class="box icon"></i>
     </a>
 
-    <a href="?1=EnvioController&2=nuevoEnvio" style="width: 24%;"  class="ui orange inverted segment">
+    <a href="?1=EnvioController&2=misEnvios" style="width: 24%;"  class="ui orange inverted segment">
         <h3>Mis Envíos</h3>
         <div class="ui divider"></div>
         <i class="envelope icon"></i>

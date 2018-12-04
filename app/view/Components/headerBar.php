@@ -46,7 +46,7 @@
                 <?php echo $_SESSION["descRol"] ?>
             </div>
             <div class="divider"></div>
-            <a href="">
+            <a href="?1=UsuarioController&2=config">
                 <div class="item" id="#btnConf">
                     <i class="cog icon"></i>
                     Cuenta

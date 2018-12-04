@@ -190,7 +190,7 @@ $(function() {
             correo: ''
         },
         computed: {
-            correoUsuario: function() {
+            correoUsuario() {
                 return this.nomUsuario + this.sufix;
             }
         }

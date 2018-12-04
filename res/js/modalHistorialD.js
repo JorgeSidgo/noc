@@ -26,7 +26,6 @@ Vue.component('modal-detalles', {
                                 <th>Monto</th>
                                 <th>Status</th>
                                 <th>Observación</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,13 +41,13 @@ Vue.component('modal-detalles', {
                                 <td  v-if="detalle.descStatus == 'Pendiente'" style="background-color: #F6AD43;">
                                     {{detalle.descStatus}}
                                 </td>
-                                <td  v-if="detalle.descStatus == 'Revisado'" style="background-color: #F67943;">
+                                <td  v-else-if="detalle.descStatus == 'Revisado'" style="background-color: #F67943;">
                                     {{detalle.descStatus}}
                                 </td>
-                                <td  v-if="detalle.descStatus == 'Completo'" style="background-color: lightgreen;">
+                                <td  v-else-if="detalle.descStatus == 'Completo'" style="background-color: lightgreen;">
                                     {{detalle.descStatus}}
                                 </td>
-                                <td  v-if="detalle.descStatus == 'Regresado a Finanzas'" style="background-color: lightblue;">
+                                <td  v-else-if="detalle.descStatus == 'Regresado a Finanzas'" style="background-color: lightblue;">
                                     {{detalle.descStatus}}
                                 </td>
                                 

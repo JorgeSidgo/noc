@@ -55,6 +55,19 @@ class EnvioController extends ControladorBase {
         echo $dao->historialEnvios();
     }
 
+    public function actualizarDetalle() {
+        $dao = new DaoEnvio();
+
+        $detalle = json_decode($_REQUEST["detalle"]);
+
+        $dao->objeto->setCodigoDetalleEnvio($detalle->idDetalle);
+        $dao->objeto->setCodigoStatus($detalle->idStatus);
+        $dao->objeto->setObservacion($detalle->observacion);
+
+        echo $dao->actualizarDetalle();
+        
+    }
+
     public function getDetallesEnvio() {
         $dao = new DaoEnvio();
 
@@ -97,6 +110,15 @@ class EnvioController extends ControladorBase {
         $json = substr($json, 0, strlen($json) - 1);
 
         echo'['.$json.']';
+    }
+
+    public function getMisEnvios() {
+        session_start();
+        $dao = new DaoEnvio();
+
+        $dao->objeto->setCodigoUsuario($_SESSION["codigoUsuario"]);
+
+        echo $dao->misEnvios();
     }
 
     public function registrarEnvio() {

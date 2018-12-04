@@ -307,8 +307,7 @@ create procedure encabezadoEnvio(
 	in usuario int
 )
 begin
-	insert into envio values(null, usuario, curdate(), DATE_FORMAT(NOW( ), "%H:%i:%s" ));
-    
+	insert into envio values(null, usuario, curdate(), DATE_FORMAT(NOW( ), "%H:%i:%s" ));    
     select max(codigoEnvio) as codigoEnvio from envio;
 end
 $$
@@ -361,7 +360,9 @@ begin
     inner join area a on a.codigoArea = d.codigoArea 
     inner join status s on s.codigoStatus = d.codigoStatus
     
-    where s.codigoStatus = 1 and e.codigoEnvio = idEnvio;
+    where s.codigoStatus = 1 or s.codigoStatus = 2 and e.codigoEnvio = idEnvio
+    
+    order by d.codigoDetalleEnvio desc;
 end
 $$
 
@@ -376,7 +377,9 @@ begin
 	inner join envio e on e.codigoEnvio = d.codigoEnvio
     inner join status s on s.codigoStatus = d.codigoStatus
     
-    where e.codigoEnvio = idEnvio;
+    where e.codigoEnvio = idEnvio
+    
+    order by d.codigoDetalleEnvio desc;
 end
 $$
 
@@ -392,22 +395,19 @@ begin
     where e.codigoEnvio = idEnvio;
 end
 $$
+
+
 delimiter $$
 create procedure mostrarPaquetes()
 begin
-select Distinct(e.codigoEnvio), DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.nombre, u.apellido from envio e
-inner join usuario u on u.codigoUsuario = e.codigoUsuario
-inner join detalleEnvio d on e.codigoEnvio = d.codigoEnvio
-where d.codigoStatus=1;
+	select Distinct(e.codigoEnvio), DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.nombre, u.apellido from envio e
+	inner join usuario u on u.codigoUsuario = e.codigoUsuario
+	inner join detalleEnvio d on e.codigoEnvio = d.codigoEnvio
+	where d.codigoStatus=1 or d.codigoStatus = 2
+    order by e.codigoEnvio desc;
 end
 $$
 
-call encabezadoEnvio(1);
-
-insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 2, '123', '$1', 'nada');
-insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 3, '123', '$1', 'nada');
-insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');
-insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');
 
 -- select * from detalleEnvio;
 
@@ -415,9 +415,9 @@ insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');
 delimiter $$ 
 create procedure historialEnvios()
 begin
-select Distinct(e.codigoEnvio), DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.nombre, u.apellido from envio e
-inner join usuario u on u.codigoUsuario = e.codigoUsuario
-inner join detalleEnvio d on e.codigoEnvio = d.codigoEnvio;
+	select Distinct(e.codigoEnvio), DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.nombre, u.apellido from envio e
+	inner join usuario u on u.codigoUsuario = e.codigoUsuario
+	inner join detalleEnvio d on e.codigoEnvio = d.codigoEnvio;
 end
 $$
 
@@ -440,3 +440,47 @@ begin
     where e.codigoEnvio = idEnvio;
 end
 $$
+
+delimiter $$
+create procedure actualizarDetalle(
+	in idDetalle int,
+    in idStatus int,
+    in obs text
+)
+begin 
+	update detalleEnvio 
+    set codigoStatus = idStatus, observacion = obs
+    where codigoDetalleEnvio = idDetalle;
+end
+$$
+
+delimiter $$
+create procedure misEnvios(
+	in idUsuario int
+)
+begin
+	select Distinct(e.codigoEnvio), DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora
+    from envio e		
+	inner join usuario u on u.codigoUsuario = e.codigoUsuario
+	inner join detalleEnvio d on e.codigoEnvio = d.codigoEnvio
+	where u.codigoUsuario = idUsuario
+    order by e.codigoEnvio desc;
+end 
+$$
+
+delimiter $$
+create procedure misDocumentosPendientes(
+	in idUsuario int 
+)
+begin
+end
+$$
+
+
+
+call encabezadoEnvio(1);
+
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 2, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 3, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');

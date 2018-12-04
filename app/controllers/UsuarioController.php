@@ -38,6 +38,11 @@ class UsuarioController extends ControladorBase {
         require_once './app/view/Usuario/resetPassword.php';
     }
 
+    public static function config() {
+        self::loadHeadOnly();
+        require_once './app/view/Usuario/config.php';
+    }
+
 
     // Métodos 
 
