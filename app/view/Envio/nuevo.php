@@ -61,8 +61,8 @@
                                     <div class="ui mini input">
                                         <select class="requerido" v-model="envio.tramite">
                                             <option value="1">Entrega</option>
-                                            <option value="2">Remesa</option>
-                                            <option value="3">Pago</option>
+                                            <option value="2">Cobro</option>
+                                            <option value="3">Transferencia</option>
                                             <option value="4">Depósito</option>
                                         </select>
                                     </div>

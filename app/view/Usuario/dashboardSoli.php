@@ -66,10 +66,12 @@ if ($Cantidad==1) {
       
     </script>
 
-    <?php
+<?php
  require_once './vendor/autoload.php';
  $con = new mysqli("localhost","root","","deloitte_mensajeria");
+
 $sql="call tiposTramiteUsuario(".$id.")";
+
 $res=$con->query($sql);
 
 $Cantidad=mysqli_num_rows($res);
@@ -93,7 +95,7 @@ if ($Cantidad==1) {
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Usuario', 'Cantidad'],
+          ['Tramite', 'Cantidad'],
            <?php
           while ($fila=$res->fetch_assoc()) {
           echo "['".$fila["descTipoTramite"]."',".$fila["Tramite"]."],";          
