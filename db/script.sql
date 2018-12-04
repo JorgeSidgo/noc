@@ -553,3 +553,11 @@ insert into status values (null, 'Pendiente');
 insert into status values (null, 'Revisado');
 insert into status values (null, 'Completo');
 insert into status values (null, 'Regresado a Finanzas');
+
+
+call encabezadoEnvio(1);
+
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 2, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 3, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');
