@@ -85,9 +85,9 @@ class DaoUsuario extends DaoBase {
         }
     }
 
-
-    public function cambiarUsuario() {
-        $_query = "update usuario set nomUsuario = '".$this->objeto->getNomUsuario()."' where codigoUsuario = ".$this->objeto->getCodigoUsuario();
+    public function restablecerContraConfig()
+    {
+        $_query = "update usuario set pass = '".sha1($this->objeto->getPass())."' where codigoUsuario = ".$this->objeto->getCodigoUsuario();
         $resultado = $this->con->ejecutar($_query);
 
         if($resultado) {
@@ -97,8 +97,20 @@ class DaoUsuario extends DaoBase {
         }
     }
 
-    public function cambiarDatos($estado) {
+
+    public function cambiarDatos() {
         $_query = "update usuario set nombre = '".$this->objeto->getNombre()."', apellido='".$this->objeto->getApellido()."' where codigoUsuario = ".$this->objeto->getCodigoUsuario();
+        $resultado = $this->con->ejecutar($_query);
+
+        if($resultado) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public function eliminarCuenta() {
+        $_query = "update usuario set codigoAuth = 4 where codigoUsuario = ".$this->objeto->getCodigoUsuario();
         $resultado = $this->con->ejecutar($_query);
 
         if($resultado) {

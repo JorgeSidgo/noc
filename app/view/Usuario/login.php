@@ -131,9 +131,10 @@ if(isset($_REQUEST["3"])) {
                         if (r == 1) {
                             location.href = '?1=UsuarioController&2=dashboard';
                         } else if ((r == 2) || (r == 3)) {
-                            $('#label-error').html('Su cuenta no ha sido autorizada');
+                            $('#label-error').html('Su cuenta no está autorizada');
                             $('#label-error').css('display', 'inline-block');
-                        } else {
+                        }
+                        else {
                             $('#label-error').html('Datos Incorrectos');
                             $('#label-error').css('display', 'inline-block');
                         }

@@ -145,17 +145,39 @@ class UsuarioController extends ControladorBase {
     public function registrarExterno() {
 
     }
-    public function actualizarNomUser()
+   
+    public function reestablecerContra()
     {
         $dao = new DaoUsuario();
 
         $id = $_REQUEST["id"];
-        $nomUser = $_REQUEST["nomUser"];
+        $nuPass = $_REQUEST["nuPass"];
 
-        $dao->objeto->setNomUsuario($nomUser);
+        $dao->objeto->setPass($nuPass);
         $dao->objeto->setCodigoUsuario($id);
+        echo $dao->restablecerContraConfig();
+    }
 
-        echo $dao->cambiarUsuario();
+    public function actualizarDatosPersonales()
+    {
+        $dao = new DaoUsuario();
+
+        $id = $_REQUEST["id"];
+        $nomUser = $_REQUEST["nom"];
+        $ape = $_REQUEST["ape"];
+
+        $dao->objeto->setNombre($nomUser);
+        $dao->objeto->setApellido($ape);
+        $dao->objeto->setCodigoUsuario($id);
+        echo $dao->cambiarDatos();
+    }
+
+    public function eliminarCuenta() {
+        $dao = new DaoUsuario();
+
+        $id = $_REQUEST["id"];
+        $dao->objeto->setCodigoUsuario($id);
+        echo $dao->eliminarCuenta();
     }
 
     public function editar() {

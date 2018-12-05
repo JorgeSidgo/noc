@@ -88,6 +88,8 @@
                 <div class="two fields">
                 <input type="password" name="antPass" id="antPass" class="requerido">
                 <div id="show-contra" class="ui basic label show-contra"><i style="margin: 0;" id="icon-contra" class="eye slash icon"></i></div>
+                <a id="label-error" style="display: none; margin: 0; text-align:center;" class="ui red fluid large label">Datos
+                        Incorrectos</a>
                 <div class="ui red pointing label" style="display: none;">
                 </div>
             </div>
@@ -121,7 +123,7 @@
             
                 <label for="">Ingrese su <code style="padding: 0px 3px; background: rgba(255, 0, 0, .1); color: rgba(255, 0, 0, 0.8); border-radius: 2px;">contraseña</code> para confirmar:</label>
                 <div class="two fields">
-                <input class="requerido" type="password" name="antPass" id="antPass">
+                <input class="requerido" type="password" name="Pass" id="Pass">
                 <div id="show-contra" class="ui basic label show-contra"><i style="margin: 0;" id="icon-contra" class="eye slash icon"></i></div>
                 <div class="ui red pointing label" style="display: none;">
                 </div>
@@ -151,7 +153,7 @@
             </div>
 
             <div class="row">
-        <?php echo $id ?>
+        
                 <div class="eight wide column">
                     <h3 class="ui header"><font color=""><i class="user outline icon"></font></i>Usuario Deloitte<font color="#85BC22" size="20px">.</font></h3>
                     <h4><?php echo '<p class="user-info">'.$_SESSION['nomUsuario'].'</p>' ?></h4>
@@ -167,9 +169,6 @@
                 <center><h3><i class="cogs icon"></i> Opciones de configuración.</h3></center>
                     <div class="ui list">
                         <div class="item">
-                            <button class="ui right floated fluid green-deloitte  button" id="btnCambiarNomUser" type="button"><i class="user icon"></i>Mi usuario Deloitte</button>
-                        </div>
-                        <div class="item">
                             <button class="ui right floated fluid green-deloitte  button" id="btnCambiarNom" type="button"><i class="street view icon"></i>Datos Personales</button>
                         </div>
                         <div class="item">
@@ -183,31 +182,19 @@
 
             </div>
 
-            <!-- <div class="row">
-                <div class="ten wide column">
-                    <form id="frmConf" class="ui form">
-                        <div class="two fields">
-                            <div class="field">
-                                <label>Nombres:</label>
-                                <input name="first-name" type="text">
-                            </div>
-                            <div class="field">
-                                <label>Apellidos:</label>
-                                <input name="last-name" type="text">
-                            </div>
-                        </div>
-                      <button class="ui positive button" type="button">Guardar Cambios</button>
-                    </form>
-                </div>
-            </div> -->
         </div>
+        <script>
+        $(function () {
+            $('#frmCambiarContra :input').keyup(function () {
+                $('#label-error').css('display', 'none');
+            });
+        });
+    </script>
 <script>
  $(document).on("click", "#btnCambiarNom", function () {
             $('#modalCambiarNom').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
         });
-        $(document).on("click", "#btnCambiarNomUser", function () {
-            $('#modalCambiarNomUser').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
-        });
+        
         $(document).on("click", "#btnCambiarContra", function () {
             $('#modalCambiarContra').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
         });
@@ -216,29 +203,107 @@
         });
 
         $(function() {
-        $('#btnGuardarNomUser').click(function() {
-            var idU=2;
-            var nombreUser = $('#nomUser').val();
+        $('#btnGuardarNom').click(function() {
+            var idU=<?php echo $id ?>;
+            var nombreUser = $('#nom').val();
+            var apeUser = $('#ape').val();
 
            $.ajax({
                type: 'POST',
-               url: '?1=UsuarioController&2=actualizarNomUser',
+               url: '?1=UsuarioController&2=actualizarDatosPersonales',
                data: {
                    id: idU,
-                   nomUser: nombreUser
+                   nom: nombreUser,
+                   ape:apeUser
                },
                success: function(r) {
-                $('#frmCambiarNomUser').removeClass('loading');
+                $('#frmCambiarNom').removeClass('loading');
                    if(r == 1) {
                     swal({
-                            title: 'Completado',
-                            text: 'Los cambios han sido guardados',
+                            title: 'Cambios realizados',
+                            text: 'Para verificar sus cambios deberá iniciar sesión nuevamente',
                             type: 'success',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        $('#modalCambiarNomUser').modal('hide');
+                            showConfirmButton: true
+                        }).then((result) => {
+                                        if (result.value) {
+                                            location.href = '?';
+                                        }
+                                    }); 
+                        
+                        $('#modalCambiarNom').modal('hide');
+
                    }
+               }
+           });
+        });
+    });
+
+
+    $(function() {
+        $('#btnGuardarContra').click(function() {
+            var idU=<?php echo $id ?>;
+            var contraAnterior = $('#antPass').val();
+            var contraNueva = $('#nuPass').val();
+
+           $.ajax({
+               type: 'POST',
+               url: '?1=UsuarioController&2=reestablecerContra',
+               data: {
+                   id: idU,
+                   nuPass: contraNueva,
+               },
+               success: function(r) {
+                $('#frmCambiarContra').removeClass('loading');
+                   if(r == 1) {
+                    swal({
+                            title: 'Cambios realizados',
+                            text: 'Al iniciar sesión nuevamente debe utilizar su nueva contraseña',
+                            type: 'success',
+                            showConfirmButton: true
+                        }); 
+                        
+                        $('#modalCambiarContra').modal('hide');
+
+                   }else{
+                            $('#label-error').html('Datos Incorrectos');
+                            $('#label-error').css('display', 'inline-block');
+                        }
+               }
+           });
+        });
+    });
+
+
+    $(function() {
+        $('#btnConfEliminarCuenta').click(function() {
+            var idU=<?php echo $id ?>;
+
+           $.ajax({
+               type: 'POST',
+               url: '?1=UsuarioController&2=eliminarCuenta',
+               data: {
+                   id: idU
+               },
+               success: function(r) {
+                $('#frmEliminarCuenta').removeClass('loading');
+                   if(r == 1) {
+                    swal({
+                            title: 'Aviso',
+                            text: 'No podrás acceder nuevamente al sistema',
+                            type: 'warning',
+                            showConfirmButton: true
+                        }).then((result) => {
+                                        if (result.value) {
+                                            location.href = '?';
+                                        }
+                                    }); 
+                        
+                        $('#modalEliminarCuenta').modal('hide');
+
+                   }else{
+                            $('#label-error').html('Datos Incorrectos');
+                            $('#label-error').css('display', 'inline-block');
+                        }
                }
            });
         });
