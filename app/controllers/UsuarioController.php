@@ -145,6 +145,18 @@ class UsuarioController extends ControladorBase {
     public function registrarExterno() {
 
     }
+    public function actualizarNomUser()
+    {
+        $dao = new DaoUsuario();
+
+        $id = $_REQUEST["id"];
+        $nomUser = $_REQUEST["nomUser"];
+
+        $dao->objeto->setNomUsuario($nomUser);
+        $dao->objeto->setCodigoUsuario($id);
+
+        echo $dao->cambiarUsuario();
+    }
 
     public function editar() {
         $datos = $_REQUEST["datos"];
