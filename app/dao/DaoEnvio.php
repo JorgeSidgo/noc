@@ -171,6 +171,7 @@ class DaoEnvio extends DaoBase {
         while($fila = $resultado->fetch_assoc()) {
 
             $btnVer = '<button id=\"'.$fila["codigoEnvio"].'\" class=\"ui btnVer icon secondary small button\"><i class=\"list ul icon\"></i></button>';
+            $btnCorreo = '<button codigo-usuario\"'.$fila["codigoUsuario"].'\" codigo-envio=\"'.$fila["codigoEnvio"].'\" class=\"ui btnCorreo icon teal small button\"><i class=\"envelope icon\"></i></button>';
 
             $sub_query = "call detallesEnvioLabel({$fila["codigoEnvio"]})";
 
@@ -212,7 +213,7 @@ class DaoEnvio extends DaoBase {
                             "nomUsuario": "'.$fila["nomUsuario"].'",
                             "nombre": "'.$fila["nombre"].' '.$fila["apellido"].'",
                             "documentos": "'.$labels.'",
-                            "Acciones": "'.$btnVer.'"
+                            "Acciones": "'.$btnVer.' '.$btnCorreo.'"
                         }';
 
             $_json .= $object.',';

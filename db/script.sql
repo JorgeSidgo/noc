@@ -37,7 +37,8 @@ create table envio (
 	codigoEnvio int primary key unique auto_increment,
     codigoUsuario int,
     fecha date,
-    hora time 
+    hora time,
+	estado int
 );
 
 create table detalleEnvio (
@@ -255,7 +256,7 @@ create procedure encabezadoEnvio(
 	in usuario int
 )
 begin
-	insert into envio values(null, usuario, curdate(), DATE_FORMAT(NOW( ), "%H:%i:%s" ));    
+	insert into envio values(null, usuario, curdate(), DATE_FORMAT(NOW( ), "%H:%i:%s" ), 1);    
     select max(codigoEnvio) as codigoEnvio from envio;
 end
 $$
@@ -337,7 +338,7 @@ create procedure getEncabezadoEnvio(
 	in idEnvio int
 )
 begin
-	select e.codigoEnvio, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.nombre, u.apellido
+	select e.codigoEnvio, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.codigoUsuario, u.nombre, u.apellido
     from envio e
     inner join usuario u on u.codigoUsuario = e.codigoUsuario
     where e.codigoEnvio = idEnvio;
@@ -348,10 +349,10 @@ $$
 delimiter $$
 create procedure mostrarPaquetes()
 begin
-	select Distinct(e.codigoEnvio), DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.nombre, u.apellido from envio e
+	select Distinct(e.codigoEnvio), DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.codigoUsuario, u.nombre, u.apellido from envio e
 	inner join usuario u on u.codigoUsuario = e.codigoUsuario
 	inner join detalleEnvio d on e.codigoEnvio = d.codigoEnvio
-	where d.codigoStatus=1 or d.codigoStatus = 2
+	where e.estado = 1
     order by e.codigoEnvio desc;
 end
 $$
@@ -558,6 +559,6 @@ insert into status values (null, 'Regresado a Finanzas');
 call encabezadoEnvio(1);
 
 insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 2, '123', '$1', 'nada');
-insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 3, '123', '$1', 'nada');
-insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 1, 1, 2, 1, 1, 3, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 1, 1, 3, 1, 1, 1, '123', '$1', 'nada');
 insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');

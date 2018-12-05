@@ -181,4 +181,21 @@ class EnvioController extends ControladorBase {
         }
 
     }
+
+    public function revisionPaquete() {
+        session_start();
+        
+        $idEnvio = $_REQUEST["idEnvio"];
+    
+        $idUsuario = $_REQUEST["idUsuario"];
+
+        $daoUsuario = new DaoUsuario();
+
+        $daoUsuario->setCodigoUsuario($idUsuario);
+
+        $datosUsuario = json_decode($daoUsuario->cargarDatosUsuario());
+
+        
+
+    }
 }
