@@ -18,13 +18,63 @@
         <i class="envelope icon"></i>
     </a>
 
-    <a href="?1=EnvioController&2=llamaReporte" style="width: 24%;"  class="ui teal inverted segment" target="_blank">
+   <a style="width: 24%;" id="btnReportes"  class="ui teal inverted segment">
         <h3>Reporte Diario</h3>
         <div class="ui divider"></div>
         <i class="save icon"></i>
     </a>
-
 </div>
+<!-- modal para reportes-->
+<div class="ui tiny modal" id="modalReportes">
+
+    <div class="header">
+       <i class="trash icon"></i> Reportes Deloitte<font color="#85BC22" size="20px">.</font>
+       <a href="?1=EnvioController&2=llamaReporte" style="width: 14%;" id="btnReportes" target="_blank">
+       <i class="save icon"></i>Reporte Diario
+    </a>
+    </div>
+    <div class="content">
+        <form class="ui form" id="frmReportes">
+            
+                <label for="">En base a:</label>
+                <div class="two fields">
+                <input class="requerido" type="password" name="Pass" id="Pass">
+                </div>
+            
+        </form>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button" id="btnCancelarEliminar">
+            Cancelar
+        </div>
+        <div class="ui red right button" id="btnConfEliminarCuenta">
+            Generar reporte
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).on("click", "#btnReportes", function () {
+            $('#modalReportes').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
+        });
+</script>
+
+
+<style>
+.btnGraficos{
+  border-radius: 5px 5px 5px 5px;
+  margin: auto;
+  width: 15%;
+  padding: 10px;
+  background-color:#0AF1B9;
+  color: black;
+  text-align: center;
+}
+</style>
+
+<a class="btnGraficos" href="?1=UsuarioController&2=dashboard">
+<b><i class="chart bar icon"></i>Actualizar gráficos</b>
+    </a>
 
 
 <?php

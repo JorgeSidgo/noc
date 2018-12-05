@@ -15,7 +15,20 @@
 
 
 </div>
-
+<style>
+.btnGraficos{
+  border-radius: 5px 5px 5px 5px;
+  margin: auto;
+  width: 15%;
+  padding: 10px;
+  background-color:#0AF1B9;
+  color: black;
+  text-align: center;
+}
+</style>
+<a class="btnGraficos" href="?1=UsuarioController&2=dashboard">
+<b><i class="chart bar icon"></i>Actualizar gráficos</b>
+    </a>
 <?php
  require_once './vendor/autoload.php';
  $id=$_SESSION['codigoUsuario'];
@@ -113,6 +126,7 @@ if ($Cantidad==1) {
       }
     </script>
     <body>
+    
     <table>
     <td>
     <div id="piechart" style="width: 700px; height: 500px;"></div>
