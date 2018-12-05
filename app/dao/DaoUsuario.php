@@ -86,7 +86,7 @@ class DaoUsuario extends DaoBase {
     }
 
 
-    public function cambiarUsuario($estado) {
+    public function cambiarUsuario() {
         $_query = "update usuario set nomUsuario = '".$this->objeto->getNomUsuario()."' where codigoUsuario = ".$this->objeto->getCodigoUsuario();
         $resultado = $this->con->ejecutar($_query);
 

@@ -1,5 +1,8 @@
 
+<?php 
+     $id=$_SESSION['codigoUsuario'];
 
+?>
 <script>
     $(document).ready(function() {
         // $('#nomUser').val(<?php echo "'".$_SESSION['nomUsuario']."'"; ?>);
@@ -148,7 +151,7 @@
             </div>
 
             <div class="row">
-
+        <?php echo $id ?>
                 <div class="eight wide column">
                     <h3 class="ui header"><font color=""><i class="user outline icon"></font></i>Usuario Deloitte<font color="#85BC22" size="20px">.</font></h3>
                     <h4><?php echo '<p class="user-info">'.$_SESSION['nomUsuario'].'</p>' ?></h4>
@@ -211,6 +214,36 @@
         $(document).on("click", "#btnEliminarCuenta", function () {
             $('#modalEliminarCuenta').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
         });
+
+        $(function() {
+        $('#btnGuardarNomUser').click(function() {
+            var idU=2;
+            var nombreUser = $('#nomUser').val();
+
+           $.ajax({
+               type: 'POST',
+               url: '?1=UsuarioController&2=actualizarNomUser',
+               data: {
+                   id: idU,
+                   nomUser: nombreUser
+               },
+               success: function(r) {
+                $('#frmCambiarNomUser').removeClass('loading');
+                   if(r == 1) {
+                    swal({
+                            title: 'Completado',
+                            text: 'Los cambios han sido guardados',
+                            type: 'success',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        $('#modalCambiarNomUser').modal('hide');
+                   }
+               }
+           });
+        });
+    });
+        ;
 </script>
  <script>
         $(function () {
@@ -227,3 +260,5 @@
 
         });
     </script>
+
+    
