@@ -345,7 +345,7 @@ begin
 end
 $$
 
-
+select * from usuario;
 delimiter $$
 create procedure mostrarPaquetes()
 begin
