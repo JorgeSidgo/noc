@@ -202,7 +202,48 @@
                     }
                 });
 
+            },
+
+            correoPaquete(idUsuario, idEnvio) {
+                $('body').dimmer('show');
+                
+                // alert('envio: ' + idEnvio + ' user: ' +idUsuario);
+
+                $.ajax({
+                    type: 'POST',
+                    url: '?1=EnvioController&2=revisionPaquete',
+                    data: {
+                        idUsuario: idUsuario,
+                        idEnvio: idEnvio
+                    },
+                    success: function(r) {
+
+                        if(r==1) {
+                            swal({
+                                title: null,
+                                text: 'El correo fué enviado',
+                                type: 'success',
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+                                            $('body').dimmer('hide');
+                        } else {
+                            swal({
+                                title: null,
+                                text: 'Error al enviar el correo',
+                                type: 'error',
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+                            $('body').dimmer('hide');
+                        }
+                        app.reloadTabla();
+                    }
+                }); 
+
             }
+
+            
         },
         computed: {
 
@@ -216,6 +257,9 @@
             $('#modalDetalles').modal('setting', 'autofocus', false).modal('setting', 'closable', false)
                 .modal('show');
             app.cargarDetalles($(this).attr('id'));
+        });
+        $(document).on("click", ".btnCorreo", function () {
+            app.correoPaquete($(this).attr('codigo-usuario'), $(this).attr('codigo-envio'));
         });
     });
 </script>

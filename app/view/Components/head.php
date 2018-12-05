@@ -50,7 +50,9 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script> -->
     
 </head>
-<body>
+<body class="">
+
+<div id="cosa"></div>
 <script>
     $(document).ready(function () {
         $('.ui.dropdown')

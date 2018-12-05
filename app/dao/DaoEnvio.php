@@ -171,7 +171,7 @@ class DaoEnvio extends DaoBase {
         while($fila = $resultado->fetch_assoc()) {
 
             $btnVer = '<button id=\"'.$fila["codigoEnvio"].'\" class=\"ui btnVer icon secondary small button\"><i class=\"list ul icon\"></i></button>';
-            $btnCorreo = '<button codigo-usuario\"'.$fila["codigoUsuario"].'\" codigo-envio=\"'.$fila["codigoEnvio"].'\" class=\"ui btnCorreo icon teal small button\"><i class=\"envelope icon\"></i></button>';
+            $btnCorreo = '<button codigo-usuario=\"'.$fila["codigoUsuario"].'\" codigo-envio=\"'.$fila["codigoEnvio"].'\" class=\"ui btnCorreo icon teal small button\"><i class=\"envelope icon\"></i></button>';
 
             $sub_query = "call detallesEnvioLabel({$fila["codigoEnvio"]})";
 
@@ -228,6 +228,14 @@ class DaoEnvio extends DaoBase {
         $_json = substr($_json,0, strlen($_json) - 1);
 
         echo '{"data": ['.$_json .']}';
+    }
+
+    public function cambiarEnvio() {
+        $_query = "update envio set estado = 0 where codigoEnvio = {$this->objeto->getCodigoEnvio()}";
+
+        $resultado = $this->con->ejecutar($_query);
+
+        return $resultado;
     }
 
     public function historialEnvios()

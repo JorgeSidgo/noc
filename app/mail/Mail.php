@@ -191,8 +191,201 @@ class Mail {
         }
     }
 
-    public function revisionPaquete($codigoEnvio, $datosUsuario) {
+    public function revisionPaquete($datosUsuario, $datosEncabezado, $detalles) {
+        $emailFrom = 'deloitte.prueba.no.reply@gmail.com';
+        $emailFromName = 'Deloitte';
 
+        $emailTo = $datosUsuario->email;
+        $emailToName = $datosUsuario->nombre.' '.$datosUsuario->apellido;
+
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+
+        $mail->Host = "smtp.gmail.com";
+        $mail->Port = 587;
+        $mail->SMTPSecure = 'tls';
+        $mail->SMTPAuth = true;
+        $mail->isHTML(true);
+        // $mail->SMTPDebug = 2;
+        $mail->Charset = 'UTF-8';
+
+        $mail->Username = 'deloitte.prueba.no.reply@gmail.com';
+        $mail->Password = 'Deloitte123!';
+        $mail->setFrom($emailFrom, $emailFromName);
+
+        $mail->addAddress($emailTo, $emailToName);
+
+        $mail->Subject = 'Control de Envios';
+
+        
+        $plantilla = file_get_contents('./app/mail/correoRevision.html');
+        
+        $plantilla = str_replace('%nomUsuario%', $datosEncabezado["nomUsuario"], $plantilla);
+        $plantilla = str_replace('%fecha%', $datosEncabezado["fecha"], $plantilla);
+        $plantilla = str_replace('%hora%', $datosEncabezado["hora"], $plantilla);
+        $plantilla = str_replace('%nombre%', $datosEncabezado["nombre"], $plantilla);
+        $plantilla = str_replace('%apellido%', $datosEncabezado["apellido"], $plantilla);
+
+
+        $docsCompletos = '';
+        $docsRevisados = '';
+        $docsFinanzas = '';
+        $docsPendientes = '';
+
+        while($fila = $detalles->fetch_assoc()){
+
+            switch ($fila["descStatus"]) {
+                case 'Pendiente':
+                    $docsPendientes .= '<tr>
+                                <td>'.$fila["descTipoTramite"].'</td>
+                                <td>'.$fila["nombreCliente"].'</td>
+                                <td>'.$fila["descArea"].'</td>
+                                <td>'.$fila["descTipoDocumento"].'</td>
+                                <td>'.$fila["numDoc"].'</td>
+                                <td>'.$fila["descStatus"].'</td>
+                                <td>'.$fila["monto"].'</td>
+                                <td>'.$fila["observacion"].'</td>
+                            </tr>'; 
+                    break;
+
+                case 'Revisado':
+                    $docsRevisados .= '<tr>
+                                <td>'.$fila["descTipoTramite"].'</td>
+                                <td>'.$fila["nombreCliente"].'</td>
+                                <td>'.$fila["descArea"].'</td>
+                                <td>'.$fila["descTipoDocumento"].'</td>
+                                <td>'.$fila["numDoc"].'</td>
+                                <td>'.$fila["descStatus"].'</td>
+                                <td>'.$fila["monto"].'</td>
+                                <td>'.$fila["observacion"].'</td>
+                            </tr>'; 
+                    break;
+                
+                case 'Completo':
+                    $docsCompletos .= '<tr>
+                                <td>'.$fila["descTipoTramite"].'</td>
+                                <td>'.$fila["nombreCliente"].'</td>
+                                <td>'.$fila["descArea"].'</td>
+                                <td>'.$fila["descTipoDocumento"].'</td>
+                                <td>'.$fila["numDoc"].'</td>
+                                <td>'.$fila["descStatus"].'</td>
+                                <td>'.$fila["monto"].'</td>
+                                <td>'.$fila["observacion"].'</td>
+                            </tr>'; 
+                    break;
+                
+                case 'Regresado a Finanzas':
+                    $docsFinanzas .= '<tr>
+                                <td>'.$fila["descTipoTramite"].'</td>
+                                <td>'.$fila["nombreCliente"].'</td>
+                                <td>'.$fila["descArea"].'</td>
+                                <td>'.$fila["descTipoDocumento"].'</td>
+                                <td>'.$fila["numDoc"].'</td>
+                                <td>'.$fila["descStatus"].'</td>
+                                <td>'.$fila["monto"].'</td>
+                                <td>'.$fila["observacion"].'</td>
+                            </tr>'; 
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+
+        }
+
+        $contenido = '';
+
+        if(strlen($docsCompletos) > 0) {
+
+            $contenido .= '<tr><td><br>
+                            <h3>Documentos Completados</h3>
+                            <table border="1" style="width:100%; border-collapse: collapse;">
+                            <tr>
+                                <th>Tramite</th>
+                                <th>Cliente</th>
+                                <th>Area</th>
+                                <th>Tipo Documento</th>
+                                <th>N° Documento</th>
+                                <th>Status</th>
+                                <th>Monto</th>
+                                <th>Observacion</th>
+                            </tr>
+                            '.$docsCompletos.'
+                        </table>
+                        </td></tr>';
+        }
+        if(strlen($docsRevisados) > 0) {
+
+            $contenido .= '<tr><td><br>
+                            <h3>Documentos Revisados</h3>
+                            <table border="1" style="width:100%; border-collapse: collapse;">
+                            <tr>
+                                <th>Tramite</th>
+                                <th>Cliente</th>
+                                <th>Area</th>
+                                <th>Tipo Documento</th>
+                                <th>N° Documento</th>
+                                <th>Status</th>
+                                <th>Monto</th>
+                                <th>Observacion</th>
+                            </tr>
+                            '.$docsRevisados.'
+                        </table></td></tr>';
+        }
+
+        if(strlen($docsFinanzas) > 0) {
+
+            $contenido .= '<tr><td><br>
+                            <h3>Documentos regresados a finanzas</h3>
+                            <table border="1" style="width:100%; border-collapse: collapse;">
+                            <tr>
+                                <th>Tramite</th>
+                                <th>Cliente</th>
+                                <th>Area</th>
+                                <th>Tipo Documento</th>
+                                <th>N° Documento</th>
+                                <th>Status</th>
+                                <th>Monto</th>
+                                <th>Observacion</th>
+                            </tr>
+                            '.$docsFinanzas.'
+                        </table></td></tr>';
+        }
+
+        if(strlen($docsPendientes) > 0) {
+
+            $contenido .= '<tr><td><br>
+                            <h3>Documentos Pendientes de Revisión</h3>
+                            <table border="1" style="width:100%; border-collapse: collapse;">
+                            <tr>
+                                <th>Tramite</th>
+                                <th>Cliente</th>
+                                <th>Area</th>
+                                <th>Tipo Documento</th>
+                                <th>N° Documento</th>
+                                <th>Status</th>
+                                <th>Monto</th>
+                                <th>Observacion</th>
+                            </tr>
+                            '.$docsPendientes.'
+                        </table></td></tr>';
+        }
+
+        $plantilla = str_replace('%contenido%', $contenido, $plantilla);
+
+        $mail->Body = $plantilla;
+        $mail->AltBody = strip_tags($plantilla);
+        // $mail->AltBody(strip_tags($plantilla));
+        $mail->AddEmbeddedImage('./app/mail/deloitteNegro.png', 'logo');
+
+
+        if($mail->Send())
+        {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

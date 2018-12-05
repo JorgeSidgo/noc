@@ -186,19 +186,35 @@ class EnvioController extends ControladorBase {
     }
 
     public function revisionPaquete() {
-        session_start();
         
         $idEnvio = $_REQUEST["idEnvio"];
     
         $idUsuario = $_REQUEST["idUsuario"];
 
         $daoUsuario = new DaoUsuario();
+        $daoEnvio = new DaoEnvio();
 
-        $daoUsuario->setCodigoUsuario($idUsuario);
+        $daoUsuario->objeto->setCodigoUsuario($idUsuario);
 
         $datosUsuario = json_decode($daoUsuario->cargarDatosUsuario());
 
-        
+        $daoEnvio->objeto->setCodigoEnvio($idEnvio);
+
+        $datosEncabezado = $daoEnvio->getEncabezadoEnvio()->fetch_assoc();
+
+        require './app/mail/Mail.php';
+        $mail = new Mail();
+
+        $daoEnvio->objeto->setCodigoEnvio($idEnvio);
+        $detalles = $daoEnvio->detallesEnvio(); 
+
+        $daoEnvio->cambiarEnvio();
+
+        if(!$mail->revisionPaquete($datosUsuario, $datosEncabezado, $detalles)) {
+            echo 'Error al enviar el correo';
+        } else {
+            echo 1;
+        }
 
     }
 }
