@@ -67,6 +67,7 @@ class EnvioController extends ControladorBase {
 
         $detalle = json_decode($_REQUEST["detalle"]);
 
+        $dao->objeto->setCodigoEnvio($detalle->idEnvio);
         $dao->objeto->setCodigoDetalleEnvio($detalle->idDetalle);
         $dao->objeto->setCodigoStatus($detalle->idStatus);
         $dao->objeto->setObservacion($detalle->observacion);
