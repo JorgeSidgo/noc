@@ -10,6 +10,7 @@
     $sql="call reporteDiario();";
     
 $res = $con ->query($sql);
+
 $tabla="";
 
 $tabla .= '<style>
@@ -31,7 +32,7 @@ $tabla .= '<style>
                     font-family: sans-serif;
                 }
             </style>';
-                $fecha=$res->fetch_assoc();
+                
 
 $tabla.= "
             <div class='header'>
