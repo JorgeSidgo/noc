@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class DaoEnvio extends DaoBase {
 
@@ -38,7 +38,7 @@ class DaoEnvio extends DaoBase {
 
         $resultado = $this->con->ejecutar($query);
 
-        return $resultado; 
+        return $resultado;
     }
 
     public function getEncabezadoEnvio() {
@@ -94,10 +94,10 @@ class DaoEnvio extends DaoBase {
                         $contador_pendientes++;
                         break;
 
-                    case 'Revisado': 
+                    case 'Revisado':
                         $contador_revisado++;
                         break;
-                        
+
                     case 'Completo':
                         $contador_completo++;
                         break;
@@ -185,10 +185,10 @@ class DaoEnvio extends DaoBase {
                         $contador_pendientes++;
                         break;
 
-                    case 'Revisado': 
+                    case 'Revisado':
                         $contador_revisado++;
                         break;
-                        
+
                     case 'Completo':
                         $contador_completo++;
                         break;
@@ -230,8 +230,8 @@ class DaoEnvio extends DaoBase {
         echo '{"data": ['.$_json .']}';
     }
 
-    public function cambiarEnvio() {
-        $_query = "update envio set estado = 0 where codigoEnvio = {$this->objeto->getCodigoEnvio()}";
+    public function cambiarEnvio($estado) {
+        $_query = "update envio set estado = {$estado} where codigoEnvio = {$this->objeto->getCodigoEnvio()}";
 
         $resultado = $this->con->ejecutar($_query);
 
@@ -268,10 +268,10 @@ class DaoEnvio extends DaoBase {
                         $contador_pendientes++;
                         break;
 
-                    case 'Revisado': 
+                    case 'Revisado':
                         $contador_revisado++;
                         break;
-                        
+
                     case 'Completo':
                         $contador_completo++;
                         break;

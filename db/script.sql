@@ -556,7 +556,7 @@ insert into status values (null, 'Completo');
 insert into status values (null, 'Regresado a Finanzas');
 
 
-call encabezadoEnvio(1);
+call encabezadoEnvio(2);
 
 insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 2, '123', '$1', 'nada');
 insert into detalleEnvio values (null, 1, 1, 2, 1, 1, 3, '123', '$1', 'nada');

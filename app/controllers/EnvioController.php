@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class EnvioController extends ControladorBase {
 
@@ -37,16 +37,16 @@ class EnvioController extends ControladorBase {
     {
         require_once './app/ReporteDiario/reporteDiario.php';
     }
-    
+
 
     public function historialEnvios()
     {
         self::loadMain();
         require_once './app/view/Envio/historialEnvios.php';
     }
-    // Métodos 
+    // Métodos
 
-   
+
 
     public function mostrarPaquetes()
     {
@@ -71,15 +71,17 @@ class EnvioController extends ControladorBase {
         $dao->objeto->setCodigoStatus($detalle->idStatus);
         $dao->objeto->setObservacion($detalle->observacion);
 
+        $dao->cambiarEnvio(1);
+
         echo $dao->actualizarDetalle();
-        
+
     }
 
     public function getDetallesEnvio() {
         $dao = new DaoEnvio();
 
         $id = $_REQUEST["id"];
-        
+
         $dao->objeto->setCodigoEnvio($id);
 
         $resultado = $dao->detallesEnvio();
@@ -101,7 +103,7 @@ class EnvioController extends ControladorBase {
         $dao = new DaoEnvio();
 
         $id = $_REQUEST["id"];
-        
+
         $dao->objeto->setCodigoEnvio($id);
 
         $resultado = $dao->detallesEnvioH();
@@ -144,11 +146,11 @@ class EnvioController extends ControladorBase {
         $detalles = json_decode($_REQUEST["detalles"]);
 
         $dao = new DaoEnvio();
-        
+
         $dao->objeto->setCodigoUsuario($_SESSION["codigoUsuario"]);
 
         $codigoEnvio = $dao->encabezadoEnvio();
-        
+
         $dao->objeto->setCodigoEnvio($codigoEnvio);
 
         $contador = 0;
@@ -186,9 +188,9 @@ class EnvioController extends ControladorBase {
     }
 
     public function revisionPaquete() {
-        
+
         $idEnvio = $_REQUEST["idEnvio"];
-    
+
         $idUsuario = $_REQUEST["idUsuario"];
 
         $daoUsuario = new DaoUsuario();
@@ -206,9 +208,9 @@ class EnvioController extends ControladorBase {
         $mail = new Mail();
 
         $daoEnvio->objeto->setCodigoEnvio($idEnvio);
-        $detalles = $daoEnvio->detallesEnvio(); 
+        $detalles = $daoEnvio->detallesEnvioH();
 
-        $daoEnvio->cambiarEnvio();
+        $daoEnvio->cambiarEnvio(0);
 
         if(!$mail->revisionPaquete($datosUsuario, $datosEncabezado, $detalles)) {
             echo 'Error al enviar el correo';

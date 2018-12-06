@@ -221,10 +221,10 @@
                                 showConfirmButton: false,
                                 timer: 1000
                             });
-                            app.cambiarDetalle.observacion = '';    
+                            app.cambiarDetalle.observacion = '';
                             app.cargarDetalles(app.idEnvio);
                             app.cerrarCambios();
-                            app.cargarPendientes();    
+                            app.cargarPendientes();
                             app.reloadTabla();
                         }
 
