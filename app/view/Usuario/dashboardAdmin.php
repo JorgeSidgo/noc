@@ -149,7 +149,7 @@ $(document).on("click", "#btnReportes", function () {
 //llamando al reporte
    $(document).on("click", "#btnGenerarReporteArea", function () {
         var idU = $('#area').val();
-   $(location).attr('href',"./app/ReporteDiario/reporteArea.php"+idU);
+   $(location).attr('href',"?1=UsuarioController&2=reporteArea&area="+idU);
 });
 </script>
 

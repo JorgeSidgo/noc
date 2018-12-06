@@ -251,4 +251,23 @@ class UsuarioController extends ControladorBase {
 
         echo $dao->mostrarUsuarios();
     }
+
+    // Reportes 
+
+
+    public function reporteArea() {
+        $daoArea = new DaoArea();
+        
+        require_once './app/reportes/Reporte.php';
+        
+        $idArea = $_REQUEST["area"];
+
+        $reporte = new Reporte();
+
+
+        $daoArea->objeto->setCodigoArea($idArea);
+        $resultado = $daoArea->reporteArea();
+
+        $reporte->reporteArea($idArea, $resultado);
+    }
 }

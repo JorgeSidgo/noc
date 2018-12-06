@@ -95,4 +95,12 @@ class DaoArea extends DaoBase {
         }
     }
 
+    public function reporteArea() {
+        $query = "call reporteArea({$this->objeto->getCodigoArea()})";
+
+        $resultado = $this->con->ejecutar($query);
+
+        return $resultado;
+    }
+
 }
