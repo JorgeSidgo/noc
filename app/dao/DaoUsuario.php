@@ -206,4 +206,20 @@ class DaoUsuario extends DaoBase {
         return '{"data": ['.$_json .']}';
     }
 
+    public function mostrarUsuariosCmb() {
+        $_query = "select * from usuario;";
+
+        $resultado = $this->con->ejecutar($_query);
+
+        $json = '';
+
+        while($fila = $resultado->fetch_assoc()) {
+            $json .= json_encode($fila).',';
+        }
+
+        $json = substr($json,0, strlen($json) - 1);
+
+        return '['.$json.']';
+    }
+
 }

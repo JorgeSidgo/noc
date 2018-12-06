@@ -18,6 +18,11 @@ class UsuarioController extends ControladorBase {
     
     public static function dashboard() {
         self::loadMain();
+        $daoU = new DaoUsuario();
+        $usuarios = $daoU->mostrarUsuariosCmb();
+
+        $daoA = new DaoArea();
+        $areas = $daoA->mostrarAreas();
         require_once './app/view/Usuario/dashboard.php';
     }
 
