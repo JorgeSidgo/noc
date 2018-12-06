@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once './app/composer/vendor/autoload.php';
 
@@ -54,11 +54,11 @@ class Mail {
             $celda = '<td></td>';
         }
 
-        
-        
+
+
         $plantilla = str_replace('%estadoCuenta%', $estadoCuenta, $plantilla);
         $plantilla = str_replace('%celda%', $celda, $plantilla);
-        
+
         $mail->Body = $plantilla;
         $mail->AltBody = strip_tags($plantilla);
         // $mail->AltBody(strip_tags($plantilla));
@@ -106,7 +106,7 @@ class Mail {
 
         $mail->msgHTML($plantilla);
         $mail->AddEmbeddedImage('./app/mail/deloitteNegro.png', 'logo');
-        
+
         if($mail->Send())
         {
             return true;
@@ -153,7 +153,7 @@ class Mail {
         $detallesEnvio = $dao->detallesEnvio();
 
         $celda = '';
-        
+
         while($fila = $detallesEnvio->fetch_assoc()){
 
             $celda .= '<tr>
@@ -165,18 +165,18 @@ class Mail {
                         <td>'.$fila["descStatus"].'</td>
                         <td>'.$fila["monto"].'</td>
                         <td>'.$fila["observacion"].'</td>
-                    </tr>'; 
+                    </tr>';
         }
 
         $plantilla = file_get_contents('./app/mail/correoEnvios.html');
-        
+
         $plantilla = str_replace('%nomUsuario%', $datosEncabezado["nomUsuario"], $plantilla);
         $plantilla = str_replace('%fecha%', $datosEncabezado["fecha"], $plantilla);
         $plantilla = str_replace('%hora%', $datosEncabezado["hora"], $plantilla);
         $plantilla = str_replace('%nombre%', $datosEncabezado["nombre"], $plantilla);
         $plantilla = str_replace('%apellido%', $datosEncabezado["apellido"], $plantilla);
         $plantilla = str_replace('%lista%', $celda, $plantilla);
-        
+
         $mail->Body = $plantilla;
         $mail->AltBody = strip_tags($plantilla);
         // $mail->AltBody(strip_tags($plantilla));
@@ -217,9 +217,9 @@ class Mail {
 
         $mail->Subject = 'Control de Envios';
 
-        
+
         $plantilla = file_get_contents('./app/mail/correoRevision.html');
-        
+
         $plantilla = str_replace('%nomUsuario%', $datosEncabezado["nomUsuario"], $plantilla);
         $plantilla = str_replace('%fecha%', $datosEncabezado["fecha"], $plantilla);
         $plantilla = str_replace('%hora%', $datosEncabezado["hora"], $plantilla);
@@ -245,7 +245,7 @@ class Mail {
                                 <td>'.$fila["descStatus"].'</td>
                                 <td>'.$fila["monto"].'</td>
                                 <td>'.$fila["observacion"].'</td>
-                            </tr>'; 
+                            </tr>';
                     break;
 
                 case 'Revisado':
@@ -258,9 +258,9 @@ class Mail {
                                 <td>'.$fila["descStatus"].'</td>
                                 <td>'.$fila["monto"].'</td>
                                 <td>'.$fila["observacion"].'</td>
-                            </tr>'; 
+                            </tr>';
                     break;
-                
+
                 case 'Completo':
                     $docsCompletos .= '<tr>
                                 <td>'.$fila["descTipoTramite"].'</td>
@@ -271,9 +271,9 @@ class Mail {
                                 <td>'.$fila["descStatus"].'</td>
                                 <td>'.$fila["monto"].'</td>
                                 <td>'.$fila["observacion"].'</td>
-                            </tr>'; 
+                            </tr>';
                     break;
-                
+
                 case 'Regresado a Finanzas':
                     $docsFinanzas .= '<tr>
                                 <td>'.$fila["descTipoTramite"].'</td>
@@ -284,9 +284,9 @@ class Mail {
                                 <td>'.$fila["descStatus"].'</td>
                                 <td>'.$fila["monto"].'</td>
                                 <td>'.$fila["observacion"].'</td>
-                            </tr>'; 
+                            </tr>';
                     break;
-                
+
                 default:
                     # code...
                     break;
@@ -300,7 +300,7 @@ class Mail {
 
             $contenido .= '<tr><td><br>
                             <h3>Documentos Completados</h3>
-                            <table border="1" style="width:100%; border-collapse: collapse;">
+                            <table border="1" style="width:100%; border-collapse: collapse; background: rgba(46, 204, 113, 0.3);">
                             <tr>
                                 <th>Tramite</th>
                                 <th>Cliente</th>
@@ -319,7 +319,7 @@ class Mail {
 
             $contenido .= '<tr><td><br>
                             <h3>Documentos Revisados</h3>
-                            <table border="1" style="width:100%; border-collapse: collapse;">
+                            <table border="1" style="width:100%; border-collapse: collapse; background: rgba(230, 126, 34, 0.3);">
                             <tr>
                                 <th>Tramite</th>
                                 <th>Cliente</th>
@@ -338,7 +338,7 @@ class Mail {
 
             $contenido .= '<tr><td><br>
                             <h3>Documentos regresados a finanzas</h3>
-                            <table border="1" style="width:100%; border-collapse: collapse;">
+                            <table border="1" style="width:100%; border-collapse: collapse; background: rgba(52, 152, 219, 0.3);">
                             <tr>
                                 <th>Tramite</th>
                                 <th>Cliente</th>
@@ -357,7 +357,7 @@ class Mail {
 
             $contenido .= '<tr><td><br>
                             <h3>Documentos Pendientes de Revisión</h3>
-                            <table border="1" style="width:100%; border-collapse: collapse;">
+                            <table border="1" style="width:100%; border-collapse: collapse; background: rgba(241, 196, 15, 0.3);">
                             <tr>
                                 <th>Tramite</th>
                                 <th>Cliente</th>
