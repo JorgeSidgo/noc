@@ -17,7 +17,7 @@
 </div>
 <style>
 .btnGraficos{
-  border-radius: 5px 5px 5px 5px;
+  border-radius: 4px 4px 4px 4px;
   margin: auto;
   width: 15%;
   padding: 10px;
