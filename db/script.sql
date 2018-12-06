@@ -35,6 +35,7 @@ create table authUsuario (
 
 create table envio (
 	codigoEnvio int primary key unique auto_increment,
+    
     codigoUsuario int,
     fecha date,
     hora time,
@@ -357,7 +358,7 @@ begin
 end
 $$
 
-
+select * from envio
 -- select * from detalleEnvio;
 
 -- call detallesEnvioLabel(1);
@@ -561,4 +562,4 @@ call encabezadoEnvio(2);
 insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 2, '123', '$1', 'nada');
 insert into detalleEnvio values (null, 1, 1, 2, 1, 1, 3, '123', '$1', 'nada');
 insert into detalleEnvio values (null, 1, 1, 3, 1, 1, 1, '123', '$1', 'nada');
-insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 4, '123', '$1', 'nada');
