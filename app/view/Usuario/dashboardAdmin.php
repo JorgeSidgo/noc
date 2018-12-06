@@ -153,19 +153,8 @@ $(document).on("click", "#btnReportes", function () {
 });
 </script>
 
-<style>
-.btnGraficos{
-  border-radius: 5px 5px 5px 5px;
-  margin: auto;
-  width: 15%;
-  padding: 10px;
-  background-color:#0AF1B9;
-  color: black;
-  text-align: center;
-}
-</style>
 
-<a class="btnGraficos" href="?1=UsuarioController&2=dashboard">
+<a class="btnGraficos ui center teal button" style="margin:auto;" href="?1=UsuarioController&2=dashboard">
 <b><i class="chart bar icon"></i>Actualizar gráficos</b>
     </a>
 
