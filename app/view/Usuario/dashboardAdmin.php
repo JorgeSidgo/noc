@@ -71,36 +71,45 @@ $(function() {
         </button>
 
             <br><br>
-            <div id="fechas">
-                <div class="two fields">
-                    <label for="" style="width:100%; margin: auto;" id="labFechaInicio"><i class="calendar icon"></i>Fecha inicial:</label>
-                    <input type="date" name="fechaIncial" id="fechaIncial">
-                    <label for="" style="width:100%;margin: auto;text-align: center;" id="labFechaFinal"><i class="calendar icon"></i>Fecha final:</label>
-                    <input type="date" name="fechaFinal" id="fechaFinal">
+                     <div id="fechas">
+                        <div class="two fields">
+                            <h5><label for="" style="width:100%; margin: auto;" id="labFechaInicio"><i class="calendar icon"></i>Fecha inicial:</label>
+                            <input type="date" name="fechaIncial" id="fechaIncial">
+                            <label for="" style="width:100%;margin: auto;text-align: center;" id="labFechaFinal"><i class="calendar icon"></i>Fecha final:</label>
+                            <input type="date" name="fechaFinal" id="fechaFinal"></h5>
+                            <button class="ui green right button" id="btnGenerarReporteFecha">
+                                Generar reporte
+                            </button>
 
-                </div>
+                        </div>
             </div>
-                <div id="cmbArea">
-                    <h4> <label for="">Seleccione el área: </label>
+                    <div id="cmbArea">
+                        <h4><label for="">Seleccione el área: </label>
 
-                    <!--select de areas-->
-                    <select name="area" id="area" class="ui dropdown" style="margin: auto; width: 60%;">
-                        </select></h4>
-                </div>
+                        <!--select de areas-->
+                        <select name="area" id="area" class="ui dropdown" style="margin: auto; width: 60%;">
+                        </select>
+                        </h4>
+                        <button class="ui orange right button" id="btnGenerarReporteArea">
+                            Generar reporte
+                        </button>
+                    </div>
             <div id="cmbUsuario">
                 <h4> <label for="">Seleccione el usuario: </label>
 
                   <!--select de areas-->
                   <select name="usuario" id="usuario" class="ui dropdown">
                     </select></h4>
-            </div></center>
+                    <a href="?1=EnvioController&2=llamaReporteUsuario" target="_blank">
+                    <button class="ui red right button" id="btnGenerarReporteUsuario">
+                        Generar reporte
+                    </button></a>
+                        </div>
+        </center>
     </div>
     <div class="actions">
         <button class="ui black deny button" id="btnCancelar">
             Cancelar
-        </button>
-        <button class="ui red right button" id="btnGenerarReprte">
-            Generar reporte
         </button>
     </div>
 </div>
@@ -116,6 +125,7 @@ $(document).on("click", "#btnReportes", function () {
         $('#fechas').hide();
         $('#cmbUsuario').hide();
         $('#cmbArea').hide();
+
     });
 
     $(document).on("click", "#btnAreas", function () {
@@ -134,6 +144,13 @@ $(document).on("click", "#btnReportes", function () {
             $('#fechas').hide();
             $('#cmbUsuario').show();
         });
+
+        
+//llamando al reporte
+   $(document).on("click", "#btnGenerarReporteArea", function () {
+        var idU = $('#area').val();
+   $(location).attr('href',"./app/ReporteDiario/reporteArea.php/"+idU);
+});
 </script>
 
 <style>
@@ -280,10 +297,12 @@ if ($Cantidad==1) {
             var usuarios = '<?php echo $usuariosCMB?>';
 
             $.each(JSON.parse(usuarios), function() {
-                option = `<option value="${this.codigoUsuario}">${this.nombre}</option>`;
+                option = `<option value="${this.codigoUsuario}">${this.nombre} ${this.apellido}</option>`;
 
                 $('#usuario').append(option);
             });
         });
 
     </script>
+
+   

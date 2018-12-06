@@ -37,6 +37,14 @@ class EnvioController extends ControladorBase {
     {
         require_once './app/ReporteDiario/reporteDiario.php';
     }
+    public function llamaReporteArea()
+    {
+        require_once './app/ReporteDiario/reporteArea.php';
+    }
+    public function llamaReporteUsuario()
+    {
+        require_once './app/ReporteDiario/reporteUsuario.php';
+    }
 
 
     public function historialEnvios()

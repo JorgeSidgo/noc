@@ -8,8 +8,8 @@
     $con = new mysqli("localhost","root","","deloitte_mensajeria");
     $con1 = new mysqli("localhost","root","","deloitte_mensajeria");
 
-    $sql="call reporteDiario()";
-    $sql1="call reporteDiario()";
+    $sql="call reporteUsuario(1)";
+    $sql1="call reporteUsuario(1)";
 $res = $con ->query($sql);
 $res1 = $con1->query($sql1);
 
@@ -35,16 +35,15 @@ $tabla .= '<style>
                 }
             </style>';
                 
-                $fecha = $res1->fetch_assoc();
+                $usuario=$res1->fetch_assoc();
 $tabla.= "
             <div class='header'>
-                <h1>Envíos Deloitte<font color='#85BC22' size='100px'>.</font></h1>
-                <p>Fecha: <b>".$fecha['fecha']."</b></p>
+                <h1>Reporte de envíos del usuario: <font color='#85BC22'>".$usuario['nomUsuario']."</font></h1>
             </div>    
 
             <table class='tabla'>
             <tr>
-                <th>Usuario</th>
+                <th>Fecha</th>
                 <th>Hora</th>
                 <th>Trámite</th>
                 <th>Cliente</th>
@@ -57,9 +56,9 @@ $tabla.= "
             </tr>
 
             ";
-            while($fila =$res->fetch_assoc()){
+            while($fila=$res->fetch_assoc()){
 $tabla.="<tr>
-                <td>".$fila['nomUsuario']."</td>
+                <td>".$fila['fecha']."</td>
                 <td>".$fila['hora']."</td>
                 <td>".$fila['descTipoTramite']."</td>
                 <td>".$fila['nombreCliente']."</td>
