@@ -562,3 +562,41 @@ insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 2, '123', '$1', 'nada');
 insert into detalleEnvio values (null, 1, 1, 2, 1, 1, 3, '123', '$1', 'nada');
 insert into detalleEnvio values (null, 1, 1, 3, 1, 1, 1, '123', '$1', 'nada');
 insert into detalleEnvio values (null, 1, 1, 1, 1, 1, 1, '123', '$1', 'nada');
+
+
+delimiter $$
+create procedure reporteArea(
+	in idArea int
+)
+begin
+select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+	from detalleEnvio d
+	inner join envio e on e.codigoEnvio = d.codigoEnvio
+    inner join usuario u on u.codigoUsuario = e.codigoUsuario
+	inner join tipoTramite tt on tt.codigoTipoTramite = d.codigoTipoTramite
+	inner join clientes c on c.codigoCliente = d.codigoCliente
+    inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
+    inner join area a on a.codigoArea = d.codigoArea 
+    inner join status s on s.codigoStatus = d.codigoStatus
+where a.codigoArea=idArea order by e.fecha DESC;
+end $$
+
+
+
+delimiter $$
+create procedure reporteUsuario(
+	in idUsuario int
+)
+begin
+select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+	from detalleEnvio d
+	inner join envio e on e.codigoEnvio = d.codigoEnvio
+    inner join usuario u on u.codigoUsuario = e.codigoUsuario
+	inner join tipoTramite tt on tt.codigoTipoTramite = d.codigoTipoTramite
+	inner join clientes c on c.codigoCliente = d.codigoCliente
+    inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
+    inner join area a on a.codigoArea = d.codigoArea 
+    inner join status s on s.codigoStatus = d.codigoStatus
+where u.codigoUsuario=idUsuario order by e.fecha DESC;
+end $$
+
