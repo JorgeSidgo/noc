@@ -81,7 +81,7 @@
 
                             <td>{{pendiente.observacion}}</td>
                             <td>
-                                <button @click="modalCambiar(pendiente.codigoDetalleEnvio)" type="button" class="ui mini circular green icon button btnCambios">
+                                <button @click="modalCambiar(pendiente.codigoDetalleEnvio, pendiente.codigoEnvio)" type="button" class="ui mini circular green icon button btnCambios">
                                     <i class="sync icon"></i>
                                 </button>
                             </td>
@@ -143,6 +143,7 @@
             },
 
             cambiarDetalle: {
+                idEnvio: 0,
                 idDetalle: 0,
                 idStatus: 1,
                 observacion: ''
@@ -187,7 +188,7 @@
                 this.detalles = [];
             },
 
-            modalCambiar(idDetalle) {
+            modalCambiar(idDetalle, codigoEnvio) {
 
                 this.cambiarDetalle.idDetalle = parseInt(idDetalle);
 
