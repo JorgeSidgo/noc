@@ -190,6 +190,7 @@
 
             modalCambiar(idDetalle, codigoEnvio) {
 
+                this.cambiarDetalle.idEnvio = parseInt(codigoEnvio);
                 this.cambiarDetalle.idDetalle = parseInt(idDetalle);
 
                 $('#modalCambios').modal('setting', 'autofocus', false).modal('setting', 'closable', false)

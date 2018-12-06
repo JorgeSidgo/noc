@@ -55,7 +55,7 @@ $(function() {
     </div>
     <br>
     <div class="ui divider"></div>
-    
+
     <div class="content">
     <h3>Otros reportes</h3><div class="ui divider"></div>
         <center>
@@ -69,7 +69,7 @@ $(function() {
         <button class="ui brown right button" id="btnUsuarios">
             Por Usuario
         </button>
-                    
+
             <br><br>
             <div id="fechas">
                 <div class="two fields">
@@ -77,19 +77,19 @@ $(function() {
                     <input type="date" name="fechaIncial" id="fechaIncial">
                     <label for="" style="width:100%;margin: auto;text-align: center;" id="labFechaFinal"><i class="calendar icon"></i>Fecha final:</label>
                     <input type="date" name="fechaFinal" id="fechaFinal">
-                    
+
                 </div>
             </div>
                 <div id="cmbArea">
                     <h4> <label for="">Seleccione el área: </label>
-                        
+
                     <!--select de areas-->
                     <select name="area" id="area" class="ui dropdown" style="margin: auto; width: 60%;">
                         </select></h4>
                 </div>
             <div id="cmbUsuario">
                 <h4> <label for="">Seleccione el usuario: </label>
-                    
+
                   <!--select de areas-->
                   <select name="usuario" id="usuario" class="ui dropdown">
                     </select></h4>
@@ -186,7 +186,7 @@ if ($Cantidad==1) {
           while ($fila=$res->fetch_assoc()) {
           echo "['".$fila["nombreCliente"]."',".$fila["Cliente"]."],";
          // ['Work',     11],
-          
+
           }
           ?>
         ]);
@@ -199,7 +199,7 @@ if ($Cantidad==1) {
 
         chart.draw(data, options);
       }
-      
+
     </script>
 
 
@@ -233,7 +233,7 @@ if ($Cantidad==1) {
           ['Usuario', 'Cantidad'],
            <?php
           while ($fila=$res->fetch_assoc()) {
-          echo "['".$fila["nomUsuario"]."',".$fila["Usuario"]."],";          
+          echo "['".$fila["nomUsuario"]."',".$fila["Usuario"]."],";
           }
           ?>
         ]);
@@ -277,7 +277,7 @@ if ($Cantidad==1) {
 
         $(function() {
             var option = '';
-            var usuarios = '<?php echo $usuarios?>';
+            var usuarios = '<?php echo $usuariosCMB?>';
 
             $.each(JSON.parse(usuarios), function() {
                 option = `<option value="${this.codigoUsuario}">${this.nombre}</option>`;

@@ -15,11 +15,11 @@ class UsuarioController extends ControladorBase {
         $areas = $dao->mostrarAreas();
         require_once './app/view/Usuario/registro.php';
     }
-    
+
     public static function dashboard() {
         self::loadMain();
         $daoU = new DaoUsuario();
-        $usuarios = $daoU->mostrarUsuariosCmb();
+        $usuariosCMB = $daoU->mostrarUsuariosCmb();
 
         $daoA = new DaoArea();
         $areas = $daoA->mostrarAreas();
@@ -37,7 +37,7 @@ class UsuarioController extends ControladorBase {
         self::loadHeadOnly();
         require_once './app/view/Usuario/newPassword.php';
     }
-    
+
     public static function resetPasswordView() {
         self::loadHeadOnly();
         require_once './app/view/Usuario/resetPassword.php';
@@ -49,7 +49,7 @@ class UsuarioController extends ControladorBase {
     }
 
 
-    // Métodos 
+    // Métodos
 
     public static function login() {
         $datos = $_REQUEST["datos"];
@@ -60,7 +60,7 @@ class UsuarioController extends ControladorBase {
         $dao = new DaoUsuario();
         $dao->objeto->setNomUsuario($datos->user);
         $dao->objeto->setPass($datos->pass);
-        
+
         echo $dao->login();
     }
 
@@ -71,7 +71,7 @@ class UsuarioController extends ControladorBase {
         header("location: ?");
     }
 
-    public function encodeString() { 
+    public function encodeString() {
         $enc = new Encode();
 
         $encoded = $enc->encode('e', $_REQUEST["string"]);
@@ -90,7 +90,7 @@ class UsuarioController extends ControladorBase {
 
         $dao->objeto->setPass($datos->pass);
         $dao->objeto->setNomUsuario($nomUser);
-        
+
         echo $dao->resetPassword($datos->code);
     }
 
@@ -116,7 +116,7 @@ class UsuarioController extends ControladorBase {
         $dao->objeto->setCodigoArea($datos->area);
 
         echo $dao->registrar();
-     
+
     }
 
     public function newPass() {
@@ -133,13 +133,13 @@ class UsuarioController extends ControladorBase {
         $id = $datos->user;
         $email = $datos->correo;
 
-        
-        
+
+
         $dao->objeto->setNomUsuario($id);
         $dao->objeto->setEmail($email);
 
         //$datosUsuario = json_decode($dao->cargarDatosUsuario());
-        
+
         if(!$mail->composeRestorePassMail($email, $id, $psswd)) {
             echo "El correo no fue enviado Correctamente";
         }
@@ -150,7 +150,7 @@ class UsuarioController extends ControladorBase {
     public function registrarExterno() {
 
     }
-   
+
     public function reestablecerContra()
     {
         $dao = new DaoUsuario();
@@ -191,7 +191,7 @@ class UsuarioController extends ControladorBase {
         $datos = json_decode($datos);
 
         $dao = new DaoUsuario();
-        
+
         $dao->objeto->setNombre($datos->nombre);
         $dao->objeto->setApellido($datos->apellido);
         $dao->objeto->setNomUsuario($datos->user);
@@ -204,7 +204,7 @@ class UsuarioController extends ControladorBase {
     }
 
     public function autorizar() {
-        
+
         $dao = new DaoUsuario();
 
         require './app/mail/Mail.php';
@@ -214,11 +214,11 @@ class UsuarioController extends ControladorBase {
         $estado = $_REQUEST["estado"];
 
         $estadoCuenta = $estado == 1 ? 'Autorizada' : 'Restringida';
-        
+
         $dao->objeto->setCodigoUsuario($id);
-        
+
         $datosUsuario = json_decode($dao->cargarDatosUsuario());
-        
+
         if(!$mail->composeAuthMail($datosUsuario, $estadoCuenta)) {
             echo "El correo no fue enviado Correctamente";
         }
