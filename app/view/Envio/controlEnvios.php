@@ -14,8 +14,8 @@
             <button class="ui black deny button">
                 Cancelar
             </button>
-            <button class="ui right red button" id="btnEliminar" @click="eliminar">
-                Eliminar
+            <button class="ui right teal button" id="btnEliminar" @click="">
+                Aceptar
             </button>
         </div>
     </div>
