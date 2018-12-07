@@ -119,19 +119,20 @@
                     $.ajax({
                     type: 'POST',
                     url: '?1=UsuarioController&2=getEmail',
-                    data:{user},
+                    data:{user,email},
                     success: function(r) {
 
                             if(r==1)
                             {
                                
-                                $('#label-error').html('Datos Incorrectos');
-                                 $('#label-error').css('display', 'inline-block');
-                                 $('#btnEnviar').attr("disabled", true);
+                                $('#btnEnviar').attr("disabled", false);
+                                
                             }    
                             else{
 
-                                 $('#btnEnviar').attr("disabled", false);
+                                 $('#label-error').html('Datos Incorrectos');
+                                 $('#label-error').css('display', 'inline-block');
+                                 $('#btnEnviar').attr("disabled", true);
                             }  
                     }
                     });

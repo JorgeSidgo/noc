@@ -235,6 +235,11 @@ $(function() {
        
 
     });
+
+    $("#user").keyup(function(){
+
+        $("#btnLogin").attr("disabled", false);
+    });
     </script>
 
 </body>

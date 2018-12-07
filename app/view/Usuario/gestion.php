@@ -108,7 +108,8 @@ var app = new Vue({
                 {
                     label: 'Nombre de Usuario Deloitte:',
                     name: 'user',
-                    type: 'text'
+                    type: 'text',
+                    id: 'usuario'
                 },
                 {
                     label: 'Correo Electrónico:',
@@ -315,5 +316,41 @@ var app = new Vue({
            });
         });
     });
+
+
+    $("#usuario").change(function(){
+
+       var user=$("#usuario").val();
+
+            $.ajax({
+            type: 'POST',
+            url: '?1=UsuarioController&2=getUserName',
+            data:{user},
+            success: function(r) {
+
+                    if(r==1)
+                    {
+                        
+                        $("#btnRegistrar").attr("disabled", true);
+                        $("#usuario").siblings('div.ui.red.pointing.label').html('El usuario ya existe!')
+                        $("#usuario").siblings('div.ui.red.pointing.label').css('display', 'inline-block');
+                    }    
+                    else{
+
+                        $("#btnRegistrar").attr("disabled", false);
+                    }  
+            }
+                });
+
+    });
+
+    $("#usuario").keyup(function(){
+
+        $("#btnRegistrar").attr("disabled", false);
+    });
+
+
+
+
 </script>
      
