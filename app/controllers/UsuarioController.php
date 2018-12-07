@@ -151,6 +151,43 @@ class UsuarioController extends ControladorBase {
 
     }
 
+
+    public function getPass()
+    {
+            $pass=$_REQUEST['pass'];
+            $dao= new DaoUsuario();
+            $id=$_REQUEST['idU'];
+            
+            $dao->objeto->setCodigoUsuario($id);
+            $contra=$dao->getPass();
+            $passEncript=sha1($pass);
+            $datos = array('pass' =>"$contra" ,'passEnc'=>"$passEncript" );
+            $resp=json_encode($datos);
+             echo $resp;
+            
+    }
+
+    public function getUserName()
+    {
+        $dao=new DaoUsuario();
+        $user=$_REQUEST['user'];
+        $dao->objeto->setNomUsuario($user);
+
+        echo $dao->getUserName();
+    }
+    public function getEmail(){
+        $dao=new DaoUsuario();
+        $email=$_REQUEST['email'];
+        $user=$_REQUEST['user'];
+
+        $dao->objeto->setEmail($email);
+        $dao->objeto->setNomUsuario($user);
+        echo $dao->getEmail();
+        
+
+    }
+
+    
     public function reestablecerContra()
     {
         $dao = new DaoUsuario();
@@ -308,4 +345,6 @@ class UsuarioController extends ControladorBase {
 
         $reporte->reporteFechas($fecha,$fecha2, $resultado, $resultado1);
     }
+
+    
 }

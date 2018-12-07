@@ -103,7 +103,7 @@
         </form>
     </div>
     <div class="actions">
-        <div class="ui black deny button" id="btnCancelarRegistrar">
+        <div class="ui black deny button" id="btnCancelarModificar">
             Cancelar
         </div>
         <div class="ui blue right button" id="btnGuardarContra">
@@ -185,7 +185,7 @@
         </div>
         <script>
         $(function () {
-            $('#frmCambiarContra :input').keyup(function () {
+            $('#antPass').keyup(function () {
                 $('#label-error').css('display', 'none');
             });
         });
@@ -239,6 +239,38 @@
     });
 
 
+    // Metodo para comprobar que la contraseña exista
+    $("#antPass").change(function(){
+        var idU=<?php echo $id ?>;
+        var pass=$("#antPass").val();
+
+            $.ajax({
+               type: 'POST',
+               url: '?1=UsuarioController&2=getPass',
+               data:{idU,pass},
+               success: function(r) {
+
+                        var data=JSON.parse(r);
+                        if(data['pass']!=data['passEnc'])
+                        {
+                            
+                            $('#btnGuardarContra').hide();
+                            $('#label-error').css('display','block');
+                        }
+                        else
+                        {
+                            $('#btnGuardarContra').show();
+                           
+                        }
+               }
+           });
+
+       
+
+    });
+
+
+
     $(function() {
         $('#btnGuardarContra').click(function() {
             var idU=<?php echo $id ?>;
@@ -271,6 +303,16 @@
                }
            });
         });
+    });
+
+
+    $("#btnCancelarModificar").click(function(){
+
+             $('#label-error').css('display', 'none');
+             $('#antPass').val("");
+             $('#nuPass').val("");
+             $('#btnGuardarContra').show();
+
     });
 
 

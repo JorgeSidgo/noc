@@ -222,12 +222,51 @@ class DaoUsuario extends DaoBase {
         return '['.$json.']';
     }
 
-    public function reporteUsuario() {
-        $query = "call reporteUsuario({$this->objeto->getCodigoUsuario()})";
+    public function getPass(){
 
-        $resultado = $this->con->ejecutar($query);
+        $_query="select pass from usuario WHERE codigoUsuario=".$this->objeto->getCodigoUsuario();
 
-        return $resultado;
+        $resultado=$this->con->ejecutar($_query)->fetch_assoc();
+        
+        return $resultado['pass'];
+    }
+
+
+    public function getUserName()
+    {
+
+        $_query="select nomUsuario from usuario WHERE nomUsuario='".$this->objeto->getNomUsuario()."'";
+       
+
+        $resultado=$this->con->ejecutar($_query)->fetch_assoc();
+        if($resultado['nomUsuario']!=null)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+        
+        
+
+    }
+
+    public function getEmail()
+    {
+        $_query="select count(email) as email from usuario where email='".$this->objeto->getEmail()."' and '".$this->objeto->getNomUsuario()."' ";
+       
+
+        $resultado=$this->con->ejecutar($_query)->fetch_assoc();
+        if($resultado['email']!=0)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+
     }
 
 }
