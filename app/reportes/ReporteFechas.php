@@ -43,6 +43,7 @@ class Reporte {
 
             <table class='tabla'>
             <tr>
+                <th>Código</th>
                 <th>Usuario</th>
                 <th>Fecha</th>
                 <th>Hora</th>
@@ -59,6 +60,7 @@ class Reporte {
 
         while($fila = $resultado->fetch_assoc()) {
             $tabla.="<tr>
+                        <td>".$fila['correlativoDetalle']."</td>
                         <td>".$fila['nomUsuario']."</td>
                         <td>".$fila['fecha']."</td>
                         <td>".$fila['hora']."</td>

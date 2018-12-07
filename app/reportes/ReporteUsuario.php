@@ -45,6 +45,7 @@ class Reporte {
 
             <table class='tabla'>
             <tr>
+                <th>Código</th>
                 <th>Fecha</th>
                 <th>Hora</th>
                 <th>Trámite</th>
@@ -61,6 +62,7 @@ class Reporte {
 
         while($fila = $resultado->fetch_assoc()) {
             $tabla.="<tr>
+                        <td>".$fila['correlativoDetalle']."</td>
                         <td>".$fila['fecha']."</td>
                         <td>".$fila['hora']."</td>
                         <td>".$fila['descTipoTramite']."</td>
@@ -138,6 +140,7 @@ class Reporte {
 
             <table class='tabla'>
             <tr>
+                <th>Código</th>
                 <th>Fecha</th>
                 <th>Hora</th>
                 <th>Trámite</th>
@@ -154,6 +157,7 @@ class Reporte {
 
         while($fila = $resultado->fetch_assoc()) {
             $tabla.="<tr>
+                         <td>".$fila['correlativoDetalle']."</td>
                         <td>".$fila['fecha']."</td>
                         <td>".$fila['hora']."</td>
                         <td>".$fila['descTipoTramite']."</td>
@@ -232,6 +236,7 @@ class Reporte {
 
             <table class='tabla'>
             <tr>
+                <th>Código</th>
                 <th>Fecha</th>
                 <th>Hora</th>
                 <th>Trámite</th>
@@ -248,6 +253,7 @@ class Reporte {
 
         while($fila = $resultado->fetch_assoc()) {
             $tabla.="<tr>
+                        <td>".$fila['correlativoDetalle']."</td>
                         <td>".$fila['fecha']."</td>
                         <td>".$fila['hora']."</td>
                         <td>".$fila['descTipoTramite']."</td>

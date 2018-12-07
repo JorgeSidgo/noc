@@ -511,7 +511,7 @@ create procedure reporteArea(
 	in idArea int
 )
 begin
-select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+select e.codigoEnvio, d.codigoDetalleEnvio,d.correlativoDetalle, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
 	from detalleEnvio d
 	inner join envio e on e.codigoEnvio = d.codigoEnvio
     inner join usuario u on u.codigoUsuario = e.codigoUsuario
@@ -530,7 +530,7 @@ create procedure reporteUsuario(
 	in idUsuario int
 )
 begin
-select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+select e.codigoEnvio, d.codigoDetalleEnvio,d.correlativoDetalle, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
 	from detalleEnvio d
 	inner join envio e on e.codigoEnvio = d.codigoEnvio
     inner join usuario u on u.codigoUsuario = e.codigoUsuario
@@ -548,7 +548,7 @@ create procedure reporteFechas(
     in fecha2 date
 )
 begin
-select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+select e.codigoEnvio, d.codigoDetalleEnvio,d.correlativoDetalle, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
 	from detalleEnvio d
 	inner join envio e on e.codigoEnvio = d.codigoEnvio
     inner join usuario u on u.codigoUsuario = e.codigoUsuario
@@ -566,7 +566,7 @@ create procedure reporteAreaDiario(
 	in idArea int
 )
 begin
-select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+select e.codigoEnvio, d.codigoDetalleEnvio,d.correlativoDetalle, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
 	from detalleEnvio d
 	inner join envio e on e.codigoEnvio = d.codigoEnvio
     inner join usuario u on u.codigoUsuario = e.codigoUsuario
@@ -587,7 +587,7 @@ create procedure reporteAreaPorFechas(
     in fecha2 date
 )
 begin
-select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+select e.codigoEnvio, d.codigoDetalleEnvio,d.correlativoDetalle, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
 	from detalleEnvio d
 	inner join envio e on e.codigoEnvio = d.codigoEnvio
     inner join usuario u on u.codigoUsuario = e.codigoUsuario
@@ -605,7 +605,7 @@ create procedure reporteUsuarioDiario(
 	in idUsuario int
 )
 begin
-select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+select e.codigoEnvio, d.codigoDetalleEnvio,d.correlativoDetalle, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
 	from detalleEnvio d
 	inner join envio e on e.codigoEnvio = d.codigoEnvio
     inner join usuario u on u.codigoUsuario = e.codigoUsuario
@@ -625,7 +625,7 @@ create procedure reporteUsuarioPorFechas(
     in fecha2 date
 )
 begin
-select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+select e.codigoEnvio, d.codigoDetalleEnvio,d.correlativoDetalle, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
 	from detalleEnvio d
 	inner join envio e on e.codigoEnvio = d.codigoEnvio
     inner join usuario u on u.codigoUsuario = e.codigoUsuario
@@ -699,6 +699,6 @@ insert into detalleEnvio values (null, 'DD3', 1, 1, 3, 1, 1, 1, '123', '$1', 'na
 insert into detalleEnvio values (null, 'DD4', 1, 1, 1, 1, 1, 4, '123', '$1', 'nada');
 
 
-select * from detalleEnvio;
+-- select * from detalleEnvio;
 
-call mostrarPaquetes;
+-- call mostrarPaquetes;
