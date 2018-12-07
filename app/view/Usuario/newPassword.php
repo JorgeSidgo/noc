@@ -60,7 +60,7 @@
                 if (validarVacios('frmNewPass', '#btnEnviar') == 0) {
 
 
-                    if(validarDatos)
+                    
                     $('#frmNewPass').addClass('loading');
 
                     var gatos = {};
@@ -124,13 +124,14 @@
 
                             if(r==1)
                             {
-                                $('#btnEnviar').attr("disabled", false);
-                            }    
-                            else{
-
+                               
                                 $('#label-error').html('Datos Incorrectos');
                                  $('#label-error').css('display', 'inline-block');
                                  $('#btnEnviar').attr("disabled", true);
+                            }    
+                            else{
+
+                                 $('#btnEnviar').attr("disabled", false);
                             }  
                     }
                     });
