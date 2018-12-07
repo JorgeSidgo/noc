@@ -313,4 +313,13 @@ class DaoEnvio extends DaoBase {
 
         echo '{"data": ['.$_json .']}';
     }
+
+
+    public function reporteFechas() {
+        $query = "call reporteFechas('{$this->objeto->getFecha()}','{$this->objeto->getFecha2()}')";
+
+        $resultado = $this->con->ejecutar($query);
+
+        return $resultado;
+    }
 }

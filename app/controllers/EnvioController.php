@@ -13,6 +13,9 @@ class EnvioController extends ControladorBase {
 
         $daoD = new DaoDocumento();
         $documentos = $daoD->mostrarDocumentosCmb();
+
+        $daoU = new DaoUsuario();
+        $usuariosCMB = $daoU->mostrarUsuariosCmb();
         require_once './app/view/Envio/nuevo.php';
     }
 

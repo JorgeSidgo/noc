@@ -103,4 +103,21 @@ class DaoArea extends DaoBase {
         return $resultado;
     }
 
+
+    public function reporteAreaDiario() {
+        $query = "call reporteAreaDiario({$this->objeto->getCodigoArea()})";
+
+        $resultado = $this->con->ejecutar($query);
+
+        return $resultado;
+    }
+
+    public function reporteAreaPorFechas() {
+        $query = "call reporteAreaPorFechas({$this->objeto->getCodigoArea()},'{$this->objeto->getFecha()}','{$this->objeto->getFecha2()}')";
+
+        $resultado = $this->con->ejecutar($query);
+
+        return $resultado;
+    }
+
 }

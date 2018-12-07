@@ -26,19 +26,23 @@ $(function() {
                     <div class="two fields">
                         <div class="field">
                             <label for="">Nombre:</label>
-                            <input type="text" class="requerido" name="nombre" id="nombre">
+                            <input type="text" class="requerido letras" name="nombre" id="nombre">
                             
                         </div>
                         <div class="field">
-                            <label for="">Apellido:</label>
-                            <input type="text" class="requerido" name="apellido" id="apellido">
+                            <label for="">Apellido:</label> 
+                            <input type="text" class="requerido letras" name="apellido" id="apellido">
 
                         </div>
                     </div>
                     <div class="field">
                         <label for="">Nombre de Usuario Deloitte:</label>
                         <input type="text" class="requerido" v-model="nomUsuario" name="user" id="user">
+                        <div class="ui pointing red basic label" id="msg">
+                            El Usuario ya existe
+                        </div>
                     </div>
+
                     <div class="field">
                         <label for="">E-mail:</label>
                         <input type="text" class="requerido" :value="correoUsuario" name="correo" id="correo" readonly>
@@ -86,6 +90,7 @@ $(function() {
     <script>
         $(function () {
             $('#nombre').focus();
+            $('#msg').hide();
         });
     </script>
 
@@ -107,8 +112,11 @@ $(function() {
 
     <script>
         $(function() {
-            $('#frmLogin :input').keyup(function() {
+            $('#antPass').keyup(function() {
                 $('#label-error').css('display', 'none');
+            });
+            $('#user').keyup(function(){
+                $('#msg').hide();;
             });
         });
     </script>
@@ -196,6 +204,42 @@ $(function() {
         }
     });
     
+    </script>
+
+    <script>
+            //Comprobar que el usuario Deloite no exista
+
+        $("#user").change(function(){
+        
+        var user=$("#user").val();
+
+            $.ajax({
+               type: 'POST',
+               url: '?1=UsuarioController&2=getUserName',
+               data:{user},
+               success: function(r) {
+
+                    if(r==1)
+                    {
+                        $("#msg").show();
+                        $("#btnLogin").attr("disabled", true);
+
+                    }    
+                    else{
+
+                          $("#btnLogin").attr("disabled", false);
+                    }  
+               }
+           });
+
+       
+
+    });
+
+    $("#user").keyup(function(){
+
+        $("#btnLogin").attr("disabled", false);
+    });
     </script>
 
 </body>

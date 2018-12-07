@@ -3,6 +3,7 @@
 class Envio extends ModeloBase {
     private $codigoEnvio;
     private $fecha;
+    private $fecha2;
     private $codigoUsuario;
     private $codigoDetalleEnvio;
     private $codigoTipoTramite;
@@ -54,6 +55,23 @@ class Envio extends ModeloBase {
     public function setFecha($fecha)
     {
         $this->fecha = $fecha;
+
+        return $this;
+    }
+
+    public function getFecha2()
+    {
+        return $this->fecha2;
+    }
+
+    /**
+     * Set the value of fecha
+     *
+     * @return  self
+     */ 
+    public function setFecha2($fecha2)
+    {
+        $this->fecha2 = $fecha2;
 
         return $this;
     }

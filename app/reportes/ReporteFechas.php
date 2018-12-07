@@ -9,7 +9,8 @@ class Reporte {
         require_once './vendor/autoload.php';
     }
 
-    public function reporteArea($codigoArea, $resultado) {
+    public function reporteFechas($fecha,$fecha2, $resultado,$resultado1) 
+    {
 
 
         $tabla = '';
@@ -34,13 +35,10 @@ class Reporte {
                         }
                     </style>';
 
-        $area = $resultado->fetch_assoc();
-
-        $area = $area["descArea"];
-
         $tabla.= "
             <div class='header'>
-                <h1>Reporte de envíos del área: <font color='#85BC22'>".$area."</font></h1>
+                <h1>Historial de envíos Deloitte<font color='#85BC22'>.</font></h1>
+                <h3> Entre las fechas: <font color='blue'>".$fecha."</font> y <font color='blue'>".$fecha2."</font>.</h3>
             </div>    
 
             <table class='tabla'>

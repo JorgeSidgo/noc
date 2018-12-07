@@ -10,6 +10,23 @@
     $(function() {
     overflowRestore();
 });
+
+
+ /*$(document).ready(function(){
+    $('#modalEleccion').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
+
+    });
+
+    $(function() {
+            var option = '';
+            var usuarios = '<?php echo $usuariosCMB?>';
+
+            $.each(JSON.parse(usuarios), function() {
+                option = `<option value="${this.codigoUsuario}">${this.nombre} ${this.apellido}</option>`;
+
+                $('#usuario').append(option);
+            });
+        });*/
 </script>
 
 <script>
@@ -21,7 +38,27 @@
         $('#fecha-header').html('Fecha: ' + fecha);
     });
 </script>
+<div class="ui tiny modal" id="modalEleccion">
 
+<div class="header">
+<i class="paper plane icon"></i>Envío Deloitte<font color="#85BC22" size="20px">.</font>
+</div>
+<div class="content">
+         <form class="ui form" id="frmEnvio">
+    <div class="field">
+            <label for="">A nombre de: </label>
+
+            <!--select de usuario-->
+            <select name="usuario" id="usuario" class="ui search dropdown">
+            </select></div>
+            </form>
+    </div>
+<div class="actions">
+    <button class="ui blue right button" id="btnSeleccionarUsuario">
+        Seleccionar Usuario
+    </button>
+</div>
+</div>
 <div id="app">
     <div class="ui grid">
         <div class="row">

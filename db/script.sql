@@ -524,6 +524,7 @@ where a.codigoArea=idArea order by e.fecha DESC;
 end $$
 
 
+
 delimiter $$
 create procedure reporteUsuario(
 	in idUsuario int
@@ -541,6 +542,100 @@ select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, DATE_FORMAT(e.fecha,'%
 where u.codigoUsuario=idUsuario order by e.fecha DESC;
 end $$
 
+delimiter $$
+create procedure reporteFechas(
+	in fecha date,
+    in fecha2 date
+)
+begin
+select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+	from detalleEnvio d
+	inner join envio e on e.codigoEnvio = d.codigoEnvio
+    inner join usuario u on u.codigoUsuario = e.codigoUsuario
+	inner join tipoTramite tt on tt.codigoTipoTramite = d.codigoTipoTramite
+	inner join clientes c on c.codigoCliente = d.codigoCliente
+    inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
+    inner join area a on a.codigoArea = d.codigoArea 
+    inner join status s on s.codigoStatus = d.codigoStatus
+where e.fecha between fecha and fecha2 order by e.fecha DESC;
+end $$
+
+
+delimiter $$
+create procedure reporteAreaDiario(
+	in idArea int
+)
+begin
+select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+	from detalleEnvio d
+	inner join envio e on e.codigoEnvio = d.codigoEnvio
+    inner join usuario u on u.codigoUsuario = e.codigoUsuario
+	inner join tipoTramite tt on tt.codigoTipoTramite = d.codigoTipoTramite
+	inner join clientes c on c.codigoCliente = d.codigoCliente
+    inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
+    inner join area a on a.codigoArea = d.codigoArea 
+    inner join status s on s.codigoStatus = d.codigoStatus
+where a.codigoArea=idArea and e.fecha=(Select max(fecha) from envio) order by e.hora DESC;
+end $$
+
+
+
+delimiter $$
+create procedure reporteAreaPorFechas(
+	in idArea int,
+    in fecha1 date,
+    in fecha2 date
+)
+begin
+select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+	from detalleEnvio d
+	inner join envio e on e.codigoEnvio = d.codigoEnvio
+    inner join usuario u on u.codigoUsuario = e.codigoUsuario
+	inner join tipoTramite tt on tt.codigoTipoTramite = d.codigoTipoTramite
+	inner join clientes c on c.codigoCliente = d.codigoCliente
+    inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
+    inner join area a on a.codigoArea = d.codigoArea 
+    inner join status s on s.codigoStatus = d.codigoStatus
+where a.codigoArea=idArea and e.fecha between fecha1 and fecha2 order by e.fecha DESC;
+end $$
+
+
+delimiter $$
+create procedure reporteUsuarioDiario(
+	in idUsuario int
+)
+begin
+select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+	from detalleEnvio d
+	inner join envio e on e.codigoEnvio = d.codigoEnvio
+    inner join usuario u on u.codigoUsuario = e.codigoUsuario
+	inner join tipoTramite tt on tt.codigoTipoTramite = d.codigoTipoTramite
+	inner join clientes c on c.codigoCliente = d.codigoCliente
+    inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
+    inner join area a on a.codigoArea = d.codigoArea 
+    inner join status s on s.codigoStatus = d.codigoStatus
+where u.codigoUsuario=idUsuario and e.fecha=(Select max(fecha) from envio) order by e.hora DESC;
+end $$
+
+
+delimiter $$
+create procedure reporteUsuarioPorFechas(
+	in idUsuario int,
+    in fecha1 date,
+    in fecha2 date
+)
+begin
+select e.codigoEnvio, d.codigoDetalleEnvio, u.nomUsuario, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+	from detalleEnvio d
+	inner join envio e on e.codigoEnvio = d.codigoEnvio
+    inner join usuario u on u.codigoUsuario = e.codigoUsuario
+	inner join tipoTramite tt on tt.codigoTipoTramite = d.codigoTipoTramite
+	inner join clientes c on c.codigoCliente = d.codigoCliente
+    inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
+    inner join area a on a.codigoArea = d.codigoArea 
+    inner join status s on s.codigoStatus = d.codigoStatus
+where u.codigoUsuario=idUsuario and e.fecha between fecha1 and fecha2 order by e.fecha DESC;
+end $$
 
 -- ===========================================================================
 -- DATOS
