@@ -222,6 +222,13 @@ class DaoUsuario extends DaoBase {
         return '['.$json.']';
     }
 
+    public function reporteUsuario() {
+        $query = "call reporteUsuario({$this->objeto->getCodigoUsuario()})";
+
+        $resultado = $this->con->ejecutar($query);
+
+        return $resultado;
+    }
     public function getPass(){
 
         $_query="select pass from usuario WHERE codigoUsuario=".$this->objeto->getCodigoUsuario();

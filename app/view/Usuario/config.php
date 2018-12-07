@@ -66,12 +66,12 @@
         </form>
     </div>
     <div class="actions">
-        <div class="ui black deny button" id="btnCancelarRegistrar">
+        <button class="ui black deny button" id="btnCancelarRegistrar">
             Cancelar
-        </div>
-        <div class="ui blue right button" id="btnGuardarNom">
+        </button>
+        <button class="ui blue right button" id="btnGuardarNom">
             Guardar Cambios
-        </div>
+        </button>
     </div>
 </div>
 
@@ -103,42 +103,15 @@
         </form>
     </div>
     <div class="actions">
-        <div class="ui black deny button" id="btnCancelarModificar">
+        <button class="ui black deny button" id="btnCancelarModificar">
             Cancelar
-        </div>
-        <div class="ui blue right button" id="btnGuardarContra">
+        </button>
+        <button class="ui blue right button" id="btnGuardarContra">
             Guardar Cambios
-        </div>
+        </button>
     </div>
 </div>
 
-<!-- modal de registro -->
-<div class="ui tiny modal" id="modalEliminarCuenta">
-
-    <div class="header">
-       <i class="trash icon"></i> Eliminar cuenta Deloitte<font color="#85BC22" size="20px">.</font>
-    </div>
-    <div class="content">
-        <form class="ui form" id="frmEliminarCuenta">
-            
-                <label for="">Ingrese su <code style="padding: 0px 3px; background: rgba(255, 0, 0, .1); color: rgba(255, 0, 0, 0.8); border-radius: 2px;">contraseña</code> para confirmar:</label>
-                <div class="two fields">
-                <input class="requerido" type="password" name="Pass" id="Pass">
-                <div id="show-contra" class="ui basic label show-contra"><i style="margin: 0;" id="icon-contra" class="eye slash icon"></i></div>
-                <div class="ui red pointing label" style="display: none;">
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="actions">
-        <div class="ui black deny button" id="btnCancelarEliminar">
-            Cancelar
-        </div>
-        <div class="ui red right button" id="btnConfEliminarCuenta">
-            Eliminar Cuenta
-        </div>
-    </div>
-</div>
 
         <div class="ui grid">
             <div class="row">
@@ -174,9 +147,6 @@
                         <div class="item">
                             <button class="ui right floated fluid green-deloitte button" id="btnCambiarContra" type="button"><i class="lock icon"></i>Modificar contraseña</button>
                         </div>
-                        <div class="item">
-                            <button class="ui right floated fluid red button" id="btnEliminarCuenta" type="button"><i class="trash icon"></i>Eliminar mi cuenta</button>
-                        </div>
                     </div>
                 </div>
 
@@ -198,10 +168,6 @@
         $(document).on("click", "#btnCambiarContra", function () {
             $('#modalCambiarContra').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
         });
-        $(document).on("click", "#btnEliminarCuenta", function () {
-            $('#modalEliminarCuenta').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
-        });
-
         $(function() {
         $('#btnGuardarNom').click(function() {
             var idU=<?php echo $id ?>;
@@ -315,41 +281,6 @@
 
     });
 
-
-    $(function() {
-        $('#btnConfEliminarCuenta').click(function() {
-            var idU=<?php echo $id ?>;
-
-           $.ajax({
-               type: 'POST',
-               url: '?1=UsuarioController&2=eliminarCuenta',
-               data: {
-                   id: idU
-               },
-               success: function(r) {
-                $('#frmEliminarCuenta').removeClass('loading');
-                   if(r == 1) {
-                    swal({
-                            title: 'Aviso',
-                            text: 'No podrás acceder nuevamente al sistema',
-                            type: 'warning',
-                            showConfirmButton: true
-                        }).then((result) => {
-                                        if (result.value) {
-                                            location.href = '?';
-                                        }
-                                    }); 
-                        
-                        $('#modalEliminarCuenta').modal('hide');
-
-                   }else{
-                            $('#label-error').html('Datos Incorrectos');
-                            $('#label-error').css('display', 'inline-block');
-                        }
-               }
-           });
-        });
-    });
         ;
 </script>
  <script>

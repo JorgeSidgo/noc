@@ -295,7 +295,7 @@ class UsuarioController extends ControladorBase {
     public function reporteArea() {
         $daoArea = new DaoArea();
         
-        require_once './app/reportes/Reporte.php';
+        require_once './app/reportes/ReporteArea.php';
         
         $idArea = $_REQUEST["area"];
 
@@ -304,8 +304,46 @@ class UsuarioController extends ControladorBase {
 
         $daoArea->objeto->setCodigoArea($idArea);
         $resultado = $daoArea->reporteArea();
+        $resultado1 = $daoArea->reporteArea();
 
-        $reporte->reporteArea($idArea, $resultado);
+        $reporte->reporteArea($idArea, $resultado, $resultado1);
+    }
+
+    public function reporteUsuario() {
+        $daoUsuario = new DaoUsuario();
+        
+        require_once './app/reportes/ReporteUsuario.php';
+        
+        $idUsuario = $_REQUEST["usuario"];
+
+        $reporte = new Reporte();
+
+
+        $daoUsuario->objeto->setCodigoUsuario($idUsuario);
+        $resultado = $daoUsuario->reporteUsuario();
+        $resultado1 = $daoUsuario->reporteUsuario();
+
+        $reporte->reporteUsuario($idUsuario, $resultado, $resultado1);
+    }
+
+
+    public function reporteFechas() {
+        $daoEnvio = new DaoEnvio();
+        
+        require_once './app/reportes/ReporteFechas.php';
+        
+        $fecha = $_REQUEST["fecha"];
+        $fecha2 = $_REQUEST["fecha2"];
+
+        $reporte = new Reporte();
+
+
+        $daoEnvio->objeto->setFecha($fecha);
+       $daoEnvio->objeto->setFecha2($fecha2);
+        $resultado = $daoEnvio->reporteFechas();
+        $resultado1 = $daoEnvio->reporteFechas();
+
+        $reporte->reporteFechas($fecha,$fecha2, $resultado, $resultado1);
     }
 
     
