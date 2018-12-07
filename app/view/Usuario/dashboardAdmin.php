@@ -74,9 +74,9 @@ $(function() {
                      <div id="fechas">
                         <div class="two fields">
                             <h5><label for="" style="width:100%; margin: auto;" id="labFechaInicio"><i class="calendar icon"></i>Fecha inicial:</label>
-                            <input type="date" name="fechaIncial" id="fechaIncial">
+                            <input type="date" name="fechaIncial" id="fecha">
                             <label for="" style="width:100%;margin: auto;text-align: center;" id="labFechaFinal"><i class="calendar icon"></i>Fecha final:</label>
-                            <input type="date" name="fechaFinal" id="fechaFinal"></h5>
+                            <input type="date" name="fechaFinal" id="fecha2"></h5>
                             <button class="ui green right button" id="btnGenerarReporteFecha">
                                 Generar reporte
                             </button>
@@ -87,7 +87,7 @@ $(function() {
                         <h4><label for="">Seleccione el área: </label>
 
                         <!--select de areas-->
-                        <select name="area" id="area" class="ui dropdown" style="margin: auto; width: 60%;">
+                        <select name="area" id="area" class="ui search dropdown" style="margin: auto; width: 60%;">
                         </select>
                         </h4>
                         <button class="ui orange right button" id="btnGenerarReporteArea">
@@ -98,12 +98,11 @@ $(function() {
                 <h4> <label for="">Seleccione el usuario: </label>
 
                   <!--select de areas-->
-                  <select name="usuario" id="usuario" class="ui dropdown">
+                  <select name="usuario" id="usuario" class="ui search dropdown">
                     </select></h4>
-                    <a href="?1=EnvioController&2=llamaReporteUsuario" target="_blank">
                     <button class="ui red right button" id="btnGenerarReporteUsuario">
                         Generar reporte
-                    </button></a>
+                    </button>
                         </div>
         </center>
     </div>
@@ -149,14 +148,26 @@ $(document).on("click", "#btnReportes", function () {
 //llamando al reporte
    $(document).on("click", "#btnGenerarReporteArea", function () {
         var idU = $('#area').val();
-   $(location).attr('href',"?1=UsuarioController&2=reporteArea&area="+idU);
+   window.open('?1=UsuarioController&2=reporteArea&area='+idU,'_blank');
+});
+
+$(document).on("click", "#btnGenerarReporteUsuario", function () {
+        var idU = $('#usuario').val();
+   window.open('?1=UsuarioController&2=reporteUsuario&usuario='+idU,'_blank');
+   return false;
+});
+
+
+$(document).on("click", "#btnGenerarReporteFecha", function () {
+        var fecha = $('#fecha').val();
+        var fecha2 = $('#fecha2').val();
+   window.open('?1=UsuarioController&2=reporteFechas&fecha='+fecha+'&fecha2='+fecha2,'_blank');
+   return false;
+
+   
 });
 </script>
 
-
-<a class="btnGraficos ui center teal button" style="margin:auto;" href="?1=UsuarioController&2=dashboard">
-<b><i class="chart bar icon"></i>Actualizar gráficos</b>
-    </a>
 
 
 <?php
@@ -255,13 +266,23 @@ if ($Cantidad==1) {
     </script>
   </head>
   <body>
+ 
     <table>
+    <thead>
+        <a class="btnGraficos ui center teal button" style="margin:auto;" href="?1=UsuarioController&2=dashboard">
+            <b><i class="chart bar icon"></i>Actualizar gráficos</b>
+        </a>
+
+    </thead>
+    <tbody>
     <td>
-    <div id="piechart" style="width: 700px; height: 500px;"></div>
+    <br>
+    <div id="piechart" style="width: 750px; height: 500px;"></div>
     </td>
-    <td>
-    <div id="donutchart" style="width: 700px; height: 500px;"></div>
+    <td><br>
+    <div id="donutchart" style="width: 750px; height: 500px;"></div>
     </td>
+    </tbody>
     <table>
     </body>
 </div>

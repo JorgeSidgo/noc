@@ -222,4 +222,12 @@ class DaoUsuario extends DaoBase {
         return '['.$json.']';
     }
 
+    public function reporteUsuario() {
+        $query = "call reporteUsuario({$this->objeto->getCodigoUsuario()})";
+
+        $resultado = $this->con->ejecutar($query);
+
+        return $resultado;
+    }
+
 }
