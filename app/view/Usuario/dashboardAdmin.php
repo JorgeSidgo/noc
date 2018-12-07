@@ -1,3 +1,13 @@
+<?php
+            $fechaMaxima = date('Y-m-d');
+            $fechaMax = strtotime ( '-1 day' , strtotime ( $fechaMaxima ) ) ;
+            $fechaMax = date ( 'Y-m-d' , $fechaMax );
+             
+            $fechaMinima = date('Y-m-d');
+            $fechaMin = strtotime ( '-2 day' , strtotime ( $fechaMinima ) ) ;
+            $fechaMin = date ( 'Y-m-d' , $fechaMin );
+?>
+
 <style>
     body {
         overflow: hidden;
@@ -76,13 +86,15 @@ $(function() {
                         <div class="two fields">
                             <h5><label for="" style="width:100%; margin: auto;" id="labFechaInicio"><i class="calendar icon">
                             </i>Fecha inicial:</label>
-                                    <input type="date" name="fechaIncial" id="fecha1fecha">
+                                    <input type="date" name="fechaIncial" id="fecha1fecha" required max=<?php echo $fechaMin;?>>
                             <label for="" style="width:100%;margin: auto;text-align: center;" id="labFechaFinal"><i class="calendar icon"></i>Fecha final:</label>
-                                     <input type="date" name="fechaFinal" id="fecha2fecha"></h5>
+                                     <input type="date" name="fechaFinal" id="fecha2fecha" required max=<?php echo $fechaMax;?>></h5>
                             <button class="ui green right button" id="btnGenerarReporteFecha">
                                 Generar reporte
                             </button>
-
+                            <?php
+                            echo $fechaMax;
+                            ?>
                         </div>
                     </div>      
                     <div id="cmbArea">
@@ -134,9 +146,9 @@ $(function() {
                          <div class="two fields" id="fechasArea">
                             <h5><label for="" style="width:100%; margin: auto;" id="labFechaInicio"><i class="calendar icon">
                             </i>Fecha inicial:</label>
-                                    <input type="date" name="fecha1Area" id="fecha1Area">
+                                    <input type="date" name="fecha1Area" id="fecha1Area" required max=<?php echo $fechaMin;?>>
                             <label for="" style="width:100%;margin: auto;text-align: center;" id="labFechaFinal"><i class="calendar icon"></i>Fecha final:</label>
-                                     <input type="date" name="fecha2Area" id="fecha2Area"></h5>
+                                     <input type="date" name="fecha2Area" id="fecha2Area" required max=<?php echo $fechaMax;?>></h5>
 
                         </div><br>
                         <button class="ui green right button" id="btnGenerarReporteAreaPorFechas">
@@ -190,9 +202,9 @@ $(function() {
                          <div class="two fields" id="fechasUsuario">
                             <h5><label for="" style="width:100%; margin: auto;" id="labFechaInicio"><i class="calendar icon">
                             </i>Fecha inicial:</label>
-                                    <input type="date" name="fecha1Usuario" id="fecha1Usuario">
+                                    <input type="date" name="fecha1Usuario" id="fecha1Usuario" required max=<?php echo $fechaMin;?>>
                             <label for="" style="width:100%;margin: auto;text-align: center;" id="labFechaFinal"><i class="calendar icon"></i>Fecha final:</label>
-                                     <input type="date" name="fecha2Usuario" id="fecha2Usuario"></h5>
+                                     <input type="date" name="fecha2Usuario" id="fecha2Usuario" required max=<?php echo $fechaMax;?>></h5>
 
                         </div><br>
                         <button class="ui green right button" id="btnGenerarReporteUsuarioPorFechas">
