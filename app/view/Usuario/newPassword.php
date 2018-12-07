@@ -60,7 +60,7 @@
                 if (validarVacios('frmNewPass', '#btnEnviar') == 0) {
 
 
-                    if(validarDatos)
+                    
                     $('#frmNewPass').addClass('loading');
 
                     var gatos = {};
@@ -119,16 +119,18 @@
                     $.ajax({
                     type: 'POST',
                     url: '?1=UsuarioController&2=getEmail',
-                    data:{user},
+                    data:{user,email},
                     success: function(r) {
 
                             if(r==1)
                             {
+                               
                                 $('#btnEnviar').attr("disabled", false);
+                                
                             }    
                             else{
 
-                                $('#label-error').html('Datos Incorrectos');
+                                 $('#label-error').html('Datos Incorrectos');
                                  $('#label-error').css('display', 'inline-block');
                                  $('#btnEnviar').attr("disabled", true);
                             }  

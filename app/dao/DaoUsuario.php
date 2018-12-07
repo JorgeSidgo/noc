@@ -279,18 +279,11 @@ class DaoUsuario extends DaoBase {
 
     public function getEmail()
     {
-        $_query="select count(email) as email from usuario where email='".$this->objeto->getEmail()."' and '".$this->objeto->getNomUsuario()."' ";
+        $_query="select count(email) as email from usuario where email='".$this->objeto->getEmail()."' and nomUsuario='".$this->objeto->getNomUsuario()."' ";
        
 
         $resultado=$this->con->ejecutar($_query)->fetch_assoc();
-        if($resultado['email']!=0)
-        {
-            return 1;
-        }
-        else
-        {
-            return 0;
-        }
+        return $resultado['email'];
 
     }
 
