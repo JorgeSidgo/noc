@@ -229,6 +229,24 @@ class DaoUsuario extends DaoBase {
 
         return $resultado;
     }
+
+    public function reporteUsuarioDiario() {
+        $query = "call reporteUsuarioDiario({$this->objeto->getCodigoUsuario()})";
+
+        $resultado = $this->con->ejecutar($query);
+
+        return $resultado;
+    }
+
+
+    public function reporteUsuarioPorFechas() {
+        $query = "call reporteUsuarioPorFechas({$this->objeto->getCodigoUsuario()},'{$this->objeto->getFecha()}','{$this->objeto->getFecha2()}')";
+
+        $resultado = $this->con->ejecutar($query);
+
+        return $resultado;
+    }
+
     public function getPass(){
 
         $_query="select pass from usuario WHERE codigoUsuario=".$this->objeto->getCodigoUsuario();

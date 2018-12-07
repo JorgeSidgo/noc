@@ -9,6 +9,8 @@ class Usuario extends ModeloBase{
     private $pass;
     private $codigoRol;
     private $codigoArea;
+    private $fecha;
+    private $fecha2;
 
     public function __construct() {
 
@@ -170,6 +172,40 @@ class Usuario extends ModeloBase{
     public function setCodigoArea($codigoArea)
     {
         $this->codigoArea = $codigoArea;
+
+        return $this;
+    }
+
+    public function getFecha()
+    {
+        return $this->fecha;
+    }
+
+    /**
+     * Set the value of fecha
+     *
+     * @return  self
+     */ 
+    public function setFecha($fecha)
+    {
+        $this->fecha = $fecha;
+
+        return $this;
+    }
+
+    public function getFecha2()
+    {
+        return $this->fecha2;
+    }
+
+    /**
+     * Set the value of fecha
+     *
+     * @return  self
+     */ 
+    public function setFecha2($fecha2)
+    {
+        $this->fecha2 = $fecha2;
 
         return $this;
     }

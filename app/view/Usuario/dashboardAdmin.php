@@ -57,32 +57,34 @@ $(function() {
     <div class="ui divider"></div>
 
     <div class="content">
-    <h3>Otros reportes</h3><div class="ui divider"></div>
-        <center>
+        <h3>Otros reportes</h3><div class="ui divider"></div>
+            <center>
                 <h4>
                 <button class="ui blue deny button" id="btnAreas">
-            Por Áreas
-        </button>
-        <button class="ui purple right button" id="btnFechas">
-            Por Fechas
-        </button>
-        <button class="ui brown right button" id="btnUsuarios">
-            Por Usuario
-        </button>
+                    Por Áreas
+                </button>
+                <button class="ui brown right button" id="btnUsuarios">
+                    Por Usuario
+                </button>
+                <button class="ui purple right button" id="btnFechas">
+                    Por Fechas
+                </button>
+                
 
             <br><br>
                      <div id="fechas">
                         <div class="two fields">
-                            <h5><label for="" style="width:100%; margin: auto;" id="labFechaInicio"><i class="calendar icon"></i>Fecha inicial:</label>
-                            <input type="date" name="fechaIncial" id="fecha">
+                            <h5><label for="" style="width:100%; margin: auto;" id="labFechaInicio"><i class="calendar icon">
+                            </i>Fecha inicial:</label>
+                                    <input type="date" name="fechaIncial" id="fecha1fecha">
                             <label for="" style="width:100%;margin: auto;text-align: center;" id="labFechaFinal"><i class="calendar icon"></i>Fecha final:</label>
-                            <input type="date" name="fechaFinal" id="fecha2"></h5>
+                                     <input type="date" name="fechaFinal" id="fecha2fecha"></h5>
                             <button class="ui green right button" id="btnGenerarReporteFecha">
                                 Generar reporte
                             </button>
 
                         </div>
-            </div>
+                    </div>      
                     <div id="cmbArea">
                         <h4><label for="">Seleccione el área: </label>
 
@@ -90,9 +92,58 @@ $(function() {
                         <select name="area" id="area" class="ui search dropdown" style="margin: auto; width: 60%;">
                         </select>
                         </h4>
-                        <button class="ui orange right button" id="btnGenerarReporteArea">
+                        
+                        <div class="ui form" style="margin: auto; display: flex; justify-content:center;">
+                            <div class="inline fields">
+                            <div class="field">
+                                    <div class="">
+                                        <label style="color:red;"><b>Opciones:</b></label>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="opcion" id="historialA" tabindex="0" value="historialA">
+                                        <label>Historial</label>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="opcion" id="diarioA" tabindex="0" value="diarioA">
+                                        <label>Diario</label>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="opcion" id="porfechasA" tabindex="0" value="porfechasA">
+                                        <label>Por Fechas</label>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            
+                         </div>
+                         
+                        <button class="ui teal right button" id="btnGenerarReporteAreaHistorial">
                             Generar reporte
                         </button>
+                        
+                        <button class="ui red right button" id="btnGenerarReporteAreaDiario">
+                            Generar reporte
+                        </button>
+
+                         <div class="two fields" id="fechasArea">
+                            <h5><label for="" style="width:100%; margin: auto;" id="labFechaInicio"><i class="calendar icon">
+                            </i>Fecha inicial:</label>
+                                    <input type="date" name="fecha1Area" id="fecha1Area">
+                            <label for="" style="width:100%;margin: auto;text-align: center;" id="labFechaFinal"><i class="calendar icon"></i>Fecha final:</label>
+                                     <input type="date" name="fecha2Area" id="fecha2Area"></h5>
+
+                        </div><br>
+                        <button class="ui green right button" id="btnGenerarReporteAreaPorFechas">
+                            Generar reporte
+                        </button>
+
+                       
                     </div>
             <div id="cmbUsuario">
                 <h4> <label for="">Seleccione el usuario: </label>
@@ -100,9 +151,53 @@ $(function() {
                   <!--select de areas-->
                   <select name="usuario" id="usuario" class="ui search dropdown">
                     </select></h4>
-                    <button class="ui red right button" id="btnGenerarReporteUsuario">
-                        Generar reporte
-                    </button>
+                    <div class="ui form" style="margin: auto; display: flex; justify-content:center;">
+                            <div class="inline fields">
+                            <div class="field">
+                                    <div class="">
+                                        <label style="color:red;"><b>Opciones:</b></label>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="opcion1" id="historialU" tabindex="0" value="historialU">
+                                        <label>Historial</label>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="opcion1" id="diarioU" tabindex="0" value="diarioU">
+                                        <label>Diario</label>
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="ui radio checkbox">
+                                        <input type="radio" name="opcion1" id="porfechasU" tabindex="0" value="porfechasU">
+                                        <label>Por Fechas</label>
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+                        <button class="ui teal right button" id="btnGenerarReporteUsuarioHistorial">
+                            Generar reporte
+                        </button>
+                        
+                        <button class="ui red right button" id="btnGenerarReporteUsuarioDiario">
+                            Generar reporte
+                        </button>
+
+                         <div class="two fields" id="fechasUsuario">
+                            <h5><label for="" style="width:100%; margin: auto;" id="labFechaInicio"><i class="calendar icon">
+                            </i>Fecha inicial:</label>
+                                    <input type="date" name="fecha1Usuario" id="fecha1Usuario">
+                            <label for="" style="width:100%;margin: auto;text-align: center;" id="labFechaFinal"><i class="calendar icon"></i>Fecha final:</label>
+                                     <input type="date" name="fecha2Usuario" id="fecha2Usuario"></h5>
+
+                        </div><br>
+                        <button class="ui green right button" id="btnGenerarReporteUsuarioPorFechas">
+                            Generar reporte
+                        </button>
                         </div>
         </center>
     </div>
@@ -114,24 +209,27 @@ $(function() {
 </div>
 </div>
 
-<script>
-$(document).on("click", "#btnReportes", function () {
-            $('#modalReportes').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
-        });
-</script>
+
+
  <script>
     $(document).ready(function(){
         $('#fechas').hide();
         $('#cmbUsuario').hide();
         $('#cmbArea').hide();
-
+        $('#btnGenerarReporteAreaHistorial').hide();
+        $('#btnGenerarReporteAreaDiario').hide();
+        $('#btnGenerarReporteAreaPorFechas').hide();
+        $('#btnGenerarReporteUsuarioPorFechas').hide();
+        $('#btnGenerarReporteUsuarioHistorial').hide();
+        $('#btnGenerarReporteUsuarioDiario').hide();
+        $('#fechasArea').hide();
+        $('#fechasUsuario').hide();
     });
 
     $(document).on("click", "#btnAreas", function () {
             $('#fechas').hide();
             $('#cmbUsuario').hide();
             $('#cmbArea').show();
-
         });
         $(document).on("click", "#btnFechas", function () {
             $('#cmbUsuario').hide();
@@ -143,29 +241,107 @@ $(document).on("click", "#btnReportes", function () {
             $('#fechas').hide();
             $('#cmbUsuario').show();
         });
+</script>
+<script>
 
-        
-//llamando al reporte
-   $(document).on("click", "#btnGenerarReporteArea", function () {
-        var idU = $('#area').val();
-   window.open('?1=UsuarioController&2=reporteArea&area='+idU,'_blank');
-});
+        $(document).on("click", "#historialA", function () {
+            $('#btnGenerarReporteAreaHistorial').show();
+            $('#btnGenerarReporteAreaDiario').hide();
+            $('#btnGenerarReporteAreaPorFechas').hide();
+            $('#fechasArea').hide();
+            
 
-$(document).on("click", "#btnGenerarReporteUsuario", function () {
-        var idU = $('#usuario').val();
-   window.open('?1=UsuarioController&2=reporteUsuario&usuario='+idU,'_blank');
-   return false;
-});
+            $(document).on("click", "#btnGenerarReporteAreaHistorial", function () {
+                var idU = $('#area').val();
+                window.open('?1=UsuarioController&2=reporteArea&area='+idU,'_blank');
+            });
+        });
+
+        $(document).on("click", "#diarioA", function () {
+            $('#btnGenerarReporteAreaHistorial').hide();
+            $('#btnGenerarReporteAreaDiario').show();
+            $('#btnGenerarReporteAreaPorFechas').hide();
+            $('#fechasArea').hide();
+
+            $(document).on("click", "#btnGenerarReporteAreaDiario", function () {
+                var idU = $('#area').val();
+                window.open('?1=UsuarioController&2=reporteAreaDiario&area='+idU,'_blank');
+            });
+        });
+
+        $(document).on("click", "#porfechasA", function () {
+                $('#btnGenerarReporteAreaHistorial').hide();
+                $('#btnGenerarReporteAreaDiario').hide();
+                $('#btnGenerarReporteAreaPorFechas').show();
+                $('#fechasArea').show();
+
+                $(document).on("click", "#btnGenerarReporteAreaPorFechas", function () {
+                    var idU = $('#area').val();
+                    var fecha = $('#fecha1Area').val();
+                    var fecha2 = $('#fecha2Area').val();
+            window.open('?1=UsuarioController&2=reporteAreaPorFechas&area='+idU+'&fecha='+fecha+'&fecha2='+fecha2,'_blank');
+            return false;
+
+            
+            });
+        });
+
+        $(document).on("click", "#historialU", function () {
+            $('#btnGenerarReporteUsuarioHistorial').show();
+            $('#btnGenerarReporteUsuarioDiario').hide();
+            $('#btnGenerarReporteUsuarioPorFechas').hide();
+            $('#fechasUsuario').hide();
+            
+
+           $(document).on("click", "#btnGenerarReporteUsuarioHistorial", function () {
+                var idU = $('#usuario').val();
+                window.open('?1=UsuarioController&2=reporteUsuario&usuario='+idU,'_blank');
+                return false;
+            });
+        });
+
+        $(document).on("click", "#diarioU", function () {
+            $('#btnGenerarReporteUsuarioHistorial').hide();
+            $('#btnGenerarReporteUsuarioDiario').show();
+            $('#btnGenerarReporteUsuarioPorFechas').hide();
+            $('#fechasUsuario').hide();
+
+            $(document).on("click", "#btnGenerarReporteUsuarioDiario", function () {
+                var idU = $('#usuario').val();
+                window.open('?1=UsuarioController&2=reporteUsuarioDiario&usuario='+idU,'_blank');
+                return false;
+            });
+        });
+
+        $(document).on("click", "#porfechasU", function () {
+                $('#btnGenerarReporteUsuarioHistorial').hide();
+                $('#btnGenerarReporteUsuarioDiario').hide();
+                $('#btnGenerarReporteUsuarioPorFechas').show();
+                $('#fechasUsuario').show();
+
+                $(document).on("click", "#btnGenerarReporteUsuarioPorFechas", function () {
+                    var idU = $('#usuario').val();
+                    var fecha = $('#fecha1Usuario').val();
+                    var fecha2 = $('#fecha2Usuario').val();
+            window.open('?1=UsuarioController&2=reporteUsuarioPorFechas&usuario='+idU+'&fecha='+fecha+'&fecha2='+fecha2,'_blank');
+            return false;
+
+            
+            });
+        });
 
 
-$(document).on("click", "#btnGenerarReporteFecha", function () {
-        var fecha = $('#fecha').val();
-        var fecha2 = $('#fecha2').val();
-   window.open('?1=UsuarioController&2=reporteFechas&fecha='+fecha+'&fecha2='+fecha2,'_blank');
-   return false;
+         $(document).on("click", "#btnGenerarReporteFecha", function () {
+                    var fecha = $('#fecha1fecha').val();
+                    var fecha2 = $('#fecha2fecha').val();
+            window.open('?1=UsuarioController&2=reporteFechas&fecha='+fecha+'&fecha2='+fecha2,'_blank');
+            return false;
+        });
 
-   
-});
+
+$(document).on("click", "#btnReportes", function () {
+            $('#modalReportes').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
+        });
 </script>
 
 

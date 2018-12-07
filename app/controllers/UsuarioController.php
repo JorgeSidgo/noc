@@ -309,6 +309,46 @@ class UsuarioController extends ControladorBase {
         $reporte->reporteArea($idArea, $resultado, $resultado1);
     }
 
+
+    public function reporteAreaDiario() {
+        $daoArea = new DaoArea();
+        
+        require_once './app/reportes/ReporteArea.php';
+        
+        $idArea = $_REQUEST["area"];
+
+        $reporte = new Reporte();
+
+
+        $daoArea->objeto->setCodigoArea($idArea);
+        $resultado = $daoArea->reporteAreaDiario();
+        $resultado1 = $daoArea->reporteAreaDiario();
+
+        $reporte->reporteAreaDiario($idArea, $resultado, $resultado1);
+    }
+
+
+    public function reporteAreaPorFechas() {
+        $daoArea = new DaoArea();
+        
+        require_once './app/reportes/ReporteArea.php';
+        
+        $idA= $_REQUEST["area"];
+        $fecha1Area = $_REQUEST["fecha"];
+        $fecha2Area = $_REQUEST["fecha2"];
+
+        $reporte = new Reporte();
+
+        $daoArea->objeto->setCodigoArea($idA);
+        $daoArea->objeto->setFecha($fecha1Area);
+       $daoArea->objeto->setFecha2($fecha2Area);
+        $resultado = $daoArea->reporteAreaPorFechas();
+        $resultado1 = $daoArea->reporteAreaPorFechas();
+
+        $reporte->reporteAreaPorFechas($fecha1Area,$fecha2Area, $resultado, $resultado1);
+    }
+
+
     public function reporteUsuario() {
         $daoUsuario = new DaoUsuario();
         
@@ -324,6 +364,45 @@ class UsuarioController extends ControladorBase {
         $resultado1 = $daoUsuario->reporteUsuario();
 
         $reporte->reporteUsuario($idUsuario, $resultado, $resultado1);
+    }
+
+    public function reporteUsuarioDiario() {
+        $daoUsuario = new DaoUsuario();
+        
+        require_once './app/reportes/ReporteUsuario.php';
+        
+        $idUsuario = $_REQUEST["usuario"];
+
+        $reporte = new Reporte();
+
+
+        $daoUsuario->objeto->setCodigoUsuario($idUsuario);
+        $resultado = $daoUsuario->reporteUsuarioDiario();
+        $resultado1 = $daoUsuario->reporteUsuarioDiario();
+
+        $reporte->reporteUsuarioDiario($idUsuario, $resultado, $resultado1);
+    }
+
+    public function reporteUsuarioPorFechas() {
+        $daoUsuario = new DaoUsuario();
+        
+        require_once './app/reportes/ReporteUsuario.php';
+
+        $fecha1Usuario = $_REQUEST["fecha"];
+        $fecha2Usuario = $_REQUEST["fecha2"];
+
+        $idUsuario = $_REQUEST["usuario"];
+
+        $reporte = new Reporte();
+
+
+        $daoUsuario->objeto->setCodigoUsuario($idUsuario);
+        $daoUsuario->objeto->setFecha($fecha1Usuario);
+       $daoUsuario->objeto->setFecha2($fecha2Usuario);
+        $resultado = $daoUsuario->reporteUsuarioPorFechas();
+        $resultado1 = $daoUsuario->reporteUsuarioPorFechas();
+
+        $reporte->reporteUsuarioPorFechas($fecha1Usuario,$fecha2Usuario, $resultado, $resultado1);
     }
 
 

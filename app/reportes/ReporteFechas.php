@@ -35,13 +35,10 @@ class Reporte {
                         }
                     </style>';
 
-        $fecha = $resultado1->fetch_assoc();
-
-        $fecha = $fecha["fecha"];
-
         $tabla.= "
             <div class='header'>
-                <h1>Reporte de envíos del área: <font color='#85BC22'>".$fecha."</font></h1>
+                <h1>Historial de envíos Deloitte<font color='#85BC22'>.</font></h1>
+                <h3> Entre las fechas: <font color='blue'>".$fecha."</font> y <font color='blue'>".$fecha2."</font>.</h3>
             </div>    
 
             <table class='tabla'>
