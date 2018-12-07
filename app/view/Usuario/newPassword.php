@@ -59,6 +59,8 @@
 
                 if (validarVacios('frmNewPass', '#btnEnviar') == 0) {
 
+
+                    if(validarDatos)
                     $('#frmNewPass').addClass('loading');
 
                     var gatos = {};
@@ -104,8 +106,54 @@
                     $('#label-error').css('display', 'inline-block');
                 }
 
+
             });
         });
+
+
+            $("#correo").change(function(){
+
+                 var user=$("#user").val();
+                 var email=$("#correo").val();
+
+                    $.ajax({
+                    type: 'POST',
+                    url: '?1=UsuarioController&2=getEmail',
+                    data:{user},
+                    success: function(r) {
+
+                            if(r==1)
+                            {
+                                $('#btnEnviar').attr("disabled", false);
+                            }    
+                            else{
+
+                                $('#label-error').html('Datos Incorrectos');
+                                 $('#label-error').css('display', 'inline-block');
+                                 $('#btnEnviar').attr("disabled", true);
+                            }  
+                    }
+                    });
+
+        
+            });
+
+
+            $("#correo").keyup(function(){
+
+                $('#label-error').css('display', 'none');
+                
+
+            });
+
+            $("#user").keyup(function(){
+
+                $('#label-error').css('display', 'none');
+
+            });
+           
+
+        
     </script>
 
 </body>
