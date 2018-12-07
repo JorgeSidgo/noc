@@ -18,6 +18,8 @@ template: `<div class="ui longer fullscreen first coupled modal" id="modalDetall
             <table v-if="detalles" class="ui selectable very compact single line table">
                 <thead>
                     <tr>
+                    
+                        <th>Correlativo</th>
                         <th>Trámite</th>
                         <th>Cliente</th>
                         <th>Área</th>
@@ -31,6 +33,7 @@ template: `<div class="ui longer fullscreen first coupled modal" id="modalDetall
                 </thead>
                 <tbody>
                     <tr v-for="detalle in detalles" :codigo-detalle="detalle.codigoDetalleEnvio">
+                            <td>{{detalle.correlativoDetalle}}</td>
                             <td>{{detalle.descTipoTramite}}</td>
                             <td>{{detalle.nombreCliente}}</td>
                             <td>{{detalle.descArea}}</td>
@@ -53,7 +56,7 @@ template: `<div class="ui longer fullscreen first coupled modal" id="modalDetall
                                 {{detalle.observacion}}
                             </td>
                             <td>
-                            <button @click="$parent.modalCambiar(detalle.codigoDetalleEnvio, detalle.descTipoTramite, detalle.nombreCliente, detalle.descArea, detalle.descTipoDocumento, detalle.descStatus, detalle.observacion)" type="button" class="ui mini circular primary icon button btnCambios">
+                            <button @click="$parent.modalCambiar(detalle.codigoDetalleEnvio, detalle.correlativoDetalle, detalle.descTipoTramite, detalle.nombreCliente, detalle.descArea, detalle.descTipoDocumento, detalle.descStatus, detalle.observacion)" type="button" class="ui mini circular primary icon button btnCambios">
                                 <i class="edit icon"></i>
                             </button>
                         </td>

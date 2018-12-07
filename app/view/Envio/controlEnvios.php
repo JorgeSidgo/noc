@@ -2,6 +2,25 @@
 
     <modal-detalles :detalles="detalles"></modal-detalles>
 
+    <div class="ui mini modal" id="modalConfirmar">
+
+        <div class="header">
+            Confirmar Correo
+        </div>
+        <div class="content">
+            <h4>¿Desea enviar el correo con la revisión de este paquete?</h4>
+        </div>
+        <div class="actions">
+            <button class="ui black deny button">
+                Cancelar
+            </button>
+            <button class="ui right red button" id="btnEliminar" @click="eliminar">
+                Eliminar
+            </button>
+        </div>
+    </div>
+
+
     <div class="ui small second coupled modal" id="modalCambios">
 
         <div class="header">
@@ -11,6 +30,12 @@
 
             <div style="margin-bottom: 0em !important; width: 100% !important;" class="ui tiny fluid horizontal divided list">
 
+                <div class="item">
+                    <i class="tag icon"></i>
+                    <div class="content">
+                        {{datosDetalle.correlativo}}
+                    </div>
+                </div>
                 <div class="item">
                     <i class="exchange icon"></i>
                     <div class="content">
@@ -82,6 +107,7 @@
                     <thead>
                         <tr>
                             <th>N°</th>
+                            <th>Correlativo</th>
                             <th>Fecha</th>
                             <th>Hora</th>
                             <th>Usuario</th>
@@ -109,6 +135,7 @@
             idEnvio: 0,
 
             datosDetalle: {
+                correlativo: '',
                 tramite: '',
                 cliente: '',
                 area: '',
@@ -148,8 +175,9 @@
                 this.detalles = [];
             },
 
-            modalCambiar(idDetalle, tramite, cliente, area, tipoDoc, estado, obs) {
+            modalCambiar(idDetalle, correlativo, tramite, cliente, area, tipoDoc, estado, obs) {
 
+                this.datosDetalle.correlativo = correlativo;
                 this.datosDetalle.tramite = tramite;
                 this.datosDetalle.cliente = cliente;
                 this.datosDetalle.area = area;
@@ -204,9 +232,13 @@
 
             },
 
+            modalConfirmar() {
+                $('#modalConfirmar').modal('show');
+            },
+
             correoPaquete(idUsuario, idEnvio) {
                 $('body').dimmer('show');
-                
+
                 // alert('envio: ' + idEnvio + ' user: ' +idUsuario);
 
                 $.ajax({
@@ -216,9 +248,9 @@
                         idUsuario: idUsuario,
                         idEnvio: idEnvio
                     },
-                    success: function(r) {
+                    success: function (r) {
 
-                        if(r==1) {
+                        if (r == 1) {
                             swal({
                                 title: null,
                                 text: 'El correo fué enviado',
@@ -226,7 +258,7 @@
                                 showConfirmButton: false,
                                 timer: 1000
                             });
-                                            $('body').dimmer('hide');
+                            $('body').dimmer('hide');
                         } else {
                             swal({
                                 title: null,
@@ -239,11 +271,11 @@
                         }
                         app.reloadTabla();
                     }
-                }); 
+                });
 
             }
 
-            
+
         },
         computed: {
 
@@ -259,7 +291,8 @@
             app.cargarDetalles($(this).attr('id'));
         });
         $(document).on("click", ".btnCorreo", function () {
-            app.correoPaquete($(this).attr('codigo-usuario'), $(this).attr('codigo-envio'));
+            app.modalConfirmar();
+            // app.correoPaquete($(this).attr('codigo-usuario'), $(this).attr('codigo-envio'));
         });
     });
 </script>

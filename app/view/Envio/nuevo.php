@@ -38,7 +38,7 @@
                 </span>
             </div>
         </div>
-        
+
         <div class="row ">
             <div class="sixteen wide column">
                 <form action="" class="ui form" id="frmEnvios">
@@ -149,29 +149,37 @@
         methods: {
             guardarEnvio() {
 
-                if(this.envios.length) {
+                if (this.envios.length) {
 
                     $('#frmEnvios').addClass('loading');
                     $.ajax({
-                    type: 'POST',
-                    data: {
-                        detalles: JSON.stringify(this.envios)
-                    },
-                    url: '?1=EnvioController&2=registrarEnvio',
-                    success: function (r) {
-                        $('#frmEnvios').removeClass('loading');
-                        if (r == 1) {
-                            swal({
-                                title: 'Completado',
-                                type: 'success'
-                            }).then((result) => {
-                                if (result.value) {
-                                    location.reload();
-                                }
-                            });
+                        type: 'POST',
+                        data: {
+                            detalles: JSON.stringify(this.envios)
+                        },
+                        url: '?1=EnvioController&2=registrarEnvio',
+                        success: function (r) {
+                            $('#frmEnvios').removeClass('loading');
+                            if (r == 1) {
+                                swal({
+                                    title: 'Completado',
+                                    type: 'success'
+                                }).then((result) => {
+                                    if (result.value) {
+                                        app.envios = [{
+                                            tramite: '1',
+                                            cliente: '1',
+                                            area: '1',
+                                            tipoDocumento: '1',
+                                            numDocumento: '',
+                                            monto: '',
+                                            observaciones: ''
+                                        }]
+                                    }
+                                });
+                            }
                         }
-                    }
-                });
+                    });
                 }
 
             },
