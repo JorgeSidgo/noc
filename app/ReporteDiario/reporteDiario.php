@@ -44,6 +44,7 @@ $tabla.= "
 
             <table class='tabla'>
             <tr>
+                <th>Código</th>
                 <th>Usuario</th>
                 <th>Hora</th>
                 <th>Trámite</th>
@@ -59,6 +60,7 @@ $tabla.= "
             ";
             while($fila =$res->fetch_assoc()){
 $tabla.="<tr>
+                <td>".$fila['correlativoDetalle']."</td>
                 <td>".$fila['nomUsuario']."</td>
                 <td>".$fila['hora']."</td>
                 <td>".$fila['descTipoTramite']."</td>

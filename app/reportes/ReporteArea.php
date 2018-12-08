@@ -10,7 +10,18 @@ class Reporte {
     }
 
     public function reporteArea($codigoArea, $resultado,$resultado1) {
+        $validar = $resultado1->fetch_assoc();
+        $validar = $validar['fecha'];
+        if($validar=="")
+        {
+            $tabla = '<h1>Aún no se ha realizado ningún envio en esta Área</h1>';
+            $html = $tabla;
 
+
+        $pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
+        $pdf->WriteHTML($html);
+        $pdf->Output();
+        }else{
 
         $tabla = '';
 
@@ -45,6 +56,7 @@ class Reporte {
 
             <table class='tabla'>
             <tr>
+                <th>Código</th>
                 <th>Usuario</th>
                 <th>Fecha</th>
                 <th>Hora</th>
@@ -61,6 +73,7 @@ class Reporte {
 
         while($fila = $resultado->fetch_assoc()) {
             $tabla.="<tr>
+                        <td>".$fila['correlativoDetalle']."</td>
                         <td>".$fila['nomUsuario']."</td>
                         <td>".$fila['fecha']."</td>
                         <td>".$fila['hora']."</td>
@@ -98,12 +111,24 @@ class Reporte {
         $pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
         $pdf->WriteHTML($html);
         $pdf->Output();
+        }
 
     }
 
 
     public function reporteAreaDiario($codigoArea, $resultado,$resultado1) {
+        $validar = $resultado1->fetch_assoc();
+        $validar = $validar['fecha'];
+        if($validar=="")
+        {
+            $tabla = '<h1>No hay ningun registro que mostrar para este día</h1>';
+            $html = $tabla;
 
+
+        $pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
+        $pdf->WriteHTML($html);
+        $pdf->Output();
+        }else{
 
         $tabla = '';
 
@@ -137,6 +162,7 @@ class Reporte {
 
             <table class='tabla'>
             <tr>
+                <th>Código</th>
                 <th>Usuario</th>
                 <th>Fecha</th>
                 <th>Hora</th>
@@ -153,6 +179,7 @@ class Reporte {
 
         while($fila = $resultado->fetch_assoc()) {
             $tabla.="<tr>
+                        <td>".$fila['correlativoDetalle']."</td>
                         <td>".$fila['nomUsuario']."</td>
                         <td>".$fila['fecha']."</td>
                         <td>".$fila['hora']."</td>
@@ -190,13 +217,25 @@ class Reporte {
         $pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
         $pdf->WriteHTML($html);
         $pdf->Output();
+        }
 
     }
 
 
     public function reporteAreaPorFechas($fecha,$fecha2, $resultado,$resultado1) {
 
+        $validar = $resultado1->fetch_assoc();
+        $validar = $validar['fecha'];
+        if($validar=="")
+        {
+            $tabla = '<h1>El rango de fechas seleccionado no contiene ningún registro</h1>';
+            $html = $tabla;
 
+
+        $pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
+        $pdf->WriteHTML($html);
+        $pdf->Output();
+        }else{
         $tabla = '';
 
         $tabla .= ' <style>
@@ -230,6 +269,7 @@ class Reporte {
 
             <table class='tabla'>
             <tr>
+                <th>Código</th>
                 <th>Usuario</th>
                 <th>Fecha</th>
                 <th>Hora</th>
@@ -246,6 +286,7 @@ class Reporte {
 
         while($fila = $resultado->fetch_assoc()) {
             $tabla.="<tr>
+                        <td>".$fila['correlativoDetalle']."</td>
                         <td>".$fila['nomUsuario']."</td>
                         <td>".$fila['fecha']."</td>
                         <td>".$fila['hora']."</td>
@@ -283,6 +324,7 @@ class Reporte {
         $pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
         $pdf->WriteHTML($html);
         $pdf->Output();
+    }
 
     }
 

@@ -10,8 +10,21 @@ class Reporte {
     }
 
     public function reporteFechas($fecha,$fecha2, $resultado,$resultado1) 
-    {
+    {   
+        $validar = $resultado1->fetch_assoc();
+        $validar = $validar['fecha'];
+        if($validar=="")
+        {
+            $tabla = '<h1>El rango de fechas no contiene ningún registro</h1>';
+            $html = $tabla;
 
+
+        $pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
+        $pdf->WriteHTML($html);
+        $pdf->Output();
+        }else{
+
+        
 
         $tabla = '';
 
@@ -43,6 +56,7 @@ class Reporte {
 
             <table class='tabla'>
             <tr>
+                <th>Código</th>
                 <th>Usuario</th>
                 <th>Fecha</th>
                 <th>Hora</th>
@@ -59,6 +73,7 @@ class Reporte {
 
         while($fila = $resultado->fetch_assoc()) {
             $tabla.="<tr>
+                        <td>".$fila['correlativoDetalle']."</td>
                         <td>".$fila['nomUsuario']."</td>
                         <td>".$fila['fecha']."</td>
                         <td>".$fila['hora']."</td>
@@ -96,7 +111,9 @@ class Reporte {
         $pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
         $pdf->WriteHTML($html);
         $pdf->Output();
+    }
 
     }
+
 
 }
