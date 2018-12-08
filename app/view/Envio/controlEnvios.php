@@ -1,8 +1,12 @@
 <div id="app">
 
+        <div id="cargando" class="ui dimmer">
+                <div class="ui big loader"></div>
+        </div>
+
     <modal-detalles :detalles="detalles"></modal-detalles>
 
-    <div class="ui mini modal" id="modalConfirmar">
+    <div class="ui tiny modal" id="modalConfirmar">
 
         <div class="header">
             Confirmar Correo
@@ -14,7 +18,7 @@
             <button class="ui black deny button">
                 Cancelar
             </button>
-            <button class="ui right teal button" id="btnEliminar" @click="">
+            <button class="ui right teal button" id="btnConfirmar" @click="correoPaquete">
                 Aceptar
             </button>
         </div>
@@ -142,7 +146,13 @@
                 tipoDoc: ''
             },
 
+            datosCorreo: {
+                idEnvio: 0,
+                idUsuario: 0
+            },
+
             cambiarDetalle: {
+                idEnvio: 0,
                 idDetalle: 0,
                 idStatus: 2,
                 observacion: ''
@@ -152,6 +162,7 @@
             cargarDetalles(id) {
 
                 this.idEnvio = parseInt(id);
+                this.cambiarDetalle.idEnvio = parseInt(id);
 
                 $('#frmDetalles').addClass('loading');
                 $.ajax({
@@ -176,7 +187,9 @@
             },
 
             modalCambiar(idDetalle, correlativo, tramite, cliente, area, tipoDoc, estado, obs) {
-
+                
+                // this.cambiarDetalle.idEnvio = idEnvio;
+                
                 this.datosDetalle.correlativo = correlativo;
                 this.datosDetalle.tramite = tramite;
                 this.datosDetalle.cliente = cliente;
@@ -232,21 +245,24 @@
 
             },
 
-            modalConfirmar() {
+            modalConfirmar(idUsuario, idEnvio) {
+
+                this.datosCorreo.idUsuario = parseInt(idUsuario);
+                this.datosCorreo.idEnvio = parseInt(idEnvio);
+
                 $('#modalConfirmar').modal('show');
             },
 
-            correoPaquete(idUsuario, idEnvio) {
-                $('body').dimmer('show');
-
-                // alert('envio: ' + idEnvio + ' user: ' +idUsuario);
+            correoPaquete() {
+                $('#modalConfirmar').modal('hide');
+                $('#cargando').addClass('active');
 
                 $.ajax({
                     type: 'POST',
                     url: '?1=EnvioController&2=revisionPaquete',
                     data: {
-                        idUsuario: idUsuario,
-                        idEnvio: idEnvio
+                        idUsuario: app.datosCorreo.idUsuario,
+                        idEnvio: app.datosCorreo.idEnvio
                     },
                     success: function (r) {
 
@@ -258,7 +274,6 @@
                                 showConfirmButton: false,
                                 timer: 1000
                             });
-                            $('body').dimmer('hide');
                         } else {
                             swal({
                                 title: null,
@@ -267,9 +282,10 @@
                                 showConfirmButton: false,
                                 timer: 1000
                             });
-                            $('body').dimmer('hide');
                         }
                         app.reloadTabla();
+                        
+                        $('#cargando').removeClass('active');
                     }
                 });
 
@@ -291,8 +307,7 @@
             app.cargarDetalles($(this).attr('id'));
         });
         $(document).on("click", ".btnCorreo", function () {
-            app.modalConfirmar();
-            // app.correoPaquete($(this).attr('codigo-usuario'), $(this).attr('codigo-envio'));
+            app.modalConfirmar($(this).attr('codigo-usuario'), $(this).attr('codigo-envio'));
         });
     });
 </script>

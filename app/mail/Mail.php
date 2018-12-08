@@ -157,6 +157,7 @@ class Mail {
         while($fila = $detallesEnvio->fetch_assoc()){
 
             $celda .= '<tr>
+                        <td>'.$fila["correlativoDetalle"].'</td>
                         <td>'.$fila["descTipoTramite"].'</td>
                         <td>'.$fila["nombreCliente"].'</td>
                         <td>'.$fila["descArea"].'</td>
@@ -172,6 +173,7 @@ class Mail {
 
         $plantilla = str_replace('%nomUsuario%', $datosEncabezado["nomUsuario"], $plantilla);
         $plantilla = str_replace('%fecha%', $datosEncabezado["fecha"], $plantilla);
+        $plantilla = str_replace('%correlativo%', $datosEncabezado["correlativoEnvio"], $plantilla);
         $plantilla = str_replace('%hora%', $datosEncabezado["hora"], $plantilla);
         $plantilla = str_replace('%nombre%', $datosEncabezado["nombre"], $plantilla);
         $plantilla = str_replace('%apellido%', $datosEncabezado["apellido"], $plantilla);
@@ -221,6 +223,7 @@ class Mail {
         $plantilla = file_get_contents('./app/mail/correoRevision.html');
 
         $plantilla = str_replace('%nomUsuario%', $datosEncabezado["nomUsuario"], $plantilla);
+        $plantilla = str_replace('%correlativo%', $datosEncabezado["correlativoEnvio"], $plantilla);
         $plantilla = str_replace('%fecha%', $datosEncabezado["fecha"], $plantilla);
         $plantilla = str_replace('%hora%', $datosEncabezado["hora"], $plantilla);
         $plantilla = str_replace('%nombre%', $datosEncabezado["nombre"], $plantilla);
@@ -237,6 +240,7 @@ class Mail {
             switch ($fila["descStatus"]) {
                 case 'Pendiente':
                     $docsPendientes .= '<tr>
+                                <td>'.$fila["correlativoDetalle"].'</td>
                                 <td>'.$fila["descTipoTramite"].'</td>
                                 <td>'.$fila["nombreCliente"].'</td>
                                 <td>'.$fila["descArea"].'</td>
@@ -250,6 +254,7 @@ class Mail {
 
                 case 'Revisado':
                     $docsRevisados .= '<tr>
+                                <td>'.$fila["correlativoDetalle"].'</td>
                                 <td>'.$fila["descTipoTramite"].'</td>
                                 <td>'.$fila["nombreCliente"].'</td>
                                 <td>'.$fila["descArea"].'</td>
@@ -263,6 +268,7 @@ class Mail {
 
                 case 'Completo':
                     $docsCompletos .= '<tr>
+                                <td>'.$fila["correlativoDetalle"].'</td>
                                 <td>'.$fila["descTipoTramite"].'</td>
                                 <td>'.$fila["nombreCliente"].'</td>
                                 <td>'.$fila["descArea"].'</td>
@@ -276,6 +282,7 @@ class Mail {
 
                 case 'Regresado a Finanzas':
                     $docsFinanzas .= '<tr>
+                                <td>'.$fila["correlativoDetalle"].'</td>
                                 <td>'.$fila["descTipoTramite"].'</td>
                                 <td>'.$fila["nombreCliente"].'</td>
                                 <td>'.$fila["descArea"].'</td>
@@ -302,6 +309,7 @@ class Mail {
                             <h3>Documentos Completados</h3>
                             <table border="1" style="width:100%; border-collapse: collapse; background: rgba(46, 204, 113, 0.3);">
                             <tr>
+                                <th>Codigo Documento</th>
                                 <th>Tramite</th>
                                 <th>Cliente</th>
                                 <th>Area</th>
@@ -321,6 +329,7 @@ class Mail {
                             <h3>Documentos Revisados</h3>
                             <table border="1" style="width:100%; border-collapse: collapse; background: rgba(230, 126, 34, 0.3);">
                             <tr>
+                                <th>Codigo Documento</th>
                                 <th>Tramite</th>
                                 <th>Cliente</th>
                                 <th>Area</th>
@@ -340,6 +349,7 @@ class Mail {
                             <h3>Documentos regresados a finanzas</h3>
                             <table border="1" style="width:100%; border-collapse: collapse; background: rgba(52, 152, 219, 0.3);">
                             <tr>
+                                <th>Codigo Documento</th>
                                 <th>Tramite</th>
                                 <th>Cliente</th>
                                 <th>Area</th>
@@ -359,6 +369,7 @@ class Mail {
                             <h3>Documentos Pendientes de Revisión</h3>
                             <table border="1" style="width:100%; border-collapse: collapse; background: rgba(241, 196, 15, 0.3);">
                             <tr>
+                                <th>Codigo Documento</th>
                                 <th>Tramite</th>
                                 <th>Cliente</th>
                                 <th>Area</th>
