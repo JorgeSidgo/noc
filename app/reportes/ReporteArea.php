@@ -10,7 +10,18 @@ class Reporte {
     }
 
     public function reporteArea($codigoArea, $resultado,$resultado1) {
+        $validar = $resultado1->fetch_assoc();
+        $validar = $validar['fecha'];
+        if($validar=="")
+        {
+            $tabla = '<h1>Aún no se ha realizado ningún envio en esta Área</h1>';
+            $html = $tabla;
 
+
+        $pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
+        $pdf->WriteHTML($html);
+        $pdf->Output();
+        }else{
 
         $tabla = '';
 
@@ -100,12 +111,24 @@ class Reporte {
         $pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
         $pdf->WriteHTML($html);
         $pdf->Output();
+        }
 
     }
 
 
     public function reporteAreaDiario($codigoArea, $resultado,$resultado1) {
+        $validar = $resultado1->fetch_assoc();
+        $validar = $validar['fecha'];
+        if($validar=="")
+        {
+            $tabla = '<h1>No hay ningun registro que mostrar para este día</h1>';
+            $html = $tabla;
 
+
+        $pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
+        $pdf->WriteHTML($html);
+        $pdf->Output();
+        }else{
 
         $tabla = '';
 
@@ -194,13 +217,25 @@ class Reporte {
         $pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
         $pdf->WriteHTML($html);
         $pdf->Output();
+        }
 
     }
 
 
     public function reporteAreaPorFechas($fecha,$fecha2, $resultado,$resultado1) {
 
+        $validar = $resultado1->fetch_assoc();
+        $validar = $validar['fecha'];
+        if($validar=="")
+        {
+            $tabla = '<h1>El rango de fechas seleccionado no contiene ningún registro</h1>';
+            $html = $tabla;
 
+
+        $pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
+        $pdf->WriteHTML($html);
+        $pdf->Output();
+        }else{
         $tabla = '';
 
         $tabla .= ' <style>
@@ -289,6 +324,7 @@ class Reporte {
         $pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
         $pdf->WriteHTML($html);
         $pdf->Output();
+    }
 
     }
 

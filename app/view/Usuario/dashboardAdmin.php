@@ -92,9 +92,7 @@ $(function() {
                             <button class="ui green right button" id="btnGenerarReporteFecha">
                                 Generar reporte
                             </button>
-                            <?php
-                            echo $fechaMax;
-                            ?>
+                            
                         </div>
                     </div>      
                     <div id="cmbArea">
