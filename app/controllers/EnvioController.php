@@ -154,12 +154,21 @@ class EnvioController extends ControladorBase {
     public function registrarEnvio() {
 
         session_start();
-
+        
         $detalles = json_decode($_REQUEST["detalles"]);
+        
 
         $dao = new DaoEnvio();
 
+        if( $_SESSION['rol']==0)
+        {
         $dao->objeto->setCodigoUsuario($_SESSION["codigoUsuario"]);
+        }
+        else if( $_SESSION['rol']==1)
+        {
+            $dao->objeto->setCodigoUsuario($_SESSION["idUsuario"]);
+
+        }
 
         $codigoEnvio = $dao->encabezadoEnvio();
 
@@ -231,4 +240,25 @@ class EnvioController extends ControladorBase {
         }
 
     }
+
+    public function setCodigo()
+    {
+        session_start();
+       
+        $id=$_REQUEST['datos'];
+        $rol=$_REQUEST['rol'];
+
+        $_SESSION['idUsuario']=$id;
+        $_SESSION['rol']=$rol;
+    
+
+        echo $_SESSION['rol'];
+
+    }
+
+    public function getRol()
+    {
+        
+        echo $_SESSION["descRol"];
+    }    
 }
