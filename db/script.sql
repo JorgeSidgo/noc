@@ -260,10 +260,22 @@ create procedure encabezadoEnvio(
 begin
 	declare idAnterior int;
     set idAnterior = (select max(codigoEnvio) from envio) + 1;
-	insert into envio values(null, concat('ED', idAnterior), usuario, curdate(), DATE_FORMAT(NOW( ), "%H:%i:%s" ), 1);    
+    
+	declare horaActual time;
+    declare horaPredefinida time;
+    set horaActual = cast(date_format(now(), "%H:%i:%s") as time);
+    set horaPredefinida = cast('13:00:00' as time);
+
+	if horaActual > horaPredefinida then 
+		insert into envio values(null, concat('ED', idAnterior), usuario, curdate(), DATE_FORMAT(NOW(), "%H:%i:%s" ), 2); 
+	else 
+		insert into envio values(null, concat('ED', idAnterior), usuario, curdate(), DATE_FORMAT(NOW(), "%H:%i:%s" ), 1);    
+	end if;
+	
     select max(codigoEnvio) as codigoEnvio from envio;
 end
 $$
+
 delimiter $$
 create procedure registrarDetalleEnvio(
 	in envio int,
@@ -701,8 +713,3 @@ insert into detalleEnvio values (null, 'DD4', 1, 1, 1, 1, 1, 4, '123', '$1', 'na
 
 
 select * from envio;
-
-call detallesEnvio(2);
-
-call getEncabezadoEnvio(2)
-call mostrarPaquetes;

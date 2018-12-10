@@ -70,7 +70,7 @@
                         <small id="fecha-header">Fecha</small>
                     </small>
 
-                    <button @click.once="guardarEnvio" class="ui green-deloitte mini circular icon button"><i class="check icon"></i></button>
+                    <button @click="guardarEnvio" class="ui green-deloitte mini circular icon button"><i class="check icon"></i></button>
                     <button @click="agregarDetalle" class="ui primary mini circular icon button"><i class="plus icon"></i></button>
                 </span>
             </div>
