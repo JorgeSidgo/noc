@@ -113,12 +113,15 @@ class Mail {
         }
     }
 
-    public function detalleEnvio($codigoEnvio) {
+    public function detalleEnvio($datosUsuario, $codigoEnvio) {
         $emailFrom = 'deloitte.prueba.no.reply@gmail.com';
         $emailFromName = 'Deloitte';
 
         $emailTo = 'jorge.sidgo@gmail.com';
         $emailToName = 'Ing. Jorge Sidgo-Pimentel';
+
+        $emailCC = $datosUsuario->email;
+        $emailNameCC = $datosUsuario->nombre.' '.$datosUsuario->apellido;
 
         $mail = new PHPMailer();
         $mail->isSMTP();
@@ -171,6 +174,16 @@ class Mail {
 
         $plantilla = file_get_contents('./app/mail/correoEnvios.html');
 
+        $nota= '';
+
+
+        if($datosEncabezado["estado"] == 2) {
+            $nota = '<tr>
+                        <td style="padding: 20px 0px;"><b>Nota:</b> ya que el paquete se registró despues de las 13:00 de la tarde será agendado para enviarse el día de mañana</td>
+                    </tr>';
+        }
+
+        
         $plantilla = str_replace('%nomUsuario%', $datosEncabezado["nomUsuario"], $plantilla);
         $plantilla = str_replace('%fecha%', $datosEncabezado["fecha"], $plantilla);
         $plantilla = str_replace('%correlativo%', $datosEncabezado["correlativoEnvio"], $plantilla);
@@ -178,6 +191,7 @@ class Mail {
         $plantilla = str_replace('%nombre%', $datosEncabezado["nombre"], $plantilla);
         $plantilla = str_replace('%apellido%', $datosEncabezado["apellido"], $plantilla);
         $plantilla = str_replace('%lista%', $celda, $plantilla);
+        $plantilla = str_replace('%nota%', $nota, $plantilla);
 
         $mail->Body = $plantilla;
         $mail->AltBody = strip_tags($plantilla);
@@ -222,12 +236,16 @@ class Mail {
 
         $plantilla = file_get_contents('./app/mail/correoRevision.html');
 
+        
+
         $plantilla = str_replace('%nomUsuario%', $datosEncabezado["nomUsuario"], $plantilla);
         $plantilla = str_replace('%correlativo%', $datosEncabezado["correlativoEnvio"], $plantilla);
         $plantilla = str_replace('%fecha%', $datosEncabezado["fecha"], $plantilla);
         $plantilla = str_replace('%hora%', $datosEncabezado["hora"], $plantilla);
         $plantilla = str_replace('%nombre%', $datosEncabezado["nombre"], $plantilla);
         $plantilla = str_replace('%apellido%', $datosEncabezado["apellido"], $plantilla);
+        
+
 
 
         $docsCompletos = '';
