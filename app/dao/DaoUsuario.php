@@ -47,6 +47,7 @@ class DaoUsuario extends DaoBase {
     }
 
     public function cargarDatosUsuario() {
+
         $_query = "select u.*, r.descRol, a.descAuth
         from usuario u
         inner join rol r on r.codigoRol = u.codigoRol

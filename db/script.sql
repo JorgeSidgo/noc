@@ -259,10 +259,10 @@ create procedure encabezadoEnvio(
 )
 begin
 	declare idAnterior int;
-    set idAnterior = (select max(codigoEnvio) from envio) + 1;
-    
 	declare horaActual time;
     declare horaPredefinida time;
+    
+    set idAnterior = (select max(codigoEnvio) from envio) + 1;
     set horaActual = cast(date_format(now(), "%H:%i:%s") as time);
     set horaPredefinida = cast('13:00:00' as time);
 
@@ -356,7 +356,7 @@ create procedure getEncabezadoEnvio(
 	in idEnvio int
 )
 begin
-	select e.codigoEnvio, e.correlativoEnvio, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.codigoUsuario, u.nombre, u.apellido
+	select e.codigoEnvio, e.correlativoEnvio, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.codigoUsuario, u.nombre, u.apellido, e.estado
     from envio e
     inner join usuario u on u.codigoUsuario = e.codigoUsuario
     where e.codigoEnvio = idEnvio;
@@ -402,7 +402,9 @@ begin
     inner join area a on a.codigoArea = d.codigoArea 
     inner join status s on s.codigoStatus = d.codigoStatus
     
-    where e.codigoEnvio = idEnvio;
+    where e.codigoEnvio = idEnvio
+    
+    order by d.codigoDetalleEnvio desc;
 end
 $$
 
@@ -503,8 +505,7 @@ create procedure clientesConMasEnvios()
 begin
 select count(c.codigoCliente) as Cliente, c.nombreCliente  from detalleEnvio d
 inner join clientes c on c.codigoCliente = d.codigoCliente
-inner join envio e on e.codigoEnvio = d.codigoEnvio
- where e.fecha between (SELECT date_add(CURDATE(), INTERVAL -7 DAY)) and CURDATE() group by c.nombreCliente;
+group by c.nombreCliente;
 end
 $$
 
@@ -514,7 +515,7 @@ create procedure usuariosEnvios()
 begin
 select count(c.codigoUsuario) as Usuario, c.nomUsuario  from envio e
 inner join usuario c on c.codigoUsuario = e.codigoUsuario
- where e.fecha between (SELECT date_add(CURDATE(), INTERVAL -7 DAY)) and CURDATE() group by c.nomUsuario;
+ group by c.nomUsuario;
 end
 $$
 
@@ -700,6 +701,7 @@ insert into tipoDocumento values(null, 'Otro');
 #Status 
 insert into status values (null, 'Pendiente');
 insert into status values (null, 'Revisado');
+insert into status values (null, 'Recibido');
 insert into status values (null, 'Completo');
 insert into status values (null, 'Regresado a Finanzas');
 
@@ -711,5 +713,6 @@ insert into detalleEnvio values (null, 'DD2', 1, 1, 2, 1, 1, 3, '123', '$1', 'na
 insert into detalleEnvio values (null, 'DD3', 1, 1, 3, 1, 1, 1, '123', '$1', 'nada');
 insert into detalleEnvio values (null, 'DD4', 1, 1, 1, 1, 1, 4, '123', '$1', 'nada');
 
+call getEncabezadoEnvio(4);
 
 select * from envio;

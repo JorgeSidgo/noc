@@ -163,12 +163,13 @@ class EnvioController extends ControladorBase {
 
         if( $_SESSION['rol']==0)
         {
-        $dao->objeto->setCodigoUsuario($_SESSION["codigoUsuario"]);
+            $dao->objeto->setCodigoUsuario($_SESSION["codigoUsuario"]);
+            $daoUsuario->objeto->setCodigoUsuario($_SESSION["codigoUsuario"]);
         }
-        else if( $_SESSION['rol']==1)
+        else
         {
             $dao->objeto->setCodigoUsuario($_SESSION["idUsuario"]);
-
+            $daoUsuario->objeto->setCodigoUsuario($_SESSION["idUsuario"]);
         }
 
         $codigoEnvio = $dao->encabezadoEnvio();
@@ -254,7 +255,7 @@ class EnvioController extends ControladorBase {
         $_SESSION['rol']=$rol;
     
 
-        echo $_SESSION['rol'];
+        echo $_SESSION['codigoUsuario'];
 
     }
 
