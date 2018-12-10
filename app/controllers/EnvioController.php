@@ -175,6 +175,10 @@ class EnvioController extends ControladorBase {
         $codigoEnvio = $dao->encabezadoEnvio();
         $datosUsuario = json_decode($daoUsuario->cargarDatosUsuario());
 
+
+        print_r($datosUsuario);
+        die();
+
         $dao->objeto->setCodigoEnvio($codigoEnvio);
 
         $contador = 0;
@@ -199,7 +203,7 @@ class EnvioController extends ControladorBase {
         require './app/mail/Mail.php';
         $mail = new Mail();
 
-        if(!$mail->detalleEnvio($datosUsuario, $codigoEnvio)) {
+        if(!$mail->detalleEnvio($codigoEnvio)) {
             echo "El correo no fue enviado Correctamente";
         }
 

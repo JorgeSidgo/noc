@@ -682,6 +682,8 @@ insert into area values (null, 'Finanzas');
 # Usuario
 insert into usuario values (null, 'Karla Guadalupe', 'Arevalo Vega', 'kgarevalo', 'kgarevalo@deloitte.com', sha1('Deloitte123!'), 1, 1, 1);
 insert into usuario values (null, 'Jorge Luis', 'Sidgo Pimentel', 'jlsidgo', 'jorge.sidgo@gmail.com', sha1('Deloitte123!'), 1, 1, 1);
+insert into usuario values (null, 'Fabio Alonso', 'Mejia', 'famejia', 'fabiomejiash@gmail.com', sha1('Deloitte123!'), 1, 1, 1);
+insert into usuario values (null, 'Carlos Eduardo', 'Campos', 'cecampos', 'carlos.eduardo.ramos1997@gmail.com', sha1('Deloitte123!'), 1, 1, 1);
 insert into usuario values (null, 'John', 'Doe', 'johndoe', 'johndoe@deloitte.com', sha1('123'), 1, 2, 4);
 
 #Cliente
