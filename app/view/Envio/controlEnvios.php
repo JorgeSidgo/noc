@@ -73,8 +73,9 @@
                     <select v-model="cambiarDetalle.idStatus" class="ui dropdown" name="idEstado" id="idEstado">
                         <option value="1">Pendiente</option>
                         <option value="2">Revisado</option>
-                        <option value="3">Completo</option>
-                        <option value="4">En finanzas</option>
+                        <option value="3">Recibido</option>
+                        <option value="4">Completo</option>
+                        <option value="5">Regresado a finanzas</option>
                     </select>
                 </div>
                 <div class="field">

@@ -50,7 +50,7 @@ class DaoEnvio extends DaoBase {
     }
 
     public function detallesEnvio() {
-        $_query = "call detallesEnvio({$this->objeto->getCodigoEnvio()})";
+        $_query = "call detallesEnvioH({$this->objeto->getCodigoEnvio()})";
 
         $resultado = $this->con->ejecutar($_query);
 
@@ -164,6 +164,7 @@ class DaoEnvio extends DaoBase {
 
         $contador_pendientes = 0;
         $contador_completo = 0;
+        $contador_recibido = 0;
         $contador_revisado = 0;
         $contador_finanzas = 0;
 
@@ -188,6 +189,10 @@ class DaoEnvio extends DaoBase {
                     case 'Revisado':
                         $contador_revisado++;
                         break;
+                    
+                    case 'Recibido':
+                        $contador_revisado++;
+                        break;
 
                     case 'Completo':
                         $contador_completo++;
@@ -202,9 +207,10 @@ class DaoEnvio extends DaoBase {
             $label_pendientes= '<a class=\"ui yellow label\">'.$contador_pendientes.'</a>';
             $label_completo= '<a class=\"ui green label\">'.$contador_completo.'</a>';
             $label_revisado= '<a class=\"ui orange label\">'.$contador_revisado.'</a>';
-            $label_finanzas= '<a class=\"ui blue label\">'.$contador_finanzas.'</a>';
+            $label_recibido= '<a class=\"ui blue label\">'.$contador_recibido.'</a>';
+            $label_finanzas= '<a class=\"ui grey label\">'.$contador_finanzas.'</a>';
 
-            $labels = '<div class=\"ui small labels\">'.$label_pendientes.$label_completo.$label_revisado.$label_finanzas.'</div>';
+            $labels = '<div class=\"ui small labels\">'.$label_completo.$label_recibido.$label_revisado.$label_finanzas.$label_pendientes.'</div>';
 
             $object = '{
                             "codigoEnvio": "'.$fila["codigoEnvio"].'",
