@@ -1,10 +1,10 @@
 <?php
             $fechaMaxima = date('Y-m-d');
-            $fechaMax = strtotime ( '-1 day' , strtotime ( $fechaMaxima ) ) ;
+            $fechaMax = strtotime ( '-0 day' , strtotime ( $fechaMaxima ) ) ;
             $fechaMax = date ( 'Y-m-d' , $fechaMax );
              
             $fechaMinima = date('Y-m-d');
-            $fechaMin = strtotime ( '-2 day' , strtotime ( $fechaMinima ) ) ;
+            $fechaMin = strtotime ( '-1 day' , strtotime ( $fechaMinima ) ) ;
             $fechaMin = date ( 'Y-m-d' , $fechaMin );
 ?>
 
