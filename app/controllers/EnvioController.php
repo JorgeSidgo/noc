@@ -203,7 +203,7 @@ class EnvioController extends ControladorBase {
         require './app/mail/Mail.php';
         $mail = new Mail();
 
-        if(!$mail->detalleEnvio($datosUsuario, $codigoEnvio)) {
+        if(!$mail->detalleEnvio($codigoEnvio)) {
             echo "El correo no fue enviado Correctamente";
         }
 

@@ -113,15 +113,15 @@ class Mail {
         }
     }
 
-    public function detalleEnvio($datosUsuario, $codigoEnvio) {
+    public function detalleEnvio($codigoEnvio) {
         $emailFrom = 'deloitte.prueba.no.reply@gmail.com';
         $emailFromName = 'Deloitte';
 
         $emailTo = 'jorge.sidgo@gmail.com';
         $emailToName = 'Ing. Jorge Sidgo-Pimentel';
 
-        $emailCC = $datosUsuario->email;
-        $emailNameCC = $datosUsuario->nombre.' '.$datosUsuario->apellido;
+        // $emailCC = $datosUsuario->email;
+        // $emailNameCC = $datosUsuario->nombre.' '.$datosUsuario->apellido;
 
         $mail = new PHPMailer();
         $mail->isSMTP();
