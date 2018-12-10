@@ -395,7 +395,7 @@ if ($Cantidad==1) {
         ]);
 
         var options = {
-          title: 'Clientes que reciben mayor cantidad de  envíos'
+          title: 'Clientes que han recibido mayor cantidad de  envíos durante la última semana'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
@@ -442,7 +442,7 @@ if ($Cantidad==1) {
         ]);
 
         var options = {
-          title: 'Usuarios que han enviado mas paquetes',
+          title: 'Usuarios que han enviado mas paquetes durante la última semana',
           pieHole: 0.4,
         };
 

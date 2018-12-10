@@ -5,14 +5,18 @@
         width: 92vw;
     }
 </style>
-
+<?php
+ $_SESSION['rol']=0;
+if($_SESSION["descRol"]=="Administrador") {?>
 <script>
     $(function() {
     overflowRestore();
 });
 
 
- /*$(document).ready(function(){
+ $(document).ready(function(){
+
+    
     $('#modalEleccion').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
 
     });
@@ -26,8 +30,9 @@
 
                 $('#usuario').append(option);
             });
-        });*/
+        });
 </script>
+<?php }?>
 
 <script>
     var fecha;
@@ -250,4 +255,21 @@
             $('input[mask="dinero"]').mask('$0');
         }
     });
+</script>
+
+<script>
+        $("#btnSeleccionarUsuario").click(function(){
+
+            var datos=$("#usuario").val();
+            var rol=1
+            $.ajax({
+                    type: 'POST',
+                    url: '?1=EnvioController&2=setCodigo',
+                    data:{datos,rol},
+                    success: function(r) {
+                        
+                        $('#modalEleccion').modal('hide');;
+                    }
+                    });           
+        });
 </script>

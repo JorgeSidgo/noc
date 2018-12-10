@@ -503,7 +503,8 @@ create procedure clientesConMasEnvios()
 begin
 select count(c.codigoCliente) as Cliente, c.nombreCliente  from detalleEnvio d
 inner join clientes c on c.codigoCliente = d.codigoCliente
-group by c.nombreCliente;
+inner join envio e on e.codigoEnvio = d.codigoEnvio
+ where e.fecha between (SELECT date_add(CURDATE(), INTERVAL -7 DAY)) and CURDATE() group by c.nombreCliente;
 end
 $$
 
@@ -513,7 +514,7 @@ create procedure usuariosEnvios()
 begin
 select count(c.codigoUsuario) as Usuario, c.nomUsuario  from envio e
 inner join usuario c on c.codigoUsuario = e.codigoUsuario
- group by c.nomUsuario;
+ where e.fecha between (SELECT date_add(CURDATE(), INTERVAL -7 DAY)) and CURDATE() group by c.nomUsuario;
 end
 $$
 
@@ -699,7 +700,6 @@ insert into tipoDocumento values(null, 'Otro');
 #Status 
 insert into status values (null, 'Pendiente');
 insert into status values (null, 'Revisado');
-insert into status values (null, 'Recibido');
 insert into status values (null, 'Completo');
 insert into status values (null, 'Regresado a Finanzas');
 
