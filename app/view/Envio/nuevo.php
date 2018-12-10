@@ -31,6 +31,20 @@ if($_SESSION["descRol"]=="Administrador") {?>
                 $('#usuario').append(option);
             });
         });
+
+
+      $(function ()
+      {
+
+        var select = document.getElementById('usuario');
+        select.addEventListener('change',
+            function(){
+            var selectedOption = this.options[select.selectedIndex];
+            var nombre=selectedOption.text;
+            $("#nombreActual").html(nombre);
+            });
+
+      });  
 </script>
 <?php }?>
 
@@ -70,6 +84,11 @@ if($_SESSION["descRol"]=="Administrador") {?>
             <div class="titulo">
                 <i class="paper plane icon"></i>
                 Envíos Deloitte<font color="#85BC22" size="20px">.</font>
+                <?php
+                if($_SESSION["descRol"]=="Administrador") {?>
+                <center>A nombre de: <font color="#85BC22"><span id="nombreActual"></span></font></center>
+
+                <?php }?>
                 <span style="float:right;">
                     <small>
                         <small id="fecha-header">Fecha</small>
@@ -269,6 +288,7 @@ if($_SESSION["descRol"]=="Administrador") {?>
                     success: function(r) {
                         
                         $('#modalEleccion').modal('hide');;
+                        
                     }
                     });           
         });
