@@ -59,24 +59,24 @@ if($_SESSION["descRol"]=="Administrador") {?>
 </script>
 <div class="ui tiny modal" id="modalEleccion">
 
-<div class="header">
-<i class="paper plane icon"></i>Envío Deloitte<font color="#85BC22" size="20px">.</font>
-</div>
-<div class="content">
-         <form class="ui form" id="frmEnvio">
-    <div class="field">
-            <label for="">A nombre de: </label>
-
-            <!--select de usuario-->
-            <select name="usuario" id="usuario" class="ui search dropdown">
-            </select></div>
-            </form>
+    <div class="header">
+        <i class="paper plane icon"></i>Envío Deloitte<font color="#85BC22" size="20px">.</font>
     </div>
-<div class="actions">
-    <button class="ui blue right button" id="btnSeleccionarUsuario">
-        Seleccionar Usuario
-    </button>
-</div>
+    <div class="content">
+        <form class="ui form" id="frmEnvio">
+            <div class="field">
+                <label for="">A nombre de: </label>
+
+                <!--select de usuario-->
+                <select name="usuario" id="usuario" class="ui search dropdown">
+                </select></div>
+        </form>
+    </div>
+    <div class="actions">
+        <button class="ui blue right button" id="btnSeleccionarUsuario">
+            Seleccionar Usuario
+        </button>
+    </div>
 </div>
 <div id="app">
     <div class="ui grid">
@@ -86,7 +86,8 @@ if($_SESSION["descRol"]=="Administrador") {?>
                 Envíos Deloitte<font color="#85BC22" size="20px">.</font>
                 <?php
                 if($_SESSION["descRol"]=="Administrador") {?>
-                <center>A nombre de: <font color="#85BC22"><span id="nombreActual"></span></font></center>
+                <center>A nombre de: <font color="#85BC22"><span id="nombreActual"></span></font>
+                </center>
 
                 <?php }?>
                 <span style="float:right;">
@@ -277,19 +278,27 @@ if($_SESSION["descRol"]=="Administrador") {?>
 </script>
 
 <script>
-        $("#btnSeleccionarUsuario").click(function(){
+    $(function () {
+        $("#btnSeleccionarUsuario").click(function () {
 
-            var datos=$("#usuario").val();
-            var rol=1
+            var datos = $("#usuario").val();
+            var rol = 1
+
             $.ajax({
-                    type: 'POST',
-                    url: '?1=EnvioController&2=setCodigo',
-                    data:{datos,rol},
-                    success: function(r) {
-                        
-                        $('#modalEleccion').modal('hide');;
-                        
-                    }
-                    });           
+                type: 'POST',
+                url: '?1=EnvioController&2=setCodigo',
+                data: {
+                    datos: datos,
+                    rol: rol
+                },
+                success: function (r) {
+
+                    console.log(r);
+
+                    $('#modalEleccion').modal('hide');;
+
+                }
+            });
         });
+    });
 </script>
