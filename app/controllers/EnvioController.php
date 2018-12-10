@@ -152,7 +152,7 @@ class EnvioController extends ControladorBase {
     }
 
     public function registrarEnvio() {
-
+        
         session_start();
         
         $detalles = json_decode($_REQUEST["detalles"]);
