@@ -13,6 +13,19 @@
 $res = $con ->query($sql);
 $res1 = $con1->query($sql1);
 
+    $validar = $res1->fetch_assoc();
+        $validar = $validar['fecha'];
+        if($validar=="")
+        {
+            $tabla = '<h1>Aún no se ha realizado ningún registro</h1>';
+            $html = $tabla;
+
+
+        $pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
+        $pdf->WriteHTML($html);
+        $pdf->Output();
+        }
+
 $tabla="";
 
 $tabla .= '<style>
@@ -47,6 +60,7 @@ $tabla.= "
                 <th>Código</th>
                 <th>Usuario</th>
                 <th>Hora</th>
+                <th>Fecha</th>
                 <th>Trámite</th>
                 <th>Cliente</th>
                 <th>Área</th>
@@ -63,6 +77,7 @@ $tabla.="<tr>
                 <td>".$fila['correlativoDetalle']."</td>
                 <td>".$fila['nomUsuario']."</td>
                 <td>".$fila['hora']."</td>
+                <td>".$fila['fecha']."</td>
                 <td>".$fila['descTipoTramite']."</td>
                 <td>".$fila['nombreCliente']."</td>
                 <td>".$fila['descArea']."</td>
@@ -104,5 +119,6 @@ $html = datos();
 $pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
 $pdf->WriteHTML($html);
 $pdf->Output();
+ 
 
 ?>

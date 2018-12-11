@@ -53,10 +53,7 @@ create table detalleEnvio (
     codigoStatus int,
     numDoc varchar(25),
     monto varchar(25),
-    observacion text,
-    fechaRevision date,
-    horaRevision time,
-    fechaEntrega date
+    observacion text
 );
 
 create table tipoTramite(
@@ -262,19 +259,8 @@ create procedure encabezadoEnvio(
 )
 begin
 	declare idAnterior int;
-	declare horaActual time;
-    declare horaPredefinida time;
     set idAnterior = (select max(codigoEnvio) from envio) + 1;
-    set horaActual = cast(date_format(now(), "%H:%i:%s") as time);
-    set horaPredefinida = cast('13:00:00' as time);
-
-	if horaActual > horaPredefinida then 
-		insert into envio values(null, concat('ED', idAnterior), usuario, curdate(), DATE_FORMAT(NOW(), "%H:%i:%s" ), 2); 
-	else 
-		insert into envio values(null, concat('ED', idAnterior), usuario, curdate(), DATE_FORMAT(NOW(), "%H:%i:%s" ), 1);    
-	end if;
-	
-    
+	insert into envio values(null, concat('ED', idAnterior), usuario, curdate(), DATE_FORMAT(NOW( ), "%H:%i:%s" ), 1);    
     select max(codigoEnvio) as codigoEnvio from envio;
 end
 $$
@@ -292,7 +278,7 @@ create procedure registrarDetalleEnvio(
 begin
 	declare idAnterior int;
     set idAnterior = (select max(codigoDetalleEnvio) from detalleEnvio) + 1;
-	insert into detalleEnvio values (null, concat('DD', idAnterior), envio, tramite, cliente, documento, area, 1, num, mon, obs, '0000-00-00', '00:00:00', '0000-00-00');
+	insert into detalleEnvio values (null, concat('DD', idAnterior), envio, tramite, cliente, documento, area, 1, num, mon, obs);
 end
 $$
 
@@ -376,17 +362,6 @@ begin
 end
 $$
 
-delimiter $$
-create procedure mostrarPaquetesManana()
-begin
-	select Distinct(e.codigoEnvio), e.correlativoEnvio, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.codigoUsuario, u.nombre, u.apellido from envio e
-	inner join usuario u on u.codigoUsuario = e.codigoUsuario
-	inner join detalleEnvio d on e.codigoEnvio = d.codigoEnvio
-	where e.estado = 2
-    order by e.codigoEnvio desc;
-end
-$$
-
 -- select * from detalleEnvio;
 
 -- call detallesEnvioLabel(1);
@@ -461,7 +436,7 @@ begin
     inner join area a on a.codigoArea = d.codigoArea 
     inner join status s on s.codigoStatus = d.codigoStatus
     
-    where s.codigoStatus = 5 or s.codigoStatus = 2 and e.codigoUsuario = idUsuario
+    where s.codigoStatus = 4 or s.codigoStatus = 2 and e.codigoUsuario = idUsuario
     
     order by d.codigoDetalleEnvio desc;
 end
@@ -479,9 +454,10 @@ select e.codigoEnvio, d.codigoDetalleEnvio, d.correlativoDetalle, u.nomUsuario, 
     inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
     inner join area a on a.codigoArea = d.codigoArea 
     inner join status s on s.codigoStatus = d.codigoStatus
-where e.fecha=(select curdate()) order by e.hora DESC;
+ where e.fecha between (SELECT date_add(CURDATE(), INTERVAL -1 DAY)) and CURDATE()  order by e.fecha DESC;
 end
 $$
+
 
 delimiter $$
 create procedure tiposTramiteUsuario(
@@ -491,7 +467,7 @@ begin
 select count(tt.codigoTipoTramite) as Tramite, tt.descTipoTramite  from detalleEnvio d
 inner join tipoTramite tt on tt.codigoTipoTramite = d.codigoTipoTramite
 inner join envio e on e.codigoEnvio = d.codigoEnvio
-where e.codigoUsuario=idUsuario
+where e.codigoUsuario=idUsuario and e.fecha between (SELECT date_add(CURDATE(), INTERVAL -31 DAY)) and CURDATE()
 group by tt.descTipoTramite;
 end
 $$
@@ -504,7 +480,7 @@ begin
 select count(c.codigoCliente) as Cliente, c.nombreCliente  from detalleEnvio d
 inner join clientes c on c.codigoCliente = d.codigoCliente
 inner join envio e on e.codigoEnvio = d.codigoEnvio
-where e.codigoUsuario=idUsuario
+where e.codigoUsuario=idUsuario and e.fecha between (SELECT date_add(CURDATE(), INTERVAL -31 DAY)) and CURDATE()
 group by c.nombreCliente;
 end
 $$
@@ -722,26 +698,16 @@ insert into status values (null, 'Regresado a Finanzas');
 
 insert into envio values(null, concat('ED', 1), 2, curdate(), DATE_FORMAT(NOW(), "%H:%i:%s" ), 1);   
 
-insert into detalleEnvio values (null, 'DD1', 1, 1, 1, 1, 1, 2, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
-insert into detalleEnvio values (null, 'DD2', 1, 1, 2, 1, 1, 3, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
-insert into detalleEnvio values (null, 'DD3', 1, 1, 3, 1, 1, 1, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
-insert into detalleEnvio values (null, 'DD4', 1, 1, 1, 1, 1, 4, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
-
-
-
-insert into envio values(null, concat('ED', 2), 2, curdate(), '14:00:01', 2);   
-
-insert into detalleEnvio values (null, 'DD5', 2, 1, 1, 1, 1, 2, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
-insert into detalleEnvio values (null, 'DD6', 2, 1, 2, 1, 1, 3, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
-insert into detalleEnvio values (null, 'DD7', 2, 1, 3, 1, 1, 1, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
-insert into detalleEnvio values (null, 'DD8', 2, 1, 1, 1, 1, 4, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
-
+insert into detalleEnvio values (null, 'DD1', 1, 1, 1, 1, 1, 2, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 'DD2', 1, 1, 2, 1, 1, 3, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 'DD3', 1, 1, 3, 1, 1, 1, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 'DD4', 1, 1, 1, 1, 1, 4, '123', '$1', 'nada');
 
 
 -- select * from detalleEnvio;
 
 -- call mostrarPaquetes;
 
-select * from envio;
+select * from detalleEnvio;
 
 
