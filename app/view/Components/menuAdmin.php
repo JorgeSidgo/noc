@@ -32,6 +32,10 @@
     <i class="users icon"></i>
     Gestión de Usuarios
 </a>
+<a href="?1=MensajeroController&2=gestion" class="item menu-it">
+    <i class="shipping fast icon"></i>
+    Gestión de Mensajeros
+</a>
 <a href="?1=EnvioController&2=historialEnvios" class="item menu-it">
     <i class="clock icon"></i>
     Historial de Envíos
