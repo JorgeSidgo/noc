@@ -689,7 +689,8 @@ insert into tipoDocumento values(null, 'Otro');
 
 #Status 
 insert into status values (null, 'Pendiente');
-insert into status values (null, 'Revisado');
+insert into status values (null, 'Incompleto');
+insert into status values (null, 'Recibido');
 insert into status values (null, 'Completo');
 insert into status values (null, 'Regresado a Finanzas');
 
@@ -707,4 +708,5 @@ insert into detalleEnvio values (null, 'DD4', 1, 1, 1, 1, 1, 4, '123', '$1', 'na
 -- call mostrarPaquetes;
 
 select * from detalleEnvio;
+
 

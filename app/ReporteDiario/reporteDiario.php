@@ -78,12 +78,16 @@ $tabla.="<tr>
                          $tabla.="<td bgcolor='lightgreen'>".$fila['descStatus']."</td>";
                             break;
 
-                 case 'Revisado':
+                 case 'Incompleto':
                          $tabla.="<td bgcolor='#F67943'>".$fila['descStatus']."</td>";
                              break;
+
+                 case 'Recibido':
+                        $tabla.="<td bgcolor='lightblue'>".$fila['descStatus']."</td>";
+                             break;             
                 
                 case 'Regresado a Finanzas':
-                        $tabla.="<td bgcolor='lightblue'>".$fila['descStatus']."</td>";
+                        $tabla.="<td style='background-color: rgba(149, 165, 166, 0.3);'>".$fila['descStatus']."</td>";
                              break;            
                 }
                 $tabla.="<td>".$fila['observacion']."</td>

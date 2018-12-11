@@ -69,13 +69,16 @@
                             <td v-if="pendiente.descStatus == 'Pendiente'" style="background-color: #F6AD43;">
                                 {{pendiente.descStatus}}
                             </td>
-                            <td v-else-if="pendiente.descStatus == 'Revisado'" style="background-color: #F67943;">
+                            <td v-else-if="pendiente.descStatus == 'Incompleto'" style="background-color: #F67943;">
+                                {{pendiente.descStatus}}
+                            </td>
+                            <td v-else-if="pendiente.descStatus == 'Recibido'" style="background-color:lightblue;">
                                 {{pendiente.descStatus}}
                             </td>
                             <td v-else-if="pendiente.descStatus == 'Completo'" style="background-color: lightgreen;">
                                 {{pendiente.descStatus}}
                             </td>
-                            <td v-else-if="pendiente.descStatus == 'Regresado a Finanzas'" style="background-color: lightblue;">
+                            <td v-else-if="pendiente.descStatus == 'Regresado a Finanzas'" style="background-color: rgba(149, 165, 166, 0.3);">
                                 {{pendiente.descStatus}}
                             </td>
 

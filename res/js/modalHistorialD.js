@@ -41,13 +41,16 @@ Vue.component('modal-detalles', {
                                 <td  v-if="detalle.descStatus == 'Pendiente'" style="background-color: #F6AD43;">
                                     {{detalle.descStatus}}
                                 </td>
-                                <td  v-else-if="detalle.descStatus == 'Revisado'" style="background-color: #F67943;">
+                                <td v-else-if="detalle.descStatus == 'Incompleto'" style="background-color: #F67943;">
+                                {{detalle.descStatus}}
+                                 </td>
+                                <td  v-else-if="detalle.descStatus == 'Recibido'" style="background-color:lightblue;">
                                     {{detalle.descStatus}}
                                 </td>
                                 <td  v-else-if="detalle.descStatus == 'Completo'" style="background-color: lightgreen;">
                                     {{detalle.descStatus}}
                                 </td>
-                                <td  v-else-if="detalle.descStatus == 'Regresado a Finanzas'" style="background-color: lightblue;">
+                                <td  v-else-if="detalle.descStatus == 'Regresado a Finanzas'" style="background-color: rgba(149, 165, 166, 0.3);>
                                     {{detalle.descStatus}}
                                 </td>
                                 

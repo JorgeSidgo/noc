@@ -83,21 +83,25 @@ class Reporte {
                         <td>".$fila['numDoc']."</td>
                         <td>".$fila['monto']."</td>";
                         switch ($fila['descStatus']) {
-                        case 'Pendiente':
-                                $tabla.="<td bgcolor='#F6AD43'>".$fila['descStatus']."</td>";
+                     case 'Pendiente':
+                            $tabla.="<td bgcolor='#F6AD43'>".$fila['descStatus']."</td>";
+                            break;
+                       
+                    case 'Completo':
+                            $tabla.="<td bgcolor='lightgreen'>".$fila['descStatus']."</td>";
+                               break;
+   
+                    case 'Incompleto':
+                            $tabla.="<td bgcolor='#F67943'>".$fila['descStatus']."</td>";
                                 break;
-                            
-                        case 'Completo':
-                                $tabla.="<td bgcolor='lightgreen'>".$fila['descStatus']."</td>";
-                                    break;
-
-                        case 'Revisado':
-                                $tabla.="<td bgcolor='#F67943'>".$fila['descStatus']."</td>";
-                                    break;
-                        
-                        case 'Regresado a Finanzas':
-                                $tabla.="<td bgcolor='lightblue'>".$fila['descStatus']."</td>";
-                                    break;            
+   
+                    case 'Recibido':
+                           $tabla.="<td bgcolor='lightblue'>".$fila['descStatus']."</td>";
+                                break;             
+                   
+                   case 'Regresado a Finanzas':
+                           $tabla.="<td style='background-color: rgba(149, 165, 166, 0.3);'>".$fila['descStatus']."</td>";
+                                break;          
                         }
                         $tabla.="<td>".$fila['observacion']."</td>
                      </tr>";
@@ -189,21 +193,25 @@ class Reporte {
                         <td>".$fila['numDoc']."</td>
                         <td>".$fila['monto']."</td>";
                         switch ($fila['descStatus']) {
-                        case 'Pendiente':
-                                $tabla.="<td bgcolor='#F6AD43'>".$fila['descStatus']."</td>";
+                    case 'Pendiente':
+                            $tabla.="<td bgcolor='#F6AD43'>".$fila['descStatus']."</td>";
+                            break;
+                       
+                    case 'Completo':
+                            $tabla.="<td bgcolor='lightgreen'>".$fila['descStatus']."</td>";
+                               break;
+   
+                    case 'Incompleto':
+                            $tabla.="<td bgcolor='#F67943'>".$fila['descStatus']."</td>";
                                 break;
-                            
-                        case 'Completo':
-                                $tabla.="<td bgcolor='lightgreen'>".$fila['descStatus']."</td>";
-                                    break;
-
-                        case 'Revisado':
-                                $tabla.="<td bgcolor='#F67943'>".$fila['descStatus']."</td>";
-                                    break;
-                        
-                        case 'Regresado a Finanzas':
-                                $tabla.="<td bgcolor='lightblue'>".$fila['descStatus']."</td>";
-                                    break;            
+   
+                    case 'Recibido':
+                           $tabla.="<td bgcolor='lightblue'>".$fila['descStatus']."</td>";
+                                break;             
+                   
+                   case 'Regresado a Finanzas':
+                           $tabla.="<td style='background-color: rgba(149, 165, 166, 0.3);'>".$fila['descStatus']."</td>";
+                                break;          
                         }
                         $tabla.="<td>".$fila['observacion']."</td>
                      </tr>";
@@ -296,21 +304,25 @@ class Reporte {
                         <td>".$fila['numDoc']."</td>
                         <td>".$fila['monto']."</td>";
                         switch ($fila['descStatus']) {
-                        case 'Pendiente':
-                                $tabla.="<td bgcolor='#F6AD43'>".$fila['descStatus']."</td>";
+                    case 'Pendiente':
+                            $tabla.="<td bgcolor='#F6AD43'>".$fila['descStatus']."</td>";
+                            break;
+                       
+                    case 'Completo':
+                            $tabla.="<td bgcolor='lightgreen'>".$fila['descStatus']."</td>";
+                               break;
+   
+                    case 'Incompleto':
+                            $tabla.="<td bgcolor='#F67943'>".$fila['descStatus']."</td>";
                                 break;
-                            
-                        case 'Completo':
-                                $tabla.="<td bgcolor='lightgreen'>".$fila['descStatus']."</td>";
-                                    break;
-
-                        case 'Revisado':
-                                $tabla.="<td bgcolor='#F67943'>".$fila['descStatus']."</td>";
-                                    break;
-                        
-                        case 'Regresado a Finanzas':
-                                $tabla.="<td bgcolor='lightblue'>".$fila['descStatus']."</td>";
-                                    break;            
+   
+                    case 'Recibido':
+                           $tabla.="<td bgcolor='lightblue'>".$fila['descStatus']."</td>";
+                                break;             
+                   
+                   case 'Regresado a Finanzas':
+                           $tabla.="<td style='background-color: rgba(149, 165, 166, 0.3);'>".$fila['descStatus']."</td>";
+                                break;            
                         }
                         $tabla.="<td>".$fila['observacion']."</td>
                      </tr>";
