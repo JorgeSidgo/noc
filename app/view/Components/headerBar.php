@@ -9,13 +9,13 @@
         <img src="./res/img/deloitteNigga.svg" alt="" width="" class="logo" id="">
     </a>
 
-    <div style="margin-right:10px;" id="notif" class="ui floated right dropdown tug floating item">
+    <!-- <div style="margin-right:10px;" id="notif" class="ui floated right dropdown tug floating item">
         <i class="bell icon"></i>
 
         <div class="menu">
             <div class="header">
                 Notificaciones
-                <!-- <div class="ui floated right tiny active inline loader"></div> -->
+                <div class="ui floated right tiny active inline loader"></div>
             </div>
 
             <div class="divider"></div>
@@ -36,9 +36,9 @@
         </div>
          <a class="ui bottom right attached green-deloitte label">1</a>
     </div>
-    
+     -->
 
-    <div style="margin-right:20px;" id="usuario-header" class="ui dropdown tug floating item">
+    <div style="margin-right:20px;" id="usuario-header" class="ui floated right dropdown tug floating item">
         <img class="ui avatar image" src="./res/img/userDef.png"> &nbsp;&nbsp; <?php echo $_SESSION["nomUsuario"] ?>
         <i class="dropdown icon"></i>
         <div class="menu">

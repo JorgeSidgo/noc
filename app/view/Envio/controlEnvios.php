@@ -126,9 +126,37 @@
                 </table>
             </div>
         </div>
+
+        <div v-if="paquetesManana > 0" class="row">
+            <h3 style="width: 100%;" class="ui dividing header">
+                Paquetes agendados para mañana
+            </h3>
+        </div>
+
+        <div v-if="paquetesManana > 0" class="row">
+            <div class="sixteen wide column">
+                <table id="dtManana" class="ui selectable very compact celled table" style="width:100%; margin:auto;">
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Correlativo</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Usuario</th>
+                            <th>Nombre</th>
+                            <th>Documentos</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 <script src="./res/tablas/tablaPaquetes.js"></script>
+<script src="./res/tablas/tablaManana.js"></script>
 <script src="./res/js/modalDetalles.js"></script>
 
 <script>
@@ -138,6 +166,8 @@
             detalles: [],
 
             idEnvio: 0,
+
+            paquetesManana: <?php echo $numPaquetesManana ?>,
 
             datosDetalle: {
                 correlativo: '',
@@ -188,9 +218,9 @@
             },
 
             modalCambiar(idDetalle, correlativo, tramite, cliente, area, tipoDoc, estado, obs) {
-                
+
                 // this.cambiarDetalle.idEnvio = idEnvio;
-                
+
                 this.datosDetalle.correlativo = correlativo;
                 this.datosDetalle.tramite = tramite;
                 this.datosDetalle.cliente = cliente;
@@ -285,7 +315,7 @@
                             });
                         }
                         app.reloadTabla();
-                        
+
                         $('#cargando').removeClass('active');
                     }
                 });
@@ -297,6 +327,12 @@
         computed: {
 
         }
+    });
+</script>
+
+<script>
+    $(function () {
+        $('.sixteen.wide.column').children().children().css('margin', '0');
     });
 </script>
 
