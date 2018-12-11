@@ -54,9 +54,16 @@ create table detalleEnvio (
     numDoc varchar(25),
     monto varchar(25),
     observacion text,
+    fechaRegistro date,
     fechaRevision date,
     horaRevision time,
-    fechaEnviado date
+    fechaEnviado date,
+    codigoMensajero int
+);
+
+create table mensajero(
+	codigoMensajero int primary key unique auto_increment,
+    nombre varchar(50)
 );
 
 create table tipoTramite(
@@ -101,6 +108,7 @@ alter table detalleEnvio add constraint fk_detalleEnvio_area foreign key (codigo
 alter table detalleEnvio add constraint fk_detalleEnvio_clientes foreign key (codigoCliente) references clientes(codigoCliente);
 -- alter table detalleEnvio add constraint fk_detalleEnvio_observaciones foreign key (codigoObservaciones) references observaciones(codigoObservaciones);
 alter table detalleEnvio add constraint fk_detalleEnvio_status foreign key (codigoStatus) references status(codigoStatus);
+alter table detalleEnvio add constraint fk_detalleEnvio_mensajero foreign key (codigoMensajero) references mensajero(codigoMensajero);
 
 
 delimiter $$
@@ -291,7 +299,7 @@ create procedure registrarDetalleEnvio(
 begin
 	declare idAnterior int;
     set idAnterior = (select max(codigoDetalleEnvio) from detalleEnvio) + 1;
-    insert into detalleEnvio values (null, concat('DD', idAnterior), envio, tramite, cliente, documento, area, 1, num, mon, obs, '0000-00-00', '00:00:00', '0000-00-00');
+    insert into detalleEnvio values (null, concat('DD', idAnterior), envio, tramite, cliente, documento, area, 1, num, mon, obs,curdate(), '0000-00-00', '00:00:00', '0000-00-00', 0);
 
 end
 $$
@@ -309,7 +317,9 @@ begin
     inner join area a on a.codigoArea = d.codigoArea 
     inner join status s on s.codigoStatus = d.codigoStatus
     
-    where s.codigoStatus = 1;
+    where s.codigoStatus = 1
+    
+    order by d.codigoDetalleEnvio desc;
     
 end
 $$
@@ -416,7 +426,9 @@ begin
     inner join area a on a.codigoArea = d.codigoArea 
     inner join status s on s.codigoStatus = d.codigoStatus
     
-    where e.codigoEnvio = idEnvio;
+    where e.codigoEnvio = idEnvio
+    
+    order by d.codigoDetalleEnvio desc;
 end
 $$
 
@@ -426,10 +438,22 @@ create procedure actualizarDetalle(
     in idStatus int,
     in obs text
 )
-begin 
-	update detalleEnvio 
-    set codigoStatus = idStatus, observacion = obs
-    where codigoDetalleEnvio = idDetalle;
+begin
+
+    if idStatus <> 5 and idStatus <> 1 then
+        update detalleEnvio 
+        set codigoStatus = idStatus, observacion = obs, fechaRevision = curdate(), horaRevision = DATE_FORMAT(NOW(), "%H:%i:%s" )
+        where codigoDetalleEnvio = idDetalle;
+    elseif idStatus = 1 then  
+        update detalleEnvio 
+        set codigoStatus = idStatus, observacion = obs, fechaRegistro = curdate()
+        where codigoDetalleEnvio = idDetalle;
+    elseif idStatus = 5 then  
+        update detalleEnvio 
+        set codigoStatus = idStatus, observacion = obs, fechaEnviado = curdate()
+        where codigoDetalleEnvio = idDetalle;
+    end if;
+	
 end
 $$
 
@@ -715,35 +739,38 @@ insert into tipoDocumento values(null, 'Informes');
 insert into tipoDocumento values(null, 'Otro');
 
 #Status 
-insert into status values (null, 'Pendiente');
+insert into status values (null, 'Pendiente de Revision');
 insert into status values (null, 'Incompleto');
 insert into status values (null, 'Recibido');
+insert into status values (null, 'Pendiente');
 insert into status values (null, 'Completo');
-insert into status values (null, 'Regresado a Finanzas');
+
+insert into mensajero values(null, 'Enrique Segoviano');
+insert into mensajero values(null, 'Ramon Valdez');
 
 
 insert into envio values(null, concat('ED', 1), 2, curdate(), DATE_FORMAT(NOW(), "%H:%i:%s" ), 1);   
 
-insert into detalleEnvio values (null, 'DD1', 1, 1, 1, 1, 1, 2, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
-insert into detalleEnvio values (null, 'DD2', 1, 1, 2, 1, 1, 3, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
-insert into detalleEnvio values (null, 'DD3', 1, 1, 3, 1, 1, 1, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
-insert into detalleEnvio values (null, 'DD4', 1, 1, 1, 1, 1, 4, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
+insert into detalleEnvio values (null, 'DD1', 1, 1, 1, 1, 1, 2, '123', '$1', 'nada', curdate(),'0000-00-00', '00:00:00', '0000-00-00', 1);
+insert into detalleEnvio values (null, 'DD2', 1, 1, 2, 1, 1, 3, '123', '$1', 'nada', curdate(),'0000-00-00', '00:00:00', '0000-00-00', 1);
+insert into detalleEnvio values (null, 'DD3', 1, 1, 3, 1, 1, 1, '123', '$1', 'nada', curdate(),'0000-00-00', '00:00:00', '0000-00-00', 1);
+insert into detalleEnvio values (null, 'DD4', 1, 1, 1, 1, 1, 4, '123', '$1', 'nada', curdate(),'0000-00-00', '00:00:00', '0000-00-00', 1);
 		
 
 						
 insert into envio values(null, concat('ED', 2), 4, curdate(), '14:00:01', 2);   
 
-insert into detalleEnvio values (null, 'DD5', 2, 1, 1, 1, 1, 2, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
-insert into detalleEnvio values (null, 'DD6', 2, 1, 2, 1, 1, 3, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
-insert into detalleEnvio values (null, 'DD7', 2, 1, 3, 1, 1, 1, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
-insert into detalleEnvio values (null, 'DD8', 2, 1, 1, 1, 1, 4, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
+insert into detalleEnvio values (null, 'DD5', 2, 1, 1, 1, 1, 2, '123', '$1', 'nada', curdate(),'0000-00-00', '00:00:00', '0000-00-00', 1);
+insert into detalleEnvio values (null, 'DD6', 2, 1, 2, 1, 1, 3, '123', '$1', 'nada', curdate(),'0000-00-00', '00:00:00', '0000-00-00', 1);
+insert into detalleEnvio values (null, 'DD7', 2, 1, 3, 1, 1, 1, '123', '$1', 'nada', curdate(),'0000-00-00', '00:00:00', '0000-00-00', 1);
+insert into detalleEnvio values (null, 'DD8', 2, 1, 1, 1, 1, 4, '123', '$1', 'nada', curdate(),'0000-00-00', '00:00:00', '0000-00-00', 1);
 
 insert into envio values(null, concat('ED', 3), 4, curdate(), '16:00:01', 2);   
 
-insert into detalleEnvio values (null, 'DD9', 3, 1, 1, 1, 1, 2, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
-insert into detalleEnvio values (null, 'DD10', 3, 1, 2, 1, 1, 3, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
-insert into detalleEnvio values (null, 'DD11', 3, 1, 3, 1, 1, 1, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
-insert into detalleEnvio values (null, 'DD12', 3, 1, 1, 1, 1, 4, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
+insert into detalleEnvio values (null, 'DD9', 3, 1, 1, 1, 1, 2, '123', '$1', 'nada', curdate(),'0000-00-00', '00:00:00', '0000-00-00', 1);
+insert into detalleEnvio values (null, 'DD10', 3, 1, 2, 1, 1, 3, '123', '$1', 'nada',curdate(), '0000-00-00', '00:00:00', '0000-00-00', 1);
+insert into detalleEnvio values (null, 'DD11', 3, 1, 3, 1, 1, 1, '123', '$1', 'nada',curdate(), '0000-00-00', '00:00:00', '0000-00-00', 1);
+insert into detalleEnvio values (null, 'DD12', 3, 1, 1, 1, 1, 4, '123', '$1', 'nada',curdate(), '0000-00-00', '00:00:00', '0000-00-00', 1);
 
 
 -- select * from detalleEnvio;
@@ -753,3 +780,4 @@ insert into detalleEnvio values (null, 'DD12', 3, 1, 1, 1, 1, 4, '123', '$1', 'n
 select * from detalleEnvio;
 
 
+call detallesEnvio(1)
