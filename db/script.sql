@@ -53,7 +53,10 @@ create table detalleEnvio (
     codigoStatus int,
     numDoc varchar(25),
     monto varchar(25),
-    observacion text
+    observacion text,
+    fechaRevision date,
+    horaRevision time,
+    fechaEntrega date
 );
 
 create table tipoTramite(
@@ -259,8 +262,19 @@ create procedure encabezadoEnvio(
 )
 begin
 	declare idAnterior int;
+	declare horaActual time;
+    declare horaPredefinida time;
     set idAnterior = (select max(codigoEnvio) from envio) + 1;
-	insert into envio values(null, concat('ED', idAnterior), usuario, curdate(), DATE_FORMAT(NOW( ), "%H:%i:%s" ), 1);    
+    set horaActual = cast(date_format(now(), "%H:%i:%s") as time);
+    set horaPredefinida = cast('13:00:00' as time);
+
+	if horaActual > horaPredefinida then 
+		insert into envio values(null, concat('ED', idAnterior), usuario, curdate(), DATE_FORMAT(NOW(), "%H:%i:%s" ), 2); 
+	else 
+		insert into envio values(null, concat('ED', idAnterior), usuario, curdate(), DATE_FORMAT(NOW(), "%H:%i:%s" ), 1);    
+	end if;
+	
+    
     select max(codigoEnvio) as codigoEnvio from envio;
 end
 $$
@@ -278,7 +292,7 @@ create procedure registrarDetalleEnvio(
 begin
 	declare idAnterior int;
     set idAnterior = (select max(codigoDetalleEnvio) from detalleEnvio) + 1;
-	insert into detalleEnvio values (null, concat('DD', idAnterior), envio, tramite, cliente, documento, area, 1, num, mon, obs);
+	insert into detalleEnvio values (null, concat('DD', idAnterior), envio, tramite, cliente, documento, area, 1, num, mon, obs, '0000-00-00', '00:00:00', '0000-00-00');
 end
 $$
 
@@ -697,16 +711,16 @@ insert into status values (null, 'Regresado a Finanzas');
 
 insert into envio values(null, concat('ED', 1), 2, curdate(), DATE_FORMAT(NOW(), "%H:%i:%s" ), 1);   
 
-insert into detalleEnvio values (null, 'DD1', 1, 1, 1, 1, 1, 2, '123', '$1', 'nada');
-insert into detalleEnvio values (null, 'DD2', 1, 1, 2, 1, 1, 3, '123', '$1', 'nada');
-insert into detalleEnvio values (null, 'DD3', 1, 1, 3, 1, 1, 1, '123', '$1', 'nada');
-insert into detalleEnvio values (null, 'DD4', 1, 1, 1, 1, 1, 4, '123', '$1', 'nada');
+insert into detalleEnvio values (null, 'DD1', 1, 1, 1, 1, 1, 2, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
+insert into detalleEnvio values (null, 'DD2', 1, 1, 2, 1, 1, 3, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
+insert into detalleEnvio values (null, 'DD3', 1, 1, 3, 1, 1, 1, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
+insert into detalleEnvio values (null, 'DD4', 1, 1, 1, 1, 1, 4, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
 
 
 -- select * from detalleEnvio;
 
 -- call mostrarPaquetes;
 
-select * from detalleEnvio;
+select * from envio;
 
 
