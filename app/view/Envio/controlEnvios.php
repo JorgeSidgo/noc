@@ -73,7 +73,7 @@
                     <select v-model="cambiarDetalle.idStatus" class="ui dropdown" name="idEstado" id="idEstado">
                         <option value="2">Incompleto</option>
                         <option value="3">Recibido</option>
-                        <option value="4">Regresado a finanzas</option>
+                        <option value="4">Pendiente</option>
                         <option value="5">Completo</option>
                     </select>
                 </div>
