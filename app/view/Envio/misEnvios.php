@@ -41,54 +41,25 @@
             </h3>
         </div>
 
-        <div v-if="pendientes.length" class="row">
+        <div class="row">
             <div class="sixteen wide column">
-                <table id="" class="ui selectable very compact celled table" style="width:100%; margin:auto;">
+                <table id="dtDocumentosPend" class="ui selectable very compact celled table" style="width:100%; margin:auto;">
                     <thead>
                         <tr>
-                            <th>Trámite</th>
+                            <th>Id</th>
+                            <th>Código</th>
+                            <th>Tipo de trámite</th>
                             <th>Cliente</th>
                             <th>Área</th>
                             <th>Tipo de Documento</th>
-                            <th>N° Documento</th>
+                            <th>N° Doc</th>
+                            <th>Estado</th>
                             <th>Monto</th>
-                            <th>Status</th>
                             <th>Observación</th>
-                            <th></th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="pendiente in pendientes">
-                            <td>{{pendiente.descTipoTramite}}</td>
-                            <td>{{pendiente.nombreCliente}}</td>
-                            <td>{{pendiente.descArea}}</td>
-                            <td>{{pendiente.descTipoDocumento}}</td>
-                            <td>{{pendiente.numDoc}}</td>
-                            <td>{{pendiente.monto}}</td>
-
-                            <td v-if="pendiente.descStatus == 'Pendiente'" style="background-color: #F6AD43;">
-                                {{pendiente.descStatus}}
-                            </td>
-                            <td v-else-if="pendiente.descStatus == 'Incompleto'" style="background-color: #F67943;">
-                                {{pendiente.descStatus}}
-                            </td>
-                            <td v-else-if="pendiente.descStatus == 'Recibido'" style="background-color:lightblue;">
-                                {{pendiente.descStatus}}
-                            </td>
-                            <td v-else-if="pendiente.descStatus == 'Completo'" style="background-color: lightgreen;">
-                                {{pendiente.descStatus}}
-                            </td>
-                            <td v-else-if="pendiente.descStatus == 'Regresado a Finanzas'" style="background-color: rgba(149, 165, 166, 0.3);">
-                                {{pendiente.descStatus}}
-                            </td>
-
-                            <td>{{pendiente.observacion}}</td>
-                            <td>
-                                <button @click="modalCambiar(pendiente.codigoDetalleEnvio, pendiente.codigoEnvio)" type="button" class="ui mini circular green icon button btnCambios">
-                                    <i class="sync icon"></i>
-                                </button>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -129,6 +100,7 @@
 </div>
 
 <script src="./res/tablas/tablaMisEnvios.js"></script>
+<script src="./res/tablas/tablaDocPendiente.js"></script>
 <script src="./res/js/modalMisDetalles.js"></script>
 
 <script>

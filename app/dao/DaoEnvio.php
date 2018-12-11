@@ -153,13 +153,15 @@ class DaoEnvio extends DaoBase {
         $_json = '';
 
         while($fila = $resultado->fetch_assoc()) {
+            
             $_json .=  json_encode($fila).',';
+           
         }
 
         $_json = substr($_json,0, strlen($_json) - 1);
 
 
-        return '['.$_json.']';
+         echo '{"data": ['.$_json .']}';
     }
 
     public function mostrarPaquetes()
