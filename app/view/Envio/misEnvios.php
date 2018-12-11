@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <div v-if="pendientes.length" class="row">
+        <div v-if="1" class="row">
             <h3 style="width: 100%;" class="ui dividing header">
                 Documentos Pendientes
             </h3>
@@ -56,7 +56,7 @@
                             <th>Estado</th>
                             <th>Monto</th>
                             <th>Observación</th>
-                            <th>Opciones</th>
+                            <th>Opcion</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -84,6 +84,7 @@
                     <thead>
                         <tr>
                             <th>N°</th>
+                            <th>Correlativo</th>
                             <th>Fecha</th>
                             <th>Hora</th>
                             <th>Documentos</th>
@@ -177,6 +178,10 @@
                 $('#modalCambios').modal('hide');
             },
 
+            refrescarTablaPendientes(){
+                tablaDocumentosPendientes.ajax.reload();
+            },
+
             cambiarEstado() {
 
                 var detalle = JSON.stringify(this.cambiarDetalle);
@@ -203,6 +208,7 @@
                             app.cerrarCambios();
                             app.cargarPendientes();
                             app.reloadTabla();
+                            app.refrescarTablaPendientes();
                         }
 
                     }
@@ -221,6 +227,18 @@
     $(function () {
         $('.sixteen.wide.column').children().children().css('margin', '0');
     });
+</script>
+
+<script>
+$(function() {
+    $(document).on("click", '.btnCambios', function(){
+        var detalle = $(this).attr('detalle-envio');
+        var envio = $(this).attr('envio');
+
+
+        app.modalCambiar(detalle, envio);
+    });
+});
 </script>
 
 <script>

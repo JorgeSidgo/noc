@@ -37,6 +37,9 @@ $(function() {
                 },
                 {
                     "data": "observacion"             
+                },
+                {
+                    "data": "opcion"
                 }
                 
             ],

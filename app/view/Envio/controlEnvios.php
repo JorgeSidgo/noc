@@ -167,7 +167,7 @@
 
             idEnvio: 0,
 
-            paquetesManana: <?php echo $numPaquetesManana ?>,
+            paquetesManana: <?php echo $numPaquetesManana?>,
 
             datosDetalle: {
                 correlativo: '',
@@ -213,6 +213,9 @@
                 tablaPaquetes.ajax.reload();
             },
 
+            reloadTabla2() {
+                tablaManana.ajax.reload();
+            },
             cerrarModal() {
                 this.detalles = [];
             },
@@ -242,6 +245,18 @@
                 $('#modalDetalles').modal('setting', 'autofocus', false).modal('setting', 'closable', false)
                     .modal('show');
                 $('#modalCambios').modal('hide');
+            },
+
+            numeroPaquetesManana() {
+
+                $.ajax({
+                    type: 'POST',
+                    url: '?1=EnvioController&2=numeroPaquetesManana',
+                    success: function(r) {
+                        app.paquetesManana = parseInt(r);
+                    }
+                });
+
             },
 
             cambiarEstado() {
@@ -324,9 +339,7 @@
 
 
         },
-        computed: {
-
-        }
+        
     });
 </script>
 

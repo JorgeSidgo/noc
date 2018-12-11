@@ -123,6 +123,7 @@ class DaoEnvio extends DaoBase {
 
             $object = '{
                             "codigoEnvio": "'.$fila["codigoEnvio"].'",
+                            "correlativoEnvio": "'.$fila["correlativoEnvio"].'",
                             "fecha": "'.$fila["fecha"].'",
                             "hora": "'.$fila["hora"].'",
                             "documentos": "'.$labels.'",
@@ -152,8 +153,18 @@ class DaoEnvio extends DaoBase {
         $_json = '';
 
         while($fila = $resultado->fetch_assoc()) {
+
+
+            $object = json_encode($fila);
+
+
+            $boton = '<button detalle-envio=\"'.$fila["codigoDetalleEnvio"].'\" envio=\"'.$fila["codigoEnvio"].'\" type=\"button\" class=\"ui mini circular green icon button btnCambios\"><i class=\"sync icon\"></i></button>';
+
+            $acciones = ', "opcion": "'.$boton.'"';
+
+            $object = substr_replace($object, $acciones, strlen($object) -1, 0);
             
-            $_json .=  json_encode($fila).',';
+            $_json .=  $object.',';
            
         }
 
