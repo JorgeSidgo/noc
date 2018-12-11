@@ -114,6 +114,7 @@ class Mail {
     }
 
     public function detalleEnvio($codigoEnvio) {
+
         $emailFrom = 'deloitte.prueba.no.reply@gmail.com';
         $emailFromName = 'Deloitte';
 

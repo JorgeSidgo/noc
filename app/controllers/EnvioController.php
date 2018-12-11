@@ -173,8 +173,7 @@ class EnvioController extends ControladorBase {
         }
 
         $codigoEnvio = $dao->encabezadoEnvio();
-        $datosUsuario = json_decode($daoUsuario->cargarDatosUsuario());
-
+        // $datosUsuario = json_decode($daoUsuario->cargarDatosUsuario());
 
         $dao->objeto->setCodigoEnvio($codigoEnvio);
 

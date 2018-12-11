@@ -344,7 +344,7 @@ create procedure getEncabezadoEnvio(
 	in idEnvio int
 )
 begin
-	select e.codigoEnvio, e.correlativoEnvio, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.codigoUsuario, u.nombre, u.apellido
+	select e.codigoEnvio, e.correlativoEnvio, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.codigoUsuario, u.nombre, u.apellido, e.estado
     from envio e
     inner join usuario u on u.codigoUsuario = e.codigoUsuario
     where e.codigoEnvio = idEnvio;
