@@ -438,10 +438,22 @@ create procedure actualizarDetalle(
     in idStatus int,
     in obs text
 )
-begin 
-	update detalleEnvio 
-    set codigoStatus = idStatus, observacion = obs
-    where codigoDetalleEnvio = idDetalle;
+begin
+
+    if idStatus <> 5 and idStatus <> 1 then
+        update detalleEnvio 
+        set codigoStatus = idStatus, observacion = obs, fechaRevision = curdate(), horaRevision = DATE_FORMAT(NOW(), "%H:%i:%s" )
+        where codigoDetalleEnvio = idDetalle;
+    elseif idStatus = 1 then  
+        update detalleEnvio 
+        set codigoStatus = idStatus, observacion = obs, fechaRegistro = curdate()
+        where codigoDetalleEnvio = idDetalle;
+    elseif idStatus = 5 then  
+        update detalleEnvio 
+        set codigoStatus = idStatus, observacion = obs, fechaEnviado = curdate()
+        where codigoDetalleEnvio = idDetalle;
+    end if;
+	
 end
 $$
 
@@ -727,11 +739,11 @@ insert into tipoDocumento values(null, 'Informes');
 insert into tipoDocumento values(null, 'Otro');
 
 #Status 
-insert into status values (null, 'Pendiente');
+insert into status values (null, 'Pendiente de Revision');
 insert into status values (null, 'Incompleto');
 insert into status values (null, 'Recibido');
+insert into status values (null, 'Pendiente');
 insert into status values (null, 'Completo');
-insert into status values (null, 'Regresado a Finanzas');
 
 insert into mensajero values(null, 'Enrique Segoviano');
 insert into mensajero values(null, 'Ramon Valdez');
@@ -768,3 +780,4 @@ insert into detalleEnvio values (null, 'DD12', 3, 1, 1, 1, 1, 4, '123', '$1', 'n
 select * from detalleEnvio;
 
 
+call detallesEnvio(1)

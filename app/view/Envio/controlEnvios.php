@@ -71,11 +71,10 @@
                 <div class="field">
                     <label for="">Estado:</label>
                     <select v-model="cambiarDetalle.idStatus" class="ui dropdown" name="idEstado" id="idEstado">
-                        <option value="1">Pendiente</option>
                         <option value="2">Incompleto</option>
                         <option value="3">Recibido</option>
-                        <option value="4">Completo</option>
-                        <option value="5">Regresado a finanzas</option>
+                        <option value="4">Regresado a finanzas</option>
+                        <option value="5">Completo</option>
                     </select>
                 </div>
                 <div class="field">
