@@ -27,6 +27,10 @@ class EnvioController extends ControladorBase {
     public function controlEnvios()
     {
         self::loadMain();
+        $dao = new DaoEnvio();
+
+        $numPaquetesManana = $dao->contarPaquetesManana();
+
         require_once './app/view/Envio/controlEnvios.php';
     }
 
@@ -65,6 +69,13 @@ class EnvioController extends ControladorBase {
 
         echo $dao->mostrarPaquetes();
     }
+    
+    public function mostrarPaquetesManana()
+    {
+        $dao = new DaoEnvio();
+
+        echo $dao->mostrarPaquetesManana();
+    }
 
     public function historialEnviosP()
     {
@@ -83,7 +94,7 @@ class EnvioController extends ControladorBase {
         $dao->objeto->setCodigoStatus($detalle->idStatus);
         $dao->objeto->setObservacion($detalle->observacion);
 
-        $dao->cambiarEnvio(1);
+        //$dao->cambiarEnvio(1);
 
         echo $dao->actualizarDetalle();
 

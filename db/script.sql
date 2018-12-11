@@ -376,6 +376,17 @@ begin
 end
 $$
 
+delimiter $$
+create procedure mostrarPaquetesManana()
+begin
+	select Distinct(e.codigoEnvio), e.correlativoEnvio, DATE_FORMAT(e.fecha,'%d/%m/%Y') as fecha, e.hora, u.nomUsuario, u.codigoUsuario, u.nombre, u.apellido from envio e
+	inner join usuario u on u.codigoUsuario = e.codigoUsuario
+	inner join detalleEnvio d on e.codigoEnvio = d.codigoEnvio
+	where e.estado = 2
+    order by e.codigoEnvio desc;
+end
+$$
+
 -- select * from detalleEnvio;
 
 -- call detallesEnvioLabel(1);
@@ -450,7 +461,7 @@ begin
     inner join area a on a.codigoArea = d.codigoArea 
     inner join status s on s.codigoStatus = d.codigoStatus
     
-    where s.codigoStatus = 4 or s.codigoStatus = 2 and e.codigoUsuario = idUsuario
+    where s.codigoStatus = 5 or s.codigoStatus = 2 and e.codigoUsuario = idUsuario
     
     order by d.codigoDetalleEnvio desc;
 end
@@ -715,6 +726,16 @@ insert into detalleEnvio values (null, 'DD1', 1, 1, 1, 1, 1, 2, '123', '$1', 'na
 insert into detalleEnvio values (null, 'DD2', 1, 1, 2, 1, 1, 3, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
 insert into detalleEnvio values (null, 'DD3', 1, 1, 3, 1, 1, 1, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
 insert into detalleEnvio values (null, 'DD4', 1, 1, 1, 1, 1, 4, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
+
+
+
+insert into envio values(null, concat('ED', 2), 2, curdate(), '14:00:01', 2);   
+
+insert into detalleEnvio values (null, 'DD5', 2, 1, 1, 1, 1, 2, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
+insert into detalleEnvio values (null, 'DD6', 2, 1, 2, 1, 1, 3, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
+insert into detalleEnvio values (null, 'DD7', 2, 1, 3, 1, 1, 1, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
+insert into detalleEnvio values (null, 'DD8', 2, 1, 1, 1, 1, 4, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
+
 
 
 -- select * from detalleEnvio;
