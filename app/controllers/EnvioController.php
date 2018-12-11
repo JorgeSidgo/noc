@@ -255,6 +255,12 @@ class EnvioController extends ControladorBase {
 
     }
 
+    public function numeroPaquetesManana(){
+        $dao = new DaoEnvio();
+
+        echo $dao->contarPaquetesManana();
+    }
+
     public function setCodigo()
     {
         session_start();

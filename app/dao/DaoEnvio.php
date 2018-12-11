@@ -123,6 +123,7 @@ class DaoEnvio extends DaoBase {
 
             $object = '{
                             "codigoEnvio": "'.$fila["codigoEnvio"].'",
+                            "correlativoEnvio": "'.$fila["correlativoEnvio"].'",
                             "fecha": "'.$fila["fecha"].'",
                             "hora": "'.$fila["hora"].'",
                             "documentos": "'.$labels.'",

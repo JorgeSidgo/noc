@@ -726,16 +726,22 @@ insert into detalleEnvio values (null, 'DD1', 1, 1, 1, 1, 1, 2, '123', '$1', 'na
 insert into detalleEnvio values (null, 'DD2', 1, 1, 2, 1, 1, 3, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
 insert into detalleEnvio values (null, 'DD3', 1, 1, 3, 1, 1, 1, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
 insert into detalleEnvio values (null, 'DD4', 1, 1, 1, 1, 1, 4, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
+		
 
-
-
-insert into envio values(null, concat('ED', 2), 2, curdate(), '14:00:01', 2);   
+						
+insert into envio values(null, concat('ED', 2), 4, curdate(), '14:00:01', 2);   
 
 insert into detalleEnvio values (null, 'DD5', 2, 1, 1, 1, 1, 2, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
 insert into detalleEnvio values (null, 'DD6', 2, 1, 2, 1, 1, 3, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
 insert into detalleEnvio values (null, 'DD7', 2, 1, 3, 1, 1, 1, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
 insert into detalleEnvio values (null, 'DD8', 2, 1, 1, 1, 1, 4, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
 
+insert into envio values(null, concat('ED', 3), 4, curdate(), '16:00:01', 2);   
+
+insert into detalleEnvio values (null, 'DD9', 3, 1, 1, 1, 1, 2, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
+insert into detalleEnvio values (null, 'DD10', 3, 1, 2, 1, 1, 3, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
+insert into detalleEnvio values (null, 'DD11', 3, 1, 3, 1, 1, 1, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
+insert into detalleEnvio values (null, 'DD12c', 3, 1, 1, 1, 1, 4, '123', '$1', 'nada', '0000-00-00', '00:00:00', '0000-00-00');
 
 
 -- select * from detalleEnvio;
