@@ -476,21 +476,27 @@ delimiter $$
 create procedure actualizarDetalle(
 	in idDetalle int,
     in idStatus int,
-    in obs text
+    in obs text,
+    in idMensajero int 
 )
 begin
 
+	if idMensajero = null then
+		set idMensajero = (select codigoMensajero from detalleEnvio where codigoDetalleEnvio = idDetalle);
+	end if;
+
+
     if idStatus <> 5 and idStatus <> 1 then
         update detalleEnvio 
-        set codigoStatus = idStatus, observacion = obs, fechaRevision = curdate(), horaRevision = DATE_FORMAT(NOW(), "%H:%i:%s" )
+        set codigoStatus = idStatus, observacion = obs, fechaRevision = curdate(), horaRevision = DATE_FORMAT(NOW(), "%H:%i:%s" ), codigoMensajero = idMensajero
         where codigoDetalleEnvio = idDetalle;
     elseif idStatus = 1 then  
         update detalleEnvio 
-        set codigoStatus = idStatus, observacion = obs, fechaRegistro = curdate()
+        set codigoStatus = idStatus, observacion = obs, fechaRegistro = curdate(), codigoMensajero = idMensajero
         where codigoDetalleEnvio = idDetalle;
     elseif idStatus = 5 then  
         update detalleEnvio 
-        set codigoStatus = idStatus, observacion = obs, fechaEnviado = curdate()
+        set codigoStatus = idStatus, observacion = obs, fechaRevision = curdate(), fechaEnviado = curdate(), codigoMensajero = idMensajero
         where codigoDetalleEnvio = idDetalle;
     end if;
 	
@@ -796,6 +802,7 @@ insert into status values (null, 'Recibido');
 insert into status values (null, 'Pendiente');
 insert into status values (null, 'Completo');
 
+insert into mensajero values(null, 'No Asignado',1);
 insert into mensajero values(null, 'Enrique Segoviano',1);
 insert into mensajero values(null, 'Ramon ValdÃ©z',1);
 
