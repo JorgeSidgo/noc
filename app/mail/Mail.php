@@ -154,7 +154,7 @@ class Mail {
 
         $datosEncabezado = $dao->getEncabezadoEnvio()->fetch_assoc();
 
-        $detallesEnvio = $dao->detallesEnvio();
+        $detallesEnvio = $dao->detallesEnvioH();
 
         $celda = '';
 
