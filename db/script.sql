@@ -339,7 +339,7 @@ create procedure registrarDetalleEnvio(
 begin
 	declare idAnterior int;
     set idAnterior = (select max(codigoDetalleEnvio) from detalleEnvio) + 1;
-    insert into detalleEnvio values (null, concat('DD', idAnterior), envio, tramite, cliente, documento, area, 1, num, mon, obs,curdate(), '0000-00-00', '00:00:00', '0000-00-00', 0);
+    insert into detalleEnvio values (null, concat('DD', idAnterior), envio, tramite, cliente, documento, area, 1, num, mon, obs, curdate(), '0000-00-00', '00:00:00', '0000-00-00', 1);
 
 end
 $$
@@ -516,7 +516,7 @@ create procedure misDocumentosPendientes(
 	in idUsuario int 
 )
 begin
-		select e.codigoEnvio, d.codigoDetalleEnvio, d.correlativoDetalle, u.nomUsuario, e.fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+	select e.codigoEnvio, d.codigoDetalleEnvio, d.correlativoDetalle, u.nomUsuario, e.fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
 	from detalleEnvio d
 	inner join envio e on e.codigoEnvio = d.codigoEnvio
     inner join usuario u on u.codigoUsuario = e.codigoUsuario
@@ -526,9 +526,20 @@ begin
     inner join area a on a.codigoArea = d.codigoArea 
     inner join status s on s.codigoStatus = d.codigoStatus
     
-    where s.codigoStatus = 5 or s.codigoStatus = 2 and e.codigoUsuario = idUsuario
+    where (s.codigoStatus = 4 or s.codigoStatus = 2) and e.codigoUsuario = idUsuario
     
     order by d.codigoDetalleEnvio desc;
+end
+$$
+
+delimiter $$
+create procedure contarDocumentosPendientes(
+	in idUsuario int 
+)
+begin
+	select count(d.codigoDetalleEnvio) as numero
+    from envio e, detalleEnvio d
+    where (s.codigoStatus = 4 or s.codigoStatus = 2) and e.codigoUsuario = idUsuario;
 end
 $$
 
@@ -786,7 +797,7 @@ insert into status values (null, 'Pendiente');
 insert into status values (null, 'Completo');
 
 insert into mensajero values(null, 'Enrique Segoviano',1);
-insert into mensajero values(null, 'Ramon Valdez',1);
+insert into mensajero values(null, 'Ramon ValdÃ©z',1);
 
 
 insert into envio values(null, concat('ED', 1), 2, curdate(), DATE_FORMAT(NOW(), "%H:%i:%s" ), 1);   

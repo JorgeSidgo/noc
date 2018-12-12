@@ -270,6 +270,18 @@ class DaoEnvio extends DaoBase {
         return $num;
     }
 
+    public function contarDocumentosPendientes() {
+        $_query = "call contarDocumentosPendientes({$this->objeto->getCodigoUsuario()})";
+
+        $resultado = $this->con->ejecutar($_query);
+
+        $num = $resultado->fetch_assoc();
+    
+        $num = $num['numero'];
+
+        return $num;
+    }
+
     public function mostrarPaquetesManana()
     {
         $_query = "call mostrarPaquetesManana()";
@@ -306,7 +318,7 @@ class DaoEnvio extends DaoBase {
                         $contador_revisado++;
                         break;
                     
-                    case 'Recibido':
+                    case 'Recibido': 
                         $contador_recibido++;
                         break;
 
