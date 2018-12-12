@@ -40,7 +40,7 @@ $(function() {
     </a>
 
    <a style="width: 24%;" id="btnReportes"  class="ui teal inverted segment">
-        <h3>Reporte Diario</h3>
+        <h3>Reportes</h3>
         <div class="ui divider"></div>
         <i class="save icon"></i>
     </a>

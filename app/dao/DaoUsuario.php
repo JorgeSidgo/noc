@@ -64,7 +64,7 @@ class DaoUsuario extends DaoBase {
 
 
     public function registrar() {
-        $_query = "call registrarUsuario('".$this->objeto->getNombre()."', '".$this->objeto->getApellido()."','".$this->objeto->getNomUsuario()."', '".$this->objeto->getEmail()."', '".sha1($this->objeto->getPass())."', ".$this->objeto->getCodigoArea().", ".$this->objeto->getCodigoRol().")";
+        $_query = "call registrarUsuario('".$this->objeto->getNombre()."', '".$this->objeto->getApellido()."','".$this->objeto->getNomUsuario()."', '".$this->objeto->getEmail()."', '".sha1($this->objeto->getPass())."', ".$this->objeto->getCodigoArea().", ".$this->objeto->getCodigoRol().",1)";
 
         $resultado = $this->con->ejecutar($_query);
 
@@ -169,7 +169,7 @@ class DaoUsuario extends DaoBase {
     }
 
     public function eliminar() {
-        $_query = "delete from usuario where codigoUsuario = ".$this->objeto->getCodigoUsuario();
+        $_query = "update usuario set idEliminado=2 where codigoUsuario = ".$this->objeto->getCodigoUsuario();
 
         $resultado = $this->con->ejecutar($_query);
 
@@ -208,7 +208,7 @@ class DaoUsuario extends DaoBase {
     }
 
     public function mostrarUsuariosCmb() {
-        $_query = "select * from usuario;";
+        $_query = "select * from usuario where idEliminado=1 and codigoAuth=1";
 
         $resultado = $this->con->ejecutar($_query);
 

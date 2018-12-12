@@ -8,7 +8,7 @@ class DaoArea extends DaoBase {
     }
 
     public function mostrarAreas() {
-        $_query = "select * from area";
+        $_query = "select * from area where idEliminado=1";
 
         $resultado = $this->con->ejecutar($_query);
 
@@ -50,7 +50,7 @@ class DaoArea extends DaoBase {
     }
 
     public function registrar() {
-        $_query = "call registrarArea('".$this->objeto->getDescArea()."')";
+        $_query = "call registrarArea('".$this->objeto->getDescArea()."',1)";
 
         $resultado = $this->con->ejecutar($_query);
 
@@ -84,7 +84,7 @@ class DaoArea extends DaoBase {
     }
 
     public function eliminar() {
-        $_query = "delete from area where codigoArea = ".$this->objeto->getCodigoArea();
+        $_query = "update  area set idEliminado=2 where codigoArea = ".$this->objeto->getCodigoArea();
 
         $resultado = $this->con->ejecutar($_query);
 

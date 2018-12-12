@@ -8,7 +8,7 @@ class DaoDocumento extends DaoBase {
     }
 
     public function mostrarDocumentosCmb() {
-        $_query = "select * from tipoDocumento";
+        $_query = "select * from tipoDocumento where idEliminado=1";
 
         $resultado = $this->con->ejecutar($_query);
 
@@ -50,7 +50,7 @@ class DaoDocumento extends DaoBase {
     }
 
     public function registrar() {
-        $_query = "call registrarDocumentos('".$this->objeto->getDescTipoDocumento()."')";
+        $_query = "call registrarDocumentos('".$this->objeto->getDescTipoDocumento()."',1)";
 
         $resultado = $this->con->ejecutar($_query);
 
@@ -85,7 +85,7 @@ class DaoDocumento extends DaoBase {
     }
 
     public function eliminar() {
-        $_query = "delete  from tipoDocumento where codigoTipoDocumento= ".$this->objeto->getCodigoTipoDocumento();
+        $_query = "update tipoDocumento set idEliminado=2 where codigoTipoDocumento= ".$this->objeto->getCodigoTipoDocumento();
 
         $resultado = $this->con->ejecutar($_query);
 
