@@ -299,7 +299,7 @@ if($_SESSION["descRol"]=="Administrador") {?>
                 },
                 success: function (r) {
 
-                    console.log(r);
+                    
 
                     $('#modalEleccion').modal('hide');;
 
