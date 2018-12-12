@@ -379,7 +379,7 @@ begin
     inner join area a on a.codigoArea = d.codigoArea 
     inner join status s on s.codigoStatus = d.codigoStatus
     
-    where s.codigoStatus = 1 and e.codigoEnvio = idEnvio
+    where (s.codigoStatus = 1 or s.codigoStatus = 3) and e.codigoEnvio = idEnvio
     
     order by d.codigoDetalleEnvio desc;
 end
