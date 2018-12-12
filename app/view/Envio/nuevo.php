@@ -18,8 +18,10 @@ if($_SESSION["descRol"]=="Administrador") {?>
 
     
     $('#modalEleccion').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
-
+    $('#btnSeleccionarUsuario').hide();
     });
+
+    
 
     $(function() {
             var option = '';
@@ -42,6 +44,7 @@ if($_SESSION["descRol"]=="Administrador") {?>
             var selectedOption = this.options[select.selectedIndex];
             var nombre=selectedOption.text;
             $("#nombreActual").html(nombre);
+            $('#btnSeleccionarUsuario').show();
             });
 
       });  
