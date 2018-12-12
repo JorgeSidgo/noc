@@ -355,12 +355,12 @@ window.onload = function() {
     </div>
   </div>
   <div class="actions">
-    <div class="ui black deny button" id="btnNo">
+    <button class="ui black deny button" id="btnNo">
         No
-    </div>
-    <div class="ui green button" id="btnSi">
+    </button>
+    <button class="ui green button" id="btnSi">
       Si
       <i class="checkmark icon"></i>
-    </div>
+    </button>
   </div>
 </div>
