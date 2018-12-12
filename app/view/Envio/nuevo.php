@@ -317,7 +317,7 @@ window.onload = function() {
                 },
                 success: function (r) {
 
-                    console.log(r);
+                    
 
                     $('#modalEleccion').modal('hide');;
 
