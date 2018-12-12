@@ -99,7 +99,7 @@ class Reporte {
                            $tabla.="<td bgcolor='lightblue'>".$fila['descStatus']."</td>";
                                 break;             
                    
-                   case 'Regresado a Finanzas':
+                   case 'Pendiente de Revision':
                            $tabla.="<td style='background-color: rgba(149, 165, 166, 0.3);'>".$fila['descStatus']."</td>";
                                 break;       
                         }

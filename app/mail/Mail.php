@@ -250,9 +250,10 @@ class Mail {
 
 
         $docsCompletos = '';
-        $docsRevisados = '';
-        $docsFinanzas = '';
+        $docsIncompleto = '';
+        $docsRecibido = '';
         $docsPendientes = '';
+        $docsPendienteRevision = '';
 
         while($fila = $detalles->fetch_assoc()){
 
@@ -272,7 +273,7 @@ class Mail {
                     break;
 
                 case 'Incompleto':
-                    $docsRevisados .= '<tr>
+                    $docsIncompleto .= '<tr>
                                 <td>'.$fila["correlativoDetalle"].'</td>
                                 <td>'.$fila["descTipoTramite"].'</td>
                                 <td>'.$fila["nombreCliente"].'</td>
@@ -300,7 +301,20 @@ class Mail {
                     break;
 
                 case 'Recibido':
-                    $docsFinanzas .= '<tr>
+                    $docsRecibido .= '<tr>
+                                <td>'.$fila["correlativoDetalle"].'</td>
+                                <td>'.$fila["descTipoTramite"].'</td>
+                                <td>'.$fila["nombreCliente"].'</td>
+                                <td>'.$fila["descArea"].'</td>
+                                <td>'.$fila["descTipoDocumento"].'</td>
+                                <td>'.$fila["numDoc"].'</td>
+                                <td>'.$fila["descStatus"].'</td>
+                                <td>'.$fila["monto"].'</td>
+                                <td>'.$fila["observacion"].'</td>
+                            </tr>';
+                    break;
+                    case 'Pendiente de Revision':
+                    $docsPendienteRevision .= '<tr>
                                 <td>'.$fila["correlativoDetalle"].'</td>
                                 <td>'.$fila["descTipoTramite"].'</td>
                                 <td>'.$fila["nombreCliente"].'</td>
@@ -342,10 +356,10 @@ class Mail {
                         </table>
                         </td></tr>';
         }
-        if(strlen($docsRevisados) > 0) {
+        if(strlen($docsIncompleto) > 0) {
 
             $contenido .= '<tr><td><br>
-                            <h3>Documentos Revisados</h3>
+                            <h3>Documentos Incompletos</h3>
                             <table border="1" style="width:100%; border-collapse: collapse; background: rgba(230, 126, 34, 0.3);">
                             <tr>
                                 <th>Codigo Documento</th>
@@ -358,11 +372,11 @@ class Mail {
                                 <th>Monto</th>
                                 <th>Observacion</th>
                             </tr>
-                            '.$docsRevisados.'
+                            '.$docsIncompleto.'
                         </table></td></tr>';
         }
 
-        if(strlen($docsFinanzas) > 0) {
+        if(strlen($docsRecibido) > 0) {
 
             $contenido .= '<tr><td><br>
                             <h3>Documentos Recibidos</h3>
@@ -378,7 +392,7 @@ class Mail {
                                 <th>Monto</th>
                                 <th>Observacion</th>
                             </tr>
-                            '.$docsFinanzas.'
+                            '.$docsRecibido.'
                         </table></td></tr>';
         }
 
@@ -399,6 +413,25 @@ class Mail {
                                 <th>Observacion</th>
                             </tr>
                             '.$docsPendientes.'
+                        </table></td></tr>';
+        }
+        if(strlen($docsPendienteRevision) > 0) {
+
+            $contenido .= '<tr><td><br>
+                            <h3>Documentos Pendientes de Revision</h3>
+                            <table border="1" style="width:100%; border-collapse: collapse; background:  rgba(149, 165, 166, 0.3);">
+                            <tr>
+                                <th>Codigo Documento</th>
+                                <th>Tramite</th>
+                                <th>Cliente</th>
+                                <th>Area</th>
+                                <th>Tipo Documento</th>
+                                <th>N° Documento</th>
+                                <th>Status</th>
+                                <th>Monto</th>
+                                <th>Observacion</th>
+                            </tr>
+                            '.$docsPendienteRevision.'
                         </table></td></tr>';
         }
 

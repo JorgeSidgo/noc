@@ -476,27 +476,26 @@ delimiter $$
 create procedure actualizarDetalle(
 	in idDetalle int,
     in idStatus int,
-    in obs text,
-    in idMensajero int 
+    in obs text
 )
 begin
-
+/*
 	if idMensajero = null then
 		set idMensajero = (select codigoMensajero from detalleEnvio where codigoDetalleEnvio = idDetalle);
-	end if;
+	end if;*/
 
 
     if idStatus <> 5 and idStatus <> 1 then
         update detalleEnvio 
-        set codigoStatus = idStatus, observacion = obs, fechaRevision = curdate(), horaRevision = DATE_FORMAT(NOW(), "%H:%i:%s" ), codigoMensajero = idMensajero
+        set codigoStatus = idStatus, observacion = obs, fechaRevision = curdate(), horaRevision = DATE_FORMAT(NOW(), "%H:%i:%s" )
         where codigoDetalleEnvio = idDetalle;
     elseif idStatus = 1 then  
         update detalleEnvio 
-        set codigoStatus = idStatus, observacion = obs, fechaRegistro = curdate(), codigoMensajero = idMensajero
+        set codigoStatus = idStatus, observacion = obs, fechaRegistro = curdate()
         where codigoDetalleEnvio = idDetalle;
     elseif idStatus = 5 then  
         update detalleEnvio 
-        set codigoStatus = idStatus, observacion = obs, fechaRevision = curdate(), fechaEnviado = curdate(), codigoMensajero = idMensajero
+        set codigoStatus = idStatus, observacion = obs, fechaRevision = curdate(), fechaEnviado = curdate()
         where codigoDetalleEnvio = idDetalle;
     end if;
 	

@@ -52,7 +52,7 @@ if($_SESSION["descRol"]=="Administrador") {?>
 <?php }?>
 
 <script>
-
+//simon
 window.onload = function() {
     
     document.getElementById("usuario").selectedIndex = "0";
@@ -62,7 +62,7 @@ window.onload = function() {
      $('#nombreActual').html(y[x].text);
 
 }
-
+//simon
 </script>
 
 

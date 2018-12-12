@@ -11,6 +11,7 @@ class Usuario extends ModeloBase{
     private $codigoArea;
     private $fecha;
     private $fecha2;
+    private $idMensajero;
 
     public function __construct() {
 
@@ -206,6 +207,26 @@ class Usuario extends ModeloBase{
     public function setFecha2($fecha2)
     {
         $this->fecha2 = $fecha2;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idMensajero
+     */ 
+    public function getIdMensajero()
+    {
+        return $this->idMensajero;
+    }
+
+    /**
+     * Set the value of idMensajero
+     *
+     * @return  self
+     */ 
+    public function setIdMensajero($idMensajero)
+    {
+        $this->idMensajero = $idMensajero;
 
         return $this;
     }
