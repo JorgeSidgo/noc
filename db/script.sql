@@ -379,7 +379,7 @@ begin
     inner join area a on a.codigoArea = d.codigoArea 
     inner join status s on s.codigoStatus = d.codigoStatus
     
-    where s.codigoStatus = 1 and e.codigoEnvio = idEnvio
+    where (s.codigoStatus = 1 or s.codigoStatus = 3) and e.codigoEnvio = idEnvio
     
     order by d.codigoDetalleEnvio desc;
 end
@@ -793,8 +793,8 @@ insert into envio values(null, concat('ED', 1), 2, curdate(), DATE_FORMAT(NOW(),
 
 insert into detalleEnvio values (null, 'DD1', 1, 1, 1, 1, 1, 2, '123', '$1', 'nada', curdate(),'0000-00-00', '00:00:00', '0000-00-00', 1);
 insert into detalleEnvio values (null, 'DD2', 1, 1, 2, 1, 1, 3, '123', '$1', 'nada', curdate(),'0000-00-00', '00:00:00', '0000-00-00', 1);
-insert into detalleEnvio values (null, 'DD3', 1, 1, 3, 1, 1, 1, '123', '$1', 'nada', curdate(),'0000-00-00', '00:00:00', '0000-00-00', 1);
-insert into detalleEnvio values (null, 'DD4', 1, 1, 1, 1, 1, 4, '123', '$1', 'nada', curdate(),'0000-00-00', '00:00:00', '0000-00-00', 1);
+insert into detalleEnvio values (null, 'DD3', 1, 1, 3, 1, 1, 1, '123', '$1', 'nada', '2018-11-01','0000-00-00', '00:00:00', '0000-00-00', 1);
+insert into detalleEnvio values (null, 'DD4', 1, 1, 1, 1, 1, 4, '123', '$1', 'nada', '2018-11-01','0000-00-00', '00:00:00', '0000-00-00', 1);
 		
 
 						
@@ -817,7 +817,4 @@ insert into detalleEnvio values (null, 'DD12', 3, 1, 1, 1, 1, 4, '123', '$1', 'n
 
 -- call mostrarPaquetes;
 
--- select * from detalleEnvio;
-
-
--- select * from usuario
+select * from detalleEnvio;

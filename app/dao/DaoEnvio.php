@@ -50,7 +50,7 @@ class DaoEnvio extends DaoBase {
     }
 
     public function detallesEnvio() {
-        $_query = "call detallesEnvioH({$this->objeto->getCodigoEnvio()})";
+        $_query = "call detallesEnvio({$this->objeto->getCodigoEnvio()})";
 
         $resultado = $this->con->ejecutar($_query);
 
