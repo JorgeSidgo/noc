@@ -271,7 +271,7 @@ class Mail {
                             </tr>';
                     break;
 
-                case 'Revisado':
+                case 'Incompleto':
                     $docsRevisados .= '<tr>
                                 <td>'.$fila["correlativoDetalle"].'</td>
                                 <td>'.$fila["descTipoTramite"].'</td>
@@ -299,7 +299,7 @@ class Mail {
                             </tr>';
                     break;
 
-                case 'Regresado a Finanzas':
+                case 'Recibido':
                     $docsFinanzas .= '<tr>
                                 <td>'.$fila["correlativoDetalle"].'</td>
                                 <td>'.$fila["descTipoTramite"].'</td>
@@ -365,7 +365,7 @@ class Mail {
         if(strlen($docsFinanzas) > 0) {
 
             $contenido .= '<tr><td><br>
-                            <h3>Documentos regresados a finanzas</h3>
+                            <h3>Documentos Recibidos</h3>
                             <table border="1" style="width:100%; border-collapse: collapse; background: rgba(52, 152, 219, 0.3);">
                             <tr>
                                 <th>Codigo Documento</th>
@@ -385,7 +385,7 @@ class Mail {
         if(strlen($docsPendientes) > 0) {
 
             $contenido .= '<tr><td><br>
-                            <h3>Documentos Pendientes de Revisión</h3>
+                            <h3>Documentos Pendientes</h3>
                             <table border="1" style="width:100%; border-collapse: collapse; background: rgba(241, 196, 15, 0.3);">
                             <tr>
                                 <th>Codigo Documento</th>

@@ -91,7 +91,10 @@
 
                 <div class="field" id="mensaje">
                     <label for="">Mensajero:</label>
-                    <select class="ui dropdown" name="mensajero" id="mensajero">
+                    <select v-model="cambiarDetalle.idMensajero" class="ui dropdown" name="mensajero" id="mensajero">
+
+                        <option v-for="mensajero in mensajeros" :value="parseInt(mensajero.codigoMensajero)">{{mensajero.nombre}}</option>
+
                     </select>
                 </div>
             </form>
@@ -178,6 +181,8 @@
 
             idEnvio: 0,
 
+            mensajeros: JSON.parse('<?php echo $mensajerosCMB?>'),
+
             paquetesManana: <?php echo $numPaquetesManana?>,
 
             datosDetalle: {
@@ -197,6 +202,7 @@
                 idEnvio: 0,
                 idDetalle: 0,
                 idStatus: 2,
+                idMensajero: 1,
                 observacion: ''
             }
         },
@@ -373,18 +379,6 @@
             app.modalConfirmar($(this).attr('codigo-usuario'), $(this).attr('codigo-envio'));
         });
     });
-
-
-    $(function() {
-            var option = '';
-            var mensajerosCMB = '<?php echo $mensajerosCMB?>';
-
-            $.each(JSON.parse(mensajerosCMB), function() {
-                option = `<option value="${this.codigoMensajero}">${this.nombre}</option>`;
-
-                $('#mensajero').append(option);
-            });
-        });
 
         $(document).ready(function(){
         $('#mensaje').hide();

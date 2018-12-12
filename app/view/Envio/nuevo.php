@@ -18,7 +18,7 @@ if($_SESSION["descRol"]=="Administrador") {?>
 
     
     $('#modalEleccion').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
-    $('#btnSeleccionarUsuario').hide();
+    // $('#btnSeleccionarUsuario').hide();
     });
 
     
@@ -44,12 +44,27 @@ if($_SESSION["descRol"]=="Administrador") {?>
             var selectedOption = this.options[select.selectedIndex];
             var nombre=selectedOption.text;
             $("#nombreActual").html(nombre);
-            $('#btnSeleccionarUsuario').show();
+            // $('#btnSeleccionarUsuario').show();
             });
 
       });  
 </script>
 <?php }?>
+
+<script>
+
+window.onload = function() {
+    
+    document.getElementById("usuario").selectedIndex = "0";
+
+        var x = document.getElementById("usuario").selectedIndex;
+    var y = document.getElementById("usuario").options;
+     $('#nombreActual').html(y[x].text);
+
+}
+
+</script>
+
 
 <script>
     var fecha;
@@ -76,6 +91,9 @@ if($_SESSION["descRol"]=="Administrador") {?>
         </form>
     </div>
     <div class="actions">
+        <button class="ui black left button" type="button" onclick="location.href='?1=UsuarioController&2=dashboard'">
+            Cancelar
+        </button>
         <button class="ui blue right button" id="btnSeleccionarUsuario">
             Seleccionar Usuario
         </button>
@@ -111,7 +129,7 @@ if($_SESSION["descRol"]=="Administrador") {?>
                         <thead class="super-compact">
                             <tr>
                                 <th class="two wide">Trámite</th>
-                                <th class="three wide">Cliente</th>
+                                <th class="three wide">C liente</th>
                                 <th class="two wide">Área</th>
                                 <th class="two wide">Tipo Doc</th>
                                 <th class="one wide">N° Doc</th>
