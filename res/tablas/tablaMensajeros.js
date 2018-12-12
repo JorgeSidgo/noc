@@ -14,9 +14,6 @@ $(function() {
                     "data": "nombre"
                 },
                 {
-                    "data": "apellido"
-                },
-                {
                     "data": "Acciones"             
                 }
             ],

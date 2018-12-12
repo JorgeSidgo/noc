@@ -263,6 +263,35 @@ end
 $$
 
 
+-- PROCEDIMIENTOS MENSAJEROS --
+delimiter $$
+create procedure mostrarMensajeros()
+begin
+	select * from mensajero;
+end
+$$
+
+delimiter $$
+create procedure registrarMensajero(
+	in nombre varchar(50)
+)
+begin
+	insert into mensajero values (null,nombre);
+end
+$$
+
+delimiter $$
+create procedure editarMensajero(
+	in nom varchar(50),
+    in idMensajero int
+)
+begin
+	update mensajero
+    set nombre = nom
+    where codigoMensajero = idMensajero;
+end
+$$
+
 -- PROCEDIMIENTOS ENVIOS--	
 delimiter $$
 create procedure encabezadoEnvio(

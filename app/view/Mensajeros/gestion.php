@@ -1,13 +1,13 @@
 <div id="app">
 
-    <modal-registrar id_form="frmRegistrar" id="modalRegistrar" url="?1=UsuarioController&2=registrar" titulo="Registrar Usuario"
+    <modal-registrar id_form="frmRegistrar" id="modalRegistrar" url="?1=MensajeroController&2=registrar" titulo="Registrar Mensajero"
         :campos="campos_registro" tamanio='tiny'></modal-registrar>
 
-    <modal-editar id_form="frmEditar" id="modalEditar" url="?1=UsuarioController&2=editar" titulo="Editar Usuario"
+    <modal-editar id_form="frmEditar" id="modalEditar" url="?1=MensajeroController&2=editar" titulo="Editar Mensajero"
         :campos="campos_editar" tamanio='tiny'></modal-editar>
 
-    <modal-eliminar id_form="frmEliminar" id="modalEliminar" url="?1=UsuarioController&2=eliminar" titulo="Eliminar Usuario"
-        sub_titulo="¿Está seguro de querer eliminar este usuario?" :campos="campos_eliminar" tamanio='tiny'></modal-eliminar>
+    <modal-eliminar id_form="frmEliminar" id="modalEliminar" url="?1=MensajeroController&2=eliminar" titulo="Eliminar Mensajero"
+        sub_titulo="¿Está seguro de querer eliminar este Mensajero?" :campos="campos_eliminar" tamanio='tiny'></modal-eliminar>
 
 
 
@@ -41,7 +41,6 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombres</th>
-                            <th>Apellido</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -66,126 +65,14 @@ var app = new Vue({
                     label: 'Nombre:',
                     name: 'nombre',
                     type: 'text'
-                },
-                {
-                    label: 'Apellido:',
-                    name: 'apellido',
-                    type: 'text'
-                },
-                {
-                    label: 'Nombre de Usuario Deloitte:',
-                    name: 'user',
-                    type: 'text',
-                    id: 'usuario'
-                },
-                {
-                    label: 'Correo Electrónico:',
-                    name: 'correo',
-                    mask: 'correoElectronico',
-                    type: 'text'
-                },
-                {
-                    label: 'Contraseña:',
-                    name: 'pass',
-                    type: 'password'
-                },
-                {
-                    label: 'Área:',
-                    name: 'area',
-                    type: 'select',
-                    options: [
-                        {
-                            val: 2,
-                            text: 'Abas'
-                        },
-                        {
-                            val: 3,
-                            text: 'Tax y Legal'
-                        },
-                        {
-                            val: 4,
-                            text: 'RRHH'
-                        },
-                        {
-                            val: 5,
-                            text: 'Finanzas'
-                        }
-                    ]
-                },
-                {
-                    label: 'Rol:',
-                    name: 'rol',
-                    type: 'select',
-                    options: [
-                        {
-                            val: 2,
-                            text: 'Solicitante'
-                        },
-                        {
-                            val: 1,
-                            text: 'Administrador'
-                        },
-                    ]
                 }
+                
             ],
             campos_editar: [
                 {
                     label: 'Nombre:',
                     name: 'nombre',
                     type: 'text'
-                },
-                {
-                    label: 'Apellido:',
-                    name: 'apellido',
-                    type: 'text'
-                },
-                {
-                    label: 'Nombre de Usuario Deloitte:',
-                    name: 'user',
-                    type: 'text'
-                },
-                {
-                    label: 'Correo Electrónico:',
-                    name: 'correo',
-                    mask: 'correoElectronico',
-                    type: 'text'
-                },
-                {
-                    label: 'Área:',
-                    name: 'area',
-                    type: 'select',
-                    options: [
-                        {
-                            val: 2,
-                            text: 'Abas'
-                        },
-                        {
-                            val: 3,
-                            text: 'Tax y Legal'
-                        },
-                        {
-                            val: 4,
-                            text: 'RRHH'
-                        },
-                        {
-                            val: 5,
-                            text: 'Finanzas'
-                        }
-                    ]
-                },
-                {
-                    label: 'Rol:',
-                    name: 'rol',
-                    type: 'select',
-                    options: [
-                        {
-                            val: 2,
-                            text: 'Solicitante'
-                        },{
-                            val: 1,
-                            text: 'Administrador'
-                        }
-                    ]
                 },
                 {
                     name: 'idDetalle',
@@ -200,7 +87,7 @@ var app = new Vue({
         },
         methods: {
             refrescarTabla() {
-                tablaUsuarios.ajax.reload();
+                tablaMensajeros.ajax.reload();
             },
             modalRegistrar() {
                 $('#modalRegistrar').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal(
@@ -209,7 +96,7 @@ var app = new Vue({
             cargarDatos() {
                 var id = $("#idDetalle").val();
 
-                fetch("?1=UsuarioController&2=cargarDatosUsuario&id=" + id)
+                fetch("?1=MensajeroController&2=cargarDatosMensajeros&id=" + id)
                     .then(response => {
                         return response.json();
                     })
@@ -219,10 +106,6 @@ var app = new Vue({
 
                         // $('#frmEditar input[name="idDetalle"]').val(dat.codigoUsuari);
                         $('#frmEditar input[name="nombre"]').val(dat.nombre);
-                        $('#frmEditar input[name="apellido"]').val(dat.apellido);
-                        $('#frmEditar input[name="user"]').val(dat.nomUsuario);
-                        $('#frmEditar input[name="correo"]').val(dat.email);
-                        $('#frmEditar select[name="rol"]').dropdown('set selected', dat.codigoRol);
                     })
                     .catch(err => {
                         console.log(err);
@@ -243,81 +126,6 @@ var app = new Vue({
             app.cargarDatos();
         });
 
-        $(document).on("click", ".btnAutorizar", function () {
-            $('#modalAutorizar').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
-            $('#idAutorizar').val($(this).attr("id"));
-        });
 </script>
 
-
-<script>
-    $(function() {
-        $('#btnAutorizar').click(function() {
-
-            $('#frmAutorizar').addClass('loading');
-
-            var idUsuario = $('#idAutorizar').val();
-            var idEstado = $('#idEstado').val();
-
-           $.ajax({
-               type: 'POST',
-               url: '?1=UsuarioController&2=autorizar',
-               data: {
-                   id: idUsuario, 
-                   estado: idEstado
-               },
-               success: function(r) {
-                $('#frmAutorizar').removeClass('loading');
-                   if(r == 1) {
-                    swal({
-                            title: 'Autorizado',
-                            text: 'Los cambios han sido guardados',
-                            type: 'success',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        $('#modalAutorizar').modal('hide');
-                        app.refrescarTabla();
-                   }
-               }
-           });
-        });
-    });
-
-
-    $("#usuario").change(function(){
-
-       var user=$("#usuario").val();
-
-            $.ajax({
-            type: 'POST',
-            url: '?1=UsuarioController&2=getUserName',
-            data:{user},
-            success: function(r) {
-
-                    if(r==1)
-                    {
-                        
-                        $("#btnRegistrar").attr("disabled", true);
-                        $("#usuario").siblings('div.ui.red.pointing.label').html('El usuario ya existe!')
-                        $("#usuario").siblings('div.ui.red.pointing.label').css('display', 'inline-block');
-                    }    
-                    else{
-
-                        $("#btnRegistrar").attr("disabled", false);
-                    }  
-            }
-                });
-
-    });
-
-    $("#usuario").keyup(function(){
-
-        $("#btnRegistrar").attr("disabled", false);
-    });
-
-
-
-
-</script>
      
