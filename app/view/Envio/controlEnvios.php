@@ -303,6 +303,7 @@
                             app.cargarDetalles(app.idEnvio);
                             app.cerrarCambios();
                             app.reloadTabla();
+                            app.reloadTabla2();
                         }
 
                     }

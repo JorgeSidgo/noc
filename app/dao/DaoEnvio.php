@@ -75,7 +75,7 @@ class DaoEnvio extends DaoBase {
         $contador_pendientes = 0;
         $contador_completo = 0;
         $contador_revisado = 0;
-        $contador_finanzas = 0;
+        $contador_pendientesRevision = 0;
         $contador_recibido = 0;
 
 
@@ -91,8 +91,8 @@ class DaoEnvio extends DaoBase {
             while($sub_fila = $sub_resultado->fetch_assoc()) {
 
                 switch($sub_fila["descStatus"]) {
-                    case 'Pendiente':
-                        $contador_pendientes++;
+                    case 'Pendiente de Revision':
+                        $contador_pendientesRevision++;
                         break;
 
                     case 'Incompleto':
@@ -107,17 +107,17 @@ class DaoEnvio extends DaoBase {
                         $contador_completo++;
                         break;
 
-                    case 'Regresado a Finanzas':
-                    $contador_finanzas++;
+                    case 'Pendiente':
+                    $contador_pendientes++;
                     break;
                 }
             }
 
-            $label_pendientes= '<a class=\"ui yellow label\">'.$contador_pendientes.'</a>';
+            $label_pendientes= '<a class=\"ui grey label\">'.$contador_pendientesRevision.'</a>';
             $label_completo= '<a class=\"ui green label\">'.$contador_completo.'</a>';
             $label_revisado= '<a class=\"ui orange label\">'.$contador_revisado.'</a>';
             $label_recibido= '<a class=\"ui blue label\">'.$contador_recibido.'</a>';
-            $label_finanzas= '<a class=\"ui grey label\">'.$contador_finanzas.'</a>';
+            $label_finanzas= '<a class=\"ui yellow label\">'.$contador_pendientes.'</a>';
 
             $labels = '<div class=\"ui small labels\">'.$label_pendientes.$label_recibido.$label_completo.$label_revisado.$label_finanzas.'</div>';
 
@@ -136,7 +136,7 @@ class DaoEnvio extends DaoBase {
             $contador_pendientes = 0;
             $contador_completo = 0;
             $contador_revisado = 0;
-            $contador_finanzas = 0;
+            $contador_pendientesRevision = 0;
             $contador_recibido=0;
         }
 
@@ -182,11 +182,11 @@ class DaoEnvio extends DaoBase {
 
         $_json = '';
 
-        $contador_pendientes = 0;
+        $contador_pendientesRevision = 0;
         $contador_completo = 0;
         $contador_recibido = 0;
         $contador_revisado = 0;
-        $contador_finanzas = 0;
+        $contador_pendientes = 0;
 
 
         while($fila = $resultado->fetch_assoc()) {
@@ -202,15 +202,15 @@ class DaoEnvio extends DaoBase {
             while($sub_fila = $sub_resultado->fetch_assoc()) {
 
                 switch($sub_fila["descStatus"]) {
-                    case 'Pendiente':
-                        $contador_pendientes++;
+                    case 'Pendiente de Revision':
+                        $contador_pendientesRevision++;
                         break;
 
                     case 'Incompleto':
                         $contador_revisado++;
                         break;
                     
-                    case 'Recibido':
+                    case 'Recibido': 
                         $contador_recibido++;
                         break;
 
@@ -218,17 +218,17 @@ class DaoEnvio extends DaoBase {
                         $contador_completo++;
                         break;
 
-                    case 'Regresado a Finanzas':
-                    $contador_finanzas++;
+                    case 'Pendiente':
+                    $contador_pendientes++;
                     break;
                 }
             }
 
-            $label_pendientes= '<a class=\"ui yellow label\">'.$contador_pendientes.'</a>';
+            $label_pendientes= '<a class=\"ui grey label\">'.$contador_pendientesRevision.'</a>';
             $label_completo= '<a class=\"ui green label\">'.$contador_completo.'</a>';
             $label_revisado= '<a class=\"ui orange label\">'.$contador_revisado.'</a>';
             $label_recibido= '<a class=\"ui blue label\">'.$contador_recibido.'</a>';
-            $label_finanzas= '<a class=\"ui grey label\">'.$contador_finanzas.'</a>';
+            $label_finanzas= '<a class=\"ui yellow label\">'.$contador_pendientes.'</a>';
 
             $labels = '<div class=\"ui small labels\">'.$label_completo.$label_recibido.$label_revisado.$label_finanzas.$label_pendientes.'</div>';
 
@@ -247,9 +247,10 @@ class DaoEnvio extends DaoBase {
 
 
             $contador_pendientes = 0;
+            $contador_recibido = 0;
             $contador_completo = 0;
             $contador_revisado = 0;
-            $contador_finanzas = 0;
+            $contador_pendientesRevision = 0;
         }
 
         $_json = substr($_json,0, strlen($_json) - 1);
@@ -290,11 +291,11 @@ class DaoEnvio extends DaoBase {
 
         $_json = '';
 
-        $contador_pendientes = 0;
+        $contador_pendientesRevision = 0;
         $contador_completo = 0;
         $contador_recibido = 0;
         $contador_revisado = 0;
-        $contador_finanzas = 0;
+        $contador_pendientes = 0;
 
 
         while($fila = $resultado->fetch_assoc()) {
@@ -310,8 +311,8 @@ class DaoEnvio extends DaoBase {
             while($sub_fila = $sub_resultado->fetch_assoc()) {
 
                 switch($sub_fila["descStatus"]) {
-                    case 'Pendiente':
-                        $contador_pendientes++;
+                    case 'Pendiente de Revision':
+                        $contador_pendientesRevision++;
                         break;
 
                     case 'Incompleto':
@@ -326,17 +327,17 @@ class DaoEnvio extends DaoBase {
                         $contador_completo++;
                         break;
 
-                    case 'Regresado a Finanzas':
-                    $contador_finanzas++;
+                    case 'Pendiente':
+                    $contador_pendientes++;
                     break;
                 }
             }
 
-            $label_pendientes= '<a class=\"ui yellow label\">'.$contador_pendientes.'</a>';
+            $label_pendientes= '<a class=\"ui grey label\">'.$contador_pendientesRevision.'</a>';
             $label_completo= '<a class=\"ui green label\">'.$contador_completo.'</a>';
             $label_revisado= '<a class=\"ui orange label\">'.$contador_revisado.'</a>';
             $label_recibido= '<a class=\"ui blue label\">'.$contador_recibido.'</a>';
-            $label_finanzas= '<a class=\"ui grey label\">'.$contador_finanzas.'</a>';
+            $label_finanzas= '<a class=\"ui yellow label\">'.$contador_pendientes.'</a>';
 
             $labels = '<div class=\"ui small labels\">'.$label_completo.$label_recibido.$label_revisado.$label_finanzas.$label_pendientes.'</div>';
 
@@ -355,9 +356,10 @@ class DaoEnvio extends DaoBase {
 
 
             $contador_pendientes = 0;
+            $contador_recibido = 0;
             $contador_completo = 0;
             $contador_revisado = 0;
-            $contador_finanzas = 0;
+            $contador_pendientesRevision = 0;
         }
 
         $_json = substr($_json,0, strlen($_json) - 1);
@@ -381,10 +383,10 @@ class DaoEnvio extends DaoBase {
 
         $_json = '';
 
-        $contador_pendientes = 0;
+        $contador_pendientesRevision = 0;
         $contador_completo = 0;
         $contador_revisado = 0;
-        $contador_finanzas = 0;
+        $contador_pendientes = 0;
         $contador_recibido = 0;
 
 
@@ -400,8 +402,8 @@ class DaoEnvio extends DaoBase {
             while($sub_fila = $sub_resultado->fetch_assoc()) {
 
                 switch($sub_fila["descStatus"]) {
-                    case 'Pendiente':
-                        $contador_pendientes++;
+                    case 'Pendiente de Revision':
+                        $contador_pendientesRevision++;
                         break;
 
                     case 'Incompleto':
@@ -416,17 +418,17 @@ class DaoEnvio extends DaoBase {
                         $contador_completo++;
                         break;
 
-                    case 'Regresado a Finanzas':
-                    $contador_finanzas++;
+                    case 'Pendiente':
+                    $contador_pendientes++;
                     break;
                 }
             }
 
-            $label_pendientes= '<a class=\"ui yellow label\">'.$contador_pendientes.'</a>';
+            $label_pendientes= '<a class=\"ui grey label\">'.$contador_pendientesRevision.'</a>';
             $label_completo= '<a class=\"ui green label\">'.$contador_completo.'</a>';
             $label_revisado= '<a class=\"ui orange label\">'.$contador_revisado.'</a>';
             $label_recibido= '<a class=\"ui blue label\">'.$contador_recibido.'</a>';
-            $label_finanzas= '<a class=\"ui grey label\">'.$contador_finanzas.'</a>';
+            $label_finanzas= '<a class=\"ui yellow label\">'.$contador_pendientes.'</a>';
             $labels = '<div class=\"ui small labels\">'.$label_pendientes.$label_recibido.$label_completo.$label_revisado.$label_finanzas.'</div>';
 
             $object = '{
@@ -445,7 +447,7 @@ class DaoEnvio extends DaoBase {
             $contador_pendientes = 0;
             $contador_completo = 0;
             $contador_revisado = 0;
-            $contador_finanzas = 0;
+            $contador_pendientesRevision= 0;
             $contador_recibido = 0;
         }
 
