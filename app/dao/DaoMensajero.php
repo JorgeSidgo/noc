@@ -34,7 +34,7 @@ class DaoMensajero extends DaoBase {
     }
 
     public function registrar() {
-        $_query = "call registrarMensajero('".$this->objeto->getNombre()."')";
+        $_query = "call registrarMensajero('".$this->objeto->getNombre()."',1)";
 
         $resultado = $this->con->ejecutar($_query);
 
@@ -72,7 +72,7 @@ class DaoMensajero extends DaoBase {
 
 
     public function eliminar() {
-        $_query = "delete from mensajero where codigoMensajero = ".$this->objeto->getCodigoMensajero();
+        $_query = "update mensajero set idEliminado=2 where codigoMensajero = ".$this->objeto->getCodigoMensajero();
 
         $resultado = $this->con->ejecutar($_query);
 

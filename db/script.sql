@@ -15,7 +15,8 @@ create table usuario (
     pass varchar(75),
     codigoAuth int,
     codigoRol int,
-    codigoArea int
+    codigoArea int,
+    idEliminado int
 );
 
 create table rol (
@@ -25,7 +26,8 @@ create table rol (
 
 create table area (
 	codigoArea int primary key unique auto_increment,
-    descArea varchar(25)
+    descArea varchar(25),
+    idEliminado int
 );
 
 create table authUsuario (
@@ -63,7 +65,8 @@ create table detalleEnvio (
 
 create table mensajero(
 	codigoMensajero int primary key unique auto_increment,
-    nombre varchar(50)
+    nombre varchar(50),
+    idEliminado int
 );
 
 create table tipoTramite(
@@ -75,12 +78,14 @@ create table clientes (
 	codigoCliente int primary key unique auto_increment,
     nombreCliente varchar(50),
     direccion varchar(100),
-    telefono varchar(20)
+    telefono varchar(20),
+    idEliminado int
 );
 
 create table tipoDocumento (
     codigoTipoDocumento int primary key unique auto_increment,
-    descTipoDocumento varchar(25)
+    descTipoDocumento varchar(25),
+    idEliminado int
 );
 
 create table observaciones (
@@ -119,10 +124,11 @@ create procedure registrarUsuario(
     in correo varchar(75),
     in contra varchar(75),
     in idArea int,
-    in rol int
+    in rol int,
+    in idEli int
 )
 begin
-	insert into usuario values (null, nom, ape, us, correo, contra, 2, rol, idArea);
+	insert into usuario values (null, nom, ape, us, correo, contra, 2, rol, idArea,idEli);
 end
 $$
 
@@ -165,7 +171,8 @@ begin
 	from usuario u
 	inner join rol r on r.codigoRol = u.codigoRol
 	inner join authUsuario a on a.codigoAuth = u.codigoAuth
-    inner join area ar on ar.codigoArea = u.codigoArea;
+    inner join area ar on ar.codigoArea = u.codigoArea
+    where u.idEliminado=1;
 end
 $$
 
@@ -175,7 +182,7 @@ $$
 delimiter $$
 create procedure mostrarClientes()
 begin
-	select * from clientes;
+	select * from clientes where idEliminado=1;
 end
 $$
 
@@ -183,10 +190,11 @@ delimiter $$
 create procedure registrarCliente(
 	in nom varchar(50),
     in direc varchar(50),
-    in tel varchar(50)
+    in tel varchar(50),
+    in idEli int
 )
 begin
-	insert into clientes values (null, nom, direc, tel);
+	insert into clientes values (null, nom, direc, tel,idEli);
 end
 $$
 
@@ -207,16 +215,17 @@ $$
 delimiter $$
 create procedure mostrarDocumentos()
 begin
-	select * from tipoDocumento;
+	select * from tipoDocumento where idEliminado=1;
 end
 $$
 
 delimiter $$
 create procedure registrarDocumentos(
-	in nom varchar(50)
+	in nom varchar(50),
+    in idEli int
 )
 begin
-	insert into tipoDocumento values (null, nom);
+	insert into tipoDocumento values (null, nom, idEli);
 end
 $$
 
@@ -236,17 +245,18 @@ $$
 delimiter $$
 create procedure mostrarArea()
 begin
-	select * from area;
+	select * from area where idEliminado=1;
 end
 $$
 
 
 delimiter $$
 create procedure registrarArea(
-	in descArea varchar(50)
+	in descArea varchar(50),
+    in idEli int
 )
 begin
-	insert into area values (null,descArea);
+	insert into area values (null,descArea,idEli);
 end
 $$
 
@@ -267,16 +277,17 @@ $$
 delimiter $$
 create procedure mostrarMensajeros()
 begin
-	select * from mensajero;
+	select * from mensajero where idEliminado=1;
 end
 $$
 
 delimiter $$
 create procedure registrarMensajero(
-	in nombre varchar(50)
+	in nombre varchar(50),
+    in idEli int
 )
 begin
-	insert into mensajero values (null,nombre);
+	insert into mensajero values (null,nombre, idEli);
 end
 $$
 
@@ -741,31 +752,31 @@ insert into tipoTramite values(null, 'Retiro de Documentos');
 
 #Area
 -- insert into area values (null, 'Administraci&oacute;n');
-insert into area values (null, 'ABAS');
-insert into area values (null, 'Tax y Legal');
-insert into area values (null, 'RRHH');
-insert into area values (null, 'Finanzas');
+insert into area values (null, 'ABAS',1);
+insert into area values (null, 'Tax y Legal',1);
+insert into area values (null, 'RRHH',1);
+insert into area values (null, 'Finanzas',1);
 
 # Usuario
-insert into usuario values (null, 'Karla Guadalupe', 'Arevalo Vega', 'kgarevalo', 'kgarevalo@deloitte.com', sha1('Deloitte123!'), 1, 1, 1);
-insert into usuario values (null, 'Jorge Luis', 'Sidgo Pimentel', 'jlsidgo', 'jorge.sidgo@gmail.com', sha1('Deloitte123!'), 1, 1, 1);
-insert into usuario values (null, 'Fabio Alonso', 'Mejia', 'famejia', 'fabiomejiash@gmail.com', sha1('Deloitte123!'), 1, 1, 1);
-insert into usuario values (null, 'Carlos Eduardo', 'Campos', 'cecampos', 'carlos.eduardo.ramos1997@gmail.com', sha1('Deloitte123!'), 1, 1, 1);
-insert into usuario values (null, 'John', 'Doe', 'johndoe', 'johndoe@deloitte.com', sha1('123'), 1, 2, 4);
+insert into usuario values (null, 'Karla Guadalupe', 'Arevalo Vega', 'kgarevalo', 'kgarevalo@deloitte.com', sha1('Deloitte123!'), 1, 1, 1,1);
+insert into usuario values (null, 'Jorge Luis', 'Sidgo Pimentel', 'jlsidgo', 'jorge.sidgo@gmail.com', sha1('Deloitte123!'), 1, 1, 1,1);
+insert into usuario values (null, 'Fabio Alonso', 'Mejia', 'famejia', 'fabiomejiash@gmail.com', sha1('Deloitte123!'), 1, 1, 1,1);
+insert into usuario values (null, 'Carlos Eduardo', 'Campos', 'cecampos', 'carlos.eduardo.ramos1997@gmail.com', sha1('Deloitte123!'), 1, 1, 1,1);
+insert into usuario values (null, 'John', 'Doe', 'johndoe', 'johndoe@deloitte.com', sha1('123'), 1, 2, 4,1);
 
 #Cliente
-insert into clientes values(null,'Telefonica','San Salvador','2314-1231');
-insert into clientes values(null,'YKK','Santa Ana','2451-2312');
-insert into clientes values(null,'Don Pollo','Santa Tecla','2451-6969');
+insert into clientes values(null,'Telefonica','San Salvador','2314-1231',1);
+insert into clientes values(null,'YKK','Santa Ana','2451-2312',1);
+insert into clientes values(null,'Don Pollo','Santa Tecla','2451-6969',1);
 
 #Tipo de Documento
-insert into tipoDocumento values(null, 'FE');
-insert into tipoDocumento values(null, 'F');
-insert into tipoDocumento values(null, 'CCF');
-insert into tipoDocumento values(null, 'Q');
-insert into tipoDocumento values(null, 'Propuestas');
-insert into tipoDocumento values(null, 'Informes');
-insert into tipoDocumento values(null, 'Otro');
+insert into tipoDocumento values(null, 'FE',1);
+insert into tipoDocumento values(null, 'F',1);
+insert into tipoDocumento values(null, 'CCF',1);
+insert into tipoDocumento values(null, 'Q',1);
+insert into tipoDocumento values(null, 'Propuestas',1);
+insert into tipoDocumento values(null, 'Informes',1);
+insert into tipoDocumento values(null, 'Otro',1);
 
 #Status 
 insert into status values (null, 'Pendiente de Revision');
@@ -774,8 +785,8 @@ insert into status values (null, 'Recibido');
 insert into status values (null, 'Pendiente');
 insert into status values (null, 'Completo');
 
-insert into mensajero values(null, 'Enrique Segoviano');
-insert into mensajero values(null, 'Ramon Valdez');
+insert into mensajero values(null, 'Enrique Segoviano',1);
+insert into mensajero values(null, 'Ramon Valdez',1);
 
 
 insert into envio values(null, concat('ED', 1), 2, curdate(), DATE_FORMAT(NOW(), "%H:%i:%s" ), 1);   
@@ -806,7 +817,7 @@ insert into detalleEnvio values (null, 'DD12', 3, 1, 1, 1, 1, 4, '123', '$1', 'n
 
 -- call mostrarPaquetes;
 
-select * from detalleEnvio;
+-- select * from detalleEnvio;
 
 
-call detallesEnvio(1)
+-- select * from usuario

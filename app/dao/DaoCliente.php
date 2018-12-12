@@ -10,7 +10,7 @@ class DaoCliente extends DaoBase
 
 
     public function mostrarClientesCmb() {
-        $_query = "select * from clientes";
+        $_query = "select * from clientes where idEliminado=1";
 
         $resultado = $this->con->ejecutar($_query);
 
@@ -51,7 +51,7 @@ class DaoCliente extends DaoBase
     }
 
     public function registrar() {
-        $_query = "call registrarCliente('".$this->objeto->getNombreCliente()."', '".$this->objeto->getDireccion()."','".$this->objeto->getTelefono()."')";
+        $_query = "call registrarCliente('".$this->objeto->getNombreCliente()."', '".$this->objeto->getDireccion()."','".$this->objeto->getTelefono()."',1)";
 
         $resultado = $this->con->ejecutar($_query);
 
@@ -87,7 +87,7 @@ class DaoCliente extends DaoBase
     }
 
     public function eliminar() {
-        $_query = "delete from clientes where codigoCliente = ".$this->objeto->getCodigoCliente();
+        $_query = "update clientes set idEliminado=2 where codigoCliente = ".$this->objeto->getCodigoCliente();
 
         $resultado = $this->con->ejecutar($_query);
 
