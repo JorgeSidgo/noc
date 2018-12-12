@@ -28,8 +28,10 @@ class EnvioController extends ControladorBase {
     {
         self::loadMain();
         $dao = new DaoEnvio();
-
         $numPaquetesManana = $dao->contarPaquetesManana();
+
+        $daoM = new DaoMensajero();
+        $mensajerosCMB = $daoM->mostrarMensajerosCmb();
 
         require_once './app/view/Envio/controlEnvios.php';
     }

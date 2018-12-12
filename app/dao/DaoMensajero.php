@@ -83,5 +83,21 @@ class DaoMensajero extends DaoBase {
         }
     }
 
+    public function mostrarMensajerosCmb() {
+        $_query = "select * from mensajero where idEliminado=1";
+
+        $resultado = $this->con->ejecutar($_query);
+
+        $json = '';
+
+        while($fila = $resultado->fetch_assoc()) {
+            $json .= json_encode($fila).',';
+        }
+
+        $json = substr($json,0, strlen($json) - 1);
+
+        return '['.$json.']';
+    }
+
 
 }

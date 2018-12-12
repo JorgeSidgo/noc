@@ -81,7 +81,19 @@
                     <label for="">Observación:</label>
                     <input v-model="cambiarDetalle.observacion" type="text" id="obs" name="obs">
                 </div>
-                <input type="hidden" id="idAutorizar" name="idAutorizar">
+                    <input type="hidden" id="idAutorizar" name="idAutorizar">
+                <div class="field">
+                     <div class="ui radio checkbox">
+                           <input type="radio" name="rbtnMensajero" id="rbtnMensajero" tabindex="0" value="rbtnMensajero">
+                              <label>Agregar Mensajero</label>
+                    </div>
+                </div>
+
+                <div class="field" id="mensaje">
+                    <label for="">Mensajero:</label>
+                    <select class="ui dropdown" name="mensajero" id="mensajero">
+                    </select>
+                </div>
             </form>
         </div>
 
@@ -237,12 +249,14 @@
 
                 $('#modalCambios').modal('setting', 'autofocus', false).modal('setting', 'closable', false)
                     .modal('show');
+                    $('#mensaje').hide();
                 $('#modalDetalles').modal('hide');
             },
 
             cerrarCambios() {
                 $('#modalDetalles').modal('setting', 'autofocus', false).modal('setting', 'closable', false)
                     .modal('show');
+                    $('#mensaje').hide();
                 $('#modalCambios').modal('hide');
             },
 
@@ -279,7 +293,7 @@
                                 showConfirmButton: false,
                                 timer: 1000
                             });
-
+                            $('#mensaje').hide();   
                             app.cargarDetalles(app.idEnvio);
                             app.cerrarCambios();
                             app.reloadTabla();
@@ -359,4 +373,24 @@
             app.modalConfirmar($(this).attr('codigo-usuario'), $(this).attr('codigo-envio'));
         });
     });
+
+
+    $(function() {
+            var option = '';
+            var mensajerosCMB = '<?php echo $mensajerosCMB?>';
+
+            $.each(JSON.parse(mensajerosCMB), function() {
+                option = `<option value="${this.codigoMensajero}">${this.nombre}</option>`;
+
+                $('#mensajero').append(option);
+            });
+        });
+
+        $(document).ready(function(){
+        $('#mensaje').hide();
+        });
+
+         $(document).on("click", "#rbtnMensajero", function () {
+            $('#mensaje').show();
+         });
 </script>
