@@ -257,10 +257,13 @@ window.onload = function() {
                                             numDocumento: '',
                                             monto: '',
                                             observaciones: ''
-                                        }]
+                                        }];
+
+                                        $('#modalNuevoEnvio').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
                                     }
-                                });
+                                });           
                             }
+                            
                         }
                     });
                 }
@@ -323,3 +326,41 @@ window.onload = function() {
         });
     });
 </script>
+        
+<script>
+     $(function () {
+        $("#btnSi").click(function () {
+
+            $('#modalEleccion').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
+            $('#nombreActual').html("");
+           
+        });
+
+        $("#btnNo").click(function () {
+            $('#nombreActual').html("");
+            location.href="?1=UsuarioController&2=dashboard";
+            
+        });
+
+    });
+</script>
+
+<div class="ui modal" id="modalNuevoEnvio">
+  <div class="header">
+    Envío
+  </div>
+  <div class="image content">
+    <div class="description">
+      <div class="ui header">¿Desea Realizar otro envio?</div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui black deny button" id="btnNo">
+        No
+    </div>
+    <div class="ui green button" id="btnSi">
+      Si
+      <i class="checkmark icon"></i>
+    </div>
+  </div>
+</div>
