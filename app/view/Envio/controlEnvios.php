@@ -27,6 +27,10 @@
 
     <div class="ui small second coupled modal" id="modalCambios">
 
+        <div id="cargandoModal" class="ui inverted dimmer">
+                <div class="ui big loader"></div>
+        </div>
+
         <div class="header">
             Cambiar Estado
         </div>
@@ -83,8 +87,8 @@
                 </div>
                     <input type="hidden" id="idAutorizar" name="idAutorizar">
                 <div class="field">
-                     <div class="ui radio checkbox">
-                           <input type="radio" name="rbtnMensajero" id="rbtnMensajero" tabindex="0" value="rbtnMensajero">
+                     <div class="ui toggle checkbox">
+                           <input type="checkbox" name="rbtnMensajero" id="rbtnMensajero" tabindex="0" value="rbtnMensajero">
                               <label>Agregar Mensajero</label>
                     </div>
                 </div>
@@ -114,7 +118,7 @@
         <div class="row">
             <div class="titulo">
                 <i class="box icon"></i>
-                Control de Envíos<font color="#85BC22" size="20px">.</font>
+                Control de Envíos<font color="#85BC22" style="font-size: 28px;">.</font>
             </div>
         </div>
         <br><br><br>
@@ -207,7 +211,7 @@
             }
         },
         methods: {
-            cargarDetalles(id) {
+            cargarDetalles(id, idUsuario) {
 
                 this.idEnvio = parseInt(id);
                 this.cambiarDetalle.idEnvio = parseInt(id);
@@ -224,6 +228,8 @@
                         $('#frmDetalles').removeClass('loading');
                     }
                 });
+
+                this.setearDatosCorreo(idUsuario, id);
             },
 
             reloadTabla() {
@@ -231,7 +237,9 @@
             },
 
             reloadTabla2() {
-                tablaManana.ajax.reload();
+                if(this.paquetesManana > 0) {
+                    tablaManana.ajax.reload();
+                }
             },
             cerrarModal() {
                 this.detalles = [];
@@ -278,15 +286,24 @@
 
             },
 
+            cerrarModalDetalles() {
+                $('#modalDetalles').modal('hide');
+            },
+
             cambiarEstado() {
 
+                $('#cargandoModal').addClass('active');
                 var detalle = JSON.stringify(this.cambiarDetalle);
+
+                // alert('cambiar estado: ' +this.datosCorreo.idUsuario);
 
                 $.ajax({
                     type: 'POST',
                     url: '?1=EnvioController&2=actualizarDetalle',
                     data: {
-                        detalle: detalle
+                        detalle: detalle,
+                        idUsuario: app.datosCorreo.idUsuario,
+                        idEnvio: app.datosCorreo.idEnvio
                     },
                     success: function (r) {
 
@@ -300,23 +317,51 @@
                                 timer: 1000
                             });
                             $('#mensaje').hide();   
-                            app.cargarDetalles(app.idEnvio);
+                            $('#rbtnMensajero').prop('checked', false);
+                            app.cargarDetalles(app.idEnvio, app.datosCorreo.idUsuario);
                             app.cerrarCambios();
                             app.reloadTabla();
                             app.reloadTabla2();
+                        } else if(r == 11) {
+                            swal({
+                                title: null,
+                                text: 'Los cambios fueron guardados y el correo de revisión fue enviado',
+                                type: 'success'
+                            });
+                            $('#mensaje').hide();   
+                            $('#rbtnMensajero').prop('checked', false);
+                            app.cargarDetalles(app.idEnvio, app.datosCorreo.idUsuario);
+                            app.cerrarCambios();
+                            app.cerrarModalDetalles();
+                            app.reloadTabla();
+                            app.reloadTabla2();
                         }
-
+                        $('#cargandoModal').removeClass('active');
                     }
                 });
 
             },
 
             modalConfirmar(idUsuario, idEnvio) {
+                this.setearDatosCorreo(idUsuario, idEnvio);
+                $('#modalConfirmar').modal('show');
+            },
+
+
+            setearDatosCorreo(idUsuario, idEnvio) {
+
+                // alert('setear: ' + idUsuario);
 
                 this.datosCorreo.idUsuario = parseInt(idUsuario);
                 this.datosCorreo.idEnvio = parseInt(idEnvio);
+            },
 
-                $('#modalConfirmar').modal('show');
+            actualizarFechas() {
+                $.ajax({
+                    type: 'POST',
+                    url: '?1=EnvioController&2=actPaquetes',
+                    success: function(r) {}
+                });
             },
 
             correoPaquete() {
@@ -359,6 +404,10 @@
 
 
         },
+
+        beforeMount() {
+            this.actualizarFechas();
+        }
         
     });
 </script>
@@ -374,18 +423,18 @@
         $(document).on("click", ".btnVer", function () {
             $('#modalDetalles').modal('setting', 'autofocus', false).modal('setting', 'closable', false)
                 .modal('show');
-            app.cargarDetalles($(this).attr('id'));
+            app.cargarDetalles($(this).attr('codigo-envio'), $(this).attr('codigo-usuario'));
         });
         $(document).on("click", ".btnCorreo", function () {
             app.modalConfirmar($(this).attr('codigo-usuario'), $(this).attr('codigo-envio'));
         });
     });
 
-        $(document).ready(function(){
-        $('#mensaje').hide();
-        });
-
-         $(document).on("click", "#rbtnMensajero", function () {
+    $('#rbtnMensajero').click(function() {
+        if($(this).prop('checked')) {
             $('#mensaje').show();
-         });
+        } else {
+            $('#mensaje').hide();
+        }
+    });
 </script>

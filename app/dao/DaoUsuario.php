@@ -180,6 +180,17 @@ class DaoUsuario extends DaoBase {
         }
     }
 
+    public function datosNomUsuario(){
+
+        $_query = "call datosNomUsuario('{$this->objeto->getNomUsuario()}')";
+
+        $resultado = $this->con->ejecutar($_query);
+
+        $datos = $resultado->fetch_object();
+
+        return $datos;
+    }
+
     public function mostrarUsuarios() {
         $_query = "call mostrarUsuarios()";
 
@@ -230,6 +241,7 @@ class DaoUsuario extends DaoBase {
 
         return $resultado;
     }
+
 
     public function reporteUsuarioDiario() {
         $query = "call reporteUsuarioDiario({$this->objeto->getCodigoUsuario()})";

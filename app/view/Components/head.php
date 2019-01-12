@@ -13,7 +13,7 @@
     <script src="./res/plugins/jquery/jquery.js"></script>
 
     <!-- Vue.js -->
-    <script src="./res/plugins/vue/vue.js"></script>
+    <script src="./res/plugins/vue/vue.min.js"></script>
 
     <!-- Semantic UI -->
     <link rel="stylesheet" type="text/css" href="./res/plugins/semantic/semantics.css">

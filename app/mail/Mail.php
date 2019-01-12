@@ -113,7 +113,7 @@ class Mail {
         }
     }
 
-    public function detalleEnvio($codigoEnvio) {
+    public function notificacionRegistroUsuario($datosUsuario) {
 
         $emailFrom = 'deloitte.prueba.no.reply@gmail.com';
         $emailFromName = 'Deloitte';
@@ -121,8 +121,54 @@ class Mail {
         $emailTo = 'jorge.sidgo@gmail.com';
         $emailToName = 'Ing. Jorge Sidgo-Pimentel';
 
-        // $emailCC = $datosUsuario->email;
-        // $emailNameCC = $datosUsuario->nombre.' '.$datosUsuario->apellido;
+        $mail = new PHPMailer();
+        $mail->isSMTP();
+
+        $mail->Host = "smtp.gmail.com";
+        $mail->Port = 587;
+        $mail->SMTPSecure = 'tls';
+        $mail->SMTPAuth = true;
+        $mail->isHTML(true);
+        $mail->Charset = 'UTF-8';
+
+        $mail->Username = 'deloitte.prueba.no.reply@gmail.com';
+        $mail->Password = 'Deloitte123!';
+        $mail->setFrom($emailFrom, $emailFromName);
+
+        $mail->addAddress($emailTo, $emailToName);
+
+        $mail->Subject = 'Control de Cuenta Deloitte';
+
+        $plantilla = file_get_contents('./app/mail/correoNuevoUsuario.html');
+
+        $plantilla = str_replace('%fecha%', '18/12/2018', $plantilla);
+        $plantilla = str_replace('%hora%', '09:09:00', $plantilla);
+        $plantilla = str_replace('%nombre%', $datosUsuario->nombre, $plantilla);
+        $plantilla = str_replace('%apellido%', $datosUsuario->apellido, $plantilla);
+        $plantilla = str_replace('%usuario%', $datosUsuario->nomUsuario, $plantilla);
+        $plantilla = str_replace('%rol%', $datosUsuario->descRol, $plantilla);
+
+        $mail->msgHTML($plantilla);
+        $mail->AddEmbeddedImage('./app/mail/deloitteNegro.png', 'logo');
+
+        if($mail->Send())
+        {
+            return true;
+        }
+
+    }
+
+    public function detalleEnvio($codigoEnvio, $datosUsuario) {
+
+        $emailFrom = 'deloitte.prueba.no.reply@gmail.com';
+        $emailFromName = 'Deloitte';
+
+        $emailTo = 'jorge.sidgo@gmail.com';
+        $emailToName = 'Ing. Jorge Sidgo-Pimentel';
+
+        $nombreUsuario = $datosUsuario->nombre.' '. $datosUsuario->apellido;
+        $emailUsuario = $datosUsuario->email;
+
 
         $mail = new PHPMailer();
         $mail->isSMTP();
@@ -144,6 +190,8 @@ class Mail {
         $mail->setFrom($emailFrom, $emailFromName);
 
         $mail->addAddress($emailTo, $emailToName);
+
+        $mail->addAddress($nombreUsuario, $emailUsuario);
 
         $mail->Subject = 'Control de Envios';
 
@@ -169,6 +217,7 @@ class Mail {
                         <td>'.$fila["numDoc"].'</td>
                         <td>'.$fila["descStatus"].'</td>
                         <td>'.$fila["monto"].'</td>
+                        <td>'.$fila["mensajero"].'</td>
                         <td>'.$fila["observacion"].'</td>
                     </tr>';
         }
@@ -246,9 +295,6 @@ class Mail {
         $plantilla = str_replace('%nombre%', $datosEncabezado["nombre"], $plantilla);
         $plantilla = str_replace('%apellido%', $datosEncabezado["apellido"], $plantilla);
         
-
-
-
         $docsCompletos = '';
         $docsIncompleto = '';
         $docsRecibido = '';
@@ -268,6 +314,7 @@ class Mail {
                                 <td>'.$fila["numDoc"].'</td>
                                 <td>'.$fila["descStatus"].'</td>
                                 <td>'.$fila["monto"].'</td>
+                                <td>'.$fila["mensajero"].'</td>
                                 <td>'.$fila["observacion"].'</td>
                             </tr>';
                     break;
@@ -282,6 +329,7 @@ class Mail {
                                 <td>'.$fila["numDoc"].'</td>
                                 <td>'.$fila["descStatus"].'</td>
                                 <td>'.$fila["monto"].'</td>
+                                <td>'.$fila["mensajero"].'</td>
                                 <td>'.$fila["observacion"].'</td>
                             </tr>';
                     break;
@@ -296,6 +344,7 @@ class Mail {
                                 <td>'.$fila["numDoc"].'</td>
                                 <td>'.$fila["descStatus"].'</td>
                                 <td>'.$fila["monto"].'</td>
+                                <td>'.$fila["mensajero"].'</td>
                                 <td>'.$fila["observacion"].'</td>
                             </tr>';
                     break;
@@ -310,6 +359,7 @@ class Mail {
                                 <td>'.$fila["numDoc"].'</td>
                                 <td>'.$fila["descStatus"].'</td>
                                 <td>'.$fila["monto"].'</td>
+                                <td>'.$fila["mensajero"].'</td>
                                 <td>'.$fila["observacion"].'</td>
                             </tr>';
                     break;
@@ -323,6 +373,7 @@ class Mail {
                                 <td>'.$fila["numDoc"].'</td>
                                 <td>'.$fila["descStatus"].'</td>
                                 <td>'.$fila["monto"].'</td>
+                                <td>'.$fila["mensajero"].'</td>
                                 <td>'.$fila["observacion"].'</td>
                             </tr>';
                     break;
@@ -350,6 +401,7 @@ class Mail {
                                 <th>N° Documento</th>
                                 <th>Status</th>
                                 <th>Monto</th>
+                                <th>Mensajero</th>
                                 <th>Observacion</th>
                             </tr>
                             '.$docsCompletos.'
@@ -370,6 +422,7 @@ class Mail {
                                 <th>N° Documento</th>
                                 <th>Status</th>
                                 <th>Monto</th>
+                                <th>Mensajero</th>
                                 <th>Observacion</th>
                             </tr>
                             '.$docsIncompleto.'
@@ -390,6 +443,7 @@ class Mail {
                                 <th>N° Documento</th>
                                 <th>Status</th>
                                 <th>Monto</th>
+                                <th>Mensajero</th>
                                 <th>Observacion</th>
                             </tr>
                             '.$docsRecibido.'
@@ -410,6 +464,7 @@ class Mail {
                                 <th>N° Documento</th>
                                 <th>Status</th>
                                 <th>Monto</th>
+                                <th>Mensajero</th>
                                 <th>Observacion</th>
                             </tr>
                             '.$docsPendientes.'
@@ -429,6 +484,7 @@ class Mail {
                                 <th>N° Documento</th>
                                 <th>Status</th>
                                 <th>Monto</th>
+                                <th>Mensajero</th>
                                 <th>Observacion</th>
                             </tr>
                             '.$docsPendienteRevision.'

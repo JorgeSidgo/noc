@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="77784ab4-a548-413b-b782-2d4bead58cef" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ReporteDiario/reporteDiario.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ReporteDiario/reporteDiario.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/ControladorBase.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/ControladorBase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/EnvioController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/EnvioController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/UsuarioController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/UsuarioController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/dao/DaoEnvio.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/dao/DaoEnvio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/dao/DaoMensajero.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/dao/DaoMensajero.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/dao/DaoUsuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/dao/DaoUsuario.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/mail/Mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/mail/Mail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/mail/correoEnvios.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/mail/correoEnvios.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/model/Clientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/Clientes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/model/Documento.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/Documento.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/model/Envio.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/Envio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/model/ModeloBase.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/ModeloBase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/Exec.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/Exec.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/routes/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/Router.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view/Area/gestion.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Area/gestion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view/Clientes/clientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Clientes/clientes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view/Components/head.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Components/head.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view/Documento/gestion.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Documento/gestion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view/Envio/controlEnvios.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Envio/controlEnvios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view/Envio/historialEnvios.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Envio/historialEnvios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view/Envio/misEnvios.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Envio/misEnvios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view/Envio/nuevo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Envio/nuevo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view/Mensajeros/gestion.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Mensajeros/gestion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view/Usuario/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Usuario/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view/Usuario/dashboardAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Usuario/dashboardAdmin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view/Usuario/dashboardSoli.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Usuario/dashboardSoli.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view/Usuario/gestion.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Usuario/gestion.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view/Usuario/newPassword.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Usuario/newPassword.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view/Usuario/registro.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Usuario/registro.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view/Usuario/resetPassword.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Usuario/resetPassword.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/script.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db/script.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/res/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/js/modalDetalles.js" beforeDir="false" afterPath="$PROJECT_DIR$/res/js/modalDetalles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/js/modalHistorialD.js" beforeDir="false" afterPath="$PROJECT_DIR$/res/js/modalHistorialD.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/js/modalMisDetalles.js" beforeDir="false" afterPath="$PROJECT_DIR$/res/js/modalMisDetalles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/tablas/tablaDocPendiente.js" beforeDir="false" afterPath="$PROJECT_DIR$/res/tablas/tablaDocPendiente.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes.php" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/view/Usuario/dashboardAdmin.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="110">
+              <caret line="58" column="65" selection-start-line="58" selection-start-column="65" selection-end-line="58" selection-end-column="65" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/controllers/UsuarioController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="92" column="28" selection-start-line="92" selection-start-column="28" selection-end-line="92" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/dao/DaoUsuario.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1188">
+              <caret line="132" column="62" selection-start-line="132" selection-start-column="62" selection-end-line="132" selection-end-column="62" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>datosUsuario</find>
+      <find>datosNom</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/mail/Mail.php" />
+        <option value="$PROJECT_DIR$/app/view/Usuario/newPassword.php" />
+        <option value="$PROJECT_DIR$/app/view/Usuario/resetPassword.php" />
+        <option value="$PROJECT_DIR$/app/view/Envio/nuevo.php" />
+        <option value="$PROJECT_DIR$/app/view/Usuario/registro.php" />
+        <option value="$PROJECT_DIR$/app/controllers/EnvioController.php" />
+        <option value="$PROJECT_DIR$/app/dao/DaoEnvio.php" />
+        <option value="$PROJECT_DIR$/app/view/Envio/misEnvios.php" />
+        <option value="$PROJECT_DIR$/app/routes/Exec.php" />
+        <option value="$PROJECT_DIR$/app/routes/Router.php" />
+        <option value="$PROJECT_DIR$/app/model/Documento.php" />
+        <option value="$PROJECT_DIR$/app/model/ModeloBase.php" />
+        <option value="$PROJECT_DIR$/app/dao/DaoBase.php" />
+        <option value="$PROJECT_DIR$/app/dao/DaoMensajero.php" />
+        <option value="$PROJECT_DIR$/app/view/Usuario/config.php" />
+        <option value="$PROJECT_DIR$/app/view/Usuario/dashboardSoli.php" />
+        <option value="$PROJECT_DIR$/app/view/Components/head.php" />
+        <option value="$PROJECT_DIR$/app/controllers/ControladorBase.php" />
+        <option value="$PROJECT_DIR$/app/controllers/UsuarioController.php" />
+        <option value="$PROJECT_DIR$/app/view/Mensajeros/gestion.php" />
+        <option value="$PROJECT_DIR$/db/script.sql" />
+        <option value="$PROJECT_DIR$/app/view/Usuario/dashboardAdmin.php" />
+        <option value="$PROJECT_DIR$/app/dao/DaoUsuario.php" />
+      </list>
+    </option>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/mpdf/tmp" />
+      <path value="$PROJECT_DIR$/vendor/wisembly/elephant.io" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/setasign/fpdi" />
+      <path value="$PROJECT_DIR$/vendor/myclabs/deep-copy" />
+      <path value="$PROJECT_DIR$/vendor/mpdf/data" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/mpdf/src" />
+      <path value="$PROJECT_DIR$/vendor/mpdf/.github" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/mpdf/ttfonts" />
+      <path value="$PROJECT_DIR$/vendor/mpdf/mpdf" />
+    </include_path>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="754" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="deloitte-mensajeria" type="b2602c69:ProjectViewProjectNode" />
+              <item name="deloitte-mensajeria" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="deloitte-mensajeria" type="b2602c69:ProjectViewProjectNode" />
+              <item name="deloitte-mensajeria" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="deloitte-mensajeria" type="b2602c69:ProjectViewProjectNode" />
+              <item name="deloitte-mensajeria" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="deloitte-mensajeria" type="b2602c69:ProjectViewProjectNode" />
+              <item name="deloitte-mensajeria" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="deloitte-mensajeria" type="b2602c69:ProjectViewProjectNode" />
+              <item name="deloitte-mensajeria" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+              <item name="Usuario" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="deloitte-mensajeria" type="b2602c69:ProjectViewProjectNode" />
+              <item name="deloitte-mensajeria" type="462c0819:PsiDirectoryNode" />
+              <item name="db" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../c.imbertonFTP" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="77784ab4-a548-413b-b782-2d4bead58cef" name="Default Changelist" comment="" />
+      <created>1545965788434</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1545965788434</updated>
+      <workItem from="1545965792527" duration="3792000" />
+      <workItem from="1546193421043" duration="2949000" />
+      <workItem from="1546382027072" duration="1392000" />
+      <workItem from="1546389272042" duration="1523000" />
+      <workItem from="1546402447464" duration="2626000" />
+      <workItem from="1546465574513" duration="20000" />
+      <workItem from="1546578261158" duration="3724000" />
+      <workItem from="1546621249104" duration="1969000" />
+      <workItem from="1546636225838" duration="328000" />
+      <workItem from="1546905428084" duration="7872000" />
+      <workItem from="1546920689780" duration="12000" />
+      <workItem from="1546920736032" duration="2152000" />
+      <workItem from="1547003855639" duration="4840000" />
+      <workItem from="1547037930525" duration="5384000" />
+      <workItem from="1547136564370" duration="892000" />
+      <workItem from="1547152310225" duration="10000" />
+      <workItem from="1547218564693" duration="114000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="39599000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18374817" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Remote Host" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/composer.lock">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/mail/correoNuevoUsuario.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/Usuario/newPassword.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1127">
+          <caret line="51" column="7" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/Usuario/resetPassword.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3197">
+          <caret line="141" column="12" selection-start-line="141" selection-start-column="12" selection-end-line="141" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/Envio/controlEnvios.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8510">
+          <caret line="370" selection-start-line="370" selection-end-line="370" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/EnvioController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="621">
+          <caret line="27" column="70" selection-start-line="27" selection-start-column="70" selection-end-line="27" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/dao/DaoEnvio.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="30" column="62" selection-start-line="30" selection-start-column="62" selection-end-line="30" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/js/modalDetalles.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="76" column="18" lean-forward="true" selection-start-line="76" selection-start-column="18" selection-end-line="76" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/Envio/misEnvios.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="12" column="58" selection-start-line="12" selection-start-column="58" selection-end-line="12" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/Exec.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-199">
+          <caret line="7" column="23" lean-forward="true" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="9" column="40" lean-forward="true" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dAutoload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" selection-start-line="2" selection-end-line="24" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes.php" />
+    <entry file="file://$PROJECT_DIR$/app/routes/Router.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/Envio/nuevo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="526">
+          <caret line="209" column="31" lean-forward="true" selection-start-line="209" selection-start-column="31" selection-end-line="209" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/model/Conexion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="18" column="13" lean-forward="true" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/model/Usuario.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4889" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/model/Area.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1449">
+          <caret line="63" column="21" lean-forward="true" selection-start-line="2" selection-end-line="63" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/model/Clientes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="83" lean-forward="true" selection-start-line="2" selection-end-line="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/model/ModeloBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/model/Documento.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1127">
+          <caret line="49" column="1" lean-forward="true" selection-start-line="1" selection-end-line="49" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/model/Mensajero.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/hash/hash.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="85" column="65" lean-forward="true" selection-start-line="85" selection-start-column="65" selection-end-line="85" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/encode/Encode.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="18" column="24" lean-forward="true" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/dao/DaoBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/Usuario/dashboardSoli.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="644">
+          <caret line="28" column="91" selection-start-line="28" selection-start-column="91" selection-end-line="28" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/Components/head.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="15" column="43" selection-start-line="15" selection-start-column="43" selection-end-line="15" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/js/validar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="97" column="9" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/dao/DaoMensajero.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-90">
+          <caret line="18" column="50" lean-forward="true" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/Mensajeros/gestion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="59" column="8" lean-forward="true" selection-start-line="59" selection-start-column="8" selection-end-line="59" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/Usuario/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3877">
+          <caret line="313" column="41" selection-start-line="313" selection-start-column="41" selection-end-line="313" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/Usuario/dashboard.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-394" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/Usuario/gestion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3120">
+          <caret line="96" column="15" lean-forward="true" selection-start-line="94" selection-end-line="96" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/Usuario/registro.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="891">
+          <caret line="47" column="92" selection-start-line="47" selection-start-column="92" selection-end-line="47" selection-end-column="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/ControladorBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="16" column="49" selection-start-line="16" selection-start-column="49" selection-end-line="16" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/script.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19849">
+          <caret line="886" selection-end-line="886" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/mail/Mail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+          <folding>
+            <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#td#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/Usuario/dashboardAdmin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="58" column="65" selection-start-line="58" selection-start-column="65" selection-end-line="58" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/UsuarioController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="92" column="28" selection-start-line="92" selection-start-column="28" selection-end-line="92" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/dao/DaoUsuario.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1188">
+          <caret line="132" column="62" selection-start-line="132" selection-start-column="62" selection-end-line="132" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.19874214" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

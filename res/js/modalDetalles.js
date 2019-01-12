@@ -27,6 +27,7 @@ template: `<div class="ui longer fullscreen first coupled modal" id="modalDetall
                         <th>N° Documento</th>
                         <th>Monto</th>
                         <th>Status</th>
+                        <th>Mensajero</th>
                         <th>Observación</th>
                         <th></th>
                     </tr>
@@ -54,6 +55,9 @@ template: `<div class="ui longer fullscreen first coupled modal" id="modalDetall
                             </td>
                             <td v-else-if="detalle.descStatus == 'Pendiente de Revision'" style="background-color: rgba(149, 165, 166, 0.3);">
                                 {{detalle.descStatus}}
+                            </td>
+                            <td>
+                                {{detalle.mensajero}}
                             </td>
                             <td>
                                 {{detalle.observacion}}

@@ -6,7 +6,6 @@ class Router {
     private $controller;
     private $method;
     private $parameter;
-
     # Constructor
 
     public function __construct() {

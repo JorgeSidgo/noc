@@ -6,9 +6,7 @@ class Documento extends ModeloBase {
     private $descTipoDocumento;
 
     public function __construct() {
-
     }
-
 
     /**
      * Get the value of codigoTipoDocumento

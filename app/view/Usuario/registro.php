@@ -45,7 +45,7 @@ $(function() {
 
                     <div class="field">
                         <label for="">E-mail:</label>
-                        <input type="text" class="requerido" :value="correoUsuario" name="correo" id="correo" readonly>
+                        <input type="text" class="requerido" :value="correoUsuario" readonly name="correo" id="correo">
 
                     </div>
                     <div class="field">

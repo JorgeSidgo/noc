@@ -2,7 +2,7 @@
             $fechaMaxima = date('Y-m-d');
             $fechaMax = strtotime ( '-0 day' , strtotime ( $fechaMaxima ) ) ;
             $fechaMax = date ( 'Y-m-d' , $fechaMax );
-             
+
             $fechaMinima = date('Y-m-d');
             $fechaMin = strtotime ( '-1 day' , strtotime ( $fechaMinima ) ) ;
             $fechaMin = date ( 'Y-m-d' , $fechaMin );
@@ -19,27 +19,27 @@ $(function() {
     overflowRestore();
 });
 </script>
-<div class="row tiles" style="display: flex !important; align-items: baseline; justify-content: space-between">
+<div class="row tiles" id="contenedor-tiles" style="display: flex !important; align-items: baseline; justify-content: space-between">
 
-    <a href="?1=EnvioController&2=nuevoEnvio"  style="width: 24%;" class="ui green inverted segment">
+    <a href="?1=EnvioController&2=nuevoEnvio"  style="width: 24%;" class="tiles-tiles ui green inverted segment">
         <h3>Nuevo Envío</h3>
         <div class="ui divider"></div>
         <i class="paper plane icon"></i>
     </a>
 
-    <a href="?1=EnvioController&2=controlEnvios" style="width: 24%;"  class="ui blue inverted segment">
+    <a href="?1=EnvioController&2=controlEnvios" style="width: 24%;"  class="tiles-tiles ui blue inverted segment">
         <h3>Control de Envíos</h3>
         <div class="ui divider"></div>
         <i class="box icon"></i>
     </a>
 
-    <a href="?1=EnvioController&2=misEnvios" style="width: 24%;"  class="ui orange inverted segment">
+    <a href="?1=EnvioController&2=misEnvios" style="width: 24%;"  class="tiles-tiles ui orange inverted segment">
         <h3>Mis Envíos</h3>
         <div class="ui divider"></div>
         <i class="envelope icon"></i>
     </a>
 
-   <a style="width: 24%;" id="btnReportes"  class="ui teal inverted segment">
+   <a style="width: 24%;" id="btnReportes"  class="tiles-tiles ui teal inverted segment">
         <h3>Reportes</h3>
         <div class="ui divider"></div>
         <i class="save icon"></i>
@@ -50,17 +50,20 @@ $(function() {
 <div class="ui tiny modal" id="modalReportes" style="width:40%;">
 
     <div class="header">
-       <i class="clipboard outline icon"></i> Reportes Deloitte<font color="#85BC22" size="20px">.</font>
+       <i class="clipboard outline icon"></i> Reportes Deloitte<font color="#85BC22" style="font-size: 28px;">.</font>
     </div><br>
     <div class="content">
-        <div class="two fields">
-            <h4>
-            <label for="">Reporte Diario General: </label>
-                   <a href="?1=EnvioController&2=llamaReporte" target="_blank">
-                    <button class="ui olive deny button" id="btnCancelar" style="color:black; margin: auto;" id="btnReportes" type="button" >
-                            <i class="eye icon"></i>Ver reporte
-                        </button></a>
-            </h4>
+        <div class="ui form">
+          <div class="field">
+            <a href="?1=EnvioController&2=llamaReporte" class="ui green fluid button" id="btnReportes" target="_blank">
+              <i class="calendar icon"></i>Reporte Diario General
+            </a>
+          </div>
+          <div class="field">
+            <a href="?1=EnvioController&2=reporteRecibidos" class="ui blue fluid button" id="btnReportes" target="_blank">
+              <i class="shipping fast icon"></i>Documentos para Mensajeros
+            </a>
+          </div>
         </div>
     </div>
     <br>
@@ -73,15 +76,31 @@ $(function() {
                 <button class="ui blue deny button" id="btnAreas">
                     Por Áreas
                 </button>
-                <button class="ui brown right button" id="btnUsuarios">
+                <button class="ui teal right button" id="btnUsuarios">
                     Por Usuario
                 </button>
-                <button class="ui purple right button" id="btnFechas">
+                <button class="ui violet right button" id="btnFechas">
                     Por Fechas
                 </button>
-                
+                <!-- <button class="ui grey right button" id="btnxEstado">
+                    Por Estado
+                </button> -->
+
 
             <br><br>
+            <!-- <div id="paramEstados">
+                <div class="ui form">
+                    <div class="field">
+                        <select name="cmbEstado" id="cmbEstado">
+                            <option value="1">Pendiente de Revisión</option>
+                            <option value="2"></option>
+                            <option value="3"></option>
+                            <option value="4"></option>
+                            <option value="5"></option>
+                        </select>
+                    </div>
+                </div>
+            </div> -->
                      <div id="fechas">
                         <div class="two fields">
                             <h5><label for="" style="width:100%; margin: auto;" id="labFechaInicio"><i class="calendar icon">
@@ -92,9 +111,9 @@ $(function() {
                             <button class="ui green right button" id="btnGenerarReporteFecha">
                                 Generar reporte
                             </button>
-                            
+
                         </div>
-                    </div>      
+                    </div>
                     <div id="cmbArea">
                         <h4><label for="">Seleccione el área: </label>
 
@@ -102,7 +121,7 @@ $(function() {
                         <select name="area" id="area" class="ui search dropdown" style="margin: auto; width: 60%;">
                         </select>
                         </h4>
-                        
+
                         <div class="ui form" style="margin: auto; display: flex; justify-content:center;">
                             <div class="inline fields">
                             <div class="field">
@@ -128,15 +147,15 @@ $(function() {
                                         <label>Por Fechas</label>
                                     </div>
                                 </div>
-                               
+
                             </div>
-                            
+
                          </div>
-                         
+
                         <button class="ui teal right button" id="btnGenerarReporteAreaHistorial">
                             Generar reporte
                         </button>
-                        
+
                         <button class="ui red right button" id="btnGenerarReporteAreaDiario">
                             Generar reporte
                         </button>
@@ -153,7 +172,7 @@ $(function() {
                             Generar reporte
                         </button>
 
-                       
+
                     </div>
             <div id="cmbUsuario">
                 <h4> <label for="">Seleccione el usuario: </label>
@@ -186,13 +205,13 @@ $(function() {
                                         <label>Por Fechas</label>
                                     </div>
                                 </div>
-                               
+
                             </div>
                         </div>
                         <button class="ui teal right button" id="btnGenerarReporteUsuarioHistorial">
                             Generar reporte
                         </button>
-                        
+
                         <button class="ui red right button" id="btnGenerarReporteUsuarioDiario">
                             Generar reporte
                         </button>
@@ -236,20 +255,29 @@ $(function() {
         $('#fechasUsuario').hide();
     });
 
-    $(document).on("click", "#btnAreas", function () {
+        $(document).on("click", "#btnAreas", function () {
             $('#fechas').hide();
             $('#cmbUsuario').hide();
+            $('#cmbEstado').hide();
             $('#cmbArea').show();
         });
         $(document).on("click", "#btnFechas", function () {
             $('#cmbUsuario').hide();
             $('#cmbArea').hide();
+            $('#cmbEstado').hide();
             $('#fechas').show();
         });
         $(document).on("click", "#btnUsuarios", function () {
             $('#cmbArea').hide();
             $('#fechas').hide();
+            $('#cmbEstado').hide();
             $('#cmbUsuario').show();
+        });
+        $('#btxEstado').click(function() {
+            $('#cmbArea').hide();
+            $('#fechas').hide();
+            $('#cmbUsuario').hide();
+            $('#cmbEstado').show();
         });
 </script>
 <script>
@@ -259,7 +287,7 @@ $(function() {
             $('#btnGenerarReporteAreaDiario').hide();
             $('#btnGenerarReporteAreaPorFechas').hide();
             $('#fechasArea').hide();
-            
+
 
             $(document).on("click", "#btnGenerarReporteAreaHistorial", function () {
                 var idU = $('#area').val();
@@ -292,7 +320,7 @@ $(function() {
             window.open('?1=UsuarioController&2=reporteAreaPorFechas&area='+idU+'&fecha='+fecha+'&fecha2='+fecha2,'_blank');
             return false;
 
-            
+
             });
         });
 
@@ -301,7 +329,7 @@ $(function() {
             $('#btnGenerarReporteUsuarioDiario').hide();
             $('#btnGenerarReporteUsuarioPorFechas').hide();
             $('#fechasUsuario').hide();
-            
+
 
            $(document).on("click", "#btnGenerarReporteUsuarioHistorial", function () {
                 var idU = $('#usuario').val();
@@ -336,7 +364,7 @@ $(function() {
             window.open('?1=UsuarioController&2=reporteUsuarioPorFechas&usuario='+idU+'&fecha='+fecha+'&fecha2='+fecha2,'_blank');
             return false;
 
-            
+
             });
         });
 
@@ -452,22 +480,25 @@ if ($Cantidad==1) {
     </script>
   </head>
   <body>
- 
-    <table>
+
+    <table style="width: 100vw; margin:auto; padding: 0;">
     <thead>
         <a class="btnGraficos ui center teal button" style="margin:auto;" href="?1=UsuarioController&2=dashboard">
             <b><i class="chart bar icon"></i>Actualizar gráficos</b>
         </a>
 
     </thead>
-    <tbody>
-    <td>
-    <br>
-    <div id="piechart" style="width: 750px; height: 500px;"></div>
-    </td>
-    <td><br>
-    <div id="donutchart" style="width: 750px; height: 500px;"></div>
-    </td>
+    <tbody style="width: 100%;">
+    <tr style="width:100%;">
+        <td style="width: 50%;">
+            <br>
+            <div id="piechart" style="width: 100%; height: 50vh;"></div>
+        </td>
+        <td style="width: 50%;">
+            <br>
+            <div id="donutchart" style="width: 100%; height: 50vh;"></div>
+        </td>
+    </tr>
     </tbody>
     <table>
     </body>
@@ -500,5 +531,3 @@ if ($Cantidad==1) {
         });
 
     </script>
-
-   

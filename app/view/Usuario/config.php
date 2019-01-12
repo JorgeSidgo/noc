@@ -18,7 +18,7 @@
 <div class="ui tiny modal" id="modalCambiarNomUser">
 
     <div class="header">
-    <i class="user icon"></i> Mi usuario Deloitte<font color="#85BC22" size="20px">.</font>
+    <i class="user icon"></i> Mi usuario Deloitte<font color="#85BC22" style="font-size: 28px;">.</font>
     </div>
     <div class="content">
         <form class="ui form" id="frmCambiarNomUser">
@@ -31,12 +31,12 @@
         </form>
     </div>
     <div class="actions">
-        <div class="ui black deny button" id="btnCancelarRegistrar">
+        <button class="ui black deny button" id="btnCancelarRegistrar">
             Cancelar
-        </div>
-        <div class="ui blue right button" id="btnGuardarNomUser">
+        </button>
+        <button class="ui blue right button" id="btnGuardarNomUser">
             Guardar Cambios
-        </div>
+        </button>
     </div>
 </div>
 
@@ -66,12 +66,12 @@
         </form>
     </div>
     <div class="actions">
-        <div class="ui black deny button" id="btnCancelarRegistrar">
+        <button class="ui black deny button" id="btnCancelarRegistrar">
             Cancelar
-        </div>
-        <div class="ui blue right button" id="btnGuardarNom">
+        </button>
+        <button class="ui blue right button" id="btnGuardarNom">
             Guardar Cambios
-        </div>
+        </button>
     </div>
 </div>
 
@@ -103,12 +103,12 @@
         </form>
     </div>
     <div class="actions">
-        <div class="ui black deny button" id="btnCancelarModificar">
+        <button class="ui black deny button" id="btnCancelarModificar">
             Cancelar
-        </div>
-        <div class="ui blue right button" id="btnGuardarContra">
+        </button>
+        <button class="ui blue right button" id="btnGuardarContra">
             Guardar Cambios
-        </div>
+        </button>
     </div>
 </div>
 
@@ -116,7 +116,7 @@
 <div class="ui tiny modal" id="modalEliminarCuenta">
 
     <div class="header">
-       <i class="trash icon"></i> Eliminar cuenta Deloitte<font color="#85BC22" size="20px">.</font>
+       <i class="trash icon"></i> Eliminar cuenta Deloitte<font color="#85BC22" style="font-size: 28px;">.</font>
     </div>
     <div class="content">
         <form class="ui form" id="frmEliminarCuenta">
@@ -131,12 +131,12 @@
         </form>
     </div>
     <div class="actions">
-        <div class="ui black deny button" id="btnCancelarEliminar">
+        <button class="ui black deny button" id="btnCancelarEliminar">
             Cancelar
-        </div>
-        <div class="ui red right button" id="btnConfEliminarCuenta">
+        </button>
+        <button class="ui red right button" id="btnConfEliminarCuenta">
             Eliminar Cuenta
-        </div>
+        </button>
     </div>
 </div>
 
@@ -145,8 +145,11 @@
                 <div class="sixteen wide column">
                     <div class="barra-titulo">
                         <p class="texto-barra-titulo">
-                        <h1><i class="user icon"></i>
-                Mi cuenta Deloitte<font color="#85BC22" size="20px">.</font></h1><hr>
+                        <h1>
+                            <i class="user icon"></i>
+                            Configuración de cuenta
+                        </h1>
+                        <hr>
                         </p>
                     </div>
                 </div>
@@ -155,7 +158,7 @@
             <div class="row">
         
                 <div class="eight wide column">
-                    <h3 class="ui header"><font color=""><i class="user outline icon"></font></i>Usuario Deloitte<font color="#85BC22" size="20px">.</font></h3>
+                    <h3 class="ui header"><font color=""><i class="user outline icon"></font></i>Usuario Deloitte<font color="#85BC22" style="font-size: 28px;">.</font></h3>
                     <h4><?php echo '<p class="user-info">'.$_SESSION['nomUsuario'].'</p>' ?></h4>
                     <div class="ui divider"></div>
                     <h3 class="ui header">  <i class="street view  icon"></i>Nombre Completo.</h3>
@@ -173,9 +176,6 @@
                         </div>
                         <div class="item">
                             <button class="ui right floated fluid green-deloitte button" id="btnCambiarContra" type="button"><i class="lock icon"></i>Modificar contraseña</button>
-                        </div>
-                        <div class="item">
-                            <button class="ui right floated fluid red button" id="btnEliminarCuenta" type="button"><i class="trash icon"></i>Eliminar mi cuenta</button>
                         </div>
                     </div>
                 </div>
@@ -197,9 +197,6 @@
         
         $(document).on("click", "#btnCambiarContra", function () {
             $('#modalCambiarContra').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
-        });
-        $(document).on("click", "#btnEliminarCuenta", function () {
-            $('#modalEliminarCuenta').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
         });
 
         $(function() {
@@ -275,41 +272,46 @@
 
     $(function() {
         $('#btnGuardarContra').click(function() {
-            var idU=<?php echo $id ?>;
-            var contraAnterior = $('#antPass').val();
-            var contraNueva = $('#nuPass').val();
 
-           $.ajax({
-               type: 'POST',
-               url: '?1=UsuarioController&2=reestablecerContra',
-               data: {
-                   id: idU,
-                   nuPass: contraNueva,
-               },
-               success: function(r) {
-                $('#frmCambiarContra').removeClass('loading');
-                   if(r == 1) {
-                    swal({
-                            title: 'Cambios realizados',
-                            text: 'Al iniciar sesión nuevamente debe utilizar su nueva contraseña',
-                            type: 'success',
-                            showConfirmButton: true
-                        }); 
-                        
-                        $('#modalCambiarContra').modal('hide');
+            if(validarVacios('frmCambiarContra') == 0) {
+                var idU=<?php echo $id ?>;
+                var contraAnterior = $('#antPass').val();
+                var contraNueva = $('#nuPass').val();
 
-                   }else{
+                $.ajax({
+                    type: 'POST',
+                    url: '?1=UsuarioController&2=reestablecerContra',
+                    data: {
+                        id: idU,
+                        nuPass: contraNueva,
+                    },
+                    success: function(r) {
+                        $('#frmCambiarContra').removeClass('loading');
+                        if(r == 1) {
+                            swal({
+                                title: 'Cambios realizados',
+                                text: 'Al iniciar sesión nuevamente debe utilizar su nueva contraseña',
+                                type: 'success',
+                                showConfirmButton: true
+                            });
+
+                            $('#modalCambiarContra').modal('hide');
+
+                        }else{
                             $('#label-error').html('Datos Incorrectos');
                             $('#label-error').css('display', 'inline-block');
                         }
-               }
-           });
+                    }
+                });
+            }
+
         });
     });
 
 
     $("#btnCancelarModificar").click(function(){
 
+            resetFrm('frmCambiarContra');
              $('#label-error').css('display', 'none');
              $('#antPass').val("");
              $('#nuPass').val("");
@@ -318,41 +320,6 @@
     });
 
 
-    $(function() {
-        $('#btnConfEliminarCuenta').click(function() {
-            var idU=<?php echo $id ?>;
-
-           $.ajax({
-               type: 'POST',
-               url: '?1=UsuarioController&2=eliminarCuenta',
-               data: {
-                   id: idU
-               },
-               success: function(r) {
-                $('#frmEliminarCuenta').removeClass('loading');
-                   if(r == 1) {
-                    swal({
-                            title: 'Aviso',
-                            text: 'No podrás acceder nuevamente al sistema',
-                            type: 'warning',
-                            showConfirmButton: true
-                        }).then((result) => {
-                                        if (result.value) {
-                                            location.href = '?';
-                                        }
-                                    }); 
-                        
-                        $('#modalEliminarCuenta').modal('hide');
-
-                   }else{
-                            $('#label-error').html('Datos Incorrectos');
-                            $('#label-error').css('display', 'inline-block');
-                        }
-               }
-           });
-        });
-    });
-        ;
 </script>
  <script>
         $(function () {

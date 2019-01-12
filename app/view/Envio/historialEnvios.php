@@ -8,7 +8,7 @@
         <div class="row">
             <div class="titulo">
                 <i class="box icon"></i>
-                Historial de Envíos<font color="#85BC22" size="20px">.</font>
+                Historial de Envíos<font color="#85BC22" style="font-size: 28px;">.</font>
             </div>
         </div>
         <br><br><br>

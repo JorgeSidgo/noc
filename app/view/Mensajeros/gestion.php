@@ -18,7 +18,7 @@
         <div class="row">
             <div class="titulo">
             <i class="shipping fast icon"></i>
-                Mensajeros Deloitte<font color="#85BC22" size="20px">.</font>
+                Mensajeros Deloitte<font color="#85BC22" style="font-size: 28px;">.</font>
             </div>
         </div>
         <div class="row title-bar">
@@ -103,8 +103,6 @@ var app = new Vue({
                     .then(dat => {
 
                         console.log(dat);
-
-                        // $('#frmEditar input[name="idDetalle"]').val(dat.codigoUsuari);
                         $('#frmEditar input[name="nombre"]').val(dat.nombre);
                     })
                     .catch(err => {

@@ -19,7 +19,7 @@
         <div class="row">
             <div class="titulo">
             <i class="building icon"></i>
-                Clientes Deloitte<font color="#85BC22" size="20px">.</font>
+                Clientes Deloitte<font color="#85BC22" style="font-size: 28px;">.</font>
             </div>
         </div>
         <div class="row title-bar">

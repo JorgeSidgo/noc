@@ -20,8 +20,25 @@ class DaoEnvio extends DaoBase {
         return $codigoEnvio;
     }
 
+    public function numeroDocumentosPendientes()
+    {
+        if(session_status() != 2) {
+            session_start();
+        }
+
+        $idUsuario = $_SESSION["codigoUsuario"];
+
+        $_query = "call numeroDocumentosPendientes({$idUsuario})";
+
+        $resultado = $this->con->ejecutar($_query);
+
+        $resultado = $resultado->fetch_assoc();
+
+        return $resultado["numero"];
+    }
+
     public function actualizarDetalle() {
-        $_query = "call actualizarDetalle({$this->objeto->getCodigoDetalleEnvio()}, {$this->objeto->getCodigoStatus()}, '{$this->objeto->getObservacion()}')";
+        $_query = "call actualizarDetalle({$this->objeto->getCodigoDetalleEnvio()}, {$this->objeto->getCodigoStatus()}, '{$this->objeto->getObservacion()}', {$this->objeto->getCodigoMensajero()})";
 
         $resultado = $this->con->ejecutar($_query);
 
@@ -174,6 +191,64 @@ class DaoEnvio extends DaoBase {
          echo '{"data": ['.$_json .']}';
     }
 
+    public function contarCompletos() {
+
+        $_query = "select count(codigoDetalleEnvio) as numero from detalleEnvio where codigoStatus = 5 and codigoEnvio = {$this->objeto->getCodigoEnvio()}";
+        $resultado = $this->con->ejecutar($_query);
+
+        $numero = $resultado->fetch_assoc();
+
+        
+        return $numero["numero"];
+
+    }
+
+    public function contarDocumentosPaquete() {
+        $_query = "select count(codigoDetalleEnvio) as numero from detalleEnvio where codigoEnvio = {$this->objeto->getCodigoEnvio()}";
+
+        $resultado = $this->con->ejecutar($_query);
+
+        $numero = $resultado->fetch_assoc();
+
+        
+        return $numero["numero"];
+    }
+
+    public function estadoPaquete() {
+
+        $completos = $this->contarCompletos();
+        $total = $this->contarDocumentosPaquete();
+
+        if($completos == $total) {
+            $this->cambiarEnvio(0);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function actPaquetes() {
+
+        $_query = 'call paquetesDiaSiguiente';
+
+        $resultado = $this->con->ejecutar($_query);
+        $resultado1 = $this->con->ejecutar($_query);
+    
+        $campo = $resultado->fetch_field()->name;
+
+        if($campo == 'numero') {
+            return 2;
+        } else {
+            while($id = $resultado1->fetch_assoc()) {
+                $_query = "call actualizarFecha({$id["codigoEnvio"]})";
+                $resultado = $this->con->ejecutar($_query);
+            }
+
+            return 1;
+        }
+
+    }
+
     public function mostrarPaquetes()
     {
         $_query = "call mostrarPaquetes()";
@@ -191,8 +266,8 @@ class DaoEnvio extends DaoBase {
 
         while($fila = $resultado->fetch_assoc()) {
 
-            $btnVer = '<button id=\"'.$fila["codigoEnvio"].'\" class=\"ui btnVer icon secondary small button\"><i class=\"list ul icon\"></i></button>';
-            $btnCorreo = '<button codigo-usuario=\"'.$fila["codigoUsuario"].'\" codigo-envio=\"'.$fila["codigoEnvio"].'\" class=\"ui btnCorreo icon teal small button\"><i class=\"check icon\"></i></button>';
+            $btnVer = '<button codigo-usuario=\"'.$fila["codigoUsuario"].'\" codigo-envio=\"'.$fila["codigoEnvio"].'\" id=\"'.$fila["codigoEnvio"].'\" class=\"ui btnVer icon secondary small button\"><i class=\"list ul icon\"></i></button>';
+            $btnCorreo = '<button codigo-usuario=\"'.$fila["codigoUsuario"].'\" codigo-envio=\"'.$fila["codigoEnvio"].'\" class=\"ui btnCorreo icon teal small button\"><i class=\"envelope icon\"></i></button>';
 
             $sub_query = "call detallesEnvioLabel({$fila["codigoEnvio"]})";
 
@@ -300,8 +375,8 @@ class DaoEnvio extends DaoBase {
 
         while($fila = $resultado->fetch_assoc()) {
 
-            $btnVer = '<button id=\"'.$fila["codigoEnvio"].'\" class=\"ui btnVer icon secondary small button\"><i class=\"list ul icon\"></i></button>';
-            $btnCorreo = '<button codigo-usuario=\"'.$fila["codigoUsuario"].'\" codigo-envio=\"'.$fila["codigoEnvio"].'\" class=\"ui btnCorreo icon teal small button\"><i class=\"check icon\"></i></button>';
+            $btnVer = '<button codigo-usuario=\"'.$fila["codigoUsuario"].'\" codigo-envio=\"'.$fila["codigoEnvio"].'\" id=\"'.$fila["codigoEnvio"].'\" class=\"ui btnVer icon secondary small button\"><i class=\"list ul icon\"></i></button>';
+            $btnCorreo = '<button codigo-usuario=\"'.$fila["codigoUsuario"].'\" codigo-envio=\"'.$fila["codigoEnvio"].'\" class=\"ui btnCorreo icon teal small button\"><i class=\"envelope icon\"></i></button>';
 
             $sub_query = "call detallesEnvioLabel({$fila["codigoEnvio"]})";
 

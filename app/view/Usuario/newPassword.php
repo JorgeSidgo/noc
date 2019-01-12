@@ -19,24 +19,25 @@
                     <div class="field">
                         <div class="ui left icon input">
                             <i class="user icon"></i>
-                            <input @keyup.enter="login" value="" @keyup="setTrue" type="text" class="requerido" name="user"
+                            <input @keyup.enter="" @blur="requestMail" @focus="borrarError" v-model="user.userName" value="" @keyup="" type="text" class="requerido" name="user"
                                 id="user" placeholder="Usuario Deloitte">
                         </div>
                     </div>
                     <div style="text-align: right;" class="field">
                         <div class="ui right labeled left icon input">
                             <i class="envelope icon"></i>
-                            <input type="text" class="requerido" name="correo" id="correo" placeholder="Correo Electrónico"
-                                @keyup.enter="login" @keyup="setTrue">
+                            <input type="text" v-model="user.correo" class="requerido" name="correo" id="correo" readonly placeholder="Correo Electrónico"
+                                @keyup.enter="" @keyup="">
 
                         </div>
 
                     </div>
-                    <a id="label-error" style="display: none; margin: 0; text-align:center;" class="ui red fluid large label"
-                        v-if="isError">Datos
-                        Incorrectos</a>
+
+                    <a id="label-error" style="margin: 0; text-align:center;" class="ui red fluid large label"
+                        v-if="error.bandera">{{error.mensaje}}</a>
+
                     <button style="margin-top: 15px;" class="ui green-deloitte fluid button" name="btnEnviar" value="noloc"
-                        @click="login" id="btnEnviar" type="button" @submit.prevent="">Enviar datos</button>
+                        @click="enviarCorreo" id="btnEnviar" type="button" @submit.prevent="">Enviar datos</button>
 
 
                 </form>
@@ -47,115 +48,104 @@
             </div>
         </div>
     </div>
-    <script>
-        $(function () {
-            $('#user').focus();
-        });
-    </script>
 
-    <script>
-        $(function () {
-            $('#btnEnviar').click(function () {
+</body>
 
-                if (validarVacios('frmNewPass', '#btnEnviar') == 0) {
+<script>
+    let app = new Vue({
+        el: '#app',
+
+        data: {
+
+            user: {
+                userName: '',
+                correo: ''
+            },
+
+            error: {
+                mensaje: '',
+                bandera: false
+            }
+        },
+
+        methods: {
 
 
-                    
+            borrarError() {
+                this.error.bandera = false;
+                this.error.mensaje = '';
+            },
+
+            enviarCorreo() {
+
+                $('#frmNewPass').addClass('loading');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '?1=UsuarioController&2=newPass',
+                    data: {
+                        datos: app.user
+                    },
+                    success: function (r) {
+                        if (r == 1) {
+                            swal({
+                                title: 'Datos enviados',
+                                text: 'Se ha enviado un código de recuperación a su correo',
+                                type: 'success'
+                            }).then((result) => {
+                                if (result.value) {
+
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: '?1=UsuarioController&2=encodeString',
+                                        data: {string: app.user.userName},
+                                        success: function(r) {
+                                            $('#frmNewPass').removeClass('loading');
+                                            location.href = '?1=UsuarioController&2=resetPasswordView&3='+ r;
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    }
+                });
+            },
+
+            requestMail() {
+
+                if(this.user.userName.length > 4) {
                     $('#frmNewPass').addClass('loading');
-
-                    var gatos = {};
-
-                    $('#frmNewPass').find(":input").each(function () {
-                        gatos[this.name] = $(this).val();
-                    });
-
-                    gatos = JSON.stringify(gatos);
-
 
                     $.ajax({
                         type: 'POST',
-                        url: '?1=UsuarioController&2=newPass',
+                        url: '?1=UsuarioController&2=cargarDatosNomUsuario',
                         data: {
-                            datos: gatos
+                            userName: app.user.userName
                         },
-                        success: function (r) {
-                            if (r == 1) {
-                                swal({
-                                    title: 'Datos enviados',
-                                    text: 'Se ha enviado un código de recuperación a su correo',
-                                    type: 'success'
-                                }).then((result) => {
-                                    if (result.value) {
+                        success: function(data) {
+                            let datos = JSON.parse(data);
 
-                                        $.ajax({
-                                            type: 'POST',
-                                            url: '?1=UsuarioController&2=encodeString',
-                                            data: {string: JSON.parse(gatos).user},
-                                            success: function(r) {
-                                                location.href = '?1=UsuarioController&2=resetPasswordView&3='+ r;
-                                            }
-                                        });
-                                    }
-                                });
+                            if(data != 'null') {
+                                app.user.correo = datos.email;
+                                $('#btnEnviar').removeAttr('disabled');
+                            } else {
+                                $('#btnEnviar').attr('disabled', 'disabled');
+                                app.error.bandera = true;
+                                app.error.mensaje = 'Usuario no encontrado';
                             }
+                            $('#frmNewPass').removeClass('loading');
                         }
                     });
-
-                } else {
-                    $('#label-error').html('Complete todos los campos');
-                    $('#label-error').css('display', 'inline-block');
                 }
 
+            }
+        }
+    });
+</script>
 
-            });
-        });
-
-
-            $("#correo").change(function(){
-
-                 var user=$("#user").val();
-                 var email=$("#correo").val();
-
-                    $.ajax({
-                    type: 'POST',
-                    url: '?1=UsuarioController&2=getEmail',
-                    data:{user,email},
-                    success: function(r) {
-
-                            if(r==1)
-                            {
-                               
-                                $('#btnEnviar').attr("disabled", false);
-                                
-                            }    
-                            else{
-
-                                 $('#label-error').html('Datos Incorrectos');
-                                 $('#label-error').css('display', 'inline-block');
-                                 $('#btnEnviar').attr("disabled", true);
-                            }  
-                    }
-                    });
-
-        
-            });
-
-
-            $("#correo").keyup(function(){
-
-                $('#label-error').css('display', 'none');
-                
-
-            });
-
-            $("#user").keyup(function(){
-
-                $('#label-error').css('display', 'none');
-
-            });
-           
-
-        
-    </script>
-
-</body>
+<script>
+$(function() {
+    $('#user').focus();
+    $('#btnEnviar').attr('disabled', 'disabled');
+});
+</script>

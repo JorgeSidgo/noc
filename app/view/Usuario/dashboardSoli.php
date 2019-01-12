@@ -26,7 +26,7 @@
   text-align: center;
 }
 </style>
-<a class="btnGraficos" href="?1=UsuarioController&2=dashboard">
+<a class="ui teal button" style="margin:auto; href=" href="?1=UsuarioController&2=dashboard">
 <b><i class="chart bar icon"></i>Actualizar gráficos</b>
     </a>
 <?php
@@ -127,13 +127,15 @@ if ($Cantidad==1) {
     </script>
     <body>
     
-    <table>
-    <td>
-    <div id="piechart" style="width: 700px; height: 500px;"></div>
-    </td>
-    <td>
-    <div id="donutchart" style="width: 700px; height: 500px;"></div>
-    </td>
+    <table style="width: 100vw; margin:auto; padding: 0;">
+        <tr style="width:100%;">
+            <td style="width: 50%;">
+                <div id="piechart" style="width: 100%; height: 50vh;"></div>
+            </td>
+            <td style="width: 50%;">
+                <div id="donutchart" style="width: 100%; height: 50vh;"></div>
+            </td>
+        </tr>
     <table>
     
     </body>

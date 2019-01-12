@@ -3,7 +3,6 @@
 class UsuarioController extends ControladorBase {
 
     // Vistas
-
     public static function loginView() {
         self::loadHeadOnly();
         require_once './app/view/Usuario/login.php';
@@ -95,6 +94,10 @@ class UsuarioController extends ControladorBase {
     }
 
     public function registrar() {
+        $dao = new DaoUsuario();
+        require './app/mail/Mail.php';
+        $mail = new Mail();
+
         $datos = $_REQUEST["datos"];
 
         $datos = json_decode($datos);
@@ -105,7 +108,7 @@ class UsuarioController extends ControladorBase {
             $rol = $datos->rol;
         }
 
-        $dao = new DaoUsuario();
+        $contador = 0;
 
         $dao->objeto->setNombre($datos->nombre);
         $dao->objeto->setApellido($datos->apellido);
@@ -115,8 +118,27 @@ class UsuarioController extends ControladorBase {
         $dao->objeto->setCodigoRol($rol);
         $dao->objeto->setCodigoArea($datos->area);
 
-        echo $dao->registrar();
 
+        $respuesta = $dao->registrar();
+
+        $datosUsuario = $dao->datosNomUsuario();
+
+        if(!$mail->notificacionRegistroUsuario($datosUsuario)) {
+            echo "El correo no fue enviado correctamente";
+        }
+
+        echo $respuesta;
+    }
+
+    public function cargarDatosNomUsuario() {
+        $nom = $_REQUEST["userName"];
+
+        $dao = new DaoUsuario();
+        $dao->objeto->setNomUsuario($nom);
+
+        $datosUsuario = $dao->datosNomUsuario();
+
+        echo json_encode($datosUsuario);
     }
 
     public function newPass() {
@@ -128,10 +150,10 @@ class UsuarioController extends ControladorBase {
         require './app/mail/Mail.php';
         $mail = new Mail();
 
-        $datos = json_decode($_REQUEST["datos"]);
+        $datos = $_REQUEST["datos"];
 
-        $id = $datos->user;
-        $email = $datos->correo;
+        $id = $datos["userName"];
+        $email = $datos["correo"];
 
 
 
@@ -183,8 +205,6 @@ class UsuarioController extends ControladorBase {
         $dao->objeto->setEmail($email);
         $dao->objeto->setNomUsuario($user);
         echo $dao->getEmail();
-        
-
     }
 
     

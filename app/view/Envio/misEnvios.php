@@ -10,7 +10,7 @@
         <div class="content">
             <form v-on:submit.prevent action="" class="ui equal width form" id="frmAutorizar">
                 <div class="field">
-                    <label for="">Observación:</label>
+                    <label for="">Observación o Comentario:</label>
                     <input v-model="cambiarDetalle.observacion" type="text" id="obs" name="obs">
                 </div>
                 <input type="hidden" id="idAutorizar" name="idAutorizar">
@@ -31,17 +31,17 @@
         <div class="row">
             <div class="titulo">
                 <i class="envelope icon"></i>
-                Mis Envíos<font color="#85BC22" size="20px">.</font>
+                Mis Envíos<font color="#85BC22" style="font-size: 28px;">.</font>
             </div>
         </div>
 
-        <div v-if="1" class="row">
+        <div v-if="numeroDocumentosPendientes > 0" class="row">
             <h3 style="width: 100%;" class="ui dividing header">
                 Documentos Pendientes
             </h3>
         </div>
 
-        <div class="row">
+        <div v-if="numeroDocumentosPendientes > 0" class="row">
             <div class="sixteen wide column">
                 <table id="dtDocumentosPend" class="ui selectable very compact celled table" style="width:100%; margin:auto;">
                     <thead>
@@ -55,6 +55,7 @@
                             <th>N° Doc</th>
                             <th>Estado</th>
                             <th>Monto</th>
+                            <th>Mensajero</th>
                             <th>Observación</th>
                             <th>Opcion</th>
                         </tr>
@@ -111,6 +112,8 @@
 
             idEnvio: 0,
 
+            numeroDocumentosPendientes: <?php echo $numDocumentosPendientes?>,
+
             datosDetalle: {
                 tramite: '',
                 cliente: '',
@@ -122,7 +125,8 @@
                 idEnvio: 0,
                 idDetalle: 0,
                 idStatus: 1,
-                observacion: ''
+                observacion: '',
+                idMensajero: 1
             },
 
             pendientes: []
@@ -181,6 +185,15 @@
             refrescarTablaPendientes(){
                 tablaDocumentosPendientes.ajax.reload();
             },
+            getNumeroDocumentosPendientes() {
+                $.ajax({
+                    type: 'POST',
+                    url: '?1=EnvioController&2=numeroDocumentosPendientes',
+                    success: function(data) {
+                        app.numeroDocumentosPendientes = parseInt(data);
+                    }
+                })
+            },
 
             cambiarEstado() {
 
@@ -194,7 +207,6 @@
                     },
                     success: function (r) {
 
-                        console.log(r);
                         if (r == 1) {
                             swal({
                                 title: null,
@@ -209,6 +221,7 @@
                             app.cargarPendientes();
                             app.reloadTabla();
                             app.refrescarTablaPendientes();
+                            app.getNumeroDocumentosPendientes();
                         }
 
                     }

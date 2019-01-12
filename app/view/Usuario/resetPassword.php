@@ -18,6 +18,8 @@ if(isset($_REQUEST["3"])) {
 </style>
 <!-- kiondaquepex -->
 
+
+
 <body class="body-login">
     <div id="fondo-dot"></div>
     <div id="app">
@@ -82,6 +84,7 @@ if(isset($_REQUEST["3"])) {
         });
     </script>
 
+
     <script>
         $(function () {
             $('#btnEnviar').click(function () {
@@ -118,7 +121,13 @@ if(isset($_REQUEST["3"])) {
                                         location.href = '?1=UsuarioController&2=loginView&3='+ '<?php echo $nomUser ?>';
                                     }
                                 });
+                            } else {
+                                $('#frmNewPass').removeClass('loading');
+                                $('#label-error').html('El código es incorrecto');
+                                $('#label-error').css('display', 'inline-block');
                             }
+
+                            $('#frmNewPass').removeClass('loading');
                         }
                     });
 
@@ -130,5 +139,12 @@ if(isset($_REQUEST["3"])) {
             });
         });
     </script>
-
+    <script>
+        $(function() {
+            $('#code').focus(function() {
+                $('#label-error').html('');
+                $('#label-error').css('display', 'none');
+            })
+        });
+    </script>
 </body>

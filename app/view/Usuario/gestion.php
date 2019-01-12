@@ -46,14 +46,14 @@
         <div class="row">
             <div class="titulo">
             <i class="users icon"></i>
-                Usuarios Deloitte<font color="#85BC22" size="20px">.</font>
+                Usuarios Deloitte<font color="#85BC22" style="font-size: 28px;">.</font>
             </div>
         </div>
         <div class="row title-bar">
             <div class="sixteen wide column">
                 <button class="ui right floated positive labeled icon button" @click="modalRegistrar" id="btnModalRegistro">
                     <i class="plus icon"></i>
-                    Agregar
+                    Registrar
                 </button>
             </div>
         </div>

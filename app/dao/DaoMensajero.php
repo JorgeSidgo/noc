@@ -16,16 +16,20 @@ class DaoMensajero extends DaoBase {
 
         while($fila = $resultado->fetch_assoc()) {
 
-            $object = json_encode($fila);
+            if($fila["nombre"] == 'No Asignado') {
 
-            $btnEditar = '<button id=\"'.$fila["codigoMensajero"].'\" class=\"ui btnEditar icon blue small button\"><i class=\"edit icon\"></i></button>';
-            $btnEliminar = '<button id=\"'.$fila["codigoMensajero"].'\" class=\"ui btnEliminar icon negative small button\"><i class=\"trash icon\"></i></button>';
+            } else {
+                $object = json_encode($fila);
 
-            $acciones = ', "Acciones": "'.$btnEditar.' '.$btnEliminar.'"';
+                $btnEditar = '<button id=\"'.$fila["codigoMensajero"].'\" class=\"ui btnEditar icon blue small button\"><i class=\"edit icon\"></i></button>';
+                $btnEliminar = '<button id=\"'.$fila["codigoMensajero"].'\" class=\"ui btnEliminar icon negative small button\"><i class=\"trash icon\"></i></button>';
 
-            $object = substr_replace($object, $acciones, strlen($object) -1, 0);
+                $acciones = ', "Acciones": "'.$btnEditar.' '.$btnEliminar.'"';
 
-            $_json .= $object.',';
+                $object = substr_replace($object, $acciones, strlen($object) -1, 0);
+
+                $_json .= $object.',';
+            }
         }
 
         $_json = substr($_json,0, strlen($_json) - 1);

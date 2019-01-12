@@ -50,7 +50,7 @@ Vue.component('modal-detalles', {
                                 <td  v-else-if="detalle.descStatus == 'Completo'" style="background-color: lightgreen;">
                                     {{detalle.descStatus}}
                                 </td>
-                                <td  v-else-if="detalle.descStatus == 'Pendiente de Revision'" style="background-color: rgba(149, 165, 166, 0.3);>
+                                <td  v-else-if="detalle.descStatus == 'Pendiente de Revision'" style="background-color: rgba(149, 165, 166, 0.3);">
                                     {{detalle.descStatus}}
                                 </td>
                                 
@@ -65,7 +65,7 @@ Vue.component('modal-detalles', {
                         </form>
                     </div>
                     <div class="actions">
-                        <button @click="$parent.cerrarModal" class="ui deny button">
+                        <button type="button" @click="$parent.cerrarModal" class="ui deny button">
                             Cerrar
                         </button>
                     </div>

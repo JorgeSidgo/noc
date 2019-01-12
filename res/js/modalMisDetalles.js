@@ -18,18 +18,22 @@ Vue.component('modal-detalles', {
                 <table v-if="detalles" class="ui selectable very compact single line table">
                     <thead>
                         <tr>
+                            <th class="">Correlativo</th>
                             <th class="two wide">Trámite</th>
                             <th class="three wide">Cliente</th>
-                            <th class="two wide">Área</th>
+                            <th class="one wide">Área</th>
                             <th class="two wide">Tipo Doc</th>
                             <th class="one wide">N° Doc</th>
                             <th class="one wide">Monto</th>
                             <th class="two wide">Status</th>
+                            <th class="two wide">Mensajero</th>
                             <th class="three wide">Observaciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="detalle in detalles" :codigo-detalle="detalle.codigoDetalleEnvio">
+                                
+                                <td>{{detalle.correlativoDetalle}}</td>
                                 <td>{{detalle.descTipoTramite}}</td>
                                 <td>{{detalle.nombreCliente}}</td>
                                 <td>{{detalle.descArea}}</td>
@@ -52,10 +56,13 @@ Vue.component('modal-detalles', {
                             <td v-else-if="detalle.descStatus == 'Pendiente de Revision'" style="background-color: rgba(149, 165, 166, 0.3);">
                                 {{detalle.descStatus}}
                             </td>
+                            <td>
+                                {{detalle.mensajero}}
+                            </td>
+                            <td>
+                                {{detalle.observacion}}
+                            </td>
                             
-                                <td>
-                                    {{detalle.observacion}}
-                                </td>
                         </tr>
                     </tbody>
                 </table>

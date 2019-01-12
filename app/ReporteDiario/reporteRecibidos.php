@@ -8,8 +8,8 @@
     $con = new mysqli("localhost","root","","deloitte_mensajeria");
     $con1 = new mysqli("localhost","root","","deloitte_mensajeria");
 
-    $sql="call reporteDiario()";
-    $sql1="call reporteDiario()";
+    $sql="call reporteMensajeros()";
+    $sql1="call reporteMensajeros()";
 $res = $con ->query($sql);
 $res1 = $con1->query($sql1);
 

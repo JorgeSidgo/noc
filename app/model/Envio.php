@@ -14,6 +14,7 @@ class Envio extends ModeloBase {
     private $observacion;
     private $numDoc;
     private $codigoStatus;
+    private $codigoMensajero;
 
     public function __construct() {
         
@@ -272,6 +273,26 @@ class Envio extends ModeloBase {
     public function setNumDoc($numDoc)
     {
         $this->numDoc = $numDoc;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of codigoMensajero
+     */ 
+    public function getCodigoMensajero()
+    {
+        return $this->codigoMensajero;
+    }
+
+    /**
+     * Set the value of codigoMensajero
+     *
+     * @return  self
+     */ 
+    public function setCodigoMensajero($codigoMensajero)
+    {
+        $this->codigoMensajero = $codigoMensajero;
 
         return $this;
     }

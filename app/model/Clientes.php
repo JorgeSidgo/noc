@@ -6,6 +6,7 @@ class Clientes extends ModeloBase
     private $nombreCliente;
     private $direccion;
     private $telefono;
+    private $codigo;
 
     public function __construct()
     {
@@ -80,6 +81,26 @@ class Clientes extends ModeloBase
         return $this;
     }
 
+
+    /**
+     * Get the value of codigo
+     */ 
+    public function getCodigo()
+    {
+        return $this->codigo;
+    }
+
+    /**
+     * Set the value of codigo
+     *
+     * @return  self
+     */ 
+    public function setCodigo($codigo)
+    {
+        $this->codigo = $codigo;
+
+        return $this;
+    }
 }
 
 ?>

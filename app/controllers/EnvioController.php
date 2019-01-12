@@ -16,11 +16,17 @@ class EnvioController extends ControladorBase {
 
         $daoU = new DaoUsuario();
         $usuariosCMB = $daoU->mostrarUsuariosCmb();
+
         require_once './app/view/Envio/nuevo.php';
     }
 
     public function misEnvios() {
         self::loadMain();
+
+        $dao = new DaoEnvio();
+
+        $numDocumentosPendientes = $dao->numeroDocumentosPendientes();
+
         require_once './app/view/Envio/misEnvios.php';
     }
 
@@ -46,6 +52,10 @@ class EnvioController extends ControladorBase {
     {
         require_once './app/ReporteDiario/reporteDiario.php';
     }
+    public function reporteRecibidos()
+    {
+        require_once './app/ReporteDiario/reporteRecibidos.php';
+    }
     public function llamaReporteArea()
     {
         require_once './app/ReporteDiario/reporteArea.php';
@@ -64,6 +74,11 @@ class EnvioController extends ControladorBase {
     // Métodos
 
 
+    public function actPaquetes() {
+        $dao = new DaoEnvio();
+
+        echo $dao->actPaquetes();
+    }
 
     public function mostrarPaquetes()
     {
@@ -86,6 +101,12 @@ class EnvioController extends ControladorBase {
         echo $dao->historialEnvios();
     }
 
+    public function numeroDocumentosPendientes() {
+        $dao = new DaoEnvio();
+
+        echo $dao->numeroDocumentosPendientes();
+    }
+
     public function actualizarDetalle() {
         $dao = new DaoEnvio();
 
@@ -95,11 +116,16 @@ class EnvioController extends ControladorBase {
         $dao->objeto->setCodigoDetalleEnvio($detalle->idDetalle);
         $dao->objeto->setCodigoStatus($detalle->idStatus);
         $dao->objeto->setObservacion($detalle->observacion);
+        $dao->objeto->setCodigoMensajero($detalle->idMensajero);
 
-        //$dao->cambiarEnvio(1);
+        
+        $res = $dao->actualizarDetalle();
+        
+        if($dao->estadoPaquete()) {
+            $this->revisionPaquete();
+        }
 
-        echo $dao->actualizarDetalle();
-
+        echo $res;
     }
 
     public function getDetallesEnvio() {
@@ -186,7 +212,7 @@ class EnvioController extends ControladorBase {
         }
 
         $codigoEnvio = $dao->encabezadoEnvio();
-        // $datosUsuario = json_decode($daoUsuario->cargarDatosUsuario());
+        $datosUsuario = json_decode($daoUsuario->cargarDatosUsuario());
 
         $dao->objeto->setCodigoEnvio($codigoEnvio);
 
@@ -208,11 +234,10 @@ class EnvioController extends ControladorBase {
             }
         }
 
-
         require './app/mail/Mail.php';
         $mail = new Mail();
 
-        if(!$mail->detalleEnvio($codigoEnvio)) {
+        if(!$mail->detalleEnvio($codigoEnvio, $datosUsuario)) {
             echo "El correo no fue enviado Correctamente";
         }
 
@@ -233,13 +258,13 @@ class EnvioController extends ControladorBase {
         $daoUsuario = new DaoUsuario();
         $daoEnvio = new DaoEnvio();
 
-        $daoUsuario->objeto->setCodigoUsuario($idUsuario);
-
-        $datosUsuario = json_decode($daoUsuario->cargarDatosUsuario());
-
         $daoEnvio->objeto->setCodigoEnvio($idEnvio);
 
         $datosEncabezado = $daoEnvio->getEncabezadoEnvio()->fetch_assoc();
+
+        $daoUsuario->objeto->setCodigoUsuario($idUsuario);
+
+        $datosUsuario = json_decode($daoUsuario->cargarDatosUsuario());
 
         require './app/mail/Mail.php';
         $mail = new Mail();
@@ -247,7 +272,7 @@ class EnvioController extends ControladorBase {
         $daoEnvio->objeto->setCodigoEnvio($idEnvio);
         $detalles = $daoEnvio->detallesEnvioH();
 
-        $daoEnvio->cambiarEnvio(0);
+        // $daoEnvio->cambiarEnvio(0);
 
         if(!$mail->revisionPaquete($datosUsuario, $datosEncabezado, $detalles)) {
             echo 'Error al enviar el correo';

@@ -51,20 +51,6 @@ if($_SESSION["descRol"]=="Administrador") {?>
 </script>
 <?php }?>
 
-<script>
-//simon
-window.onload = function() {
-    
-    document.getElementById("usuario").selectedIndex = "0";
-
-        var x = document.getElementById("usuario").selectedIndex;
-    var y = document.getElementById("usuario").options;
-     $('#nombreActual').html(y[x].text);
-
-}
-//simon
-</script>
-
 
 <script>
     var fecha;
@@ -78,7 +64,7 @@ window.onload = function() {
 <div class="ui tiny modal" id="modalEleccion">
 
     <div class="header">
-        <i class="paper plane icon"></i>Envío Deloitte<font color="#85BC22" size="20px">.</font>
+        <i class="paper plane icon"></i>Envío Deloitte<font color="#85BC22" style="font-size: 28px;">.</font>
     </div>
     <div class="content">
         <form class="ui form" id="frmEnvio">
@@ -104,7 +90,7 @@ window.onload = function() {
         <div class="row">
             <div class="titulo">
                 <i class="paper plane icon"></i>
-                Envíos Deloitte<font color="#85BC22" size="20px">.</font>
+                Envíos Deloitte<font color="#85BC22" style="font-size: 28px;">.</font>
                 <?php
                 if($_SESSION["descRol"]=="Administrador") {?>
                 <center>A nombre de: <font color="#85BC22"><span id="nombreActual"></span></font>
@@ -129,7 +115,7 @@ window.onload = function() {
                         <thead class="super-compact">
                             <tr>
                                 <th class="two wide">Trámite</th>
-                                <th class="three wide">C liente</th>
+                                <th class="three wide">Cliente</th>
                                 <th class="two wide">Área</th>
                                 <th class="two wide">Tipo Doc</th>
                                 <th class="one wide">N° Doc</th>
@@ -226,7 +212,9 @@ window.onload = function() {
                 suffix: '',
                 precision: 2,
                 masked: true
-            }
+            },
+
+            descRol: '<?php echo $_SESSION["descRol"];?>'
 
         },
         methods: {
@@ -259,7 +247,7 @@ window.onload = function() {
                                             observaciones: ''
                                         }];
 
-                                        $('#modalNuevoEnvio').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
+                                        app.modalNuevoEnvio();
                                     }
                                 });           
                             }
@@ -269,6 +257,15 @@ window.onload = function() {
                 }
 
             },
+
+            modalNuevoEnvio() {
+
+                if(this.descRol == 'Administrador') {
+                    $('#modalNuevoEnvio').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
+                }
+
+            },
+
             agregarDetalle() {
                 this.envios.push({
                     tramite: '1',
@@ -302,6 +299,21 @@ window.onload = function() {
 </script>
 
 <script>
+//simon
+window.onload = function() {
+    
+    if(app.descRol == 'Administrador') {
+        document.getElementById("usuario").selectedIndex = "0";
+
+        var x = document.getElementById("usuario").selectedIndex;
+        var y = document.getElementById("usuario").options;
+        $('#nombreActual').html(y[x].text);
+    }
+}
+//simon
+</script>
+
+<script>
     $(function () {
         $("#btnSeleccionarUsuario").click(function () {
 
@@ -316,11 +328,7 @@ window.onload = function() {
                     rol: rol
                 },
                 success: function (r) {
-
-                    
-
-                    $('#modalEleccion').modal('hide');;
-
+                    $('#modalEleccion').modal('hide');
                 }
             });
         });
@@ -332,7 +340,7 @@ window.onload = function() {
         $("#btnSi").click(function () {
 
             $('#modalEleccion').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
-            $('#nombreActual').html("");
+            // $('#nombreActual').html("");
            
         });
 
@@ -344,6 +352,8 @@ window.onload = function() {
 
     });
 </script>
+
+
 
 <div class="ui modal" id="modalNuevoEnvio">
   <div class="header">
@@ -360,7 +370,6 @@ window.onload = function() {
     </button>
     <button class="ui green button" id="btnSi">
       Si
-      <i class="checkmark icon"></i>
     </button>
   </div>
 </div>

@@ -24,6 +24,4 @@ class ControladorBase {
             header("location: ?");
         }
     }
-
-    
 }
