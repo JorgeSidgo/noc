@@ -51,24 +51,24 @@ $tabla .= '<style>
                 $fecha = $res1->fetch_assoc();
 $tabla.= "
             <div class='header'>
-                <h1>Envíos Deloitte<font color='#85BC22' size='100px'>.</font></h1>
+                <h1>Env&iacute;os Deloitte<font color='#85BC22' size='100px'>.</font></h1>
                 <p>Fecha: <b>".date("d/m/Y")."</b></p>
             </div>    
 
             <table class='tabla'>
             <tr>
-                <th>Código</th>
+                <th>C&oacute;digo</th>
                 <th>Usuario</th>
                 <th>Hora</th>
                 <th>Fecha</th>
-                <th>Trámite</th>
+                <th>Tr&aacute;mite</th>
                 <th>Cliente</th>
-                <th>Área</th>
+                <th>&Aacute;rea</th>
                 <th>Tipo de documento</th>
-                <th>N° Documento</th>
+                <th>N<sup>o</sup> Documento</th>
                 <th>Monto</th>
                 <th>Estado</th>
-                <th>Observación</th>
+                <th>Observaci&oacute;n</th>
             </tr>
 
             ";
@@ -114,9 +114,9 @@ return $tabla;
 }
  
 $html = datos();
-
-
 $pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
+$html= mb_convert_encoding($html, 'UTF-8', 'ISO-8859-1');
+$pdf->charset_in='UTF-8';
 $pdf->WriteHTML($html);
 $pdf->Output();
  

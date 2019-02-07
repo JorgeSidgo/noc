@@ -23,6 +23,22 @@ class DaoArea extends DaoBase {
         return '['.$json.']';
     }
 
+    public function mostrarAreasSelect() {
+        $_query = "select * from area where idEliminado=1";
+
+        $resultado = $this->con->ejecutar($_query);
+
+        $json = '';
+
+        while($fila = $resultado->fetch_assoc()) {
+            $json .= '{"val": '.$fila['codigoArea'].', "text": "'.$fila['descArea'].'"},';
+        }
+
+        $json = substr($json,0, strlen($json) - 1);
+
+        return '['.$json.']';
+    }
+
     public function mostrarAreasDT() {
         $_query = "call mostrarArea()";
 

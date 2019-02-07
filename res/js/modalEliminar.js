@@ -60,7 +60,7 @@ Vue.component('modal-eliminar', {
                             type: 'success',
                             showConfirmButton: false,
                             timer: 1500
-                        })
+                        });
                         $('#' + this.id_form).removeClass('loading');
                         $('#' + this.id).modal('hide');
                         this.$parent.refrescarTabla();

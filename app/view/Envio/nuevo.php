@@ -111,16 +111,16 @@ if($_SESSION["descRol"]=="Administrador") {?>
         <div class="row ">
             <div class="sixteen wide column">
                 <form action="" class="ui form" id="frmEnvios">
-                    <table class="ui green fixed very compact table">
+                    <table class="ui green very compact table">
                         <thead class="super-compact">
                             <tr>
                                 <th class="two wide">Trámite</th>
-                                <th class="three wide">Cliente</th>
+                                <th class="four wide">Cliente</th>
                                 <th class="two wide">Área</th>
                                 <th class="two wide">Tipo Doc</th>
                                 <th class="one wide">N° Doc</th>
                                 <th class="two wide">Monto</th>
-                                <th class="three wide">Observaciones</th>
+                                <th class="two wide">Observaciones</th>
                                 <th class="one wide"></th>
                             </tr>
                         </thead>
@@ -128,31 +128,28 @@ if($_SESSION["descRol"]=="Administrador") {?>
                             <tr v-for="(envio, index) in envios">
                                 <td>
                                     <div class="ui mini input">
-                                        <select class="requerido" v-model="envio.tramite">
-                                            <option value="1">Entrega</option>
-                                            <option value="2">Cobro</option>
-                                            <option value="3">Transferencia</option>
-                                            <option value="4">Depósito</option>
+                                        <select class="ui search selection dropdown requerido" v-model="envio.tramite">
+                                            <option v-for="tipo in tiposTramite" :value="tipo.codigoTipoTramite">{{tipo.descTipoTramite}}</option>
                                         </select>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="ui mini input">
-                                        <select v-model="envio.cliente" id="clientes" name="clientes">
+                                        <select v-model="envio.cliente" class="ui search selection dropdown" id="clientes" name="clientes">
                                             <option v-for="option in clientesOps" :value="option.codigoCliente">{{option.nombreCliente}}</option>
                                         </select>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="ui mini input">
-                                        <select v-model="envio.area" id="area" name="area">
+                                        <select v-model="envio.area" class="ui search selection dropdown" id="area" name="area">
                                             <option v-for="option in areaOps" :value="option.codigoArea">{{option.descArea}}</option>
                                         </select>
                                     </div>
                                 </td>
                                 <td>
                                     <div class="ui mini input">
-                                        <select v-model="envio.tipoDocumento" id="documentos" name="documentos">
+                                        <select v-model="envio.tipoDocumento" class="ui search selection dropdown" id="documentos" name="documentos">
                                             <option v-for="option in tipoDocumentoOps" :value="option.codigoTipoDocumento">{{option.descTipoDocumento}}</option>
                                         </select>
                                     </div>
@@ -204,6 +201,8 @@ if($_SESSION["descRol"]=="Administrador") {?>
             areaOps: <?php echo $areas?>,
 
             tipoDocumentoOps: <?php echo $documentos?>,
+
+            tiposTramite: <?php echo $tiposTramiteCMB?>,
 
             money: {
                 decimal: '.',

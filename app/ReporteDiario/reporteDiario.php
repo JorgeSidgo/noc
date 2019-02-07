@@ -17,7 +17,7 @@ $res1 = $con1->query($sql1);
         $validar = $validar['fecha'];
         if($validar=="")
         {
-            $tabla = '<h1>Aún no se ha realizado ningún registro</h1>';
+            $tabla = '<h1>A&uacute;n no se ha realizado ningún registro</h1>';
             $html = $tabla;
 
 
@@ -51,27 +51,26 @@ $tabla .= '<style>
                 $fecha = $res1->fetch_assoc();
 $tabla.= "
             <div class='header'>
-                <h1>Envíos Deloitte<font color='#85BC22' size='100px'>.</font></h1>
+                <h1>Env&iacute;os Deloitte<font color='#85BC22' size='100px'>.</font></h1>
                 <p>Fecha: <b>".date("d/m/Y")."</b></p>
             </div>    
 
             <table class='tabla'>
             <tr>
-                <th>Código</th>
+                <th>C&oacute;digo</th>
                 <th>Usuario</th>
                 <th>Hora</th>
                 <th>Fecha</th>
-                <th>Trámite</th>
+                <th>Tr&aacute;mite</th>
                 <th>Cliente</th>
-                <th>Área</th>
+                <th>&Aacute;rea</th>
                 <th>Tipo de documento</th>
-                <th>N° Documento</th>
+                <th>N<sup>o</sup> Documento</th>
                 <th>Monto</th>
                 <th>Estado</th>
-                <th>Observación</th>
-            </tr>
-
-            ";
+                <th>Observaci&oacute;n</th>
+                <th style='width: 12%'>Firma</th>
+            </tr>";
             while($fila =$res->fetch_assoc()){
 $tabla.="<tr>
                 <td>".$fila['correlativoDetalle']."</td>
@@ -106,6 +105,7 @@ $tabla.="<tr>
                              break;            
                 }
                 $tabla.="<td>".$fila['observacion']."</td>
+                    <td></td>
         </tr>";
 }
 $tabla .= "</table>";
@@ -114,9 +114,9 @@ return $tabla;
 }
  
 $html = datos();
-
-
 $pdf = new \Mpdf\Mpdf(['orientation' => 'L']);
+$html= mb_convert_encoding($html, 'UTF-8', 'ISO-8859-1');
+$pdf->charset_in='UTF-8';
 $pdf->WriteHTML($html);
 $pdf->Output();
  

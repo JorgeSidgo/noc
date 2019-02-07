@@ -10,7 +10,7 @@ class DaoCliente extends DaoBase
 
 
     public function mostrarClientesCmb() {
-        $_query = "select * from clientes where idEliminado=1";
+        $_query = "call mostrarClientes()";
 
         $resultado = $this->con->ejecutar($_query);
 
@@ -34,6 +34,9 @@ class DaoCliente extends DaoBase
 
         while($fila = $resultado->fetch_assoc()) {
 
+
+//            print_r($fila);
+
             $object = json_encode($fila);
             $btnEditar = '<button id=\"'.$fila["codigoCliente"].'\" class=\"ui btnEditar icon blue small button\"><i class=\"edit icon\"></i></button>';
             $btnEliminar = '<button id=\"'.$fila["codigoCliente"].'\" class=\"ui btnEliminar icon negative small button\"><i class=\"trash icon\"></i></button>';
@@ -47,11 +50,13 @@ class DaoCliente extends DaoBase
 
         $_json = substr($_json,0, strlen($_json) - 1);
 
+        $_json = utf8_encode($_json);
+
         echo '{"data": ['.$_json .']}';
     }
 
     public function registrar() {
-        $_query = "call registrarCliente('".$this->objeto->getNombreCliente()."', '".$this->objeto->getDireccion()."','".$this->objeto->getTelefono()."',1)";
+        $_query = "call registrarCliente('".$this->objeto->getCodigo()."', '".$this->objeto->getNombreCliente()."', '".$this->objeto->getCalle()."','".$this->objeto->getPoblacion()."')";
 
         $resultado = $this->con->ejecutar($_query);
 
@@ -64,7 +69,7 @@ class DaoCliente extends DaoBase
 
 
     public function editar() {
-        $_query = "call editarCliente('".$this->objeto->getNombreCliente()."', '".$this->objeto->getDireccion()."','".$this->objeto->getTelefono()."', ".$this->objeto->getCodigoCliente().")";
+        $_query = "call editarCliente('".$this->objeto->getNombreCliente()."', '".$this->objeto->getCodigo()."', '".$this->objeto->getCalle()."','".$this->objeto->getPoblacion()."', ".$this->objeto->getCodigoCliente().")";
 
         $resultado = $this->con->ejecutar($_query);
 
@@ -87,7 +92,7 @@ class DaoCliente extends DaoBase
     }
 
     public function eliminar() {
-        $_query = "update clientes set idEliminado=2 where codigoCliente = ".$this->objeto->getCodigoCliente();
+        $_query = "update clientes set idEliminado = 0 where codigoCliente = ".$this->objeto->getCodigoCliente();
 
         $resultado = $this->con->ejecutar($_query);
 

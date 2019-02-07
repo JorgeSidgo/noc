@@ -23,7 +23,7 @@
         </div>
         <div class="row title-bar">
             <div class="sixteen wide column">
-                <button class="ui right floated positive labeled icon button" @click="modalRegistrar" id="btnModalRegistro">
+                <button type="button" class="ui right floated positive labeled icon button" @click="modalRegistrar" id="btnModalRegistro">
                     <i class="plus icon"></i>
                     Agregar
                 </button>
@@ -90,7 +90,7 @@ var app = new Vue({
                 tablaMensajeros.ajax.reload();
             },
             modalRegistrar() {
-                $('#modalRegistrar').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal(
+                $('#modalRegistrar').modal('setting', 'closable', false).modal(
                     'show');
             },
             cargarDatos() {
@@ -119,7 +119,7 @@ var app = new Vue({
             $('#idEliminar').val($(this).attr("id"));
         });
         $(document).on("click", ".btnEditar", function () {
-            $('#modalEditar').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
+            $('#modalEditar').modal('setting', 'closable', false).modal('show');
             $('#idDetalle').val($(this).attr("id"));
             app.cargarDatos();
         });

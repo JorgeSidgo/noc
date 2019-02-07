@@ -10,6 +10,8 @@ class Conexion {
     public static function conectar() {
         $con = new mysqli(self::$host, self::$dbUser, self::$dbPass, self::$dbName);
 
+        $con->set_charset("utf8");
+
         if($con)
             return $con;
     }

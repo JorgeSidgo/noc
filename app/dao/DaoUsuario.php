@@ -98,6 +98,18 @@ class DaoUsuario extends DaoBase {
         }
     }
 
+    public function cuentasAdministrador() {
+        $_query = "call cuentasAdministrador()";
+        $resultado = $this->con->ejecutar($_query);
+
+        $array = [];
+
+        while($fila = $resultado->fetch_object()) {
+            array_push($array, $fila);
+        }
+
+        return $array;
+    }
 
     public function cambiarDatos() {
         $_query = "update usuario set nombre = '".$this->objeto->getNombre()."', apellido='".$this->objeto->getApellido()."' where codigoUsuario = ".$this->objeto->getCodigoUsuario();

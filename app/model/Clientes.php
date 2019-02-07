@@ -1,106 +1,95 @@
 <?php
 
-class Clientes extends ModeloBase
-{
+class Clientes extends ModeloBase {
     private $codigoCliente;
-    private $nombreCliente;
-    private $direccion;
-    private $telefono;
     private $codigo;
+    private $nombreCliente;
+    private $calle;
+    private $poblacion;
 
     public function __construct()
     {
-        
     }
 
+    /**
+     * @return mixed
+     */
     public function getCodigoCliente()
     {
         return $this->codigoCliente;
     }
 
     /**
-     * @return self
+     * @param mixed $codigoCliente
      */
-    
-
     public function setCodigoCliente($codigoCliente)
     {
-
         $this->codigoCliente = $codigoCliente;
-
-        return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getNombreCliente()
     {
-        return $this-> nombreCliente;
+        return $this->nombreCliente;
     }
 
-     /**
-     * @return self
+    /**
+     * @param mixed $nombreCliente
      */
-    
-
     public function setNombreCliente($nombreCliente)
     {
-
-        $this ->nombreCliente = $nombreCliente;
-        return $this;
-    }
-
-
-    public function getDireccion()
-    {
-        return $this->direccion;
+        $this->nombreCliente = $nombreCliente;
     }
 
     /**
-     * @return self
+     * @return mixed
      */
-    
-
-    public function setDireccion($direccion)
+    public function getCalle()
     {
-        $this ->direccion = $direccion;
-        return $this;
-    }
-
-    public function getTelefono()
-    {
-        return $this->telefono;
+        return $this->calle;
     }
 
     /**
-     * @return self
+     * @param mixed $calle
      */
-    
-   
-    public function setTelefono($telefono)
+    public function setCalle($calle)
     {
-        $this -> telefono = $telefono;
-        return $this;
+        $this->calle = $calle;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getPoblacion()
+    {
+        return $this->poblacion;
+    }
 
     /**
-     * Get the value of codigo
-     */ 
+     * @param mixed $poblacion
+     */
+    public function setPoblacion($poblacion)
+    {
+        $this->poblacion = $poblacion;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getCodigo()
     {
         return $this->codigo;
     }
 
     /**
-     * Set the value of codigo
-     *
-     * @return  self
-     */ 
+     * @param mixed $codigo
+     */
     public function setCodigo($codigo)
     {
         $this->codigo = $codigo;
-
-        return $this;
     }
-}
 
-?>
+
+}

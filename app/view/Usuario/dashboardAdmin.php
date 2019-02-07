@@ -73,13 +73,13 @@ $(function() {
         <h3>Otros reportes</h3><div class="ui divider"></div>
             <center>
                 <h4>
-                <button class="ui blue deny button" id="btnAreas">
+                <button type="button" class="ui blue deny button" id="btnAreas">
                     Por Áreas
                 </button>
-                <button class="ui teal right button" id="btnUsuarios">
+                <button type="button" class="ui teal right button" id="btnUsuarios">
                     Por Usuario
                 </button>
-                <button class="ui violet right button" id="btnFechas">
+                <button type="button" class="ui violet right button" id="btnFechas">
                     Por Fechas
                 </button>
                 <!-- <button class="ui grey right button" id="btnxEstado">
@@ -108,7 +108,7 @@ $(function() {
                                     <input type="date" name="fechaIncial" id="fecha1fecha" required max=<?php echo $fechaMin;?>>
                             <label for="" style="width:100%;margin: auto;text-align: center;" id="labFechaFinal"><i class="calendar icon"></i>Fecha final:</label>
                                      <input type="date" name="fechaFinal" id="fecha2fecha" required max=<?php echo $fechaMax;?>></h5>
-                            <button class="ui green right button" id="btnGenerarReporteFecha">
+                            <button type="button" class="ui green right button" id="btnGenerarReporteFecha">
                                 Generar reporte
                             </button>
 
@@ -152,11 +152,11 @@ $(function() {
 
                          </div>
 
-                        <button class="ui teal right button" id="btnGenerarReporteAreaHistorial">
+                        <button type="button" class="ui teal right button" id="btnGenerarReporteAreaHistorial">
                             Generar reporte
                         </button>
 
-                        <button class="ui red right button" id="btnGenerarReporteAreaDiario">
+                        <button type="button" class="ui red right button" id="btnGenerarReporteAreaDiario">
                             Generar reporte
                         </button>
 
@@ -168,7 +168,7 @@ $(function() {
                                      <input type="date" name="fecha2Area" id="fecha2Area" required max=<?php echo $fechaMax;?>></h5>
 
                         </div><br>
-                        <button class="ui green right button" id="btnGenerarReporteAreaPorFechas">
+                        <button type="button" class="ui green right button" id="btnGenerarReporteAreaPorFechas">
                             Generar reporte
                         </button>
 
@@ -208,11 +208,11 @@ $(function() {
 
                             </div>
                         </div>
-                        <button class="ui teal right button" id="btnGenerarReporteUsuarioHistorial">
+                        <button type="button" class="ui teal right button" id="btnGenerarReporteUsuarioHistorial">
                             Generar reporte
                         </button>
 
-                        <button class="ui red right button" id="btnGenerarReporteUsuarioDiario">
+                        <button type="button" class="ui red right button" id="btnGenerarReporteUsuarioDiario">
                             Generar reporte
                         </button>
 
@@ -224,14 +224,14 @@ $(function() {
                                      <input type="date" name="fecha2Usuario" id="fecha2Usuario" required max=<?php echo $fechaMax;?>></h5>
 
                         </div><br>
-                        <button class="ui green right button" id="btnGenerarReporteUsuarioPorFechas">
+                        <button type="button" class="ui green right button" id="btnGenerarReporteUsuarioPorFechas">
                             Generar reporte
                         </button>
                         </div>
         </center>
     </div>
     <div class="actions">
-        <button class="ui black deny button" id="btnCancelar">
+        <button type="button" class="ui black deny button" id="btnCancelar">
             Cancelar
         </button>
     </div>

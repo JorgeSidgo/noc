@@ -2,6 +2,8 @@ drop database if exists deloitte_mensajeria;
 create database deloitte_mensajeria;
 use deloitte_mensajeria;
 
+ALTER DATABASE deloitte_mensajeria CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 -- ===========================================================================
 -- TABLAS
 -- ===========================================================================
@@ -71,14 +73,16 @@ create table mensajero(
 
 create table tipoTramite(
 	codigoTipoTramite int primary key unique auto_increment,
-    descTipoTramite varchar(25)
+    descTipoTramite varchar(25),
+    estado int
 );
 
 create table clientes (
 	codigoCliente int primary key unique auto_increment,
-    nombreCliente varchar(50),
-    direccion varchar(100),
-    telefono varchar(20),
+	codigo varchar(25),
+    nombreCliente varchar(128),
+    calle varchar(256),
+    poblacion varchar(75),
     idEliminado int
 );
 
@@ -188,38 +192,52 @@ begin
 end
 $$
 
+delimiter $$
+create procedure cuentasAdministrador() 
+begin
+	select u.*, r.descRol, a.descAuth, ar.descArea
+	from usuario u
+	inner join rol r on r.codigoRol = u.codigoRol
+	inner join authUsuario a on a.codigoAuth = u.codigoAuth
+    inner join area ar on ar.codigoArea = u.codigoArea
+    where u.idEliminado=1 and r.descRol = 'Administrador';
+end
+$$
 
 #Procedimientos de Clientes
 
 delimiter $$
 create procedure mostrarClientes()
 begin
-	select * from clientes where idEliminado=1;
+	select * from clientes where idEliminado=1
+    order by nombreCliente;
 end
 $$
 
+
 delimiter $$
 create procedure registrarCliente(
-	in nom varchar(50),
-    in direc varchar(50),
-    in tel varchar(50),
-    in idEli int
+	in codigo varchar(50),
+    in nombre varchar(128),
+    in ca varchar(256),
+    in pob varchar(75)
 )
 begin
-	insert into clientes values (null, nom, direc, tel,idEli);
+	insert into clientes values (null, codigo, nombre, ca, pob, 1);
 end
 $$
 
 delimiter $$
 create procedure editarCliente(
-	in nom varchar(50),
-    in direc varchar(50),
-    in tel varchar(50),
+	in nom varchar(128),
+    in cod varchar(50),
+    in ca varchar(256),
+    in pob varchar(75),
     in idCliente int
 )
 begin
 	update clientes
-    set nombreCliente = nom, direccion = direc, telefono = tel
+    set nombreCliente = nom, calle = ca, poblacion = pob, codigo = cod
     where codigoCliente = idCliente;
 end
 $$
@@ -577,6 +595,28 @@ end
 $$
 
 delimiter $$
+create procedure numeroDocumentosPendientes(
+	in idUsuario int
+)
+begin
+
+	select count(d.codigoDetalleEnvio) as numero
+	from detalleEnvio d
+	inner join envio e on e.codigoEnvio = d.codigoEnvio
+    inner join usuario u on u.codigoUsuario = e.codigoUsuario
+	inner join tipoTramite tt on tt.codigoTipoTramite = d.codigoTipoTramite
+	inner join clientes c on c.codigoCliente = d.codigoCliente
+    inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
+    inner join area a on a.codigoArea = d.codigoArea
+    inner join mensajero m on m.codigoMensajero = d.codigoMensajero
+    inner join status s on s.codigoStatus = d.codigoStatus
+    
+    where (s.codigoStatus = 4 or s.codigoStatus = 2) and e.codigoUsuario = idUsuario;
+
+end
+$$
+
+delimiter $$
 create procedure actualizarFecha(
     in idEnvio int
 )
@@ -604,7 +644,42 @@ select e.codigoEnvio, d.codigoDetalleEnvio, d.correlativoDetalle, u.nomUsuario, 
     inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
     inner join area a on a.codigoArea = d.codigoArea 
     inner join status s on s.codigoStatus = d.codigoStatus
- where fecha=CURDATE() and s.descStatus='Completo' or s.descStatus='Pendiente'  order by fecha DESC;
+ where fecha=CURDATE() and (s.descStatus='Completo' or s.descStatus='Pendiente')  order by fecha DESC;
+end
+$$
+
+delimiter $$
+create procedure reporteMensajeros()
+begin
+select e.codigoEnvio, d.codigoDetalleEnvio, d.correlativoDetalle, u.nomUsuario, DATE_FORMAT(d.fechaRevision,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+	from detalleEnvio d
+	inner join envio e on e.codigoEnvio = d.codigoEnvio
+    inner join usuario u on u.codigoUsuario = e.codigoUsuario
+	inner join tipoTramite tt on tt.codigoTipoTramite = d.codigoTipoTramite
+	inner join clientes c on c.codigoCliente = d.codigoCliente
+    inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
+    inner join area a on a.codigoArea = d.codigoArea 
+    inner join status s on s.codigoStatus = d.codigoStatus
+	where fecha=CURDATE() and s.descStatus='Recibido' order by fecha DESC;
+end
+$$
+select * from detalleEnvio
+
+delimiter $$
+create procedure reporteEstadoDocumento(
+	in parametro int
+)
+begin
+select e.codigoEnvio, d.codigoDetalleEnvio, d.correlativoDetalle, u.nomUsuario, DATE_FORMAT(d.fechaRevision,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+	from detalleEnvio d
+	inner join envio e on e.codigoEnvio = d.codigoEnvio
+    inner join usuario u on u.codigoUsuario = e.codigoUsuario
+	inner join tipoTramite tt on tt.codigoTipoTramite = d.codigoTipoTramite
+	inner join clientes c on c.codigoCliente = d.codigoCliente
+    inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
+    inner join area a on a.codigoArea = d.codigoArea 
+    inner join status s on s.codigoStatus = d.codigoStatus
+ where fecha=CURDATE() and s.codigoStatus = parametro  order by fecha DESC;
 end
 $$
 
@@ -709,7 +784,8 @@ select e.codigoEnvio, d.codigoDetalleEnvio,d.correlativoDetalle, u.nomUsuario, D
     inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
     inner join area a on a.codigoArea = d.codigoArea 
     inner join status s on s.codigoStatus = d.codigoStatus
-where a.codigoArea=idArea and e.fecha=(Select max(fecha) from envio) order by e.hora DESC;
+	where a.codigoArea=idArea and e.fecha= curdate()
+	order by e.hora DESC;
 end $$
 
 
@@ -748,7 +824,8 @@ select e.codigoEnvio, d.codigoDetalleEnvio,d.correlativoDetalle, u.nomUsuario, D
     inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
     inner join area a on a.codigoArea = d.codigoArea 
     inner join status s on s.codigoStatus = d.codigoStatus
-where u.codigoUsuario=idUsuario and e.fecha=(Select max(fecha) from envio) order by e.hora DESC;
+	where u.codigoUsuario=idUsuario and e.fecha = curdate()	
+	order by e.hora DESC;
 end $$
 
 delimiter $$
@@ -803,31 +880,35 @@ insert into authUsuario values (null, 'Esperando Autorizacion');
 insert into authUsuario values (null, 'Restringido');
 	
 # Tipo de Tramite
-insert into tipoTramite values(null, 'Entrega');
-insert into tipoTramite values(null, 'Cobro');
-insert into tipoTramite values(null, 'Transferencia');
-insert into tipoTramite values(null, 'DepÃ³sito');
-insert into tipoTramite values(null, 'Retiro de Cheques');
-insert into tipoTramite values(null, 'Retiro de Documentos');
-
+insert into tipoTramite values(null, 'Entrega', 1);
+insert into tipoTramite values(null, 'Cobro', 1);
+insert into tipoTramite values(null, 'Transferencia', 1);
+insert into tipoTramite values(null, 'Depósito', 1);
+insert into tipoTramite values(null, 'Retiro de Cheques', 1);
+insert into tipoTramite values(null, 'Retiro de Documentos', 1);
+insert into tipoTramite values(null, 'Pago', 1);
 #Area
 -- insert into area values (null, 'Administraci&oacute;n');
 insert into area values (null, 'ABAS',1);
 insert into area values (null, 'Tax y Legal',1);
 insert into area values (null, 'RRHH',1);
 insert into area values (null, 'Finanzas',1);
+insert into area values (null, 'Tecnología',1);
 
 # Usuario
 insert into usuario values (null, 'Karla Guadalupe', 'Arevalo Vega', 'kgarevalo', 'kgarevalo@deloitte.com', sha1('Deloitte123!'), 1, 1, 1,1);
--- insert into usuario values (null, 'Jorge Luis', 'Sidgo Pimentel', 'jlsidgo', 'jorge.sidgo@gmail.com', sha1('Deloitte123!'), 1, 1, 1,1);
-insert into usuario values (null, 'Fabio Alonso', 'Mejia', 'famejia', 'fabiomejiash@gmail.com', sha1('Deloitte123!'), 1, 1, 1,1);
-insert into usuario values (null, 'Carlos Eduardo', 'Campos', 'cecampos', 'carlos.eduardo.ramos1997@gmail.com', sha1('Deloitte123!'), 1, 1, 1,1);
-insert into usuario values (null, 'John', 'Doe', 'johndoe', 'johndoe@deloitte.com', sha1('123'), 1, 2, 4,1);
 
 #Cliente
-insert into clientes values(null,'Telefonica','San Salvador','2314-1231',1);
-insert into clientes values(null,'YKK','Santa Ana','2451-2312',1);
-insert into clientes values(null,'Don Pollo','Santa Tecla','2451-6969',1);
+insert into clientes values
+(null, '3041915', '21st Century Oncology, Inc.', '3661 South Miami Ave', 'Miami', 1),
+(null, '465000', 'Carlos Gustavo López Ayala', 'Residencial y Calle Primavera #11,', 'SANTA TECLA', 1),
+(null, '465001', 'Sun Chemical de Centroamérica S.A. Sun Chemical de Centroamérica S.A.', 'Blvd. Del Ejercito Nacional Km 5 1/', 'SOYAPANGO', 1),
+(null, '465002', 'Abruzzo S.A. de C.V.', 'Km 16 1/2 Carretera al Puerto de La', 'LA LIBERTAD', 1),
+(null, '465003', 'Multiriesgos, S.A. de C.V.', 'Calle Palmeral No. 144 Col. Toluca', 'SAN SALVADOR', 1),
+(null, '465004', 'Escuela Superior de Economía y Nego', 'Km 12  1/2 Carretera al Puerto de L', 'SANTA TECLA', 1),
+(null, '465005', 'Productos Carnicos S.A. de C.V.', 'Calle El Progreso, Col. Roma No. 33', 'SAN SALVADOR', 1),
+(null, '465006', 'Galvanizadora Industrial Salvadoreñ', 'Boulevard de Los Proceres, Edificio', 'SAN SALVADOR', 1);
+
 
 #Tipo de Documento
 insert into tipoDocumento values(null, 'FE',1);
@@ -847,12 +928,13 @@ insert into status values (null, 'Completo');
 
 insert into mensajero values(null, 'No Asignado',1);
 insert into mensajero values(null, 'Enrique Segoviano',1);
-insert into mensajero values(null, 'Ramon ValdÃ©z',1);
+insert into mensajero values(null, 'Ramon Valdéz',1);
+
+insert into envio values(null, concat('ED', 1), 1, curdate(), DATE_FORMAT(NOW(), "%H:%i:%s" ), 1);
+insert into detalleEnvio values (null, 'DD1', 1, 1, 1, 1, 1, 3, '123', '$0.00', '123', curdate(),curdate(),  DATE_FORMAT(NOW(), "%H:%i:%s" ), curdate(), 1);
+/*
 
 
-insert into envio values(null, concat('ED', 1), 2, curdate(), DATE_FORMAT(NOW(), "%H:%i:%s" ), 1);   
-
-insert into detalleEnvio values (null, 'DD1', 1, 1, 1, 1, 1, 3, '123', '$1', 'nada', curdate(),'0000-00-00', '00:00:00', '0000-00-00', 1);
 insert into detalleEnvio values (null, 'DD2', 1, 1, 2, 1, 1, 3, '123', '$1', 'nada', curdate(),'0000-00-00', '00:00:00', '0000-00-00', 1);
 insert into detalleEnvio values (null, 'DD3', 1, 1, 3, 1, 1, 3, '123', '$1', 'nada', curdate(),'0000-00-00', '00:00:00', '0000-00-00', 1);
 -- insert into detalleEnvio values (null, 'DD4', 1, 1, 1, 1, 1, 3, '123', '$1', 'nada', curdate(),'0000-00-00', '00:00:00', '0000-00-00', 1);
@@ -872,15 +954,8 @@ insert into detalleEnvio values (null, 'DD10', 3, 1, 2, 1, 1, 3, '123', '$1', 'n
 insert into detalleEnvio values (null, 'DD11', 3, 1, 3, 1, 1, 3, '123', '$1', 'nada','2018-12-16', '0000-00-00', '14:00:00', '0000-00-00', 1);
 insert into detalleEnvio values (null, 'DD12', 3, 1, 1, 1, 1, 3, '123', '$1', 'nada','2018-12-16', '0000-00-00', '14:00:00', '0000-00-00', 1);
 
-
+*/
 -- select * from detalleEnvio;
 
--- call mostrarPaquetes;
 
--- select * from detalleEnvio where codigoEnvio = 1;
-
-select * from envio;
-
-call detallesEnvio(1);
 -- select * from usuario
-

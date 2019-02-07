@@ -83,7 +83,7 @@ var app = new Vue({
                 tablaAreas.ajax.reload();
             },
             modalRegistrar() {
-                $('#modalRegistrar').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal(
+                $('#modalRegistrar').modal('setting', 'closable', false).modal(
                     'show');
             },
             cargarDatos() {
@@ -112,7 +112,7 @@ var app = new Vue({
             $('#idEliminar').val($(this).attr("id"));
         });
         $(document).on("click", ".btnEditar", function () {
-            $('#modalEditar').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
+            $('#modalEditar').modal('setting', 'closable', false).modal('show');
             $('#idDetalle').val($(this).attr("id"));
             app.cargarDatos();
         });

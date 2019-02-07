@@ -41,9 +41,10 @@
                     <thead>
                         <tr>
                             <th>N°</th>
+                            <th>Código Cliente</th>
                             <th>Nombre</th>
-                            <th>Dirección</th>
-                            <th>Teléfono</th>
+                            <th>Calle</th>
+                            <th>Población</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -64,38 +65,47 @@
 var app = new Vue({
         el: "#app",
         data: {
-            campos_registro: [{
+            campos_registro: [
+                {
+                    label: 'Código de Cliente',
+                    name: 'codigoCliente',
+                    type: 'text'
+                },
+                {
                     label: 'Nombre:',
                     name: 'nombreCliente',
                     type: 'text'
                 },
                 {
-                    label: 'Dirección:',
-                    name: 'direccion',
+                    label: 'Calle:',
+                    name: 'calle',
                     type: 'text'
                 },
                 {
-                    label: 'Teléfono',
-                    name: 'telefono',
-                    mask: 'telefono',
+                    label: 'Población',
+                    name: 'poblacion',
                     type: 'text'
                 }
             ],
             campos_editar: [
                 {
+                    label: 'Código de Cliente',
+                    name: 'codigoCliente',
+                    type: 'text'
+                },
+                {
                     label: 'Nombre:',
                     name: 'nombreCliente',
                     type: 'text'
                 },
                 {
-                    label: 'Dirección:',
-                    name: 'direccion',
+                    label: 'Calle:',
+                    name: 'calle',
                     type: 'text'
                 },
                 {
-                    label: 'Teléfono',
-                    name: 'telefono',
-                    mask: 'telefono',
+                    label: 'Población',
+                    name: 'poblacion',
                     type: 'text'
                 },
                 {
@@ -113,7 +123,7 @@ var app = new Vue({
                 tablaClientes.ajax.reload();
             },
             modalRegistrar() {
-                $('#modalRegistrar').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal(
+                $('#modalRegistrar').modal('setting', 'closable', false).modal(
                     'show');
             },
             cargarDatos() {
@@ -124,12 +134,10 @@ var app = new Vue({
                         return response.json();
                     })
                     .then(dat => {
-
-                        console.log(dat);
-
+                        $('#frmEditar input[name="codigoCliente"]').val(dat.codigo);
                         $('#frmEditar input[name="nombreCliente"]').val(dat.nombreCliente);
-                        $('#frmEditar input[name="direccion"]').val(dat.direccion);
-                        $('#frmEditar input[name="telefono"]').val(dat.telefono);
+                        $('#frmEditar input[name="calle"]').val(dat.calle);
+                        $('#frmEditar input[name="poblacion"]').val(dat.poblacion);
                     })
                     .catch(err => {
                         console.log(err);
@@ -145,7 +153,7 @@ var app = new Vue({
             $('#idEliminar').val($(this).attr("id"));
         });
         $(document).on("click", ".btnEditar", function () {
-            $('#modalEditar').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
+            $('#modalEditar').modal('setting', 'closable', false).modal('show');
             $('#idDetalle').val($(this).attr("id"));
             app.cargarDatos();
         });

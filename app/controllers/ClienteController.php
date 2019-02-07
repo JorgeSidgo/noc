@@ -21,9 +21,10 @@ class ClienteController extends ControladorBase {
 
         $dao = new DaoCliente();
 
+        $dao->objeto->setCodigo($datos->codigoCliente);
         $dao->objeto->setNombreCliente($datos->nombreCliente);
-        $dao->objeto->setDireccion($datos->direccion);
-        $dao->objeto->setTelefono($datos->telefono);
+        $dao->objeto->setCalle($datos->calle);
+        $dao->objeto->setPoblacion($datos->poblacion);
 
         echo $dao->registrar();
      
@@ -36,9 +37,10 @@ class ClienteController extends ControladorBase {
 
         $dao = new DaoCliente();
 
+        $dao->objeto->setCodigo($datos->codigoCliente);
         $dao->objeto->setNombreCliente($datos->nombreCliente);
-        $dao->objeto->setDireccion($datos->direccion);
-        $dao->objeto->setTelefono($datos->telefono);
+        $dao->objeto->setCalle($datos->calle);
+        $dao->objeto->setPoblacion($datos->poblacion);
         $dao->objeto->setCodigoCliente($datos->idDetalle);
 
         echo $dao->editar();

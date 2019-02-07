@@ -28,7 +28,7 @@ class UsuarioController extends ControladorBase {
     public static function gestion() {
         self::loadMain();
         $dao = new DaoArea();
-        $areas = $dao->mostrarAreas();
+        $areasDeloitte = $dao->mostrarAreasSelect();
         require_once './app/view/Usuario/gestion.php';
     }
 
@@ -123,7 +123,7 @@ class UsuarioController extends ControladorBase {
 
         $datosUsuario = $dao->datosNomUsuario();
 
-        if(!$mail->notificacionRegistroUsuario($datosUsuario)) {
+        if(!$mail->notificacionRegistroUsuario($datosUsuario, $dao->cuentasAdministrador())) {
             echo "El correo no fue enviado correctamente";
         }
 
@@ -160,7 +160,7 @@ class UsuarioController extends ControladorBase {
         $dao->objeto->setNomUsuario($id);
         $dao->objeto->setEmail($email);
 
-        //$datosUsuario = json_decode($dao->cargarDatosUsuario());
+        
 
         if(!$mail->composeRestorePassMail($email, $id, $psswd)) {
             echo "El correo no fue enviado Correctamente";
@@ -179,14 +179,14 @@ class UsuarioController extends ControladorBase {
             $pass=$_REQUEST['pass'];
             $dao= new DaoUsuario();
             $id=$_REQUEST['idU'];
-            
+
             $dao->objeto->setCodigoUsuario($id);
             $contra=$dao->getPass();
             $passEncript=sha1($pass);
             $datos = array('pass' =>"$contra" ,'passEnc'=>"$passEncript" );
             $resp=json_encode($datos);
              echo $resp;
-            
+
     }
 
     public function getUserName()
@@ -207,7 +207,7 @@ class UsuarioController extends ControladorBase {
         echo $dao->getEmail();
     }
 
-    
+
     public function reestablecerContra()
     {
         $dao = new DaoUsuario();
@@ -283,6 +283,12 @@ class UsuarioController extends ControladorBase {
         echo $dao->autorizar($estado);
     }
 
+    public function cuentasAdministrador() {
+        $dao = new DaoUsuario();
+
+        var_dump($dao->cuentasAdministrador());
+    }
+
     public function cargarDatosUsuario() {
         $id = $_REQUEST["id"];
 
@@ -309,14 +315,14 @@ class UsuarioController extends ControladorBase {
         echo $dao->mostrarUsuarios();
     }
 
-    // Reportes 
+    // Reportes
 
 
     public function reporteArea() {
         $daoArea = new DaoArea();
-        
+
         require_once './app/reportes/ReporteArea.php';
-        
+
         $idArea = $_REQUEST["area"];
 
         $reporte = new Reporte();
@@ -332,9 +338,9 @@ class UsuarioController extends ControladorBase {
 
     public function reporteAreaDiario() {
         $daoArea = new DaoArea();
-        
+
         require_once './app/reportes/ReporteArea.php';
-        
+
         $idArea = $_REQUEST["area"];
 
         $reporte = new Reporte();
@@ -350,9 +356,9 @@ class UsuarioController extends ControladorBase {
 
     public function reporteAreaPorFechas() {
         $daoArea = new DaoArea();
-        
+
         require_once './app/reportes/ReporteArea.php';
-        
+
         $idA= $_REQUEST["area"];
         $fecha1Area = $_REQUEST["fecha"];
         $fecha2Area = $_REQUEST["fecha2"];
@@ -371,9 +377,9 @@ class UsuarioController extends ControladorBase {
 
     public function reporteUsuario() {
         $daoUsuario = new DaoUsuario();
-        
+
         require_once './app/reportes/ReporteUsuario.php';
-        
+
         $idUsuario = $_REQUEST["usuario"];
 
         $reporte = new Reporte();
@@ -388,9 +394,9 @@ class UsuarioController extends ControladorBase {
 
     public function reporteUsuarioDiario() {
         $daoUsuario = new DaoUsuario();
-        
+
         require_once './app/reportes/ReporteUsuario.php';
-        
+
         $idUsuario = $_REQUEST["usuario"];
 
         $reporte = new Reporte();
@@ -405,7 +411,7 @@ class UsuarioController extends ControladorBase {
 
     public function reporteUsuarioPorFechas() {
         $daoUsuario = new DaoUsuario();
-        
+
         require_once './app/reportes/ReporteUsuario.php';
 
         $fecha1Usuario = $_REQUEST["fecha"];
@@ -428,9 +434,9 @@ class UsuarioController extends ControladorBase {
 
     public function reporteFechas() {
         $daoEnvio = new DaoEnvio();
-        
+
         require_once './app/reportes/ReporteFechas.php';
-        
+
         $fecha = $_REQUEST["fecha"];
         $fecha2 = $_REQUEST["fecha2"];
 
@@ -445,5 +451,5 @@ class UsuarioController extends ControladorBase {
         $reporte->reporteFechas($fecha,$fecha2, $resultado, $resultado1);
     }
 
-    
+
 }

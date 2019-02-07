@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Reporte {
 
@@ -14,7 +14,7 @@ class Reporte {
         $validar = $validar['fecha'];
         if($validar=="")
         {
-            $tabla = '<h1>Aún no se ha realizado ningún envio en esta Área</h1>';
+            $tabla = '<h1>A&uacute;n no se ha realizado ningún envio en esta Área</h1>';
             $html = $tabla;
 
 
@@ -56,17 +56,17 @@ class Reporte {
 
             <table class='tabla'>
             <tr>
-                <th>Código</th>
+                <th>C&oacute;digo</th>
                 <th>Usuario</th>
-                <th>Fecha</th>
                 <th>Hora</th>
-                <th>Trámite</th>
+                <th>Fecha</th>
+                <th>Tr&aacute;mite</th>
                 <th>Cliente</th>
                 <th>Tipo de documento</th>
-                <th>N° Documento</th>
+                <th>N<sup>o</sup> Documento</th>
                 <th>Monto</th>
                 <th>Estado</th>
-                <th>Observación</th>
+                <th>Observaci&oacute;n</th>
             </tr>
 
             ";
@@ -86,22 +86,22 @@ class Reporte {
                      case 'Pendiente':
                             $tabla.="<td bgcolor='#F6AD43'>".$fila['descStatus']."</td>";
                             break;
-                       
+
                     case 'Completo':
                             $tabla.="<td bgcolor='lightgreen'>".$fila['descStatus']."</td>";
                                break;
-   
+
                     case 'Incompleto':
                             $tabla.="<td bgcolor='#F67943'>".$fila['descStatus']."</td>";
                                 break;
-   
+
                     case 'Recibido':
                            $tabla.="<td bgcolor='lightblue'>".$fila['descStatus']."</td>";
-                                break;             
-                   
+                                break;
+
                    case 'Pendiente de Revision':
                            $tabla.="<td style='background-color: rgba(149, 165, 166, 0.3);'>".$fila['descStatus']."</td>";
-                                break;          
+                                break;
                         }
                         $tabla.="<td>".$fila['observacion']."</td>
                      </tr>";
@@ -158,7 +158,7 @@ class Reporte {
 
         $area = $resultado1->fetch_assoc();
 
-        $area = $area["descArea"];              
+        $area = $area["descArea"];
         $tabla.= "
             <div class='header'>
                 <h1>Reporte diario de envíos del área: <font color='#85BC22'>".$area."</font></h1>
@@ -166,17 +166,17 @@ class Reporte {
 
             <table class='tabla'>
             <tr>
-                <th>Código</th>
+                <th>C&oacute;digo</th>
                 <th>Usuario</th>
-                <th>Fecha</th>
                 <th>Hora</th>
-                <th>Trámite</th>
+                <th>Fecha</th>
+                <th>Tr&aacute;mite</th>
                 <th>Cliente</th>
                 <th>Tipo de documento</th>
-                <th>N° Documento</th>
+                <th>N<sup>o</sup> Documento</th>
                 <th>Monto</th>
                 <th>Estado</th>
-                <th>Observación</th>
+                <th>Observaci&oacute;n</th>
             </tr>
 
             ";
@@ -196,22 +196,22 @@ class Reporte {
                     case 'Pendiente':
                             $tabla.="<td bgcolor='#F6AD43'>".$fila['descStatus']."</td>";
                             break;
-                       
+
                     case 'Completo':
                             $tabla.="<td bgcolor='lightgreen'>".$fila['descStatus']."</td>";
                                break;
-   
+
                     case 'Incompleto':
                             $tabla.="<td bgcolor='#F67943'>".$fila['descStatus']."</td>";
                                 break;
-   
+
                     case 'Recibido':
                            $tabla.="<td bgcolor='lightblue'>".$fila['descStatus']."</td>";
-                                break;             
-                   
+                                break;
+
                    case 'Pendiente de Revision':
                            $tabla.="<td style='background-color: rgba(149, 165, 166, 0.3);'>".$fila['descStatus']."</td>";
-                                break;          
+                                break;
                         }
                         $tabla.="<td>".$fila['observacion']."</td>
                      </tr>";
@@ -267,8 +267,8 @@ class Reporte {
                     </style>';
 
         $area = $resultado1->fetch_assoc();
-        $area = $area["descArea"]; 
-                     
+        $area = $area["descArea"];
+
         $tabla.= "
             <div class='header'>
                 <h1>Reporte de envíos del área: <font color='#85BC22'>".$area."</font></h1>
@@ -277,17 +277,17 @@ class Reporte {
 
             <table class='tabla'>
             <tr>
-                <th>Código</th>
+                <th>C&oacute;digo</th>
                 <th>Usuario</th>
-                <th>Fecha</th>
                 <th>Hora</th>
-                <th>Trámite</th>
+                <th>Fecha</th>
+                <th>Tr&aacute;mite</th>
                 <th>Cliente</th>
                 <th>Tipo de documento</th>
-                <th>N° Documento</th>
+                <th>N<sup>o</sup> Documento</th>
                 <th>Monto</th>
                 <th>Estado</th>
-                <th>Observación</th>
+                <th>Observaci&oacute;n</th>
             </tr>
 
             ";
@@ -307,22 +307,22 @@ class Reporte {
                     case 'Pendiente':
                             $tabla.="<td bgcolor='#F6AD43'>".$fila['descStatus']."</td>";
                             break;
-                       
+
                     case 'Completo':
                             $tabla.="<td bgcolor='lightgreen'>".$fila['descStatus']."</td>";
                                break;
-   
+
                     case 'Incompleto':
                             $tabla.="<td bgcolor='#F67943'>".$fila['descStatus']."</td>";
                                 break;
-   
+
                     case 'Recibido':
                            $tabla.="<td bgcolor='lightblue'>".$fila['descStatus']."</td>";
-                                break;             
-                   
+                                break;
+
                    case 'Pendiente de Revision':
                            $tabla.="<td style='background-color: rgba(149, 165, 166, 0.3);'>".$fila['descStatus']."</td>";
-                                break;            
+                                break;
                         }
                         $tabla.="<td>".$fila['observacion']."</td>
                      </tr>";

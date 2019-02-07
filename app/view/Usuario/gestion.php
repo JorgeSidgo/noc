@@ -1,3 +1,6 @@
+<script>
+    console.log(<?php echo $areasDeloitte;?>)
+</script>
 <div id="app">
 
     <modal-registrar id_form="frmRegistrar" id="modalRegistrar" url="?1=UsuarioController&2=registrar" titulo="Registrar Usuario"
@@ -126,24 +129,7 @@ var app = new Vue({
                     label: 'Área:',
                     name: 'area',
                     type: 'select',
-                    options: [
-                        {
-                            val: 2,
-                            text: 'Abas'
-                        },
-                        {
-                            val: 3,
-                            text: 'Tax y Legal'
-                        },
-                        {
-                            val: 4,
-                            text: 'RRHH'
-                        },
-                        {
-                            val: 5,
-                            text: 'Finanzas'
-                        }
-                    ]
+                    options: <?php echo $areasDeloitte;?>
                 },
                 {
                     label: 'Rol:',
@@ -187,24 +173,7 @@ var app = new Vue({
                     label: 'Área:',
                     name: 'area',
                     type: 'select',
-                    options: [
-                        {
-                            val: 2,
-                            text: 'Abas'
-                        },
-                        {
-                            val: 3,
-                            text: 'Tax y Legal'
-                        },
-                        {
-                            val: 4,
-                            text: 'RRHH'
-                        },
-                        {
-                            val: 5,
-                            text: 'Finanzas'
-                        }
-                    ]
+                    options:<?php echo $areasDeloitte;?>
                 },
                 {
                     label: 'Rol:',
@@ -236,7 +205,7 @@ var app = new Vue({
                 tablaUsuarios.ajax.reload();
             },
             modalRegistrar() {
-                $('#modalRegistrar').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal(
+                $('#modalRegistrar').modal('setting', 'closable', false).modal(
                     'show');
             },
             cargarDatos() {
@@ -271,7 +240,7 @@ var app = new Vue({
             $('#idEliminar').val($(this).attr("id"));
         });
         $(document).on("click", ".btnEditar", function () {
-            $('#modalEditar').modal('setting', 'autofocus', false).modal('setting', 'closable', false).modal('show');
+            $('#modalEditar').modal('setting', 'closable', false).modal('show');
             $('#idDetalle').val($(this).attr("id"));
             app.cargarDatos();
         });

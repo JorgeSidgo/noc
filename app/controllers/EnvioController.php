@@ -17,6 +17,9 @@ class EnvioController extends ControladorBase {
         $daoU = new DaoUsuario();
         $usuariosCMB = $daoU->mostrarUsuariosCmb();
 
+        $daoT = new DaoTipoTramite();
+        $tiposTramiteCMB = $daoT->mostrarTipoTramite();
+
         require_once './app/view/Envio/nuevo.php';
     }
 
@@ -191,7 +194,7 @@ class EnvioController extends ControladorBase {
     }
 
     public function registrarEnvio() {
-        
+
         session_start();
         
         $detalles = json_decode($_REQUEST["detalles"]);
@@ -237,7 +240,7 @@ class EnvioController extends ControladorBase {
         require './app/mail/Mail.php';
         $mail = new Mail();
 
-        if(!$mail->detalleEnvio($codigoEnvio, $datosUsuario)) {
+        if(!$mail->detalleEnvio($codigoEnvio, $datosUsuario, $daoUsuario->cuentasAdministrador())) {
             echo "El correo no fue enviado Correctamente";
         }
 

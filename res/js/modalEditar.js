@@ -103,7 +103,7 @@ Vue.component('modal-editar', {
                 </div>
                 <div class="content">
                 <h4 v-if="sub_titulo">{{sub_titulo}}</h4>
-                    <form action="" class="ui equal width form" :id="id_form">
+                    <form onsubmit="return false;" class="ui equal width form" :id="id_form">
                         <div v-for="campo in campos" class="field">
                             <label>{{campo.label}} </label>
                             <select class="ui dropdown" v-if="campo.type == 'select'" :name="campo.name">
@@ -128,7 +128,7 @@ Vue.component('modal-editar', {
                             <input v-else-if="campo.type == 'hidden'" :type="campo.type" :id="campo.name" :name="campo.name">
 
                             <input v-else class="requerido" :type="campo.type" :mask="campo.mask" :name="campo.name">
-                            
+                           
                             <div class="ui red pointing label" style="display: none;">
                             </div>
                         </div>

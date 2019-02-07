@@ -1,29 +1,20 @@
-var tablaClientes;
+var tablaTipoTramite;
 
 $(function() {
-    if($('#dtClientes').length) {
-        tablaClientes = $('#dtClientes').DataTable({
+    if($('#dtTipoTramite').length) {
+        tablaTipoTramite = $('#dtTipoTramite').DataTable({
             "ajax": {
-                "url": "?1=ClienteController&2=mostrarClientes",
+                "url": "?1=TipoTramiteController&2=mostrarTiposTabla",
                 "type": "POST"
             },
             "columns": [{
-                    "data": "codigoCliente"
+                "data": "codigoTipoTramite"
+            },
+                {
+                    "data": "descTipoTramite"
                 },
                 {
-                    "data": "codigo"
-                },
-                {
-                    "data": "nombreCliente"
-                },
-                {
-                    "data": "calle"
-                },
-                {
-                    "data": "poblacion"
-                },
-                {
-                    "data": "Acciones"             
+                    "data": "Acciones"
                 }
             ],
             "order": [
@@ -55,7 +46,7 @@ $(function() {
             }
         });
 
-         // Ocultar columna de id de Usuario
-         tablaClientes.column(0).visible(false);
+        // Ocultar columna de id de Usuario
+        tablaTipoTramite.column(0).visible(false);
     }
 });

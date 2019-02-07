@@ -11,13 +11,17 @@ require './app/composer/vendor/phpmailer/phpmailer/src/SMTP.php';
 
 class Mail {
 
+    private $correoSistema = "dtt.es.no.reply@gmail.com";
+
+    private $URL_SERVER = "svapplocal:8080/sim/";
+
     public function __construct() {
 
     }
 
     public function composeAuthMail($datosUsuario, $estadoCuenta) {
 
-        $emailFrom = 'deloitte.prueba.no.reply@gmail.com';
+        $emailFrom = $this->correoSistema;
         $emailFromName = 'Deloitte';
 
         $emailTo = $datosUsuario->email;
@@ -36,9 +40,9 @@ class Mail {
         $mail->SMTPAuth = true;
         $mail->isHTML(true);
         // $mail->SMTPDebug = 2;
-        $mail->Charset = 'UTF-8';
+        $mail->CharSet = 'UTF-8';
 
-        $mail->Username = 'deloitte.prueba.no.reply@gmail.com';
+        $mail->Username = $this->correoSistema;
         $mail->Password = 'Deloitte123!';
         $mail->setFrom($emailFrom, $emailFromName);
 
@@ -49,11 +53,10 @@ class Mail {
         $plantilla = file_get_contents('./app/mail/correoAuth.html');
 
         if($estadoCuenta == 'Autorizada') {
-            $celda = '<td style="padding: 20px 0px;"><a href="localhost/deloitte-mensajeria/?1=UsuarioController&2=loginView&3='.$encode->encode('e', $datosUsuario->nomUsuario).'" style="padding: 10px; border-radius: 3px; background: #85BC22; text-decoration: none; color: #fff;">Iniciar Sesión</a></td>';
+            $celda = '<td style="padding: 20px 0px;"><a href="'.$this->URL_SERVER.'?1=UsuarioController&2=loginView&3='.$encode->encode('e', $datosUsuario->nomUsuario).'" style="padding: 10px; border-radius: 3px; background: #85BC22; text-decoration: none; color: #fff;">Iniciar Sesión</a></td>';
         } else {
             $celda = '<td></td>';
         }
-
 
 
         $plantilla = str_replace('%estadoCuenta%', $estadoCuenta, $plantilla);
@@ -75,7 +78,7 @@ class Mail {
 
     public function composeRestorePassMail($emailUsuario, $nomUsuario, $pass) {
 
-        $emailFrom = 'deloitte.prueba.no.reply@gmail.com';
+        $emailFrom = $this->correoSistema;
         $emailFromName = 'Deloitte';
 
         $emailTo = $emailUsuario;
@@ -90,9 +93,9 @@ class Mail {
         $mail->SMTPSecure = 'tls';
         $mail->SMTPAuth = true;
         $mail->isHTML(true);
-        $mail->Charset = 'UTF-8';
+        $mail->CharSet = 'UTF-8';
 
-        $mail->Username = 'deloitte.prueba.no.reply@gmail.com';
+        $mail->Username = $this->correoSistema;
         $mail->Password = 'Deloitte123!';
         $mail->setFrom($emailFrom, $emailFromName);
 
@@ -113,13 +116,10 @@ class Mail {
         }
     }
 
-    public function notificacionRegistroUsuario($datosUsuario) {
+    public function notificacionRegistroUsuario($datosUsuario, $arrayAdministradores) {
 
-        $emailFrom = 'deloitte.prueba.no.reply@gmail.com';
+        $emailFrom = $this->correoSistema;
         $emailFromName = 'Deloitte';
-
-        $emailTo = 'jorge.sidgo@gmail.com';
-        $emailToName = 'Ing. Jorge Sidgo-Pimentel';
 
         $mail = new PHPMailer();
         $mail->isSMTP();
@@ -129,20 +129,21 @@ class Mail {
         $mail->SMTPSecure = 'tls';
         $mail->SMTPAuth = true;
         $mail->isHTML(true);
-        $mail->Charset = 'UTF-8';
+        $mail->CharSet = 'UTF-8';
 
-        $mail->Username = 'deloitte.prueba.no.reply@gmail.com';
+        $mail->Username = $this->correoSistema;
         $mail->Password = 'Deloitte123!';
         $mail->setFrom($emailFrom, $emailFromName);
 
-        $mail->addAddress($emailTo, $emailToName);
+        foreach ($arrayAdministradores as $administrador) {
+            $mail->addAddress($administrador->email, $administrador->nombre.' '.$administrador->apellido);
+        }
 
         $mail->Subject = 'Control de Cuenta Deloitte';
 
         $plantilla = file_get_contents('./app/mail/correoNuevoUsuario.html');
 
-        $plantilla = str_replace('%fecha%', '18/12/2018', $plantilla);
-        $plantilla = str_replace('%hora%', '09:09:00', $plantilla);
+        $plantilla = str_replace('%fecha%', date('d/m/Y'), $plantilla);
         $plantilla = str_replace('%nombre%', $datosUsuario->nombre, $plantilla);
         $plantilla = str_replace('%apellido%', $datosUsuario->apellido, $plantilla);
         $plantilla = str_replace('%usuario%', $datosUsuario->nomUsuario, $plantilla);
@@ -158,13 +159,10 @@ class Mail {
 
     }
 
-    public function detalleEnvio($codigoEnvio, $datosUsuario) {
+    public function detalleEnvio($codigoEnvio, $datosUsuario, $arrayAdministradores) {
 
-        $emailFrom = 'deloitte.prueba.no.reply@gmail.com';
+        $emailFrom = $this->correoSistema;
         $emailFromName = 'Deloitte';
-
-        $emailTo = 'jorge.sidgo@gmail.com';
-        $emailToName = 'Ing. Jorge Sidgo-Pimentel';
 
         $nombreUsuario = $datosUsuario->nombre.' '. $datosUsuario->apellido;
         $emailUsuario = $datosUsuario->email;
@@ -183,15 +181,17 @@ class Mail {
         $mail->SMTPAuth = true;
         $mail->isHTML(true);
         // $mail->SMTPDebug = 2;
-        $mail->Charset = 'UTF-8';
+        $mail->CharSet = 'UTF-8';
 
-        $mail->Username = 'deloitte.prueba.no.reply@gmail.com';
+        $mail->Username = $this->correoSistema;
         $mail->Password = 'Deloitte123!';
         $mail->setFrom($emailFrom, $emailFromName);
 
-        $mail->addAddress($emailTo, $emailToName);
+        foreach ($arrayAdministradores as $administrador) {
+            $mail->addAddress($administrador->email, $administrador->nombre.' '.$administrador->apellido);
+        }
 
-        $mail->addAddress($nombreUsuario, $emailUsuario);
+        $mail->addAddress($emailUsuario,$nombreUsuario);
 
         $mail->Subject = 'Control de Envios';
 
@@ -229,7 +229,7 @@ class Mail {
 
         if($datosEncabezado["estado"] == 2) {
             $nota = '<tr>
-                        <td style="padding: 20px 0px;"><b>Nota:</b> ya que el paquete se registró despues de las 13:00 de la tarde será agendado para enviarse el día de mañana</td>
+                        <td style="padding: 20px 0px; color: rgba(0,50,250,1)"><b>Nota:</b> ya que el paquete se registró despues de las 13:00 de la tarde será agendado para enviarse el día de mañana</td>
                     </tr>';
         }
 
@@ -258,7 +258,7 @@ class Mail {
     }
 
     public function revisionPaquete($datosUsuario, $datosEncabezado, $detalles) {
-        $emailFrom = 'deloitte.prueba.no.reply@gmail.com';
+        $emailFrom = $this->correoSistema;
         $emailFromName = 'Deloitte';
 
         $emailTo = $datosUsuario->email;
@@ -273,9 +273,9 @@ class Mail {
         $mail->SMTPAuth = true;
         $mail->isHTML(true);
         // $mail->SMTPDebug = 2;
-        $mail->Charset = 'UTF-8';
+        $mail->CharSet = 'UTF-8';
 
-        $mail->Username = 'deloitte.prueba.no.reply@gmail.com';
+        $mail->Username = $this->correoSistema;
         $mail->Password = 'Deloitte123!';
         $mail->setFrom($emailFrom, $emailFromName);
 

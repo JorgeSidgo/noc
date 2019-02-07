@@ -267,11 +267,16 @@
                 $('#modalDetalles').modal('hide');
             },
 
-            cerrarCambios() {
-                $('#modalDetalles').modal('setting', 'autofocus', false).modal('setting', 'closable', false)
-                    .modal('show');
-                    $('#mensaje').hide();
-                $('#modalCambios').modal('hide');
+            cerrarCambios(param) {
+                if(param == 1) {
+                    $('#modalCambios').modal('hide');
+                    $('#modalDetalles').modal('setting', 'autofocus', false)
+                        .modal('setting', 'closable', false)
+                        .modal('show');
+                } else {
+                    $('#modalCambios').modal('hide');
+                }
+                $('#mensaje').hide();
             },
 
             numeroPaquetesManana() {
@@ -287,7 +292,9 @@
             },
 
             cerrarModalDetalles() {
+                console.log('inicio');
                 $('#modalDetalles').modal('hide');
+                console.log('fin');
             },
 
             cambiarEstado() {
@@ -307,7 +314,6 @@
                     },
                     success: function (r) {
 
-                        console.log(r);
                         if (r == 1) {
                             swal({
                                 title: null,
@@ -316,26 +322,22 @@
                                 showConfirmButton: false,
                                 timer: 1000
                             });
-                            $('#mensaje').hide();   
-                            $('#rbtnMensajero').prop('checked', false);
-                            app.cargarDetalles(app.idEnvio, app.datosCorreo.idUsuario);
-                            app.cerrarCambios();
-                            app.reloadTabla();
-                            app.reloadTabla2();
+
                         } else if(r == 11) {
                             swal({
                                 title: null,
                                 text: 'Los cambios fueron guardados y el correo de revisión fue enviado',
                                 type: 'success'
                             });
-                            $('#mensaje').hide();   
-                            $('#rbtnMensajero').prop('checked', false);
-                            app.cargarDetalles(app.idEnvio, app.datosCorreo.idUsuario);
-                            app.cerrarCambios();
-                            app.cerrarModalDetalles();
-                            app.reloadTabla();
-                            app.reloadTabla2();
                         }
+
+                        $('#mensaje').hide();
+                        $('#rbtnMensajero').prop('checked', false);
+                        app.cargarDetalles(app.idEnvio, app.datosCorreo.idUsuario);
+                        app.cerrarCambios(r);
+                        app.reloadTabla();
+                        app.reloadTabla2();
+
                         $('#cargandoModal').removeClass('active');
                     }
                 });

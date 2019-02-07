@@ -105,7 +105,7 @@ Vue.component('modal-registrar', {
                 </div>
                 <div class="content">
                     <h4 v-if="sub_titulo">{{sub_titulo}}</h4>
-                    <form action="" class="ui equal width form" :id="id_form">
+                    <form onsubmit="return false;" class="ui equal width form" :id="id_form">
                         <div v-for="campo in campos" class="field">
                             <label>{{campo.label}} </label>
                             <select class="ui dropdown" v-if="campo.type == 'select'" :name="campo.name" :id="campo.name">
@@ -135,10 +135,10 @@ Vue.component('modal-registrar', {
                     </form>        
                 </div>
                 <div class="actions">
-                    <button class="ui black deny button" @click="cancelar">
+                    <button type="button" class="ui black deny button" @click="cancelar">
                         Cancelar
                     </button>
-                    <button id="btnRegistrar" class="ui right green button" @click="registrar" >
+                    <button type="button" id="btnRegistrar" class="ui right green button" @click="registrar" >
                         Registrar
                     </button>
                 </div>
