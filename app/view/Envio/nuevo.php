@@ -21,31 +21,11 @@ if($_SESSION["descRol"]=="Administrador") {?>
     // $('#btnSeleccionarUsuario').hide();
     });
 
-    
-
-    $(function() {
-            var option = '';
-            var usuarios = '<?php echo $usuariosCMB?>';
-
-            $.each(JSON.parse(usuarios), function() {
-                option = `<option value="${this.codigoUsuario}">${this.nombre} ${this.apellido}</option>`;
-
-                $('#usuario').append(option);
-            });
-        });
-
 
       $(function ()
       {
 
-        var select = document.getElementById('usuario');
-        select.addEventListener('change',
-            function(){
-            var selectedOption = this.options[select.selectedIndex];
-            var nombre=selectedOption.text;
-            $("#nombreActual").html(nombre);
-            // $('#btnSeleccionarUsuario').show();
-            });
+
 
       });  
 </script>
@@ -61,7 +41,10 @@ if($_SESSION["descRol"]=="Administrador") {?>
         $('#fecha-header').html('Fecha: ' + fecha);
     });
 </script>
-<div class="ui tiny modal" id="modalEleccion">
+
+<div id="app">
+
+    <div class="ui tiny modal" id="modalEleccion">
 
     <div class="header">
         <i class="paper plane icon"></i>Envío Deloitte<font color="#85BC22" style="font-size: 28px;">.</font>
@@ -72,8 +55,11 @@ if($_SESSION["descRol"]=="Administrador") {?>
                 <label for="">A nombre de: </label>
 
                 <!--select de usuario-->
-                <select name="usuario" id="usuario" class="ui search dropdown">
-                </select></div>
+                <select @change="seleccionarUsuario()" name="usuario" id="usuario" class="ui search dropdown">
+                    <option v-for="option in usuarioOps" :value="option.codigoUsuario">{{option.nombre + ' ' + option.apellido }}</option>
+                </select>
+                
+                </div>
         </form>
     </div>
     <div class="actions">
@@ -85,7 +71,7 @@ if($_SESSION["descRol"]=="Administrador") {?>
         </button>
     </div>
 </div>
-<div id="app">
+
     <div class="ui grid">
         <div class="row">
             <div class="titulo">
@@ -93,7 +79,7 @@ if($_SESSION["descRol"]=="Administrador") {?>
                 Envíos Deloitte<font color="#85BC22" style="font-size: 28px;">.</font>
                 <?php
                 if($_SESSION["descRol"]=="Administrador") {?>
-                <center>A nombre de: <font color="#85BC22"><span id="nombreActual"></span></font>
+                <center>A nombre de: <font color="#85BC22"><span id="nombreActual">{{usuarioActual}}</span></font>
                 </center>
 
                 <?php }?>
@@ -198,11 +184,15 @@ if($_SESSION["descRol"]=="Administrador") {?>
             }],
             clientesOps: <?php echo $clientes?>,
 
+            usuarioOps: <?php echo $usuariosCMB?>,
+
             areaOps: <?php echo $areas?>,
 
             tipoDocumentoOps: <?php echo $documentos?>,
 
             tiposTramite: <?php echo $tiposTramiteCMB?>,
+
+            usuarioActual: '',
 
             money: {
                 decimal: '.',
@@ -278,14 +268,34 @@ if($_SESSION["descRol"]=="Administrador") {?>
             },
             eliminarDetalle(index) {
                 this.envios.splice(index, 1);
+            },
+
+            seleccionarUsuario() {
+                var select = document.getElementById('usuario');
+
+                var selectedOption = select.options[select.selectedIndex];
+                var nombre=selectedOption.text;
+                this.usuarioActual = nombre;
+
+            },
+
+            usuarioInicial() {
+                var select = document.getElementById('usuario');
+
+                var selectedOption = select.options[0];
+                var nombre=selectedOption.text;
+                this.usuarioActual = nombre;
             }
         },
+
         mounted() {
             $('.ui.dropdown').dropdown();
             $('.ui.dropdown.selection').css('max-width', '100%');
             $('.ui.dropdown.selection').css('min-width', '100%');
             $('.ui.dropdown.selection').css('width', '100%');
             $('input[mask="dinero"]').mask('$0');
+
+            this.usuarioInicial();
         },
         updated() {
             $('.ui.dropdown').dropdown();
@@ -295,21 +305,6 @@ if($_SESSION["descRol"]=="Administrador") {?>
             $('input[mask="dinero"]').mask('$0');
         }
     });
-</script>
-
-<script>
-//simon
-window.onload = function() {
-    
-    if(app.descRol == 'Administrador') {
-        document.getElementById("usuario").selectedIndex = "0";
-
-        var x = document.getElementById("usuario").selectedIndex;
-        var y = document.getElementById("usuario").options;
-        $('#nombreActual').html(y[x].text);
-    }
-}
-//simon
 </script>
 
 <script>

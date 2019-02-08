@@ -2,45 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="77784ab4-a548-413b-b782-2d4bead58cef" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/controllers/TipoTramiteController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/dao/DaoTipoTramite.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/view/TipoTramite/gestion.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/tablas/tablaTipoTramite.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ReporteDiario/reporteDiario.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ReporteDiario/reporteDiario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ReporteDiario/reporteRecibidos.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ReporteDiario/reporteRecibidos.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/ClienteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/ClienteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/EnvioController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/EnvioController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/UsuarioController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/UsuarioController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/dao/DaoArea.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/dao/DaoArea.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/dao/DaoCliente.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/dao/DaoCliente.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/dao/DaoUsuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/dao/DaoUsuario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/mail/Mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/mail/Mail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/mail/correoEnvios.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/mail/correoEnvios.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/mail/correoNuevoUsuario.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/mail/correoNuevoUsuario.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/mail/correoRevision.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/mail/correoRevision.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/Clientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/Clientes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/Conexion.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/Conexion.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/model/tipoTramite.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/model/TipoTramite.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/reportes/ReporteArea.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/reportes/ReporteArea.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/reportes/ReporteUsuario.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/reportes/ReporteUsuario.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/view/Area/gestion.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Area/gestion.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/view/Clientes/clientes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Clientes/clientes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/view/Components/head.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Components/head.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/view/Components/menuAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Components/menuAdmin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/view/Documento/gestion.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Documento/gestion.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/view/Envio/controlEnvios.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Envio/controlEnvios.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/view/Envio/nuevo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Envio/nuevo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/view/Mensajeros/gestion.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Mensajeros/gestion.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/view/Usuario/dashboardAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Usuario/dashboardAdmin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/view/Usuario/gestion.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Usuario/gestion.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/script.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db/script.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/js/modalEditar.js" beforeDir="false" afterPath="$PROJECT_DIR$/res/js/modalEditar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/js/modalEliminar.js" beforeDir="false" afterPath="$PROJECT_DIR$/res/js/modalEliminar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/js/modalRegistrar.js" beforeDir="false" afterPath="$PROJECT_DIR$/res/js/modalRegistrar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/plugins/vue/vue.js" beforeDir="false" afterPath="$PROJECT_DIR$/res/plugins/vue/vue.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/plugins/vue/vue.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/res/plugins/vue-min/vue.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/tablas/tablaClientes.js" beforeDir="false" afterPath="$PROJECT_DIR$/res/tablas/tablaClientes.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +19,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/UsuarioController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
+            <state>
               <caret line="30" column="39" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
             </state>
           </provider>
@@ -65,7 +28,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/dao/DaoArea.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
+            <state>
               <caret line="33" column="60" selection-start-line="33" selection-start-column="60" selection-end-line="33" selection-end-column="60" />
             </state>
           </provider>
@@ -74,7 +37,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/js/modalRegistrar.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1712">
+            <state>
               <caret line="107" column="49" selection-start-line="107" selection-start-column="49" selection-end-line="107" selection-end-column="49" />
             </state>
           </provider>
@@ -83,7 +46,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/ReporteDiario/reporteRecibidos.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1120">
+            <state>
               <caret line="70" column="43" selection-start-line="70" selection-start-column="43" selection-end-line="70" selection-end-column="43" />
             </state>
           </provider>
@@ -92,7 +55,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/db/script.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="768">
+            <state>
               <caret line="48" column="27" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
             </state>
           </provider>
@@ -101,7 +64,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/view/Usuario/gestion.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2960">
+            <state>
               <caret line="185" column="27" selection-start-line="185" selection-start-column="27" selection-end-line="185" selection-end-column="27" />
             </state>
           </provider>
@@ -110,8 +73,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/mail/Mail.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
-              <caret line="58" column="9" selection-start-line="58" selection-start-column="9" selection-end-line="58" selection-end-column="9" />
+            <state relative-caret-position="224">
+              <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+              <folding>
+                <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#td#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -119,7 +86,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/mail/correoNuevoUsuario.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
+            <state>
               <caret line="19" column="55" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
             </state>
           </provider>
@@ -266,83 +233,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="deloitte-mensajeria" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deloitte-mensajeria" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="deloitte-mensajeria" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deloitte-mensajeria" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="deloitte-mensajeria" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deloitte-mensajeria" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="deloitte-mensajeria" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deloitte-mensajeria" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="mail" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="deloitte-mensajeria" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deloitte-mensajeria" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="deloitte-mensajeria" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deloitte-mensajeria" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="view" type="462c0819:PsiDirectoryNode" />
-              <item name="Usuario" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="deloitte-mensajeria" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deloitte-mensajeria" type="462c0819:PsiDirectoryNode" />
-              <item name="db" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="deloitte-mensajeria" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deloitte-mensajeria" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="deloitte-mensajeria" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deloitte-mensajeria" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="deloitte-mensajeria" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deloitte-mensajeria" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="plugins" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="deloitte-mensajeria" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deloitte-mensajeria" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="plugins" type="462c0819:PsiDirectoryNode" />
-              <item name="vue" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="deloitte-mensajeria" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deloitte-mensajeria" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="plugins" type="462c0819:PsiDirectoryNode" />
-              <item name="vue-min" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -351,7 +242,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -416,17 +307,17 @@
       <workItem from="1549049616814" duration="6424000" />
       <workItem from="1549401862996" duration="222000" />
       <workItem from="1549403550322" duration="308000" />
+      <workItem from="1549507696885" duration="385000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93079000" />
+    <option name="totallyTimeSpent" value="93464000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2203514" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22390318" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -784,49 +675,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/UsuarioController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
+        <state>
           <caret line="30" column="39" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/dao/DaoArea.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
+        <state>
           <caret line="33" column="60" selection-start-line="33" selection-start-column="60" selection-end-line="33" selection-end-column="60" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/js/modalRegistrar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1712">
+        <state>
           <caret line="107" column="49" selection-start-line="107" selection-start-column="49" selection-end-line="107" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/ReporteDiario/reporteRecibidos.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1120">
+        <state>
           <caret line="70" column="43" selection-start-line="70" selection-start-column="43" selection-end-line="70" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/db/script.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="768">
+        <state>
           <caret line="48" column="27" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/Usuario/gestion.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2960">
+        <state>
           <caret line="185" column="27" selection-start-line="185" selection-start-column="27" selection-end-line="185" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/mail/correoNuevoUsuario.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
+        <state>
           <caret line="19" column="55" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
         </state>
       </provider>
@@ -846,8 +737,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/mail/Mail.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="58" column="9" selection-start-line="58" selection-start-column="9" selection-end-line="58" selection-end-column="9" />
+        <state relative-caret-position="224">
+          <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+          <folding>
+            <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#td#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
