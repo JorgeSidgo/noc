@@ -3,7 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="77784ab4-a548-413b-b782-2d4bead58cef" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/view/Envio/nuevo.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Envio/nuevo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/EnvioController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/EnvioController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/dao/DaoEnvio.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/dao/DaoEnvio.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view/Envio/controlEnvios.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Envio/controlEnvios.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/view/Usuario/dashboardSoli.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/view/Usuario/dashboardSoli.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/script.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db/script.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/js/modalDetalles.js" beforeDir="false" afterPath="$PROJECT_DIR$/res/js/modalDetalles.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,96 +22,30 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/UsuarioController.php">
+        <entry file="file://$PROJECT_DIR$/app/dao/DaoEnvio.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="30" column="39" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/dao/DaoArea.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="33" column="60" selection-start-line="33" selection-start-column="60" selection-end-line="33" selection-end-column="60" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/js/modalRegistrar.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="107" column="49" selection-start-line="107" selection-start-column="49" selection-end-line="107" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/ReporteDiario/reporteRecibidos.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="70" column="43" selection-start-line="70" selection-start-column="43" selection-end-line="70" selection-end-column="43" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/script.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="48" column="27" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/view/Usuario/gestion.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="185" column="27" selection-start-line="185" selection-start-column="27" selection-end-line="185" selection-end-column="27" />
+            <state relative-caret-position="5589">
+              <caret line="243" column="33" selection-start-line="243" selection-start-column="33" selection-end-line="243" selection-end-column="33" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/mail/Mail.php">
+        <entry file="file://$PROJECT_DIR$/app/view/Envio/controlEnvios.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
-              <folding>
-                <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#td#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="368">
+              <caret line="328" column="24" selection-start-line="328" selection-start-column="24" selection-end-line="328" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/mail/correoNuevoUsuario.html">
+        <entry file="file://$PROJECT_DIR$/app/controllers/EnvioController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="19" column="55" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
+            <state relative-caret-position="2898">
+              <caret line="126" column="23" selection-start-line="126" selection-start-column="23" selection-end-line="126" selection-end-column="23" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/mail/correoAuth.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="113" selection-start-column="113" selection-end-column="113" />
-              <folding>
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/AreaController.php">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -149,7 +88,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/app/view/Usuario/registro.php" />
-        <option value="$PROJECT_DIR$/app/dao/DaoEnvio.php" />
         <option value="$PROJECT_DIR$/app/view/Envio/misEnvios.php" />
         <option value="$PROJECT_DIR$/app/routes/Exec.php" />
         <option value="$PROJECT_DIR$/app/routes/Router.php" />
@@ -189,7 +127,6 @@
         <option value="$PROJECT_DIR$/app/reportes/ReporteFechas.php" />
         <option value="$PROJECT_DIR$/app/reportes/ReporteArea.php" />
         <option value="$PROJECT_DIR$/app/view/Components/head.php" />
-        <option value="$PROJECT_DIR$/app/view/Envio/controlEnvios.php" />
         <option value="$PROJECT_DIR$/app/reportes/ReporteUsuario.php" />
         <option value="$PROJECT_DIR$/app/ReporteDiario/reporteDiario.php" />
         <option value="$PROJECT_DIR$/app/ReporteDiario/reporteRecibidos.php" />
@@ -199,6 +136,8 @@
         <option value="$PROJECT_DIR$/app/view/Usuario/gestion.php" />
         <option value="$PROJECT_DIR$/app/mail/correoNuevoUsuario.html" />
         <option value="$PROJECT_DIR$/app/mail/Mail.php" />
+        <option value="$PROJECT_DIR$/app/dao/DaoEnvio.php" />
+        <option value="$PROJECT_DIR$/app/view/Envio/controlEnvios.php" />
       </list>
     </option>
   </component>
@@ -219,10 +158,10 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1382" />
-    <option name="height" value="754" />
+    <option name="x" value="-7" />
+    <option name="y" value="-768" />
+    <option name="width" value="1167" />
+    <option name="height" value="745" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -231,10 +170,7 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="true" />
@@ -242,7 +178,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -308,16 +244,26 @@
       <workItem from="1549401862996" duration="222000" />
       <workItem from="1549403550322" duration="308000" />
       <workItem from="1549507696885" duration="385000" />
+      <workItem from="1549673667499" duration="1377000" />
+      <workItem from="1549736239023" duration="38000" />
+      <workItem from="1549763181461" duration="182000" />
+      <workItem from="1549767762105" duration="48000" />
+      <workItem from="1549815930384" duration="152000" />
+      <workItem from="1549855138019" duration="135000" />
+      <workItem from="1549921689589" duration="2175000" />
+      <workItem from="1549931850621" duration="784000" />
+      <workItem from="1549932674132" duration="190000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93464000" />
+    <option name="totallyTimeSpent" value="98545000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="-8" y="-776" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22390318" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.14750378" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -365,13 +311,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/hash/hash.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="427">
-          <caret line="85" column="65" lean-forward="true" selection-start-line="85" selection-start-column="65" selection-end-line="85" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/encode/Encode.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
@@ -532,13 +471,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/EnvioController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="242" column="96" selection-start-line="242" selection-start-column="96" selection-end-line="242" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/dao/DaoUsuario.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="333">
@@ -619,13 +551,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/view/Envio/controlEnvios.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="273" column="60" selection-start-line="273" selection-start-column="60" selection-end-line="273" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/reportes/ReporteUsuario.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
@@ -675,49 +600,60 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/UsuarioController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="690">
           <caret line="30" column="39" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/dao/DaoArea.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="759">
           <caret line="33" column="60" selection-start-line="33" selection-start-column="60" selection-end-line="33" selection-end-column="60" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/js/modalRegistrar.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="2461">
           <caret line="107" column="49" selection-start-line="107" selection-start-column="49" selection-end-line="107" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/ReporteDiario/reporteRecibidos.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="1610">
           <caret line="70" column="43" selection-start-line="70" selection-start-column="43" selection-end-line="70" selection-end-column="43" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/db/script.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="1104">
           <caret line="48" column="27" selection-start-line="48" selection-start-column="27" selection-end-line="48" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/mail/Mail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="508">
+          <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
+          <folding>
+            <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#td#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/view/Usuario/gestion.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="499">
           <caret line="185" column="27" selection-start-line="185" selection-start-column="27" selection-end-line="185" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/mail/correoNuevoUsuario.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="437">
           <caret line="19" column="55" selection-start-line="19" selection-start-column="55" selection-end-line="19" selection-end-column="55" />
         </state>
       </provider>
@@ -735,14 +671,24 @@
     <entry file="file://$PROJECT_DIR$/app/controllers/AreaController.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/mail/Mail.php">
+    <entry file="file://$PROJECT_DIR$/app/dao/DaoEnvio.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
-          <folding>
-            <element signature="n#style#0;n#td#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#td#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="5589">
+          <caret line="243" column="33" selection-start-line="243" selection-start-column="33" selection-end-line="243" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/EnvioController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2898">
+          <caret line="126" column="23" selection-start-line="126" selection-start-column="23" selection-end-line="126" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/view/Envio/controlEnvios.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="328" column="24" selection-start-line="328" selection-start-column="24" selection-end-line="328" selection-end-column="24" />
         </state>
       </provider>
     </entry>

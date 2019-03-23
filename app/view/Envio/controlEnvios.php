@@ -24,6 +24,41 @@
         </div>
     </div>
 
+    <div class="ui modal tiny" id="modalEliminar">
+
+                <div class="header">
+                    Eliminar Paquete
+                </div>
+                <div class="content">
+                    <h4>¿Está seguro de querer eliminar este paquete?</h4>      
+                </div>
+                <div class="actions">
+                    <button class="ui black deny button">
+                        Cancelar
+                    </button>
+                    <button class="ui right red button" id="btnEliminar" @click="eliminar" >
+                        Eliminar
+                    </button>
+                </div>
+            </div>
+
+     <div class="ui modal tiny" id="modalEliminarDetalle">
+
+                <div class="header">
+                    Eliminar Documento
+                </div>
+                <div class="content">
+                    <h4>¿Está seguro de querer eliminar este documento?</h4>      
+                </div>
+                <div class="actions">
+                    <button class="ui black deny button">
+                        Cancelar
+                    </button>
+                    <button class="ui right red button" id="btnEliminarDetalle" @click="eliminarDetalle" >
+                        Eliminar
+                    </button>
+                </div>
+            </div>
 
     <div class="ui small second coupled modal" id="modalCambios">
 
@@ -197,6 +232,10 @@
                 tipoDoc: ''
             },
 
+            idEliminar: 0,
+
+            idEliminarDetalle: 0,
+
             datosCorreo: {
                 idEnvio: 0,
                 idUsuario: 0
@@ -267,6 +306,60 @@
                 $('#modalDetalles').modal('hide');
             },
 
+            modalEliminar(id) {
+
+                this.idEliminar = id;
+
+                $('#modalEliminar').modal('setting', 'autofocus', false).modal('setting', 'closable', false)
+                    .modal('show');
+            },
+
+            modalEliminarDetalle(id) {
+                this.idEliminarDetalle = id;
+
+                $('#modalEliminarDetalle').modal('setting', 'autofocus', false).modal('setting', 'closable', false)
+                    .modal('show');
+            },
+
+            eliminar() {
+                $('#btnEliminar').addClass('loading');
+
+                // $.ajax({
+                //     type: 'POST',
+                //     url:
+                // });
+            },
+
+            eliminarDetalle() {
+                $('#btnEliminarDetalle').addClass('loading');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '?1=EnvioController&2=eliminarDetalle',
+                    data: {id: app.idEliminarDetalle},
+                    success: function(r) {
+
+                        if(r == 1) {
+                            
+                            swal({
+                                title: null,
+                                text: 'El documento fue eliminado',
+                                type: 'success',
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+
+                            app.reloadTabla();
+                            app.reloadTabla2();
+                            $('#modalEliminarDetalle').modal('hide');
+                            $('#btnEliminarDetalle').removeClass('loading');
+                        }
+                    }
+                });
+
+                this.cargarDetalles(app.idEnvio, app.datosCorreo.idUsuario);
+            },
+
             cerrarCambios(param) {
                 if(param == 1) {
                     $('#modalCambios').modal('hide');
@@ -301,8 +394,6 @@
 
                 $('#cargandoModal').addClass('active');
                 var detalle = JSON.stringify(this.cambiarDetalle);
-
-                // alert('cambiar estado: ' +this.datosCorreo.idUsuario);
 
                 $.ajax({
                     type: 'POST',
@@ -429,6 +520,9 @@
         });
         $(document).on("click", ".btnCorreo", function () {
             app.modalConfirmar($(this).attr('codigo-usuario'), $(this).attr('codigo-envio'));
+        });
+        $(document).on("click", ".btnEliminar", function () {
+            app.modalEliminar($(this).attr('codigo-usuario'), $(this).attr('codigo-envio'));
         });
     });
 

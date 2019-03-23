@@ -302,7 +302,6 @@ begin
 end
 $$
 
-
 -- PROCEDIMIENTOS MENSAJEROS --
 delimiter $$
 create procedure mostrarMensajeros()
@@ -457,7 +456,6 @@ begin
 end
 $$
 
-
 delimiter $$
 create procedure mostrarPaquetesManana()
 begin
@@ -468,6 +466,7 @@ begin
     order by e.codigoEnvio desc;
 end
 $$
+
 
 delimiter $$ 
 create procedure historialEnvios()
@@ -523,13 +522,13 @@ begin
         where codigoDetalleEnvio = idDetalle;
     elseif idStatus = 5 then  
         update detalleEnvio 
-        set codigoStatus = idStatus, observacion = obs, fechaRevision = curdate(), fechaEnviado = curdate(), codigoMensajero = idMensajero
+        set codigoStatus = idStatus, observacion = obs, fechaRevision = curdate(), horaRevision = DATE_FORMAT(NOW(), "%H:%i:%s" ), fechaEnviado = curdate(), codigoMensajero = idMensajero
         where codigoDetalleEnvio = idDetalle;
     end if;
 	
 end
 $$
-
+select * from detalleEnvio
 delimiter $$
 create procedure misEnvios(
 	in idUsuario int
@@ -630,12 +629,10 @@ end
 $$
 
 -- PROCEDIMIENTOS REPORTES--
-
-
 delimiter $$
 create procedure reporteDiario()
 begin
-select e.codigoEnvio, d.codigoDetalleEnvio, d.correlativoDetalle, u.nomUsuario, DATE_FORMAT(d.fechaRevision,'%d/%m/%Y') as fecha, e.hora, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
+select e.codigoEnvio, d.codigoDetalleEnvio, d.correlativoDetalle, u.nomUsuario, DATE_FORMAT(d.fechaRevision,'%d/%m/%Y') as fechaRevision, d.horaRevision, DATE_FORMAT(d.fechaRegistro,'%d/%m/%Y') as  fechaRegistro, e.hora as horaRegistro, tt.descTipoTramite, c.nombreCliente, a.descArea, tc.descTipoDocumento, d.numDoc, s.descStatus, d.monto, d.observacion
 	from detalleEnvio d
 	inner join envio e on e.codigoEnvio = d.codigoEnvio
     inner join usuario u on u.codigoUsuario = e.codigoUsuario
@@ -644,7 +641,7 @@ select e.codigoEnvio, d.codigoDetalleEnvio, d.correlativoDetalle, u.nomUsuario, 
     inner join tipoDocumento tc on tc.codigoTipoDocumento = d.codigoTipoDocumento
     inner join area a on a.codigoArea = d.codigoArea 
     inner join status s on s.codigoStatus = d.codigoStatus
- where fecha=CURDATE() and (s.descStatus='Completo' or s.descStatus='Pendiente')  order by fecha DESC;
+ where fechaRevision=CURDATE() and (s.descStatus='Completo' or s.descStatus='Pendiente')  order by fecha DESC;
 end
 $$
 
@@ -663,7 +660,6 @@ select e.codigoEnvio, d.codigoDetalleEnvio, d.correlativoDetalle, u.nomUsuario, 
 	where fecha=CURDATE() and s.descStatus='Recibido' order by fecha DESC;
 end
 $$
-select * from detalleEnvio
 
 delimiter $$
 create procedure reporteEstadoDocumento(
@@ -896,7 +892,7 @@ insert into area values (null, 'Finanzas',1);
 insert into area values (null, 'Tecnología',1);
 
 # Usuario
-insert into usuario values (null, 'Karla Guadalupe', 'Arevalo Vega', 'kgarevalo', 'kgarevalo@deloitte.com', sha1('Deloitte123!'), 1, 1, 1,1);
+insert into usuario values (null, 'Jorge Luis', 'Sidgo Pimentel', 'jsidgo', 'jorge.sidgo@gmail.com', sha1('sferrari21'), 1, 1, 1,1);
 
 #Cliente
 insert into clientes values
@@ -925,6 +921,7 @@ insert into status values (null, 'Incompleto');
 insert into status values (null, 'Recibido');
 insert into status values (null, 'Pendiente');
 insert into status values (null, 'Completo');
+insert into status values (null, 'Eliminado');
 
 insert into mensajero values(null, 'No Asignado',1);
 insert into mensajero values(null, 'Enrique Segoviano',1);
@@ -932,6 +929,7 @@ insert into mensajero values(null, 'Ramon Valdéz',1);
 
 insert into envio values(null, concat('ED', 1), 1, curdate(), DATE_FORMAT(NOW(), "%H:%i:%s" ), 1);
 insert into detalleEnvio values (null, 'DD1', 1, 1, 1, 1, 1, 3, '123', '$0.00', '123', curdate(),curdate(),  DATE_FORMAT(NOW(), "%H:%i:%s" ), curdate(), 1);
+insert into detalleEnvio values (null, 'DD2', 1, 1, 1, 1, 1, 3, '123', '$0.00', '123', curdate(),curdate(),  DATE_FORMAT(NOW(), "%H:%i:%s" ), curdate(), 1);
 /*
 
 

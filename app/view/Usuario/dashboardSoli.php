@@ -26,7 +26,7 @@
   text-align: center;
 }
 </style>
-<a class="ui teal button" style="margin:auto; href=" href="?1=UsuarioController&2=dashboard">
+<a class="ui teal button" style="margin:auto;" href="?1=UsuarioController&2=dashboard">
 <b><i class="chart bar icon"></i>Actualizar gráficos</b>
     </a>
 <?php
